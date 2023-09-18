@@ -78,14 +78,6 @@
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
                     <a class="nav-icon position-relative text-decoration-none" href="colaboracion.html">
                         <i class="fa fa-heart text-dark mr-3"></i>
                         <span>Colaboración</span>
@@ -140,10 +132,14 @@
     <section class="container py-5">
         <div class="row text-center pt-5 pb-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">Our Services</h1>
+                <h1 class="h1">Datos Informativos</h1>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    Lorem ipsum dolor sit amet.
+                    Son datos que hay que tener en cuenta a la hora de evaluar nuestro salario.<br>El
+                    <strong>Dólar</strong> representa el valor de la cotización al inicio de cada mes correspondiente,
+                    el <strong>Salario Docente Mínimo Nacional Garantizado (SDMNG)</strong> representa el piso mínimo
+                    que debe cobrar un docente por cargo o su equivalente en horas cátedras, la <strong>Canasta
+                        Básica</strong> Total es la de tipo 2 según INDEC y la <strong>Inflación</strong> es la del mes,
+                    cuya acumulación anual es hoy de: <a id="inflacionAcumulada"></a>
                 </p>
             </div>
         </div>
@@ -152,28 +148,32 @@
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-shopping-cart"></i></div>
-                    <h2 class="h5 mt-4 text-center">Canasta Básica <br><a>$185.000</a></h2>
+                    <h2 class="h5 mt-4 text-center">Canasta Básica<br><a id="fechaCanastaBasica"></a><br><a
+                            id="canastaBasica"></a></h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-thermometer-half"></i></div>
-                    <h2 class="h5 mt-4 text-center">Dólar <br><a>$185.000</a></h2>
+                    <h2 class="h5 mt-4 text-center">Dólar Blue<br><a id="fechaDolarBlue"></a><br><a id="dolarBlue"></a>
+                    </h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
-                    <h2 class="h5 mt-4 text-center">Inflación <br><a>$185.000</a></h2>
+                    <h2 class="h5 mt-4 text-center">Inflación <br><a id="fechaInflacion"></a><br><a id="inflacion"></a>
+                    </h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-cogs"></i></div>
-                    <h2 class="h5 mt-4 text-center">Paritarias <br><a>$185.000</a></h2>
+                    <h2 class="h5 mt-4 text-center">Paritarias (SDMNG)<br><a id="fechaParitarias"></a><br><a
+                            id="paritarias"></a></h2>
                 </div>
             </div>
         </div>
@@ -298,50 +298,42 @@
     <!--End Brands-->
 
 
-    <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+     <!-- Start Footer -->
+     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">DAC Capital</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
-                            123 Consectetur at ligula 10660
-                        </li>
-                        <li>
-                            <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                            Provincia de Corrientes - Argentina
                         </li>
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                            <a class="text-decoration-none" href="ctesdocentesautoconvocados@gmail.com">ctesdocentesautoconvocados@gmail.com</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                        <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
-                        <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
-                        <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
-                        <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
-                        <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
-                        <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
-                    </ul>
+                        <li><a class="text-decoration-none" href="#">Estatuto</a></li>
+                        <li><a class="text-decoration-none" href="#">Licencias</a></li>
+                        <li><a class="text-decoration-none" href="#">Calendario Escolar</a></li>
+                        <li><a class="text-decoration-none" href="#">Efemérides</a></li>
+                   </ul>
                 </div>
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Navegador</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Home</a></li>
-                        <li><a class="text-decoration-none" href="#">About Us</a></li>
-                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
-                        <li><a class="text-decoration-none" href="#">FAQs</a></li>
-                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                        <li><a class="text-decoration-none" href="simulador.html">Simulador</a></li>
+                        <li><a class="text-decoration-none" href="normas.html">Normas</a></li>
+                        <li><a class="text-decoration-none" href="contacto.html">Contacto</a></li>
+                        <li><a class="text-decoration-none" href="colaboracion.html">Colaboración</a></li>
                     </ul>
                 </div>
 
@@ -351,33 +343,27 @@
                 <div class="col-12 mb-3">
                     <div class="w-100 my-3 border-top border-light"></div>
                 </div>
-                <div class="col-auto me-auto">
+                <div class="col-auto me-auto mx-auto text-center">
                     <ul class="list-inline text-left footer-icons">
                         <li class="list-inline-item border border-light rounded-circle text-center">
-                            <a rel="nofollow" class="text-light text-decoration-none" target="_blank"
-                                href="http://fb.com/templatemo"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.facebook.com/Docentesautoconvocadosctescap"><i
+                                    class="fab fa-facebook-f fa-lg fa-fw"></i></a>
                         </li>
                         <li class="list-inline-item border border-light rounded-circle text-center">
                             <a class="text-light text-decoration-none" target="_blank"
-                                href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                                href="https://www.instagram.com/docentes_auto_ctes"><i
+                                    class="fab fa-instagram fa-lg fa-fw"></i></a>
                         </li>
                         <li class="list-inline-item border border-light rounded-circle text-center">
-                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i
+                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/DACorrientesCap"><i
                                     class="fab fa-twitter fa-lg fa-fw"></i></a>
                         </li>
                         <li class="list-inline-item border border-light rounded-circle text-center">
-                            <a class="text-light" href="https://www.youtube.com/channel/UCQvKTsiO6uuYuCk_WGamyqA"
-                                target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a class="text-light" href="https://www.youtube.com/channel/UCQvKTsiO6uuYuCk_WGamyqA" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
                         </li>
                     </ul>
-                </div>
-                <div class="col-auto">
-                    <label class="sr-only" for="subscribeEmail">Email address</label>
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail"
-                            placeholder="Email address">
-                        <div class="input-group-text btn-success text-light">Subscribe</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -385,11 +371,11 @@
         <div class="w-100 bg-black py-3">
             <div class="container">
                 <div class="row pt-2">
-                    <div class="col-12">
+                    <div class="col-12 text-center">
                         <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name
-                            | Designed by <a rel="sponsored" href="https://templatemo.com/page/1"
-                                target="_blank">TemplateMo</a>
+                            Copyright &copy; 2023 DACorrientes - Licencia MIT. Todos los derechos
+                            reservados.
+                            | Designed by <strong class="text-success">augusalterats</strong>
                         </p>
                     </div>
                 </div>
@@ -399,12 +385,14 @@
     </footer>
     <!-- End Footer -->
 
+
     <!-- Start Script -->
     <script src="assets/js/jquery-1.11.0.min.js"></script>
     <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/templatemo.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/data.js"></script>
     <!-- End Script -->
 </body>
 

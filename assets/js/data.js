@@ -11,8 +11,8 @@ var inflacion = [6.02787356638426, 6.62772168092709, 7.67523984978356, 8.4, 7.8,
 // Paritarias Nacionales Salario Docente Mínimo Nacional Garantizado (SDMNG)
 var sdmng = [87000, 90338, 130000, 130000, 130000, 145000, 165000, 165000, 200000, 220000, 220000, 250000];
 
-document.getElementById("fechaCanastaBasica").textContent = mes[mesActual - 1];
-document.getElementById("canastaBasica").textContent = formatPesos(canastaBasica[mesActual - 1]);
+document.getElementById("fechaCanastaBasica").textContent = mes[mesActual-1];
+document.getElementById("canastaBasica").textContent = formatPesos(canastaBasica[mesActual-1]);
 
 
 document.getElementById("fechaDolarBlue").textContent = mes[mesActual];
@@ -26,12 +26,17 @@ function inflacionAcumulada() {
         n += 1;
     };
     acumulada = formatNumero(((acumulada - 1) * 100).toFixed(2)) + "%"
-    return acumulada;
+    return [acumulada,n-1];
 };
-document.getElementById('inflacion').textContent = formatNumero(inflacion[mesActual - 1].toFixed(2)) + "%";
-document.getElementById("fechaInflacion").textContent = mes[mesActual - 1];
-document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada();
-document.getElementById("mes").textContent = mes[mesActual - 1];
+var inflacionMes ="---";
+if(inflacion[mesActual-1] !=="---"){
+    inflacionMes = formatNumero(inflacion[mesActual-1].toFixed(2));
+};
+document.getElementById('inflacion').textContent = inflacionMes + "%";
+document.getElementById("fechaInflacion").textContent = mes[mesActual-1];
+document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada()[0];
+document.getElementById("fechaInflacionAcumulada1").textContent = mes[inflacionAcumulada()[1]];
+document.getElementById("fechaInflacionAcumulada2").textContent = mes[inflacionAcumulada()[1]];
 
 document.getElementById("fechaParitarias").textContent = mes[mesActual];
 document.getElementById("paritarias").textContent = formatPesos(sdmng[mesActual]);

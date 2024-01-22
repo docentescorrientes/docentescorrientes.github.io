@@ -71,8 +71,11 @@ body, ul, li, p, a, label, input, div {
 #templatemo_nav_top { min-height: 40px;}
 #templatemo_nav_top * { font-size: .9em !important;}
 #templatemo_main_nav a { color: #212934;}
+#templatemo_main_nav_blue a { color: #212934;}
 #templatemo_main_nav a:hover { color: #69bb7e;}
+#templatemo_main_nav_blue a:hover { color: #0d6efd;}
 #templatemo_main_nav .navbar .nav-icon { margin-right: 20px;}
+#templatemo_main_nav_blue .navbar .nav-icon { margin-right: 20px;}
 
 /* Hero Carousel */
 #template-mo-zay-hero-carousel { background: #efefef !important;}
@@ -159,6 +162,25 @@ body, ul, li, p, a, label, input, div {
   transition: .5s;
 }
 #tempaltemo_footer .border-light { border-color: #2d343f !important;}
+
+/* Footer Blue*/
+#tempaltemo_footer_blue a { color: #dcdde1;}
+#tempaltemo_footer_blue a:hover { color: #0d6efd;}
+#tempaltemo_footer_blue ul.footer-link-list li { padding-top: 10px;}
+#tempaltemo_footer_blue ul.footer-icons li {
+  width: 2.6em;
+  height: 2.6em;
+  line-height: 2.6em;
+}
+#tempaltemo_footer_blue ul.footer-icons li:hover {
+  background-color: #cfd6e1;
+  transition: .5s;
+}
+#tempaltemo_footer_blue ul.footer-icons li:hover i {
+  color: #212934;
+  transition: .5s;
+}
+#tempaltemo_footer_blue .border-light { border-color: #2d343f !important;}
 /*
 // Extra small devices (portrait phones, less than 576px)
 // No media query since this is the default in Bootstrap
@@ -179,11 +201,13 @@ body, ul, li, p, a, label, input, div {
 /*// Medium devices (tablets, 768px and up)*/
 @media (min-width: 768px) {
   #templatemo_main_nav .navbar-nav {max-width: 450px;}
+  #templatemo_main_nav_blue .navbar-nav {max-width: 450px;}
  }
 
 /* Large devices (desktops, 992px and up)*/
 @media (min-width: 992px) {
   #templatemo_main_nav .navbar-nav {max-width: 550px;}
+  #templatemo_main_nav_blue .navbar-nav {max-width: 550px;}
   #template-mo-zay-hero-carousel .carousel-item {min-height: 30rem !important;}
   .product-wap .h3, .product-wap li, .product-wap i, .product-wap p {font-size: 18px !important;}
   .product-wap .product-color-dot {

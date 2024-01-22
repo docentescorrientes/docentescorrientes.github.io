@@ -160,6 +160,19 @@ cantClasesSelect.addEventListener('change', function () {
     });
 })();
 
+(function () {
+    'use strict';
+    var forms = document.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        document.getElementById('resetButton2').addEventListener('click', function (event) {
+            event.preventDefault();
+            form.classList.remove("was-validated");
+        }, false);
+    });
+})();
+
+
+
 
 (function () {
     'use strict';

@@ -218,3 +218,9 @@ body, ul, li, p, a, label, input, div {
 
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {}
+
+#calcDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

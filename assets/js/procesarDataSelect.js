@@ -19,10 +19,8 @@ function procesarDatos() {
         ocultarFilas('desc1Table', array2);
         const array3 = ['plusRemCuota1Bruto', 'plusRefCuota2Bruto', 'totalCuota3Bruto', 'totalHaberBruto'];
         ocultarFilas('cuotas1Table', array3);
-
     };
 };
-
 
 function ocultarFilas(id, array) {
     let tabla = document.getElementById(id);
@@ -81,6 +79,7 @@ function disabledTrue(llave) {
             document.getElementById(id).disabled = true;
         });
         document.getElementById('resetButton').disabled = false;
+        document.getElementById('resetButton2').disabled = false;
 
     };
 };
@@ -247,7 +246,7 @@ function horasCatedrasEsp(n) {
     let valor = 1;
     if (numeroClase === '191' || numeroClase === '192') {
         valor = document.getElementById('horasCat' + n + 'Select').value
-    } else if(numeroClase === ''){
+    } else if (numeroClase === '') {
         valor = 0;
     };
     return valor;
@@ -322,6 +321,7 @@ function resetearDatos() {
         document.getElementById(id).disabled = false;
     });
     document.getElementById('resetButton').disabled = true;
+    document.getElementById('resetButton2').disabled = true;
 
     const idsDiv = [
         'hijosEscDiv', 'camposClaseDiv',
@@ -351,6 +351,7 @@ function resetearDatos() {
     document.getElementById('titleFormsH1').textContent = 'Recibo de Simulación de Haberes ';
     document.getElementById('titleTableDiv').hidden = true;
     document.getElementById('tableDiv').hidden = true;
+    scrollToTop();
 };
 
 function mostrarTodasLasFilas(id) {
@@ -362,6 +363,13 @@ function mostrarTodasLasFilas(id) {
             filas[j].style.display = ''; // Restaura la visualización predeterminada
         }
     }
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
 function mesTexto(mesNumber) {

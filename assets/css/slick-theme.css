@@ -1,5 +1,19 @@
 @charset 'UTF-8';
 /* Slider */
+/* Estilo para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .container-md {
+        width: 100% !important;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .table th,
+    .table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
 .slick-loading .slick-list
 {
     background: #fff url('../img/ajax-loader.gif') center center no-repeat;

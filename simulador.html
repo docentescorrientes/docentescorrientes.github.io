@@ -1759,8 +1759,9 @@
                 <div class="row shadow-lg p-3 mb-5 bg-body rounded" id="tableDiv" hidden><!--hidden-->
                     <div class="border border-2 rounded" id="haberDesc1Div"><br>
                         <!--Start Haberes Primer Cargo-->
-                        <div class="col container-md" id="haber1Div">
-                            <table class="table caption-top table-primary table-striped" id="haber1Table">
+                        <div class="col container-md" id="haber1Div" style="overflow-x: auto;">
+                            <table class="table table-responsive caption-top table-primary table-striped"
+                                id="haber1Table">
                                 <caption>
                                     <h4 class="text-primary" id="primerCargoH4">
                                         Recibo Total del Haber 👇
@@ -1913,8 +1914,9 @@
                         </div>
                         <!--End Haberes-->
                         <!--Start Descuentos-->
-                        <div class="col container-md" id="desc1Div">
-                            <table class="table caption-top table-secondary table-striped" id="desc1Table">
+                        <div class="col container-md" id="desc1Div" style="overflow-x: auto;">
+                            <table class="table table-responsive caption-top table-secondary table-striped"
+                                id="desc1Table">
                                 <caption>Descuentos</caption>
                                 <thead>
                                     <tr>
@@ -1976,57 +1978,55 @@
                     </div><br>
                     <p></p>
                     <!--Start Cuotas-->
-                    <div class="border border-2 rounded" id="totalCuotasDiv"><br>
-                        <div class="col container-md">
-                            <table class="table caption-top table-info table-striped" id="cuotas1Table">
-                                <caption id="sacCap">
-                                    <h4 class="text-primary" id="sacH4">
-                                        Total en Cuotas 👇
-                                    </h4>
-                                    Haber y Pluses
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th scope="col" style="width: 200px;" id="pagoth">Plan de Pago</th>
-                                        <th scope="col">Concepto</th>
-                                        <th scope="col" class="text-center" style="width: 200px;">Bruto</th>
-                                        <th scope="col" class="text-center" style="width: 200px;">Descuento</th>
-                                        <th scope="col" class="text-center" style="width: 200px;">Neto</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="plusRemRowCuota2">
-                                        <th scope="row">1° Cuota</th>
-                                        <td>📕 Plus Unificado</td>
-                                        <td class="text-center" id="plusRemCuota1Bruto">----------</td>
-                                        <td class="text-center" id="plusRemCuota1Desc">----------</td>
-                                        <td class="text-center" id="plusRemCuota1Neto">----------</td>
-                                    </tr>
-                                    <tr id="plusRefRowCuota3">
-                                        <th scope="row">2° Cuota</th>
-                                        <td>📙 Plus de Refuerzo</td>
-                                        <td class="text-center" id="plusRefCuota2Bruto">----------</td>
-                                        <td class="text-center" id="plusRefCuota2Desc">----------</td>
-                                        <td class="text-center" id="plusRefCuota2Neto">----------</td>
-                                    </tr>
-                                    <tr id="totalRowCuota1">
-                                        <th scope="row">3° Cuota</th>
-                                        <td id="sacPerctd">📘 Sueldo Percibido</td>
-                                        <td class="text-center" id="totalCuota3Bruto">----------</td>
-                                        <td class="text-center" id="totalCuota3Desc">----------</td>
-                                        <td class="text-center" id="totalCuota3Neto">----------</td>
-                                    </tr>
+                    <div class="border border-2 rounded" id="totalCuotasDiv" style="overflow-x: auto;">
+                        <table class="table table-responsive caption-top table-info table-striped" id="cuotas1Table">
+                            <caption id="sacCap">
+                                <h4 class="text-primary" id="sacH4">
+                                    Total en Cuotas 👇
+                                </h4>
+                                Haber y Pluses
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 200px;" id="pagoth">Plan de Pago</th>
+                                    <th scope="col">Concepto</th>
+                                    <th scope="col" class="text-center" style="width: 200px;">Bruto</th>
+                                    <th scope="col" class="text-center" style="width: 200px;">Descuento</th>
+                                    <th scope="col" class="text-center" style="width: 200px;">Neto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="plusRemRowCuota2">
+                                    <th scope="row">1° Cuota</th>
+                                    <td>📕 Plus Unificado</td>
+                                    <td class="text-center" id="plusRemCuota1Bruto">----------</td>
+                                    <td class="text-center" id="plusRemCuota1Desc">----------</td>
+                                    <td class="text-center" id="plusRemCuota1Neto">----------</td>
+                                </tr>
+                                <tr id="plusRefRowCuota3">
+                                    <th scope="row">2° Cuota</th>
+                                    <td>📙 Plus de Refuerzo</td>
+                                    <td class="text-center" id="plusRefCuota2Bruto">----------</td>
+                                    <td class="text-center" id="plusRefCuota2Desc">----------</td>
+                                    <td class="text-center" id="plusRefCuota2Neto">----------</td>
+                                </tr>
+                                <tr id="totalRowCuota1">
+                                    <th scope="row">3° Cuota</th>
+                                    <td id="sacPerctd">📘 Sueldo Percibido</td>
+                                    <td class="text-center" id="totalCuota3Bruto">----------</td>
+                                    <td class="text-center" id="totalCuota3Desc">----------</td>
+                                    <td class="text-center" id="totalCuota3Neto">----------</td>
+                                </tr>
 
-                                    <tr class="border border-white border-3" id="totalHaberRowNeto">
-                                        <td colspan="2"> <b>∑ Total Haber</b></td>
-                                        <td class="text-center" id="totalHaberBruto">----------</td>
-                                        <td class="text-center" id="totalHaberDesc">----------</td>
-                                        <td class="text-center" id="totalHaberNeto">----------</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <br>
-                        </div>
+                                <tr class="border border-white border-3" id="totalHaberRowNeto">
+                                    <td colspan="2"> <b>∑ Total Haber</b></td>
+                                    <td class="text-center" id="totalHaberBruto">----------</td>
+                                    <td class="text-center" id="totalHaberDesc">----------</td>
+                                    <td class="text-center" id="totalHaberNeto">----------</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
                     </div>
                     <!--End Cuotas-->
                     <p></p>

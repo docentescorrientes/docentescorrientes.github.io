@@ -304,7 +304,7 @@ function calculoHaber() {
 
     //Calculo ítems Negros
     //Cód.3 Salario Familiar - Negro
-    const salFam3Bruto = DATOS.datosSalario.salarioFam3.valor * DATOS.datosSelect.hijos.valor + DATOS.datosSalario.ayudEscolar.valor * DATOS.datosSelect.hijosEsc.valor;
+    const salFam3Bruto = ( 1 * DATOS.datosSalario.salarioFam3.valor + 1 * DATOS.datosSalario.ayudEscolar.valor) * 1 * DATOS.datosSelect.hijos.valor;
     const salFam3Desc = '';
     const salFam3Neto = salFam3Bruto;
     document.getElementById('salFam3Bruto').innerHTML = formatPesos(salFam3Bruto);

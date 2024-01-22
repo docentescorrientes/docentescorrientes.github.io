@@ -167,7 +167,7 @@ function prepararDatos() {
             'apJub': { 'oculto': document.getElementById('clase1Div').hidden, 'valor': datosClase1.apJub },
             'zona': { 'oculto': zonaEsp('zona1')[0], 'valor': zonaEsp('zona1')[1] },
             'jornada': { 'oculto': document.getElementById('jornada1Div').hidden, 'valor': checkboxSeleccionado('jornada1Radio') },
-            'horasCatedras': { 'oculto': false, 'valor': horasCatedrasEsp(1) },
+            'horasCatedras': { 'oculto': document.getElementById('horasCat1Div').hidden, 'valor': horasCatedrasEsp(1) },
         },
         'clase2': {
             'contrato': { 'oculto': document.getElementById('contrato2Div').hidden, 'valor': checkboxSeleccionado('contrato2Radio') },
@@ -179,7 +179,7 @@ function prepararDatos() {
             'apJub': { 'oculto': document.getElementById('clase2Div').hidden, 'valor': datosClase2.apJub },
             'zona': { 'oculto': zonaEsp('zona2')[0], 'valor': zonaEsp('zona2')[1] },
             'jornada': { 'oculto': document.getElementById('jornada2Div').hidden, 'valor': checkboxSeleccionado('jornada2Radio') },
-            'horasCatedras': { 'oculto': false, 'valor': horasCatedrasEsp(2) },
+            'horasCatedras': { 'oculto': document.getElementById('horasCat2Div').hidden, 'valor': horasCatedrasEsp(2) },
         },
         'clase3': {
             'contrato': { 'oculto': document.getElementById('contrato3Div').hidden, 'valor': checkboxSeleccionado('contrato3Radio') },
@@ -191,7 +191,7 @@ function prepararDatos() {
             'apJub': { 'oculto': document.getElementById('clase3Div').hidden, 'valor': datosClase3.apJub },
             'zona': { 'oculto': zonaEsp('zona3')[0], 'valor': zonaEsp('zona3')[1] },
             'jornada': { 'oculto': document.getElementById('jornada3Div').hidden, 'valor': checkboxSeleccionado('jornada3Radio') },
-            'horasCatedras': { 'oculto': false, 'valor': horasCatedrasEsp(3) },
+            'horasCatedras': { 'oculto': document.getElementById('horasCat3Div').hidden, 'valor': horasCatedrasEsp(3) },
         },
         'clase4': {
             'contrato': { 'oculto': document.getElementById('contrato4Div').hidden, 'valor': checkboxSeleccionado('contrato4Radio') },
@@ -203,7 +203,7 @@ function prepararDatos() {
             'apJub': { 'oculto': document.getElementById('clase4Div').hidden, 'valor': datosClase4.apJub },
             'zona': { 'oculto': zonaEsp('zona4')[0], 'valor': zonaEsp('zona4')[1] },
             'jornada': { 'oculto': document.getElementById('jornada4Div').hidden, 'valor': checkboxSeleccionado('jornada4Radio') },
-            'horasCatedras': { 'oculto': false, 'valor': horasCatedrasEsp(4) },
+            'horasCatedras': { 'oculto': document.getElementById('horasCat4Div').hidden, 'valor': horasCatedrasEsp(4) },
         },
         'clase5': {
             'contrato': { 'oculto': document.getElementById('contrato5Div').hidden, 'valor': checkboxSeleccionado('contrato5Radio') },
@@ -215,7 +215,7 @@ function prepararDatos() {
             'apJub': { 'oculto': document.getElementById('clase5Div').hidden, 'valor': datosClase5.apJub },
             'zona': { 'oculto': zonaEsp('zona5')[0], 'valor': zonaEsp('zona5')[1] },
             'jornada': { 'oculto': document.getElementById('jornada5Div').hidden, 'valor': checkboxSeleccionado('jornada5Radio') },
-            'horasCatedras': { 'oculto': false, 'valor': horasCatedrasEsp(5) },
+            'horasCatedras': { 'oculto': document.getElementById('horasCat5Div').hidden, 'valor': horasCatedrasEsp(5) },
         },
         'clase6': {
             'contrato': { 'oculto': document.getElementById('contrato6Div').hidden, 'valor': checkboxSeleccionado('contrato6Radio') },
@@ -227,7 +227,7 @@ function prepararDatos() {
             'apJub': { 'oculto': document.getElementById('clase6Div').hidden, 'valor': datosClase6.apJub },
             'zona': { 'oculto': zonaEsp('zona6')[0], 'valor': zonaEsp('zona6')[1] },
             'jornada': { 'oculto': document.getElementById('jornada6Div').hidden, 'valor': checkboxSeleccionado('jornada6Radio') },
-            'horasCatedras': { 'oculto': false, 'valor': horasCatedrasEsp(6) },
+            'horasCatedras': { 'oculto': document.getElementById('horasCat6Div').hidden, 'valor': horasCatedrasEsp(6) },
         },
     };
     return datosSelect;
@@ -247,6 +247,8 @@ function horasCatedrasEsp(n) {
     let valor = 1;
     if (numeroClase === '191' || numeroClase === '192') {
         valor = document.getElementById('horasCat' + n + 'Select').value
+    } else if(numeroClase === ''){
+        valor = 0;
     };
     return valor;
 };

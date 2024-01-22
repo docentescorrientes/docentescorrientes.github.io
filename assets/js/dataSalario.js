@@ -257,7 +257,7 @@ function buscarDataMes(anoSelect, mesSelect) {
             case "11-SAC":
                 var basico1 = 73536.75 * 0.5,
                     salarioFam3 = 0.0,
-                    ayudEscolar = 60.0,
+                    ayudEscolar = 0.0,
                     zona36 = basico1,
                     antiguedad37 = basico1,
                     ayMatDidac62 = 0.1,

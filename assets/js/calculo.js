@@ -197,23 +197,23 @@ function calculoHaber() {
     if (plusRem603Bruto < plusRem603Tope) {
         plusRem603BrutoCarga = plusRem603Bruto;
         plusRem603Desc = (
-            plusSegunApJub(0,plusBruto603) * proporcionalHorasCatClase[0] * descClasePlus[0] / tope15[0] +
-            plusSegunApJub(1,plusBruto603) * proporcionalHorasCatClase[1] * descClasePlus[1] / tope15[1] +
-            plusSegunApJub(2,plusBruto603) * proporcionalHorasCatClase[2] * descClasePlus[2] / tope15[2] +
-            plusSegunApJub(3,plusBruto603) * proporcionalHorasCatClase[3] * descClasePlus[3] / tope15[3] +
-            plusSegunApJub(4,plusBruto603) * proporcionalHorasCatClase[4] * descClasePlus[4] / tope15[4] +
-            plusSegunApJub(5,plusBruto603) * proporcionalHorasCatClase[5] * descClasePlus[5] / tope15[5]);
+            plusSegunApJub(0, plusBruto603) * proporcionalHorasCatClase[0] * descClasePlus[0] / tope15[0] +
+            plusSegunApJub(1, plusBruto603) * proporcionalHorasCatClase[1] * descClasePlus[1] / tope15[1] +
+            plusSegunApJub(2, plusBruto603) * proporcionalHorasCatClase[2] * descClasePlus[2] / tope15[2] +
+            plusSegunApJub(3, plusBruto603) * proporcionalHorasCatClase[3] * descClasePlus[3] / tope15[3] +
+            plusSegunApJub(4, plusBruto603) * proporcionalHorasCatClase[4] * descClasePlus[4] / tope15[4] +
+            plusSegunApJub(5, plusBruto603) * proporcionalHorasCatClase[5] * descClasePlus[5] / tope15[5]);
         plusRem603Neto = (
-            plusSegunApJub(0,plusBruto603) * proporcionalHorasCatClase[0] * (1 - descClasePlus[0]) / tope15[0] +
-            plusSegunApJub(1,plusBruto603) * proporcionalHorasCatClase[1] * (1 - descClasePlus[1]) / tope15[1] +
-            plusSegunApJub(2,plusBruto603) * proporcionalHorasCatClase[2] * (1 - descClasePlus[2]) / tope15[2] +
-            plusSegunApJub(3,plusBruto603) * proporcionalHorasCatClase[3] * (1 - descClasePlus[3]) / tope15[3] +
-            plusSegunApJub(4,plusBruto603) * proporcionalHorasCatClase[4] * (1 - descClasePlus[4]) / tope15[4] +
-            plusSegunApJub(5,plusBruto603) * proporcionalHorasCatClase[5] * (1 - descClasePlus[5]) / tope15[5]);
+            plusSegunApJub(0, plusBruto603) * proporcionalHorasCatClase[0] * (1 - descClasePlus[0]) / tope15[0] +
+            plusSegunApJub(1, plusBruto603) * proporcionalHorasCatClase[1] * (1 - descClasePlus[1]) / tope15[1] +
+            plusSegunApJub(2, plusBruto603) * proporcionalHorasCatClase[2] * (1 - descClasePlus[2]) / tope15[2] +
+            plusSegunApJub(3, plusBruto603) * proporcionalHorasCatClase[3] * (1 - descClasePlus[3]) / tope15[3] +
+            plusSegunApJub(4, plusBruto603) * proporcionalHorasCatClase[4] * (1 - descClasePlus[4]) / tope15[4] +
+            plusSegunApJub(5, plusBruto603) * proporcionalHorasCatClase[5] * (1 - descClasePlus[5]) / tope15[5]);
     } else if (plusRem603Bruto >= plusRem603Tope) {
         plusRem603BrutoCarga = plusRem603Tope;
-        plusRem603Desc = plusSegunApJub(0,plusBruto603) * descClasePlus[0];
-        plusRem603Neto = plusSegunApJub(0,plusBruto603) * (1 - descClasePlus[0]);
+        plusRem603Desc = plusSegunApJub(0, plusBruto603) * descClasePlus[0];
+        plusRem603Neto = plusSegunApJub(0, plusBruto603) * (1 - descClasePlus[0]);
     };
     document.getElementById('plusRem603Bruto').innerHTML = formatPesos(plusRem603BrutoCarga);
     document.getElementById('plusRem603Desc').innerHTML = formatPesos(plusRem603Desc);
@@ -221,7 +221,7 @@ function calculoHaber() {
 
     //Cód. 625 Plus de Refuerzo - Gris
     const plusRef625Tope = 1 * DATOS.datosSalario.plusRef625.valor;
-    const plusBruto625 = 1 * DATOS.datosSalario.plusRef625.valor;    
+    const plusBruto625 = 1 * DATOS.datosSalario.plusRef625.valor;
     let plusRef625Bruto = (
         plusSegunApJub(0, plusBruto625) * proporcionalHorasCatClase[0] / tope15[0] +
         plusSegunApJub(1, plusBruto625) * proporcionalHorasCatClase[1] / tope15[1] +
@@ -249,12 +249,13 @@ function calculoHaber() {
     } else if (plusRef625Bruto >= plusRef625Tope) {
         plusRef625BrutoCarga = plusRef625Tope;
         plusRef625Desc = plusSegunApJub(0, plusBruto625) * descClasePlus[0];
-        plusRef625Neto = plusSegunApJub(0, plusBruto625) *  (1 - descClasePlus[0]);
+        plusRef625Neto = plusSegunApJub(0, plusBruto625) * (1 - descClasePlus[0]);
     };
     document.getElementById('plusRef625Bruto').innerHTML = formatPesos(plusRef625BrutoCarga);
     document.getElementById('plusRef625Desc').innerHTML = formatPesos(plusRef625Desc);
     document.getElementById('plusRef625Neto').innerHTML = formatPesos(plusRef625Neto);
 
+    //Cód. 629 Ad. Remun 2do Cargo - Gris
     //Cód. 629 Ad. Remun 2do Cargo - Gris
     const adRemun2Cargo629Tope = 2 * DATOS.datosSalario.adRemun2Cargo629.valor;
     let adRemun2Cargo629Bruto = 1 * DATOS.datosSalario.adRemun2Cargo629.valor * (
@@ -265,11 +266,11 @@ function calculoHaber() {
         proporcionalHorasCatClase[4] / tope15[4] +
         proporcionalHorasCatClase[5] / tope15[5]);
     let adRemun2Cargo629BrutoCarga, adRemun2Cargo629Desc, adRemun2Cargo629Neto;
-    if (adRemun2Cargo629Bruto < adRemun2Cargo629Tope && (adRemun2Cargo629Bruto <= (adRemun2Cargo629Tope / 2))) {
+    if (adRemun2Cargo629Bruto <= (adRemun2Cargo629Tope / 2)) {
         adRemun2Cargo629BrutoCarga = 0.0;
         adRemun2Cargo629Desc = 0.0;
         adRemun2Cargo629Neto = 0.0;
-    } else if (adRemun2Cargo629Bruto < adRemun2Cargo629Tope && (adRemun2Cargo629Bruto > (adRemun2Cargo629Tope / 2))) {
+    } else if ((adRemun2Cargo629Bruto > (adRemun2Cargo629Tope / 2)) && adRemun2Cargo629Bruto < adRemun2Cargo629Tope) {
         adRemun2Cargo629BrutoCarga = adRemun2Cargo629Bruto - adRemun2Cargo629Tope / 2;
         adRemun2Cargo629Desc = adRemun2Cargo629BrutoCarga * (
             proporcionalHorasCatClase[0] * descClase[0] / tope15[0] +
@@ -304,7 +305,7 @@ function calculoHaber() {
 
     //Calculo ítems Negros
     //Cód.3 Salario Familiar - Negro
-    const salFam3Bruto = ( 1 * DATOS.datosSalario.salarioFam3.valor + 1 * DATOS.datosSalario.ayudEscolar.valor) * 1 * DATOS.datosSelect.hijos.valor;
+    const salFam3Bruto = (1 * DATOS.datosSalario.salarioFam3.valor + 1 * DATOS.datosSalario.ayudEscolar.valor) * 1 * DATOS.datosSelect.hijos.valor;
     const salFam3Desc = '';
     const salFam3Neto = salFam3Bruto;
     document.getElementById('salFam3Bruto').innerHTML = formatPesos(salFam3Bruto);

@@ -496,7 +496,7 @@ function calculoHaber() {
 
 
     //Gremios
-    const remunerativosAmet = totalRemBonifBruto + totalRemNoBonifBruto - (plusRem603Bruto + plusRef625Bruto);
+    const remunerativosAmet = totalRemBonifBruto + totalRemNoBonifBruto - (plusRem603BrutoCarga + plusRef625BrutoCarga);
     const nameGremio = DATOS.datosSelect.nameGremio.valor;
     const gremio = DATOS.datosSelect.gremio.valor;
     let apGrem199Desc = 0; //SUTECO

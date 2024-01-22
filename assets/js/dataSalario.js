@@ -251,7 +251,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4/3),
                     adRemun2Cargo629 = 10000 * (4/3),
-                    segVida210 = 656.73,
+                    segVida210 = 735.54,
                     obraSocial212 = 0.05;
                 break;
             case "11-SAC":

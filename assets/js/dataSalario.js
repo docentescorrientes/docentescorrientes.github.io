@@ -317,7 +317,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "1":
@@ -338,7 +338,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "2":
@@ -359,7 +359,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "3":
@@ -380,7 +380,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "4":
@@ -401,7 +401,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "5-SAC":
@@ -443,7 +443,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "6":
@@ -464,7 +464,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "7":
@@ -485,7 +485,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "8":
@@ -506,7 +506,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "9":
@@ -527,7 +527,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "10":
@@ -548,7 +548,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
             case "11-SAC":
@@ -590,7 +590,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     jornadaExt624 = 0.25,
                     plusRef625 = 25000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
-                    segVida210 = 735.54,
+                    segVida210 = 809.09,
                     obraSocial212 = 0.05;
                 break;
         };

@@ -20,6 +20,9 @@ function procesarDatos() {
         const array3 = ['plusRemCuota1Bruto', 'plusRefCuota2Bruto', 'totalCuota3Bruto', 'totalHaberBruto'];
         ocultarFilas('cuotas1Table', array3);
         scrollToNextDiv();
+        setTimeout(function() {
+            $('#myModal').modal('show');
+        }, 1000);
     };
 };
 
@@ -31,6 +34,8 @@ function scrollToNextDiv() {
         nextDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 };
+
+
 
 function ocultarFilas(id, array) {
     let tabla = document.getElementById(id);

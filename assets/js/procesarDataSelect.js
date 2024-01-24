@@ -19,6 +19,16 @@ function procesarDatos() {
         ocultarFilas('desc1Table', array2);
         const array3 = ['plusRemCuota1Bruto', 'plusRefCuota2Bruto', 'totalCuota3Bruto', 'totalHaberBruto'];
         ocultarFilas('cuotas1Table', array3);
+        scrollToNextDiv();
+    };
+};
+
+function scrollToNextDiv() {
+    var currentDivId = 'scrool'; 
+    var currentDiv = document.getElementById(currentDivId);
+    var nextDiv = currentDiv.nextElementSibling;
+    if (nextDiv) {
+        nextDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 };
 

@@ -109,6 +109,7 @@ function calculoHaber() {
     document.getElementById('ayMatDidac62Bruto').innerHTML = formatPesos(ayMatDidac62Bruto);
     document.getElementById('ayMatDidac62Desc').innerHTML = formatPesos(ayMatDidac62Desc);
     document.getElementById('ayMatDidac62Neto').innerHTML = formatPesos(ayMatDidac62Neto);
+
     //Cód. 624 Jornada Extendida - Blanco
     const jornadaExt624Bruto = 1 * DATOS.datosSalario.jornadaExt624.valor * DATOS.datosSalario.basico1.valor * (
         DATOS.clase1.jornada.valor * (proporcionalIndiceClase[0] * (1 + 1 * DATOS.clase1.zona.valor + 1 * DATOS.datosSelect.antiguedad.valor + 1 * DATOS.datosSalario.ayMatDidac62.valor)) +
@@ -256,7 +257,6 @@ function calculoHaber() {
     document.getElementById('plusRef625Neto').innerHTML = formatPesos(plusRef625Neto);
 
     //Cód. 629 Ad. Remun 2do Cargo - Gris
-    //Cód. 629 Ad. Remun 2do Cargo - Gris
     const adRemun2Cargo629Tope = 2 * DATOS.datosSalario.adRemun2Cargo629.valor;
     let adRemun2Cargo629Bruto = 1 * DATOS.datosSalario.adRemun2Cargo629.valor * (
         proporcionalHorasCatClase[0] / tope15[0] +
@@ -378,8 +378,8 @@ function calculoHaber() {
     document.getElementById('sac150Desc').innerHTML = formatPesos(0.0);
     document.getElementById('sac150Neto').innerHTML = formatPesos(0.0);
 
-    //Cód. 168 Programa Nacional Comp. Docente - Negro                      FALTA CALCULAR
-    let progNacCompDoc168Bruto = DATOS.datosSalario.progNacCompDoc168.valor;
+    //Cód. 168 Programa Nacional Comp. Docente - Negro                  
+    let progNacCompDoc168Bruto = calculoHaber30();
     let progNacCompDoc168Desc = '';
     let progNacCompDoc168Neto = progNacCompDoc168Bruto;
     document.getElementById('progNacCompDoc168Bruto').innerHTML = formatPesos(progNacCompDoc168Bruto);

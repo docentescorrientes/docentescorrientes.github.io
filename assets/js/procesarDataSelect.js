@@ -285,19 +285,25 @@ function diaFechaSuplenciaEsp(n) {
     const indiceSuplencia = indice;
     return indiceSuplencia;
 };
-function zonaEsp(nameId) {
-    const selects = document.querySelectorAll('select[name="' + nameId + '"]');
-    const divs = document.querySelectorAll('div[name="' + nameId + 'Div"]')
+
+//id="zona1IPDiv" id="zona1SSDiv"
+function zonaEsp(nameZona) {
+    const zonaIPDiv = document.getElementById(nameZona + 'IPDiv');
+    const zonaSSDiv = document.getElementById(nameZona + 'SSDiv');
+    const zonaIPSelect = document.getElementById(nameZona + 'IPSelect');
+    const zonaSSSelect = document.getElementById(nameZona + 'SSSelect');
     let oculto = true;
     let select = '';
-    for (var i = 0; i < selects.length; i++) {
-        if (!divs[i].hidden) {
-            oculto = divs[i].hidden;
-            select = selects[i].value;
-        };
+    if (!zonaIPDiv.hidden && zonaSSDiv.hidden){
+        oculto = false;
+        select = zonaIPSelect.value;
+    } else if (zonaIPDiv.hidden && !zonaSSDiv.hidden){
+        oculto = false;
+        select = zonaSSSelect.value;
     };
-    return [oculto, select]
-};
+
+    return [oculto, select];
+}
 
 function resetearDatos() {
     document.getElementById("forms").reset();

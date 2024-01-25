@@ -2061,6 +2061,22 @@
                     <!-- End Buttons 2-->
                 </div>
                 <!-- End Table -->
+
+                <div class="container">
+                    <div class="needs-validation shadow-lg p-3 mb-5 bg-body rounded">
+                        <label for="miSelect" class="form-label">
+                            <b><abbr title="Clase de cargo o función docente, clase e índice de clase">
+                                    Busca tu clase e índice de clase de cargo docentes aquí</abbr>:</b>
+                        </label>
+            
+                        <select class="form-select" aria-label="Default select example" id="miSelect">
+                            <option selected>Buscar la clase e índice de clase del cargo de docente . . . </option>
+                        </select><br>
+                        <input class="form-control" type="text" value="Esperando que seleccione cargo . . ."
+                            aria-label="readonly input example" id="claseBuscada" readonly>
+                    </div>
+                </div>
+
                 <!-- Start Version -->
                 <div class="shadow-lg p-3 mb-5 bg-body rounded" id="versionDiv">
                     <h5 class="text-primary" style="--bs-text-opacity: 1.9; text-align: center;" id="versionH6">
@@ -2124,6 +2140,10 @@
         </div>
     </section>
     <!-- End Section Datos Informativos-->
+       <!-- Start Brands -->
+       <section class="bg-light py-5">
+       </section>
+       <!--End Brands-->
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
@@ -2225,6 +2245,172 @@
     <script src="assets/js/dataSalario.js"></script>
     <script src="assets/js/calculo.js"></script>
     <script src="assets/js/calc168.js"></script>
+    <script>
+        const selectElement = document.getElementById('miSelect');
+        const inputClaseBuscada = document.getElementById('claseBuscada');
+
+        let opciones = [
+            { 'cargo': 'Asistente Social', 'clase': 318, 'indice': 1640 },
+            { 'cargo': 'Auxiliar de Dirección', 'clase': 135, 'indice': 1070 },
+            { 'cargo': 'Auxiliar Técnico Docente', 'clase': 309, 'indice': 1855 },
+            { 'cargo': 'Ayudante de Clases Prácticas de Nivel Secundario', 'clase': 151, 'indice': 971 },
+            { 'cargo': 'Ayudante de Trabajos Prácticos de Educación Superior', 'clase': 150, 'indice': 962 },
+            { 'cargo': 'Bedel de Educación Superior', 'clase': 133, 'indice': 1200 },
+            { 'cargo': 'Bibliotecario de Educación Superior', 'clase': 161, 'indice': 1450 },
+            { 'cargo': 'Bibliotecario Nivel Medio', 'clase': 144, 'indice': 1400 },
+            { 'cargo': 'Bibliotecario Nivel Primario', 'clase': 375, 'indice': 2357 },
+            { 'cargo': 'Coordinador General de Actividades Prácticas', 'clase': 164, 'indice': 1501 },
+            { 'cargo': 'Coordinador Técnico Docente', 'clase': 308, 'indice': 3730 },
+            { 'cargo': 'Director de 1º Categoría Escuela Común', 'clase': 328, 'indice': 2799 },
+            { 'cargo': 'Director de 1º Categoría Escuela de Jóvenes y Adultos', 'clase': 336, 'indice': 2799 },
+            { 'cargo': 'Director de 1º Categoría Escuela Hogar', 'clase': 344, 'indice': 3094 },
+            { 'cargo': 'Director de 1º Categoría Escuela Jornada Extendida', 'clase': 313, 'indice': 2947 },
+            { 'cargo': 'Director de 1º Centros Deportivos', 'clase': 125, 'indice': 2310 },
+            { 'cargo': 'Director de 2º Categoría Escuela Común', 'clase': 329, 'indice': 2357 },
+            { 'cargo': 'Director de 2º Categoría Escuela de Jóvenes y Adultos', 'clase': 337, 'indice': 2357 },
+            { 'cargo': 'Director de 2º Categoría Escuela Jornada Extendida-Tecnico de Alfabetización', 'clase': 314, 'indice': 2799 },
+            { 'cargo': 'Director de 2º Centros Deportivos', 'clase': 127, 'indice': 1961 },
+            { 'cargo': 'Director de 3º Categoría Escuela común', 'clase': 330, 'indice': 2136 },
+            { 'cargo': 'Director de 3º Categoría Escuela de Jóvenes y Adultos', 'clase': 338, 'indice': 2136 },
+            { 'cargo': 'Director de 3º Centros Deportivos', 'clase': 128, 'indice': 1732 },
+            { 'cargo': 'Director de 4º Categoría Escuela Común (Personal Único)', 'clase': 331, 'indice': 1915 },
+            { 'cargo': 'Director de 4º Categoría Escuela de Jóvenes y Adultos', 'clase': 342, 'indice': 1915 },
+            { 'cargo': 'Director de Carrera Educación Superior', 'clase': 176, 'indice': 558 },
+            { 'cargo': 'Director de Enseñanza Agraria de 3º Categoría', 'clase': 113, 'indice': 2136 },
+            { 'cargo': 'Director de Escuela de Educación Especial de 1º Categoría-Responsable Zonal', 'clase': 320, 'indice': 2947 },
+            { 'cargo': 'Director de Escuela de Educación Especial de 2º Categoría', 'clase': 311, 'indice': 2505 },
+            { 'cargo': 'Director de Escuela de Educación Especial de 3º Categoría', 'clase': 341, 'indice': 2284 },
+            { 'cargo': 'Director de Escuela de Educación Especial de 4º Categoría', 'clase': 310, 'indice': 2063 },
+            { 'cargo': 'Director de Jardín de Infantes', 'clase': 157, 'indice': 2633 },
+            { 'cargo': 'Director de Misión Monotécnica', 'clase': 172, 'indice': 1501 },
+            { 'cargo': 'Director de Nivel (General)', 'clase': 101, 'indice': 4609 },
+            { 'cargo': 'Director Técnico Docente', 'clase': 303, 'indice': 3830 },
+            { 'cargo': 'Directora de Escuela Jardín de 1º Categoría', 'clase': 360, 'indice': 2799 },
+            { 'cargo': 'Directora de Escuela Jardín de 2º Categoría', 'clase': 361, 'indice': 2357 },
+            { 'cargo': 'Inspector Médico Sanidad Escolar', 'clase': 169, 'indice': 1960 },
+            { 'cargo': 'Instructor', 'clase': 166, 'indice': 1155 },
+            { 'cargo': 'Jefe de Coordinador Servicio Médico Asistencial', 'clase': 401, 'indice': 2450 },
+            { 'cargo': 'Jefe de Departamento Educación Física', 'clase': 159, 'indice': 753 },
+            { 'cargo': 'Jefe de Departamento Educación Secundaria', 'clase': 175, 'indice': 462 },
+            { 'cargo': 'Jefe de División Servicio Médico Asistencial', 'clase': 402, 'indice': 2099 },
+            { 'cargo': 'Jefe de Laboratorio', 'clase': 140, 'indice': 1500 },
+            { 'cargo': 'Jefe de Normatización', 'clase': 103, 'indice': 4329 },
+            { 'cargo': 'Jefe de Preceptores de Nivel Secundario de 1º', 'clase': 143, 'indice': 1400 },
+            { 'cargo': 'Jefe de Preceptores de Nivel Secundario de 2º', 'clase': 147, 'indice': 1330 },
+            { 'cargo': 'Jefe de Preceptores de Nivel Secundario de 3º', 'clase': 148, 'indice': 1260 },
+            { 'cargo': 'Jefe de Preceptores Superior', 'clase': 170, 'indice': 1330 },
+            { 'cargo': 'Jefe de Sección de Enseñanza Práctica', 'clase': 131, 'indice': 1540 },
+            { 'cargo': 'Jefe de Trabajos Prácticos Superior', 'clase': 149, 'indice': 1200 },
+            { 'cargo': 'Jefe General de Ens. Práctica', 'clase': 155, 'indice': 1511 },
+            { 'cargo': 'Jefe General de Enseñanza Práctica', 'clase': 120, 'indice': 1732 },
+            { 'cargo': 'Jefe General de Enseñanza Práctica 2º', 'clase': 171, 'indice': 1617 },
+            { 'cargo': 'Jefe Sectorial de Trabajos Prácticos', 'clase': 165, 'indice': 1386 },
+            { 'cargo': 'Jefe Servicio Social de Escuela Hogar', 'clase': 406, 'indice': 3121 },
+            { 'cargo': 'Maestra de Grado Dpto Aplicación', 'clase': 134, 'indice': 1400 },
+            { 'cargo': 'Maestro Ayudante de Enseñanza Práctica', 'clase': 141, 'indice': 971 },
+            { 'cargo': 'Maestro de Enseñanza Práctica ', 'clase': 138, 'indice': 1400 },
+            { 'cargo': 'Maestro de Gabinete (Psicólogo, Foniátra, Fonoaudiólogo, Músico Terapéuta, Psicopedagógo, Psicólogo Educacional, Kinesiólogo)', 'clase': 322, 'indice': 1640 },
+            { 'cargo': 'Maestro de Grado Coordinador de Taller', 'clase': 410, 'indice': 1400 },
+            { 'cargo': 'Maestro de Grado de Escuela de Educación Especial', 'clase': 323, 'indice': 1583 },
+            { 'cargo': 'Maestro de Grado Educación Especial Educación Domiciliaria', 'clase': 371, 'indice': 1583 },
+            { 'cargo': 'Maestro de Grado Escuela Adultos', 'clase': 340, 'indice': 1400 },
+            { 'cargo': 'Maestro de Grado Escuela Común', 'clase': 333, 'indice': 1400 },
+            { 'cargo': 'Maestro de Grado Escuela de Jornada Completa (Plan Piloto)', 'clase': 316, 'indice': 2205 },
+            { 'cargo': 'Maestro de Grado Escuela Hogar', 'clase': 352, 'indice': 2448 },
+            { 'cargo': 'Maestro de Grado Promotor Comunitario', 'clase': 411, 'indice': 1400 },
+            { 'cargo': 'Maestro de Grado. Recup. Y Apoyo, Madur. Y Ap.', 'clase': 370, 'indice': 1583 },
+            { 'cargo': 'Maestro de Jardín de Infantes', 'clase': 132, 'indice': 1400 },
+            { 'cargo': 'Maestro de Jardín de Infantes', 'clase': 334, 'indice': 1400 },
+            { 'cargo': 'Maestro de Orientación Laboral', 'clase': 319, 'indice': 1200 },
+            { 'cargo': 'Maestro de Sección Cultural', 'clase': 136, 'indice': 1155 },
+            { 'cargo': 'Maestro de Taller', 'clase': 408, 'indice': 1400 },
+            { 'cargo': 'Maestro de Taller de Escuela de Educación Especial', 'clase': 317, 'indice': 1400 },
+            { 'cargo': 'Maestro Especial', 'clase': 139, 'indice': 1205 },
+            { 'cargo': 'Maestro Especial de Escuela de Educación Especial', 'clase': 327, 'indice': 1400 },
+            { 'cargo': 'Maestro Especial de Técnico Agropecuario', 'clase': 409, 'indice': 1200 },
+            { 'cargo': 'Maestro Especial Escuela Común', 'clase': 335, 'indice': 1200 },
+            { 'cargo': 'Maestro Especial Escuela Hogar', 'clase': 353, 'indice': 1400 },
+            { 'cargo': 'Maestro Especial Escuela Jornada Extendida', 'clase': 307, 'indice': 1400 },
+            { 'cargo': 'Maestro Secretario', 'clase': 137, 'indice': 1288 },
+            { 'cargo': 'Médicos  o Terapéutas', 'clase': 404, 'indice': 1960 },
+            { 'cargo': 'Miembro de JUNTA básico +ded,exclusiva', 'clase': 156, 'indice': 4000 },
+            { 'cargo': 'Miembro de JUNTA básico +ded,exclusiva', 'clase': 377, 'indice': 4000 },
+            { 'cargo': 'Odontólogo', 'clase': 403, 'indice': 1960 },
+            { 'cargo': 'Preceptor de Educación Superior', 'clase': 160, 'indice': 1200 },
+            { 'cargo': 'Preceptor de Nivel Secundario', 'clase': 152, 'indice': 1200 },
+            { 'cargo': 'Presidente', 'clase': 20, 'indice': 4819 },
+            { 'cargo': 'Pro-Secretario 3º ', 'clase': 162, 'indice': 1155 },
+            { 'cargo': 'Profesor de Educación Superior', 'clase': 191, 'indice': 93.02 },
+            { 'cargo': 'Profesor de Educación Secundaria', 'clase': 192, 'indice': 77.01 },
+            { 'cargo': 'Prosecretario de Educación Superior', 'clase': 130, 'indice': 1450 },
+            { 'cargo': 'Rector de Educación Superior', 'clase': 107, 'indice': 3162 },
+            { 'cargo': 'Rector de Nivel Secundario de 1º Categoría', 'clase': 109, 'indice': 2799 },
+            { 'cargo': 'Rector de Nivel Secundario de 2º Categoría', 'clase': 111, 'indice': 2357 },
+            { 'cargo': 'Rector de Nivel Secundario de 3º Categoría', 'clase': 112, 'indice': 2136 },
+            { 'cargo': 'Regente de 1º', 'clase': 153, 'indice': 1732 },
+            { 'cargo': 'Regente de 2º de Enseñanza Práctica', 'clase': 173, 'indice': 1617 },
+            { 'cargo': 'Regente de 3º', 'clase': 154, 'indice': 1501 },
+            { 'cargo': 'Regente del Dpto de Aplicación de 1º', 'clase': 119, 'indice': 2021 },
+            { 'cargo': 'Regente del Dpto de Aplicación de 2º', 'clase': 121, 'indice': 1732 },
+            { 'cargo': 'Regente Superior', 'clase': 110, 'indice': 2009 },
+            { 'cargo': 'Responsable Zonal Plan', 'clase': 168, 'indice': 2310 },
+            { 'cargo': 'Secretario de Educación Superior', 'clase': 123, 'indice': 1674 },
+            { 'cargo': 'Secretario de Nivel Secundario de 1º', 'clase': 124, 'indice': 1501 },
+            { 'cargo': 'Secretario de Nivel Secundario de 2º', 'clase': 126, 'indice': 1386 },
+            { 'cargo': 'Secretario de Nivel Secundario de 3º', 'clase': 129, 'indice': 1270 },
+            { 'cargo': 'Secretario General', 'clase': 26, 'indice': 4329 },
+            { 'cargo': 'Secretario Técnico', 'clase': 104, 'indice': 4329 },
+            { 'cargo': 'Secretario Técnico de Escuela de Educación Especial', 'clase': 321, 'indice': 1583 },
+            { 'cargo': 'Sub-Regente de Enseñanza Práctica', 'clase': 163, 'indice': 1501 },
+            { 'cargo': 'Sub-Supervisor General', 'clase': 302, 'indice': 4132 },
+            { 'cargo': 'Subjefe de Preceptores de Nivel Secundario', 'clase': 146, 'indice': 1330 },
+            { 'cargo': 'Subregente del Departamento de Aplicación', 'clase': 122, 'indice': 1732 },
+            { 'cargo': 'Supervisor', 'clase': 305, 'indice': 4000 },
+            { 'cargo': 'Supervisor General', 'clase': 102, 'indice': 4248 },
+            { 'cargo': 'Supervisor General', 'clase': 105, 'indice': 4000 },
+            { 'cargo': 'Supervisor Secretario Supervisor General', 'clase': 304, 'indice': 4050 },
+            { 'cargo': 'Técnico P.F. Alfabetización', 'clase': 167, 'indice': 2425 },
+            { 'cargo': 'Vice director Jardines de Infantes 1ª', 'clase': 158, 'indice': 2357 },
+            { 'cargo': 'Vice-Director de 1º Centros Deportivos', 'clase': 116, 'indice': 1848 },
+            { 'cargo': 'Vice-Director de 2º Centros Deportivos', 'clase': 117, 'indice': 1732 },
+            { 'cargo': 'Vice-Director de 3º Centros Deportivos', 'clase': 142, 'indice': 1617 },
+            { 'cargo': 'Vice-Director Escuela Hogar', 'clase': 349, 'indice': 2947 },
+            { 'cargo': 'Vicedirector de Escuela de Educación Especial', 'clase': 312, 'indice': 2505 },
+            { 'cargo': 'Vicedirector de Escuela de Jóvenes y Adultos', 'clase': 339, 'indice': 2357 },
+            { 'cargo': 'Vicedirector de Escuela Jornada Extendida', 'clase': 315, 'indice': 2799 },
+            { 'cargo': 'Vicedirector de Jardín de Infantes', 'clase': 365, 'indice': 2357 },
+            { 'cargo': 'Vicedirector Escuela Comun', 'clase': 332, 'indice': 2357 },
+            { 'cargo': 'Vicerrector de Educación Superior', 'clase': 108, 'indice': 2604 },
+            { 'cargo': 'Vicerrector de Nivel Secundario de 1º Categoría', 'clase': 114, 'indice': 2357 },
+            { 'cargo': 'Vicerrector de Nivel Secundario de 2º Categoría', 'clase': 115, 'indice': 2136 },
+            { 'cargo': 'Vicerrector de Nivel Secundario de 3º Categoría', 'clase': 118, 'indice': 1915 },
+            { 'cargo': 'Visitadora de Higiene de Escuela Hogar', 'clase': 407, 'indice': 2205 },
+            { 'cargo': 'Vocal', 'clase': 27, 'indice': 4609 }
+        ];
+
+        // Recorrer las opciones y agregarlas al select
+        opciones.forEach((opcion) => {
+            const optionElement = document.createElement('option');
+            optionElement.value = opcion.clase + '#' + opcion.indice;
+            optionElement.textContent = opcion.cargo;
+            selectElement.appendChild(optionElement);
+        });
+
+        document.getElementById("miSelect").addEventListener("input", () => {
+            const seleccion = new Object(document.getElementById("miSelect").value);
+
+
+            // Dividimos la cadena en función del símbolo "#"
+            var partes = seleccion.split('#');
+
+            // Obtenemos el primer elemento del array resultante
+            var clase = partes[0];
+            var indice = partes[1]
+            const basico_ref = 59444.1
+            document.getElementById("claseBuscada").value = "El número de clase 👉 " + clase + ", cuyo índice para calcular su básico es 👉 " + indice /1400;
+        });
+    </script>
+
     <!-- End Script -->
 </body>
 

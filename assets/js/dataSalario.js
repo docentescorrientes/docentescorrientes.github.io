@@ -321,7 +321,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "1":
-                var basico1 = 73536.75,
+                var basico1 = 88244.1,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -332,11 +332,11 @@ function buscarDataMes(anoSelect, mesSelect) {
                     progNacCompDoc168 = 0,
                     compProv171 = 56500.0,
                     adRemDoc193 = 33500 * (4 / 3),
-                    plusRem603 = 27650 * (4 / 3),
+                    plusRem603 = 33500 * (4 / 3),
                     conectNac609 = 12250.0,
                     bono622 = 0.0,
                     jornadaExt624 = 0.25,
-                    plusRef625 = 25000 * (4 / 3),
+                    plusRef625 = 30000 * (4 / 3),
                     adRemun2Cargo629 = 10000 * (4 / 3),
                     segVida210 = 809.09,
                     obraSocial212 = 0.05;

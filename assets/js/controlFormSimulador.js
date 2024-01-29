@@ -12,7 +12,6 @@ const verifSelect = document.getElementById('verifSelect');
 verifSelect.addEventListener("click", function () {
     const DATOS = prepararDatos();
     const llave = llaveVerif(DATOS);
-    console.log(llave)
     if (llave === 1) {
         if (document.getElementById('verifSelect').checked) {
             verificSelect.value = document.getElementById('verifSelect').checked;

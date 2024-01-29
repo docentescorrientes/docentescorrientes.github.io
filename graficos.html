@@ -26,7 +26,8 @@
             <div class="w-100 d-flex justify-content-between">
                 <div>
                     <i class="fa-solid fa-chalkboard-user mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none">DOCENTES AUTOCONVOCADOS CORRIENTES CAPITAL </a>
+                    <a class="navbar-sm-brand text-light text-decoration-none">DOCENTES AUTOCONVOCADOS CORRIENTES
+                        CAPITAL </a>
                     <i class="fa-solid fa-circle-check" style="color: #327cfb;"></i>
                 </div>
                 <div>
@@ -43,22 +44,18 @@
         </div>
     </nav>
     <!-- Close Top Nav -->
-
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
-
             <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
                 <i class="fa-solid fa-chalkboard-user mx-2"></i>
                 DAC
             </a>
-
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
                 id="templatemo_main_nav">
                 <div class="flex-fill">
@@ -88,7 +85,6 @@
         </div>
     </nav>
     <!-- Close Header -->
-
     <!-- Modal -->
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,32 +102,109 @@
             </form>
         </div>
     </div>
-
-
-
-    <!-- Start Content -->
-    <div class="container py-5">
-        <div class="row">
-            <img src="assets/img/construccion.svg" alt="About Hero">
-
+    <p id="datosInfo" hidden></p>
+    <div class="container py-5 mb-3 text-center">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chartRadio" id="chartRadio2023" value="2023" checked>
+            <label class="form-check-label" for="chartRadio2023">2023</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chartRadio" id="chartRadio2024" value="2024">
+            <label class="form-check-label" for="chartRadio2024">2024</label>
         </div>
     </div>
-    <!-- End Content -->
 
+    <!-- Start Content -->
+    <div class="container py-5 mb-3 text-center" id="myChartHaber2023Div">
+        <label for="myChartHaber2023" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoHaber2023">Chart 2023</h4>
+        </label>
+        <canvas id="myChartHaber2023" width="400" height="200"></canvas>
+    </div>
+    <div class="container py-5 mb-3 text-center" id="myChartHaber2024Div" hidden>
+        <label for="myChartHaber2024" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoHaber2024">Chart 2024</h4>
+        </label>
+        <canvas id="myChartHaber2024" width="400" height="200"></canvas>
+    </div>
+
+    <div class="container py-5 mb-3 text-center">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chartCRadio" id="chartC1Radio2023" value="C1" checked>
+            <label class="form-check-label" for="chartC1Radio2023">En el 1° Cargo</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chartCRadio" id="chartC2Radio2024" value="C2">
+            <label class="form-check-label" for="chartC2Radio2024">En el 2° Cargo</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="chartCRadio" id="chartCTRadio2024" value="CT">
+            <label class="form-check-label" for="chartCTRadio2024">En el Total de Cargos</label>
+        </div>
+    </div>
+
+    <div class="container py-5 mb-3 text-center" id="myChartInflacion2023C1Div">
+        <label for="myChartInflacion2023C1" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoInflacion2023C1">Chart C1 2023 inflación</h4>
+        </label>
+        <canvas id="myChartInflacion2023C1" width="400" height="200"></canvas>
+    </div>
+    <div class="container py-5 mb-3 text-center" id="myChartInflacion2024C1Div" hidden>
+        <label for="myChartInflacion2024C1" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoInflacion2024C1">Chart C1 2024 inflación</h4>
+        </label>
+        <canvas id="myChartInflacion2024C1" width="400" height="200"></canvas>
+    </div>
+
+    <div class="container py-5 mb-3 text-center" id="myChartInflacion2023C2Div" hidden>
+        <label for="myChartInflacion2023C2" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoInflacion2023C2">Chart C2 2023 inflación</h4>
+        </label>
+        <canvas id="myChartInflacion2023C2" width="400" height="200"></canvas>
+    </div>
+    <div class="container py-5 mb-3 text-center" id="myChartInflacion2024C2Div" hidden>
+        <label for="myChartInflacion2024C2" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoInflacion2024C2">Chart C2 2024 inflación</h4>
+        </label>
+        <canvas id="myChartInflacion2024C2" width="400" height="200"></canvas>
+    </div>
+
+    <div class="container py-5 mb-3 text-center" id="myChartInflacion2023CTDiv" hidden>
+        <label for="myChartInflacion2023CT" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoInflacion2023CT">Chart CT 2023 inflación</h4>
+        </label>
+        <canvas id="myChartInflacion2023CT" width="400" height="200"></canvas>
+    </div>
+    <div class="container py-5 mb-3 text-center" id="myChartInflacion2024CTDiv" hidden>
+        <label for="myChartInflacion2024CT" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoInflacion2024CT">Chart CT 2024 inflación</h4>
+        </label>
+        <canvas id="myChartInflacion2024CT" width="400" height="200"></canvas>
+    </div>
+
+    <div class="container py-5 mb-3 text-center" id="myChartLineal2023Div">
+        <label for="myChartLineal2023" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoLineal2023">Chart 2023</h4>
+        </label>
+        <canvas id="myChartLineal2023" width="400" height="200"></canvas>
+    </div>
+    <div class="container py-5 mb-3 text-center" id="myChartLineal2024Div" hidden>
+        <label for="myChartLineal2024" class="form-label">
+            <h4 class="mb-4 text-secondary" id="aumentoLineal2024">Chart 2024</h4>
+        </label>
+        <canvas id="myChartLineal2024" width="400" height="200"></canvas>
+    </div>
+    <!-- End Content -->
     <!-- Start Brands -->
     <section class="bg-light py-5">
-
-
     </section>
     <!--End Brands-->
-
-
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo"><i class="fa-solid fa-chalkboard-user mx-2"></i>DAC Capital</h2>
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo"><i
+                            class="fa-solid fa-chalkboard-user mx-2"></i>DAC Capital</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
@@ -144,17 +217,16 @@
                         </li>
                     </ul>
                 </div>
-
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="#">Estatuto</a></li>
-                        <li><a class="text-decoration-none" href="https://bit.ly/Régimendelicencias" target="_blank">Licencias</a></li>
+                        <li><a class="text-decoration-none" href="https://bit.ly/Régimendelicencias"
+                                target="_blank">Licencias</a></li>
                         <li><a class="text-decoration-none" href="#">Calendario Escolar</a></li>
                         <li><a class="text-decoration-none" href="#">Efemérides</a></li>
                     </ul>
                 </div>
-
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Navegador</h2>
                     <ul class="list-unstyled text-light footer-link-list">
@@ -164,9 +236,7 @@
                         <li><a class="text-decoration-none" href="colaboracion.html">Colaboración</a></li>
                     </ul>
                 </div>
-
             </div>
-
             <div class="row text-light mb-4">
                 <div class="col-12 mb-3">
                     <div class="w-100 my-3 border-top border-light"></div>
@@ -196,7 +266,6 @@
                 </div>
             </div>
         </div>
-
         <div class="w-100 bg-black py-3">
             <div class="container">
                 <div class="row pt-2">
@@ -210,13 +279,16 @@
                 </div>
             </div>
         </div>
-
     </footer>
     <!-- End Footer -->
-
     <!-- Start Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/dataSalario.js"></script>
+
+    <script type="module" src="assets/js/programar.js"></script>
     <!-- End Script -->
 </body>
 

@@ -148,6 +148,8 @@ function calculoHaber30() {
         (2 * DATOS.datosSalario.asigEspLey140.valor + 2 * DATOS.datosSalario.compProv171.valor + 2 * DATOS.datosSalario.conectNac609.valor) * (n - 1);
     let sumaTope = sdmng2 - (sumaItemsConstantes1 + blancoNeto[0] + sumaItemsConstantes2 + blancoNeto[1]) / n;
 
+    console.log((sumaItemsConstantes1 + ' - ' + blancoNeto[0] + ' - ' +  sumaItemsConstantes2 + ' - ' +  blancoNeto[1]) + ' - ' +  n)
+
     let horasCat1Cargo = resultados.primerMaxHorasCat;
     let horasCat2Cargo = resultados.segundoMaxHorasCat;
     if (clase1 === '191' && clase2 === '' && horasCat1Cargo > 24) {
@@ -174,7 +176,7 @@ function calculoHaber30() {
     if (sumaCargos <= 1 || suma168 < 0) {
         suma168 = 0.0;
     };
-
+    console.log(suma168)
     return suma168;
 };
 

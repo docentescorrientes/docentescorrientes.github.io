@@ -535,11 +535,11 @@ function calculoHaber() {
     document.getElementById('totalDesc').innerHTML = formatPesos(totalDesc);
 
     //Calculo Haber en Cuotas
-    document.getElementById('plusRemCuota1Bruto').innerHTML = formatPesos(plusRem603Bruto);
+    document.getElementById('plusRemCuota1Bruto').innerHTML = formatPesos(plusRem603BrutoCarga);
     document.getElementById('plusRemCuota1Desc').innerHTML = formatPesos(plusRem603Desc);
     document.getElementById('plusRemCuota1Neto').innerHTML = formatPesos(plusRem603Neto);
 
-    document.getElementById('plusRefCuota2Bruto').innerHTML = formatPesos(plusRef625Bruto);
+    document.getElementById('plusRefCuota2Bruto').innerHTML = formatPesos(plusRef625BrutoCarga);
     document.getElementById('plusRefCuota2Desc').innerHTML = formatPesos(plusRef625Desc);
     document.getElementById('plusRefCuota2Neto').innerHTML = formatPesos(plusRef625Neto);
 

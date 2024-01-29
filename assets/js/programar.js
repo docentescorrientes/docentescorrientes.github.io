@@ -2,8 +2,12 @@ import dateGeneral from './date.js';
 const date = dateGeneral();
 const dateInflacion = date.inflacion;
 
-cargarChart1('2023', 'barras', 'Haber');
-cargarChart1('2024', 'barras', 'Haber');
+cargarChart1('2023', 'barras', 'Haber', 'C1');
+cargarChart1('2024', 'barras', 'Haber', 'C1');
+cargarChart1('2023', 'barras', 'Haber', 'C2');
+cargarChart1('2024', 'barras', 'Haber', 'C2');
+cargarChart1('2023', 'barras', 'Haber', 'CT');
+cargarChart1('2024', 'barras', 'Haber', 'CT');
 cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C1');
 cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'C1');
 cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C2');
@@ -13,34 +17,84 @@ cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'CT');
 cargarChart3('2023', 'lineal', 'Lineal');
 cargarChart3('2024', 'lineal', 'Lineal');
 
-function cargarChart1(ano, tipo, graficoId) {
+function cargarChart1(ano, tipo, graficoId, cargo) {
+    const cargoN = cargo;
+    const zonaIndice = 0.2;
+    const antiguegadIndice = 0.0;
+    const jornadaExt = 0.0;
+    const hijos = 0.0;
+    const desc = 0.25;
+    let blancos, grises, negros, haber;
+    const arrayHaber1 = [];
+    const arrayHaber2 = [];
+    let arrayHaberTotal = [];
     const arrayBarras = [[], [], [], []];
     for (let i = 0; i < 12; i++) {
         const DATOS_SALARIO = buscarDataMes(ano, i.toString());
-        const blancos = DATOS_SALARIO.basico1;
-        const grises = DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625 + DATOS_SALARIO.adRemun2Cargo629;
-        const negros = DATOS_SALARIO.asigEspLey140 + DATOS_SALARIO.compProv171 + DATOS_SALARIO.conectNac609;
+        let blancos1 = (1 - desc) * (DATOS_SALARIO.basico1 + DATOS_SALARIO.zona36 * zonaIndice + DATOS_SALARIO.antiguedad37 * antiguegadIndice + DATOS_SALARIO.ayMatDidac62 * DATOS_SALARIO.basico1 + DATOS_SALARIO.jornadaExt624 * DATOS_SALARIO.basico1 * jornadaExt);
+        let grises1 = (1 - desc) * (DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625);
+        let negros1 = (DATOS_SALARIO.salarioFam3 + DATOS_SALARIO.ayudEscolar) * hijos + DATOS_SALARIO.asigEspLey140 + DATOS_SALARIO.compProv171 + DATOS_SALARIO.conectNac609;
+        let haber1 = blancos1 + grises1 + negros1;
+        let blancos2 = blancos1;
+        let grises2 = (1 - desc) * DATOS_SALARIO.adRemun2Cargo629;
+        let negros2 = negros1 + DATOS_SALARIO.progNacCompDoc168;
+        let haber2 = blancos2 + grises2 + negros2;
+        let sdmng = DATOS_SALARIO.sdmng;
+        let progNacCompDoc168 = sdmng - (haber1 + haber2);
+        if (progNacCompDoc168 <= 0) {
+            progNacCompDoc168 = 0.0;
+        };
+        haber2 = haber2 + progNacCompDoc168;
+        arrayHaber1.push(haber1);
+        arrayHaber2.push(haber2);
+        arrayHaberTotal.push(haber1 + haber2);
+
+        if (cargoN === 'C1') {
+            blancos = blancos1;
+            grises = grises1;
+            negros = negros1;
+            haber = haber1;
+            arrayHaberTotal = arrayHaber1;
+        } else if (cargoN === 'C2') {
+            blancos = blancos2;
+            grises = grises2;
+            negros = negros2;
+            haber = haber2;
+            arrayHaberTotal = arrayHaber2;
+        } else if (cargoN === 'CT') {
+            blancos = blancos1 + blancos2;
+            grises = grises1 + grises2;
+            negros = negros1 + negros2;
+            haber = haber1 + haber2;
+            arrayHaberTotal = arrayHaberTotal;
+        };
         arrayBarras[0].push(blancos);
         arrayBarras[1].push(grises);
         arrayBarras[2].push(negros);
-        arrayBarras[3].push(blancos + grises + negros);
+        arrayBarras[3].push(haber);
     };
+
     const arrayBarrasDif = [
         [arrayBarras[0][0] / (arrayBarras[0][0] + arrayBarras[1][0] + arrayBarras[2][0])],
         [arrayBarras[1][0] / (arrayBarras[0][0] + arrayBarras[1][0] + arrayBarras[2][0])],
         [arrayBarras[2][0] / (arrayBarras[0][0] + arrayBarras[1][0] + arrayBarras[2][0])],
         [arrayBarras[3][0] / (arrayBarras[0][0] + arrayBarras[1][0] + arrayBarras[2][0])]
     ];
+
     for (let j = 0; j < 11; j++) {
         const difBlancos = (arrayBarras[0][j + 1] / arrayBarras[0][j]) * arrayBarrasDif[0][j];
-        const difGrises = (arrayBarras[1][j + 1] / arrayBarras[1][j]) * arrayBarrasDif[1][j];
+        let difGrises = (arrayBarras[1][j + 1] / arrayBarras[1][j]) * arrayBarrasDif[1][j];
+        if (arrayBarras[1][j] === 0 && isNaN(difGrises)){
+            difGrises = (arrayBarras[1][j + 1]) / (arrayBarras[0][j] + arrayBarras[1][j] + arrayBarras[2][j])
+        };
         const difNegros = (arrayBarras[2][j + 1] / arrayBarras[2][j]) * arrayBarrasDif[2][j];
         const difHaber = (arrayBarras[3][j + 1] / arrayBarras[3][j]) * arrayBarrasDif[3][j];
         arrayBarrasDif[0].push(difBlancos.toFixed(2));
         arrayBarrasDif[1].push(difGrises.toFixed(2));
         arrayBarrasDif[2].push(difNegros.toFixed(2));
         arrayBarrasDif[3].push(difHaber.toFixed(2));
-    }
+    };
+
     const opciones = {
         plugins: {
             legend: {
@@ -91,11 +145,11 @@ function cargarChart1(ano, tipo, graficoId) {
     };
     const labelMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     if (tipo === 'barras') {
-        chartBarras(ano, graficoId, [arrayBarrasDif[0], arrayBarrasDif[1], arrayBarrasDif[2], arrayBarrasDif[3]], labelMeses, opciones);
+        chartBarras(ano, graficoId, [arrayBarrasDif[0], arrayBarrasDif[1], arrayBarrasDif[2], arrayBarrasDif[3]], labelMeses, opciones, cargoN);
         const aumentoRealAcumulado = format(((arrayBarras[3][11] / arrayBarras[3][0]) - 1) * 100);
         let aumentoRealAcumuladoText = '👉 El gráfico muestra como fue incrementándose el salario en el primer cargo, partiendo de un salario unidad, y el crecimiento' +
             ' en proporciones de los distintos grupos de ítems.<br>El aumento real porcentual acumulado docente ' + ano + ', solo el primer cargo, fue de un ' + aumentoRealAcumulado + '%';
-        document.getElementById('aumento' + graficoId + ano).innerHTML = aumentoRealAcumuladoText;
+        document.getElementById('aumento' + graficoId + ano + cargoN).innerHTML = aumentoRealAcumuladoText;
         return aumentoRealAcumulado;
     };
 };
@@ -345,8 +399,8 @@ function cargarChart3(ano, tipo, graficoId) {
     };
 };
 
-function chartBarras(ano, grafico, array, labelMeses, opciones) {
-    const ctx = document.getElementById('myChart' + grafico.toString() + ano).getContext('2d');
+function chartBarras(ano, grafico, array, labelMeses, opciones, cargo) {
+    const ctx = document.getElementById('myChart' + grafico.toString() + ano + cargo).getContext('2d');
     const colores = [
         'rgba(54, 162, 235, 0.4)',
         'rgba(255, 206, 86, 0.4)',
@@ -502,16 +556,109 @@ function colorBarras(tono = 0.2) {
     return ['rgba(255, 99, 132, ' + tono + ')', 'rgba(255, 159, 64, ' + tono + ')', 'rgba(75, 192, 192, ' + tono + ')', 'rgba(255, 205, 86, ' + tono + ')', 'rgba(54, 162, 235, ' + tono + ')', 'rgba(153, 102, 255, ' + tono + ')', 'rgba(0, 0, 0, ' + tono + ')', 'rgba(255, 0, 0, ' + tono + ')', 'rgba(255, 165, 0, ' + tono + ')', 'rgba(255, 255, 0, ' + tono + ')', 'rgba(0, 128, 0, ' + tono + ')', 'rgba(0, 0, 255, ' + tono + ')'];
 };
 
-var radios = document.getElementsByName('chartRadio');
-radios.forEach(function (radio) {
+document.getElementsByName('chart1Radio').forEach(function (radio) {
     radio.addEventListener('click', function () {
-        var anoSeleccionado = document.querySelector('input[name="chartRadio"]:checked').value;
-        var cargoSeleccionado = document.querySelector('input[name="chartCRadio"]:checked').value;
+        var anoSeleccionado = document.querySelector('input[name="chart1Radio"]:checked').value;
+        var cargoSeleccionado = document.querySelector('input[name="chart1CRadio"]:checked').value;
         if (anoSeleccionado === '2023') {
-            document.getElementById('myChartHaber2023Div').hidden = false;
-            document.getElementById('myChartHaber2024Div').hidden = true;
-            document.getElementById('myChartLineal2023Div').hidden = false;
-            document.getElementById('myChartLineal2024Div').hidden = true;
+            if (cargoSeleccionado === 'C1') {
+                document.getElementById('myChartHaber2023C1Div').hidden = false;
+                document.getElementById('myChartHaber2024C1Div').hidden = true;
+                document.getElementById('myChartHaber2023C2Div').hidden = true;
+                document.getElementById('myChartHaber2024C2Div').hidden = true;
+                document.getElementById('myChartHaber2023CTDiv').hidden = true;
+                document.getElementById('myChartHaber2024CTDiv').hidden = true;
+            } else if (cargoSeleccionado === 'C2') {
+                document.getElementById('myChartHaber2023C1Div').hidden = true;
+                document.getElementById('myChartHaber2024C1Div').hidden = true;
+                document.getElementById('myChartHaber2023C2Div').hidden = false;
+                document.getElementById('myChartHaber2024C2Div').hidden = true;
+                document.getElementById('myChartHaber2023CTDiv').hidden = true;
+                document.getElementById('myChartHaber2024CTDiv').hidden = true;
+            } else if (cargoSeleccionado === 'CT') {
+                document.getElementById('myChartHaber2023C1Div').hidden = true;
+                document.getElementById('myChartHaber2024C1Div').hidden = true;
+                document.getElementById('myChartHaber2023C2Div').hidden = true;
+                document.getElementById('myChartHaber2024C2Div').hidden = true;
+                document.getElementById('myChartHaber2023CTDiv').hidden = false;
+                document.getElementById('myChartHaber2024CTDiv').hidden = true;
+            };
+        } else if (anoSeleccionado === '2024') {
+            if (cargoSeleccionado === 'C1') {
+                document.getElementById('myChartHaber2023C1Div').hidden = true;
+                document.getElementById('myChartHaber2024C1Div').hidden = false;
+                document.getElementById('myChartHaber2023C2Div').hidden = true;
+                document.getElementById('myChartHaber2024C2Div').hidden = true;
+                document.getElementById('myChartHaber2023CTDiv').hidden = true;
+                document.getElementById('myChartHaber2024CTDiv').hidden = true;
+            } else if (cargoSeleccionado === 'C2') {
+                document.getElementById('myChartHaber2023C1Div').hidden = true;
+                document.getElementById('myChartHaber2024C1Div').hidden = true;
+                document.getElementById('myChartHaber2023C2Div').hidden = true;
+                document.getElementById('myChartHaber2024C2Div').hidden = false;
+                document.getElementById('myChartHaber2023CTDiv').hidden = true;
+                document.getElementById('myChartHaber2024CTDiv').hidden = true;
+            } else if (cargoSeleccionado === 'CT') {
+                document.getElementById('myChartHaber2023C1Div').hidden = true;
+                document.getElementById('myChartHaber2024C1Div').hidden = true;
+                document.getElementById('myChartHaber2023C2Div').hidden = true;
+                document.getElementById('myChartHaber2024C2Div').hidden = true;
+                document.getElementById('myChartHaber2023CTDiv').hidden = true;
+                document.getElementById('myChartHaber2024CTDiv').hidden = false;
+            };
+        };
+    });
+});
+
+document.getElementsByName('chart1CRadio').forEach(function (radioC) {
+    radioC.addEventListener('click', function () {
+        var cargoSeleccionado = document.querySelector('input[name="chart1CRadio"]:checked').value;
+        var anoSeleccionado = document.querySelector('input[name="chart1Radio"]:checked').value;
+        if (cargoSeleccionado === 'C1') {
+            if (anoSeleccionado === '2023') {
+                document.getElementById('myChartHaber2023C1Div').hidden = false;
+                document.getElementById('myChartHaber2024C1Div').hidden = true;
+            } else if (anoSeleccionado === '2024') {
+                document.getElementById('myChartHaber2023C1Div').hidden = true;
+                document.getElementById('myChartHaber2024C1Div').hidden = false;
+            };
+            document.getElementById('myChartHaber2023C2Div').hidden = true;
+            document.getElementById('myChartHaber2024C2Div').hidden = true;
+            document.getElementById('myChartHaber2023CTDiv').hidden = true;
+            document.getElementById('myChartHaber2024CTDiv').hidden = true;
+        } else if (cargoSeleccionado === 'C2') {
+            document.getElementById('myChartHaber2023C1Div').hidden = true;
+            document.getElementById('myChartHaber2024C1Div').hidden = true;
+            if (anoSeleccionado === '2023') {
+                document.getElementById('myChartHaber2023C2Div').hidden = false;
+                document.getElementById('myChartHaber2024C2Div').hidden = true;
+            } else if (anoSeleccionado === '2024') {
+                document.getElementById('myChartHaber2023C2Div').hidden = true;
+                document.getElementById('myChartHaber2024C2Div').hidden = false;
+            };
+            document.getElementById('myChartHaber2023CTDiv').hidden = true;
+            document.getElementById('myChartHaber2024CTDiv').hidden = true;
+        } else if (cargoSeleccionado === 'CT') {
+            document.getElementById('myChartHaber2023C1Div').hidden = true;
+            document.getElementById('myChartHaber2024C1Div').hidden = true;
+            document.getElementById('myChartHaber2023C2Div').hidden = true;
+            document.getElementById('myChartHaber2024C2Div').hidden = true;
+            if (anoSeleccionado === '2023') {
+                document.getElementById('myChartHaber2023CTDiv').hidden = false;
+                document.getElementById('myChartHaber2024CTDiv').hidden = true;
+            } else if (anoSeleccionado === '2024') {
+                document.getElementById('myChartHaber2023CTDiv').hidden = true;
+                document.getElementById('myChartHaber2024CTDiv').hidden = false;
+            };
+        };
+    });
+});
+
+document.getElementsByName('chart2Radio').forEach(function (radio) {
+    radio.addEventListener('click', function () {
+        var anoSeleccionado = document.querySelector('input[name="chart2Radio"]:checked').value;
+        var cargoSeleccionado = document.querySelector('input[name="chart2CRadio"]:checked').value;
+        if (anoSeleccionado === '2023') {
             if (cargoSeleccionado === 'C1') {
                 document.getElementById('myChartInflacion2023C1Div').hidden = false;
                 document.getElementById('myChartInflacion2023C2Div').hidden = true;
@@ -535,10 +682,6 @@ radios.forEach(function (radio) {
                 document.getElementById('myChartInflacion2024CTDiv').hidden = true;
             };
         } else {
-            document.getElementById('myChartHaber2023Div').hidden = true;
-            document.getElementById('myChartHaber2024Div').hidden = false;
-            document.getElementById('myChartLineal2023Div').hidden = true;
-            document.getElementById('myChartLineal2024Div').hidden = false;
             if (cargoSeleccionado === 'C1') {
                 document.getElementById('myChartInflacion2023C1Div').hidden = true;
                 document.getElementById('myChartInflacion2023C2Div').hidden = true;
@@ -565,11 +708,10 @@ radios.forEach(function (radio) {
     });
 });
 
-var radiosC = document.getElementsByName('chartCRadio');
-radiosC.forEach(function (radioC) {
+document.getElementsByName('chart2CRadio').forEach(function (radioC) {
     radioC.addEventListener('click', function () {
-        var cargoSeleccionado = document.querySelector('input[name="chartCRadio"]:checked').value;
-        var anoSeleccionado = document.querySelector('input[name="chartRadio"]:checked').value;
+        var cargoSeleccionado = document.querySelector('input[name="chart2CRadio"]:checked').value;
+        var anoSeleccionado = document.querySelector('input[name="chart2Radio"]:checked').value;
         if (cargoSeleccionado === 'C1') {
             if (anoSeleccionado === '2023') {
                 document.getElementById('myChartInflacion2023C1Div').hidden = false;
@@ -609,6 +751,21 @@ radiosC.forEach(function (radioC) {
         };
     });
 });
+
+document.getElementsByName('chart3Radio').forEach(function (radio) {
+    radio.addEventListener('click', function () {
+        var anoSeleccionado = document.querySelector('input[name="chart3Radio"]:checked').value;
+        if (anoSeleccionado === '2023') {
+            document.getElementById('myChartLineal2023Div').hidden = false;
+            document.getElementById('myChartLineal2024Div').hidden = true;
+        } else {
+            document.getElementById('myChartLineal2023Div').hidden = true;
+            document.getElementById('myChartLineal2024Div').hidden = false;
+        };
+    });
+});
+
+
 
 function format(number) {
     let numberFromat = number * 1;

@@ -30,7 +30,7 @@ document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulad
 document.getElementById("anoAntInflacion").textContent = 'Inflación Acumulada ' + (anoActual-1);
 document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada(buscaUltimoDato(inflacion)[0]);
 document.getElementById("anoInflacion").textContent = anoActual;
-document.getElementById("mesInflacion").textContent = mesText(mesActual);
+//document.getElementById("mesInflacion").textContent = mesText(mesActual);
 
 //End Busca último dato y lo carga Canasta Básica, Dolar Blue, Inlflación y SDNMG
 

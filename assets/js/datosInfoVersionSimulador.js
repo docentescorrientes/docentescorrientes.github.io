@@ -26,10 +26,25 @@ for (let i = 0; i < 4; i++) {
     document.getElementById(idDatos[i]).textContent = formatNumero(datos[buscaUltimoDato(datos)[0]][buscaUltimoDato(datos)[1]]);
 }
 
+document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulada(2023) + '%';
+document.getElementById("anoAntInflacion").textContent = 'Inflación Acumulada ' + (anoActual-1);
 document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada(buscaUltimoDato(inflacion)[0]);
+document.getElementById("anoInflacion").textContent = anoActual;
+document.getElementById("mesInflacion").textContent = mesText(mesActual);
+
 //End Busca último dato y lo carga Canasta Básica, Dolar Blue, Inlflación y SDNMG
 
 //Start Funciones
+function mesText(mesN){
+    let mesReturn = mesN;
+    const mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    if(mesN === -1){
+        mesReturn = 11;
+    };
+    mesReturn = mes[mesReturn];
+    return mesReturn;
+};
+
 function buscaUltimoDato(array) {
     let ano = anoActual;
     let mes;

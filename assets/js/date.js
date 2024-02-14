@@ -2,7 +2,7 @@ export default function dateGeneral() {
     // El valor de 1 (una) Canasta Básica Total tipo 2 según INDEC https://www.argentina.gob.ar/subsidios/canasta (valores a mediado del mes estan publicados)
     var canastaBasica = {
         2023: [163538.68, 177062.87, 191228.05, 203360.69, 217915.79, 232426.83, 248962.01, 284686.95, 319422.04, 345295.45, 390456.32, 495798.32],
-        2024: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---'],
+        2024: [596823.18, '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---'],
         2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
     },
         /* El valor del dólar blue https://www.dolarito.ar/cotizaciones-historicas/dolar/informal/2023/cotizacion-historica-del-dolar-informal-a%C3%B1o-2023 

@@ -15,7 +15,7 @@ export default function dateGeneral() {
         // El valor de la inflación IPC Nacional https://www.economia.gob.ar/datos/ (valores a mediado del mes estan publicados)
         inflacion = {
             2023: [6.02787356638426, 6.62772168092709, 7.67523984978356, 8.4, 7.8, 6.0, 6.3, 12.44163772869, 12.7, 8.31, 12.81, 25.5],
-            2024: [20.6, '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---'],
+            2024: [20.6, 13.2, '---', '---', '---', '---', '---', '---', '---', '---', '---', '---'],
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         },
         // Paritarias Nacionales Salario Docente Mínimo Nacional Garantizado (SDMNG)

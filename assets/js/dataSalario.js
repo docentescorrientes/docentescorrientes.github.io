@@ -321,7 +321,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "1":
-                var basico1 = 73536.75 + 14707.35,
+                var basico1 = 73536.75 + 15000.0,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -330,7 +330,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     asigEspLey140 = 16450.0,
                     sdmng = 250000.0,
                     progNacCompDoc168 = 0,
-                    compProv171 = 56500.0 + 35000,
+                    compProv171 = 56500.0 + 35000.0,
                     adRemDoc193 = 33500 * (4 / 3),
                     plusRem603 = (27650 + 5850) * (4 / 3),
                     conectNac609 = 12250.0,
@@ -342,9 +342,9 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "2":
-                var basico1 = 88244.10,
-                    salarioFam3 = 22000.0,
-                    ayudEscolar = 60.0 + 20000.0,
+                var basico1 = 88536.75,
+                    salarioFam3 = 22000.0 + 8000.0, //45000.0 asigHijoDiscap
+                    ayudEscolar = 60.0 + 20000.0 +100000.0,
                     zona36 = basico1,
                     antiguedad37 = basico1,
                     ayMatDidac62 = 0.1,
@@ -363,7 +363,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "3":
-                var basico1 = 88244.10,
+                var basico1 = 88536.75 + 9000.0,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -373,7 +373,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     sdmng = 250000.0,
                     progNacCompDoc168 = 0,
                     compProv171 = 91500.0,
-                    adRemDoc193 = 33500 * (4 / 3),
+                    adRemDoc193 = (33500 + 20000) * (4 / 3),
                     plusRem603 = 33500 * (4 / 3),
                     conectNac609 = 12250.0 * 0.0,
                     bono622 = 0.0,
@@ -384,7 +384,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "4":
-                var basico1 = 88244.10,
+                var basico1 = 97536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -405,7 +405,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "5-SAC":
-                var basico1 = 88244.10 * 0.5,
+                var basico1 = 97536.75 * 0.5,
                     salarioFam3 = 0.0,
                     ayudEscolar = 0.0,
                     zona36 = basico1,
@@ -426,7 +426,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "5":
-                var basico1 = 88244.10,
+                var basico1 = 97536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,

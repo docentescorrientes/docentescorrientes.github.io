@@ -9,7 +9,7 @@ export default function dateGeneral() {
         (dolar blue cotización los primeros días del mes)*/
         dolarBlue = {
             2023: [342, 381, 375, 395, 469, 480, 495, 560, 735, 800, 915, 955],
-            2024: [1005, 1195, 1030, '---', '---', '---', '---', '---', '---', '---', '---',],
+            2024: [1025, 1005, 1195, 1030, '---', '---', '---', '---', '---', '---', '---', '---',],
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         },
         // El valor de la inflación IPC Nacional https://www.economia.gob.ar/datos/ (valores a mediado del mes estan publicados)

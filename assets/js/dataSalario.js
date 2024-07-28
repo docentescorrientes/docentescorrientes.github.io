@@ -1,6 +1,6 @@
 // Datos Variables 2023,2024
 function buscarDataMes(anoSelect, mesSelect) {
-    if (anoSelect === '2023') {
+if (anoSelect === '2023') {
         switch (mesSelect) {
             case "0":
                 var basico1 = 29036.75,

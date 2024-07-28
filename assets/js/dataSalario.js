@@ -1,6 +1,6 @@
 // Datos Variables 2023,2024
 function buscarDataMes(anoSelect, mesSelect) {
-if (anoSelect === '2023') {
+    if (anoSelect === '2023') {
         switch (mesSelect) {
             case "0":
                 var basico1 = 29036.75,
@@ -344,7 +344,7 @@ if (anoSelect === '2023') {
             case "2":
                 var basico1 = 88536.75,
                     salarioFam3 = 22000.0 + 8000.0, //45000.0 asigHijoDiscap
-                    ayudEscolar = 60.0 + 20000.0 +100000.0,
+                    ayudEscolar = 60.0 + 20000.0 + 100000.0,
                     zona36 = basico1,
                     antiguedad37 = basico1,
                     ayMatDidac62 = 0.1,

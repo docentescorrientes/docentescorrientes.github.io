@@ -1,3 +1,8 @@
+//Start Versión
+const version = "4.0", fecha = 'Agosto de 2024';
+document.getElementById('versionH6').insertAdjacentHTML("beforeend", version + '<br>' + fecha + '<br> @augusalterats');
+//End Versión
+
 import dateGeneral from './date.js';
 const date = dateGeneral();    
 var canastaBasica = date.canastaBasica;
@@ -103,8 +108,3 @@ function formatNumero(number) {
     return numberFormat;
 };
 //End Funciones
-
-//Start Versión
-const version = "9.0", fecha = 'Agosto de 2024';
-document.getElementById('versionH6').insertAdjacentHTML("beforeend", version + '<br>' + fecha + '<br> @augusalterats');
-//End Versión

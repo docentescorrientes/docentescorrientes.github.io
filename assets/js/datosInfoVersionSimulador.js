@@ -27,7 +27,7 @@ for (let i = 0; i < 4; i++) {
 }
 
 document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulada(2023) + '%';
-document.getElementById("anoAntInflacion").textContent = 'Inflación Acumulada ' + (anoActual-1);
+document.getElementById("anoAntInflacion").textContent = 'Inflación NEA acumulada ' + (anoActual-1);
 document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada(buscaUltimoDato(inflacion)[0]);
 document.getElementById("anoInflacion").textContent = anoActual;
 //document.getElementById("mesInflacion").textContent = mesText(mesActual);

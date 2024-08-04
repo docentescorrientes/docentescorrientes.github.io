@@ -1,10 +1,16 @@
 export default function dateGeneral() {
-    // El valor de 1 (una) Canasta Básica Total Hogar 2 según INDEC https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149 (ver informe cuadro 2)
-    var canastaBasica = {
+    var canastaBT2 = {
+        // El valor de 1 (una) Canasta Básica Total (Pobreza) Hogar 2 según INDEC https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149 (ver informe cuadro 2)
         2023: [163538.68, 177062.87, 191228.05, 203360.69, 217915.79, 232426.83, 248962.01, 284686.95, 319422.04, 345295.45, 390456.32, 495798.32],
         2024: [596823.18, 690901.57, 773385.1, 828158.19, 851350.87, 873168.77, '---', '---', '---', '---', '---', '---'],
         2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
     },
+        canastaBA2 = {
+            // El valor de 1 (una) Canasta Básica Alimentaria (Indigencia) Hogar 2 según INDEC https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149 (ver informe cuadro 2)
+            2023: [72043.47, 80483.13, 87719.29, 94148.47, 99052.64, 104227.28, 111642.16, 130590.35, 147880.57, 160602.53, 185050.40, 240678.80],
+            2024: [285561.33, 322851.20, 358048.65, 373044.24, 386977.66, 393319.27, '---', '---', '---', '---'],
+            2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
+        },
         // El valor del dólar blue https://www.dolarito.ar/cotizaciones-historicas/dolar/informal/2023/cotizacion-historica-del-dolar-informal-a%C3%B1o-2023 (dolar blue cotización fin del mes)*/
         dolarBlue = {
             2023: [382, 376, 395, 469, 491.5, 495, 550.5, 737.5, 800, 917.5, 930, 1012.5],
@@ -12,9 +18,15 @@ export default function dateGeneral() {
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         },
         // El valor de la inflación IPC NEA https://www.economia.gob.ar/datos/ (valores a mediado del mes estan publicados)
-        inflacion = {
+        inflacionNEA = {
             2023: [5.65, 7.76, 6.25, 8.34, 7.29, 6.61, 6.26, 14.18, 12.95, 7.40, 12.83, 28.35],
             2024: [19.50, 10.09, 10.35, 6.29, 3.70, 4.38, '---', '---', '---', '---', '---', '---'],
+            2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
+        },
+        // El valor de la inflación IPC Nacional
+        inflacionNac = {
+            2023: [6.03, 6.63, 7.68, 8.40, 7.77, 5.95, 6.34, 12.44, 12.75, 8.30, 12.81, 25.47],
+            2024: [20.61, 13.24, 11.01, 8.83,4.20, 4.58, '---', '---', '---', '---','---','---'],
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         },
         // Paritarias Nacionales Salario Docente Mínimo Nacional Garantizado (SDMNG)
@@ -24,15 +36,9 @@ export default function dateGeneral() {
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         };
     //End Datos Informativos
-    const date = { 'canastaBasica': canastaBasica, 'dolarBlue': dolarBlue, 'inflacion': inflacion, 'sdmng': sdmng };
+    const date = { 'canastaBasica': canastaBT2, 'dolarBlue': dolarBlue, 'inflacionNac': inflacionNac, 'inflacionNea': inflacionNEA,'sdmng': sdmng };
     return date;
 };
 
-/* El valor de la inflación IPC Nacional 
-    2023: [6.03, 6.63, 7.68, 8.40, 7.77, 5.95, 6.34, 12.44, 12.75, 8.30, 12.81, 25.47],
-    2024: [20.61, 13.24, , 11.01, 8.83, , 4.20, 4.58, '---', '---', '---', '---'], 
-    
-    SDMNG 2024
-                2024: [250000, 250000, 250000, 380000, 400000, 400000, 420000, '---', '---', '---', '---', '---'],
-    
-    */
+/*  SDMNG 2024 ofrecimiento paritrias nacionales 23/07/2024 rechazada CTERA
+                2024: [250000, 250000, 250000, 380000, 400000, 400000, 420000, '---', '---', '---', '---', '---'], */

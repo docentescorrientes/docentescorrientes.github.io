@@ -2,7 +2,8 @@ import dateGeneral from './date.js';
 const date = dateGeneral();    
 var canastaBasica = date.canastaBasica;
 var dolarBlue = date.dolarBlue;
-var inflacion = date.inflacion;
+var inflacion = date.inflacionNac;
+var inflacionNea = date.inflacionNea;
 var sdmng = date.sdmng;
 
 
@@ -27,10 +28,14 @@ for (let i = 0; i < 4; i++) {
 }
 
 document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulada(2023) + '%';
-document.getElementById("anoAntInflacion").textContent = 'Inflación NEA acumulada ' + (anoActual-1);
+document.getElementById("anoAntInflacion").textContent = (anoActual-1);
 document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada(buscaUltimoDato(inflacion)[0]);
 document.getElementById("anoInflacion").textContent = anoActual;
-//document.getElementById("mesInflacion").textContent = mesText(mesActual);
+
+document.getElementById("inflacionAntAcumuladaNea").textContent = inflacionAcumuladaNea(2023) + '%';
+document.getElementById("anoAntInflacionNea").textContent = (anoActual-1);
+document.getElementById("inflacionAcumuladaNea").textContent = inflacionAcumuladaNea(buscaUltimoDato(inflacionNea)[0]);
+document.getElementById("anoInflacionNea").textContent = anoActual;
 
 //End Busca último dato y lo carga Canasta Básica, Dolar Blue, Inlflación y SDNMG
 
@@ -77,6 +82,20 @@ function inflacionAcumulada(ano) {
     acumulada = formatNumero(((acumulada - 1) * 100).toFixed(2))
     return acumulada;
 };
+
+function inflacionAcumuladaNea(ano) {
+    let n = 0;
+    let acumulada = 1;
+    for (let i = 0; i < 12; i++) {
+        if (inflacionNea[ano][i] !== '---') {
+            acumulada *= 1 + (inflacionNea[ano][n] / 100);
+            n += 1;
+        }
+    }
+    acumulada = formatNumero(((acumulada - 1) * 100).toFixed(2))
+    return acumulada;
+};
+
 
 function formatNumero(number) {
     const formattedNumber = number.toString().replace('.', ',');

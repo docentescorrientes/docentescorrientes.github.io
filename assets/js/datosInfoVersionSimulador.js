@@ -4,8 +4,9 @@ document.getElementById('versionH6').insertAdjacentHTML("beforeend", version + '
 //End Versión
 
 import dateGeneral from './date.js';
-const date = dateGeneral();    
+const date = dateGeneral();
 var canastaBasica = date.canastaBasica;
+var canastaBasicaA = date.canastaBasicaA;
 var dolarBlue = date.dolarBlue;
 var inflacion = date.inflacionNac;
 var inflacionNea = date.inflacionNea;
@@ -30,14 +31,17 @@ for (let i = 0; i < 4; i++) {
     let datos = arrayDatos[i];
     document.getElementById(idFechas[i]).textContent = mes[buscaUltimoDato(datos)[1]] + '/' + buscaUltimoDato(datos)[0];
     document.getElementById(idDatos[i]).textContent = formatNumero(datos[buscaUltimoDato(datos)[0]][buscaUltimoDato(datos)[1]]);
-}
+};
+document.getElementById('fechaCanastaBasicaT').textContent = mes[buscaUltimoDato(canastaBasica)[1]] + ' del ' + buscaUltimoDato(canastaBasica)[0];
+document.getElementById('canastaBasicaT').textContent = formatNumero(canastaBasica[buscaUltimoDato(canastaBasica)[0]][buscaUltimoDato(canastaBasica)[1]]);
+document.getElementById('canastaBasicaA').textContent = formatNumero(canastaBasicaA[buscaUltimoDato(canastaBasicaA)[0]][buscaUltimoDato(canastaBasicaA)[1]]);
 
-document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulada(2023) + '%';
+document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulada(anoActual-1) + '%';
 document.getElementById("anoAntInflacion").textContent = (anoActual-1);
 document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada(buscaUltimoDato(inflacion)[0]);
 document.getElementById("anoInflacion").textContent = anoActual;
 
-document.getElementById("inflacionAntAcumuladaNea").textContent = inflacionAcumuladaNea(2023) + '%';
+document.getElementById("inflacionAntAcumuladaNea").textContent = inflacionAcumuladaNea(anoActual-1) + '%';
 document.getElementById("anoAntInflacionNea").textContent = (anoActual-1);
 document.getElementById("inflacionAcumuladaNea").textContent = inflacionAcumuladaNea(buscaUltimoDato(inflacionNea)[0]);
 document.getElementById("anoInflacionNea").textContent = anoActual;

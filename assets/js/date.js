@@ -11,6 +11,18 @@ export default function dateGeneral() {
             2024: [285561.33, 322851.20, 358048.65, 373044.24, 386977.66, 393319.27, '---', '---', '---', '---', '---', '---'],
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         },
+        canastaBT = {
+            // El valor de 1 (una) Canasta Básica Total (Pobreza) según IBP https://www.facebook.com/profile.php?id=100063494113015
+            2023: [152724.78, 161375.05, 169869.21, 185673.06, 202591.33, 208488.39, 231913.89, 285939.07, 297330.52, 319882.37, 366403.87, 473565.32],
+            2024: [532520.07, 581933.0, 653898.18, 701288.93, 736205.39, 752534.2, '---', '---', '---', '---', '---', '---'],
+            2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
+        },
+        canastaBA = {
+            // El valor de 1 (una) Canasta Básica Alimentaria (Indigencia) según IBP https://www.facebook.com/profile.php?id=100063494113015
+            2023: [67279.64, 71090.33, 75163.37, 83261.46, 90848.13, 93492.55, 103997.26, 128283.8, 133332.07, 148093.69, 170280.87, 224438.54],
+            2024: [252378.18, 275821.33, 305559.9, 324670.8, 331624.04, 342061.0, '---', '---', '---', '---', '---', '---'],
+            2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
+        },
         // El valor del dólar blue https://www.dolarito.ar/cotizaciones-historicas/dolar/informal/2023/cotizacion-historica-del-dolar-informal-a%C3%B1o-2023 (dolar blue cotización fin del mes)*/
         dolarBlue = {
             2023: [382, 376, 395, 469, 491.5, 495, 550.5, 737.5, 800, 917.5, 930, 1012.5],
@@ -36,9 +48,10 @@ export default function dateGeneral() {
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         };
     //End Datos Informativos
-    const date = { 'canastaBasica': canastaBT2,'canastaBasicaA': canastaBA2, 'dolarBlue': dolarBlue, 'inflacionNac': inflacionNac, 'inflacionNea': inflacionNEA, 'sdmng': sdmng };
+    const date = { 'canastaBasica': canastaBT2, 'canastaBasicaA': canastaBA2, 'canastaBasicaBT': canastaBA,'canastaBasicaBA': canastaBT, 'dolarBlue': dolarBlue, 'inflacionNac': inflacionNac, 'inflacionNea': inflacionNEA, 'sdmng': sdmng };
     return date;
 };
 
 /*  SDMNG 2024 ofrecimiento paritrias nacionales 23/07/2024 rechazada CTERA
-                2024: [250000, 250000, 250000, 380000, 400000, 400000, 420000, '---', '---', '---', '---', '---'], */
+                2024: [250000, 250000, 250000, 380000, 400000, 400000, 420000, '---', '---', '---', '---', '---'],
+                */

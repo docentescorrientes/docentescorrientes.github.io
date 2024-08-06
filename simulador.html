@@ -1776,8 +1776,9 @@
                     <select class="form-select" aria-label="Default select example" id="miSelect">
                         <option selected>Buscar la clase e índice de clase del cargo de docente . . . </option>
                     </select><br>
-                    <input class="form-control" type="text" value="Esperando que seleccione cargo . . ."
-                        aria-label="readonly input example" id="claseBuscada" readonly>
+                    <div class="alert alert-secondary" id="claseBuscada">
+                        <strong>👆 Esperando</strong> que seleccione cargo . . .
+                    </div>
                 </div>
 
                 <div id="scrool"></div>
@@ -2426,15 +2427,25 @@
             const valorpunto = partes[1];
             const indice = valorpunto / 1400;
             var d = 8;
-            if (valorpunto == 1400){
+            if (valorpunto == 1400) {
                 d = 0;
             };
-            document.getElementById("claseBuscada").value = "El número de clase 👉 " +
-            clase + ", cuyo valor del punto docente es: " + valorpunto.replace('.', ',') +
-            " e índice para calcular su básico es 👉 " + indice.toFixed(d).replace('.', ',');
+            document.getElementById("claseBuscada").innerHTML = 
+    "El número de clase 👉 " + clase + 
+    ", cuyo valor del punto docente es: " + valorpunto.replace('.', ',') + 
+    " e índice para calcular su básico es 👉 " + indice.toFixed(d).replace('.', ',') +
+    "<br><small>¡Utiliza el Básico de referencia (Básico de Maestra de Grado Común) y multiplícalo por el Índice: Básico de Referencia x Índice = A tú Básico! </small>";
         });
     </script>
-
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById('miSelect').addEventListener('change', function() {
+            var claseBuscadaDiv = document.getElementById('claseBuscada');
+            claseBuscadaDiv.classList.remove('alert-secondary');
+            claseBuscadaDiv.classList.add('alert-success');
+        });
+    });
+</script>
     <!-- End Script -->
 </body>
 

@@ -7,6 +7,8 @@ import dateGeneral from './date.js';
 const date = dateGeneral();
 var canastaBasica = date.canastaBasica;
 var canastaBasicaA = date.canastaBasicaA;
+var canastaBasicaBT = date.canastaBasicaBT;
+var canastaBasicaBA = date.canastaBasicaBA;
 var dolarBlue = date.dolarBlue;
 var inflacion = date.inflacionNac;
 var inflacionNea = date.inflacionNea;
@@ -35,6 +37,10 @@ for (let i = 0; i < 4; i++) {
 document.getElementById('fechaCanastaBasicaT').textContent = mes[buscaUltimoDato(canastaBasica)[1]] + ' del ' + buscaUltimoDato(canastaBasica)[0];
 document.getElementById('canastaBasicaT').textContent = formatNumero(canastaBasica[buscaUltimoDato(canastaBasica)[0]][buscaUltimoDato(canastaBasica)[1]]);
 document.getElementById('canastaBasicaA').textContent = formatNumero(canastaBasicaA[buscaUltimoDato(canastaBasicaA)[0]][buscaUltimoDato(canastaBasicaA)[1]]);
+
+document.getElementById('fechaCanastaBasicaT2').textContent = mes[buscaUltimoDato(canastaBasicaBT)[1]] + ' del ' + buscaUltimoDato(canastaBasicaBT)[0];
+document.getElementById('canastaBasicaT2').textContent = formatNumero(canastaBasicaBT[buscaUltimoDato(canastaBasicaBT)[0]][buscaUltimoDato(canastaBasicaBT)[1]]);
+document.getElementById('canastaBasicaA2').textContent = formatNumero(canastaBasicaBA[buscaUltimoDato(canastaBasicaBA)[0]][buscaUltimoDato(canastaBasicaBA)[1]]);
 
 document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulada(anoActual-1) + '%';
 document.getElementById("anoAntInflacion").textContent = (anoActual-1);

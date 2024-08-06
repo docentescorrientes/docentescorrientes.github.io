@@ -48,7 +48,7 @@ export default function dateGeneral() {
             2025: ['---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
         };
     //End Datos Informativos
-    const date = { 'canastaBasica': canastaBT2, 'canastaBasicaA': canastaBA2, 'canastaBasicaBT': canastaBA,'canastaBasicaBA': canastaBT, 'dolarBlue': dolarBlue, 'inflacionNac': inflacionNac, 'inflacionNea': inflacionNEA, 'sdmng': sdmng };
+    const date = { 'canastaBasica': canastaBT2, 'canastaBasicaA': canastaBA2, 'canastaBasicaBT': canastaBT,'canastaBasicaBA': canastaBA, 'dolarBlue': dolarBlue, 'inflacionNac': inflacionNac, 'inflacionNea': inflacionNEA, 'sdmng': sdmng };
     return date;
 };
 

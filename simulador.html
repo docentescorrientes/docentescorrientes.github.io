@@ -2097,12 +2097,20 @@
                     Son datos que hay que tener en cuenta a la hora de evaluar nuestro salario.<br>El
                     <strong>Dólar</strong> representa el valor de la cotización al inicio de cada mes correspondiente,
                     el <strong>Salario Docente Mínimo Nacional Garantizado (SDMNG)</strong> representa el piso mínimo
-                    que debe cobrar un docente por cargo o su equivalente en horas cátedras, la <strong>Canasta Básica
+                    que debe cobrar un docente por cargo o su equivalente en horas cátedras. Según el INDEC: la
+                    <strong>Canasta Básica
                         Total - CBT (Pobreza) </strong>es de <strong class="text-danger">$</strong><strong
                         class="text-danger" id="canastaBasicaT"></strong> y la <strong>Canasta Básica Alimentaria - CBA
                         (Indigencia)</strong> es de <strong class="text-danger">$</strong><strong class="text-danger"
-                        id="canastaBasicaA"></strong> de hogar tipo 2 del mes de <a
-                        id="fechaCanastaBasicaT"></a> según INDEC. La <strong>Inflación Nacional Acumulada
+                        id="canastaBasicaA"></strong> de hogar tipo 2 del mes de <a id="fechaCanastaBasicaT"></a>. Según
+                    el Indice Barrial de Precios ISEPCI: la <strong>Canasta Básica
+                        Total - CBT (Pobreza en Corrientes) </strong>es de <strong class="text-danger">$</strong><strong
+                        class="text-danger" id="canastaBasicaT2"></strong> y la <strong>Canasta Básica Alimentaria - CBA
+                        (Indigencia en Corrientes)</strong> es de <strong class="text-danger">$</strong><strong
+                        class="text-danger" id="canastaBasicaA2"></strong> de hogar tipo 2 del mes de <a
+                        id="fechaCanastaBasicaT2"></a> (Relevamiento mensual realizado en 6 localidades de la provincia;
+                    Corrientes Capital, Empedrado, Goya, Santa Rosa, Mercedes y Monte Caseros). La
+                    <strong>Inflación Nacional Acumulada
                     </strong><strong id="anoAntInflacion"></strong> fue de <strong class="text-danger"
                         id="inflacionAntAcumulada"></strong> y la del <strong id="anoInflacion"></strong> desde el mes
                     de enero es del <strong class="text-danger" id="inflacionAcumulada"></strong><strong
@@ -2414,10 +2422,16 @@
             var partes = seleccion.split('#');
 
             // Obtenemos el primer elemento del array resultante
-            var clase = partes[0];
-            var indice = partes[1]
-            const basico_ref = 59444.1
-            document.getElementById("claseBuscada").value = "El número de clase 👉 " + clase + ", cuyo índice para calcular su básico es 👉 " + indice / 1400;
+            const clase = partes[0];
+            const valorpunto = partes[1];
+            const indice = valorpunto / 1400;
+            var d = 8;
+            if (valorpunto == 1400){
+                d = 0;
+            };
+            document.getElementById("claseBuscada").value = "El número de clase 👉 " +
+            clase + ", cuyo valor del punto docente es: " + valorpunto.replace('.', ',') +
+            " e índice para calcular su básico es 👉 " + indice.toFixed(d).replace('.', ',');
         });
     </script>
 

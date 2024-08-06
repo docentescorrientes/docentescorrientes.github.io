@@ -133,7 +133,7 @@
                                     Somos docentes apasionados por la educación en la provincia de Corrientes,
                                     comprometidos con la mejora constante de la <strong>calidad educativa y la defensa
                                         de los derechos</strong> de los docentes y estudiantes. Nos hemos unido con
-                                    fuerza en el año 2019, por eso la denominación <strong> Sector 2019</strong>, de
+                                    fuerza en el año 2019; <strong id="añosPasados"></strong>, por eso la denominación <strong> Sector 2019</strong>, de
                                     forma independiente y autoconvocada para trabajar juntos en la construcción de un
                                     <strong>sistema educativo de calidad, con cumplimiento de las leyes, transparente y
                                         con salarios dignos</strong>.
@@ -370,7 +370,8 @@
                     <div class="col-12 text-center">
                         <p class="text-left text-light">
                             Copyright &copy; 2024 Docentes Autoconvocados Corrientes - Sector 2019 - Licencia MIT. Todos
-                            los derechos reservados. Designed by <a class="text-success" href="LICENSE.txt" target="_blank"><strong>augusalterats</strong></a>
+                            los derechos reservados. Designed by <a class="text-success" href="LICENSE.txt"
+                                target="_blank"><strong>augusalterats</strong></a>
                         </p>
                     </div>
                 </div>
@@ -393,6 +394,12 @@
 
         // Muestra la fecha en el contenedor
         document.getElementById('fechaAbrir').textContent = fechaFormateada;
+
+        let today = new Date();
+        let currentYear = today.getFullYear();
+        let startYear = 2019;
+        let difference = currentYear - startYear;
+        document.getElementById('añosPasados').textContent = 'ya hace unos ' + difference + ' años';
     </script>
     <!-- End Script -->
 </body>

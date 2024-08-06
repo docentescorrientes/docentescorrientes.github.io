@@ -132,10 +132,10 @@
                 <!-- Start TitlePcipal -->
                 <div class="row shadow-lg p-3 mb-5 bg-body rounded">
                     <h1 class="text-success" style="--bs-text-opacity: 1.9;text-align: center;" id="titleFormsH1">
-                        Formulario de Simulación de Haberes<br>
+                        Formulario de Simulación de Salario<br>
                     </h1>
                     <h3 class="text-primary" style="--bs-text-opacity: 1.9;text-align: center;">
-                        Docentes de la Provincia de Corrientes</h3>
+                        Docentes de la Provincia de Corrientes - Sector 2019</h3>
                 </div>
                 <!-- End TitlePcipal -->
                 <!-- Start Forms -->
@@ -1750,7 +1750,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">📢 DOCENTES AUTOCONVOCADOS CAPITAL</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">📢 DOCENTES AUTOCONVOCADOS CORRIENTES</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -1785,10 +1785,10 @@
                 <!--Start TitleTable 15 hidden-->
                 <div class="row shadow-lg p-3 mb-5 bg-body rounded" id="titleTableDiv"> <!--hidden-->
                     <h1 class="text-success" style="--bs-text-opacity: 1.9;text-align: center;" id="titleTableH1">
-                        Recibo de Simulación de Haberes<br>
+                        Recibo de Simulación de Salario<br>
                     </h1>
                     <h3 class="text-primary" style="--bs-text-opacity: .8;text-align: center;" id="subtitleTableH5">
-                        subtitleTableH5
+                        Docentes de la Provincia de Corrientes - Sector 2019
                     </h3>
                 </div>
                 <!-- End TitleTable -->
@@ -1926,6 +1926,13 @@
                                         <td class="text-center" id="adRemun2Cargo629Bruto">----------</td>
                                         <td class="text-center" id="adRemun2Cargo629Desc">----------</td>
                                         <td class="text-center" id="adRemun2Cargo629Neto">----------</td>
+                                    </tr>
+                                    <tr class="table-warning" id="632Row1">
+                                        <th scope="row">632</th>
+                                        <td>Compl. Docente Provincial</td>
+                                        <td class="text-center" id="complDocPcial632Bruto">----------</td>
+                                        <td class="text-center" id="complDocPcial632Desc">----------</td>
+                                        <td class="text-center" id="complDocPcial632Neto">----------</td>
                                     </tr>
                                     <tr class="border border-white border-3" id="totalRemBonifRow1">
                                         <td colspan="2"><b>∑📌 Total Remunerativos y Bonificable (en blanco)</b></td>
@@ -2442,7 +2449,7 @@
         document.getElementById('miSelect').addEventListener('change', function() {
             var claseBuscadaDiv = document.getElementById('claseBuscada');
             claseBuscadaDiv.classList.remove('alert-secondary');
-            claseBuscadaDiv.classList.add('alert-success');
+            claseBuscadaDiv.classList.add('alert-primary');
         });
     });
 </script>

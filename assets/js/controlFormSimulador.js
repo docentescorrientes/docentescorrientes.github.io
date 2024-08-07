@@ -190,9 +190,6 @@ cantClasesSelect.addEventListener('change', function () {
     });
 })();
 
-
-
-
 (function () {
     'use strict';
     var forms = document.querySelectorAll('.needs-validation');
@@ -206,7 +203,6 @@ cantClasesSelect.addEventListener('change', function () {
         }, false);
     });
 })();
-
 
 for (let i = 1; i <= 6; i++) {
     i = i.toString();

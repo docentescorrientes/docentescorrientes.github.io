@@ -426,7 +426,6 @@ function sumaHcTotal(arrayHorasCatIds) {
 //Start Control de Clases
 for (let i = 1; i <= 6; i++) {
     document.getElementById('numeroClase' + i + 'Select').addEventListener('input', function () {
-        console.log(i)
         actualizarTexto(i);
     });
 };

@@ -311,6 +311,7 @@ for (let h = 1; h <= 6; h++) {
                 document.getElementById('jornada' + h + 'Div').hidden = false;
             } else {
                 document.getElementById('zona' + h + 'SSDiv').hidden = false;
+                document.getElementById('jornada' + h + 'Div').hidden = true;
             };
         });
     };

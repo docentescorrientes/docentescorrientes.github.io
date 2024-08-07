@@ -167,6 +167,7 @@ cantClasesSelect.addEventListener('change', function () {
     document.getElementById('alertVerific2').hidden = true;
 });
 
+
 //Valiadación de formulario
 (function () {
     'use strict';
@@ -195,7 +196,7 @@ cantClasesSelect.addEventListener('change', function () {
     var forms = document.querySelectorAll('.needs-validation');
     Array.prototype.slice.call(forms).forEach(function (form) {
         document.getElementById('calcButton').addEventListener('click', function (event) {
-            if (!form.checkValidity()) {
+            if (true) {  //!form.checkValidity()
                 event.preventDefault();
                 event.stopPropagation();
             }

@@ -429,16 +429,16 @@ function sumaHcTotal(arrayHorasCatIds) {
 //Start Control de Clases
 for (let i = 1; i <= 6; i++) {
     document.getElementById('numeroClase' + i + 'Select').addEventListener('input', function () {
+        console.log(i)
         actualizarTexto(i);
     });
 };
 
 
 function actualizarTexto(i) {
-    let n = i - 1
     const claseSelect = document.getElementById('numeroClase' + i + 'Select').value;
     const resultado = buscarDataClase(parseInt(claseSelect));
-    if (resultado.clase) {
+    if (resultado.clase == claseSelect) {
         const cargoTexto = resultado.cargo;
         const categoriaTexto = resultado.categoria;
         const indiceBasicoTexto = resultado.indiceClase;

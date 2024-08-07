@@ -305,7 +305,6 @@ for (let h = 1; h <= 6; h++) {
             document.getElementById('extendida' + h + 'Select').checked = false;
             document.getElementById('horasCat' + h + 'Select').value = '';
             document.getElementById('numeroClase' + h + 'Select').disabled = false;
-            document.getElementById('card' + h + 'Div').hidden = true;
             document.getElementById('zona' + h + 'IPDiv').hidden = true;
             document.getElementById('zona' + h + 'SSDiv').hidden = true;
             document.getElementById('jornada' + h + 'Div').hidden = true;
@@ -431,36 +430,30 @@ function sumaHcTotal(arrayHorasCatIds) {
 for (let i = 1; i <= 6; i++) {
     document.getElementById('numeroClase' + i + 'Select').addEventListener('input', function () {
         actualizarTexto(i);
-        document.getElementById('card' + i + 'Div').hidden = false;
     });
 };
 
 
 function actualizarTexto(i) {
     let n = i - 1
-
     const claseSelect = document.getElementById('numeroClase' + i + 'Select').value;
     const resultado = buscarDataClase(parseInt(claseSelect));
-
-    if (resultado) {
+    if (resultado.clase) {
         const cargoTexto = resultado.cargo;
         const categoriaTexto = resultado.categoria;
         const indiceBasicoTexto = resultado.indiceClase;
+        document.getElementById('cargoClase' + i + 'Select').classList.remove('alert-danger');
+        document.getElementById('cargoClase' + i + 'Select').classList.add('alert-primary');
         document.getElementById('numeroClase' + i + 'Select').classList.remove('is-invalid');
-
-        const cargoResultado = `Cargo: ${cargoTexto}.`;
+        const cargoResultado = '<strong>Cargo: </strong> ' + cargoTexto +
+            '<br><strong>Categoria: </strong> ' + categoriaTexto +
+            '<br><strong>Valor punto: </strong> ' + indiceBasicoTexto;
         document.getElementById('cargoClase' + i + 'Select').innerHTML = cargoResultado;
-
-        const categoriaResultado = `Categoria: ${categoriaTexto}`;
-        document.getElementById('categoriaClase' + i + 'Select').innerHTML = categoriaResultado;
-
-        const basicoResultado = `Índice de Básico: ${indiceBasicoTexto}`;
-        document.getElementById('basicoClase' + i + 'Select').innerHTML = basicoResultado;
     } else {
         document.getElementById('numeroClase' + i + 'Select').classList.add('is-invalid');
-        document.getElementById('cargoClase' + i + 'Select').innerHTML = "Número de clase no encontrado.<br> Asegurate de revisar la clase en tu recibo.";
-        document.getElementById('categoriaClase' + i + 'Select').innerHTML = "Categoría: -----";
-        document.getElementById('basicoClase' + i + 'Select').innerHTML = "Índice de Básico: -----";
+        document.getElementById('cargoClase' + i + 'Select').classList.remove('alert-primary');
+        document.getElementById('cargoClase' + i + 'Select').classList.add('alert-danger');
+        document.getElementById('cargoClase' + i + 'Select').innerHTML = "<strong>Número de clase no encontrado.</strong><br> Asegurate de revisar la clase en tu recibo.";
     }
 };
 

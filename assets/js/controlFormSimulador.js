@@ -365,7 +365,7 @@ for (let i = 1; i <= 6; i++) {
 
                     document.getElementById('simple' + i + 'Select').checked = false;
                     document.getElementById('extendida' + i + 'Select').checked = false;
-                    document.getElementById('jornada' + i + 'Div').hidden = false;
+                    document.getElementById('jornada' + i + 'Div').hidden = true;
 
                     document.getElementById('horasCat' + i + 'Select').value = '';
                     document.getElementById('horasCat' + i + 'Div').hidden = true;

@@ -34,13 +34,12 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo) {
     for (let i = 1; i < 12; i++) {
         arrayAcumuladoInflacion24[i] = arrayAcumuladoInflacion24[i - 1] * ((DATOS['2024'][i] / 100) + 1);
     };
-
     const ultimaInflacion24 = ultimoIndice(arrayAcumuladoInflacion24);
     let ultimaInflacionAcumulada;
     if (ano === '2023') {
         ultimaInflacionAcumulada = ultimaInflacion23;
     } else if (ano === '2024') {
-        ultimaInflacionAcumulada = ultimaInflacion23 * ultimaInflacion24;
+        ultimaInflacionAcumulada = ultimaInflacion24;
     };
     const cargoN = cargo;
     const zonaIndice = 0.2;
@@ -56,11 +55,11 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo) {
     for (let i = 0; i < 12; i++) {
         const DATOS_SALARIO = buscarDataMes(ano, i.toString());
         let blancos1 = (1 - desc) * (DATOS_SALARIO.basico1 + DATOS_SALARIO.zona36 * zonaIndice + DATOS_SALARIO.antiguedad37 * antiguegadIndice + DATOS_SALARIO.ayMatDidac62 * DATOS_SALARIO.basico1 + DATOS_SALARIO.jornadaExt624 * DATOS_SALARIO.basico1 * jornadaExt);
-        let grises1 = (1 - desc) * (DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625 + DATOS_SALARIO.adRemun2Cargo629 + DATOS_SALARIO.complDocPcial632);
+        let grises1 = (1 - desc) * (DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625 + DATOS_SALARIO.complDocPcial632);
         let negros1 = (DATOS_SALARIO.salarioFam3 + DATOS_SALARIO.ayudEscolar) * hijos + DATOS_SALARIO.asigEspLey140 + DATOS_SALARIO.compProv171 + DATOS_SALARIO.conectNac609;
         let haber1 = blancos1 + grises1 + negros1;
         let blancos2 = blancos1;
-        let grises2 = (1 - desc) * DATOS_SALARIO.adRemun2Cargo629;
+        let grises2 = (1 - desc) * DATOS_SALARIO.adRemun2Cargo629 + DATOS_SALARIO.complDocPcial632;
         let negros2 = negros1 + DATOS_SALARIO.progNacCompDoc168;
         let haber2 = blancos2 + grises2 + negros2;
         let sdmng = DATOS_SALARIO.sdmng;
@@ -169,10 +168,13 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo) {
     const labelMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     if (tipo === 'barras') {
         chartBarras(ano, graficoId, [arrayBarrasDif[0], arrayBarrasDif[1], arrayBarrasDif[2], arrayBarrasDif[3]], labelMeses, opciones, cargoN);
+        console.log(arrayBarras)
         const aumentoRealAcumulado = ((arrayBarras[3][11] / arrayBarras[3][0]) - 1) * 100;
-        let aumentoRealAcumuladoText = '👉 El gráfico muestra como fue incrementándose el salario en el primer cargo, partiendo de un salario unidad, y el crecimiento' +
-            ' en proporciones de los distintos grupos de ítems.<br>El aumento real porcentual acumulado docente ' + ano + ', solo el primer cargo, fue de un ' + format(aumentoRealAcumulado) + '%<br>' +
-            'Mientras que nuestro salario quedó 😡 sin compensar en un: ' + format((ultimaInflacionAcumulada - 1) * 100 - aumentoRealAcumulado) + '%';
+        let aumentoRealAcumuladoText = '👉 El gráfico muestra como fue incrementándose el salario en el primer cargo, partiendo de un salario unidad (salario referencia de enero de ' +
+            ano + '), y el crecimiento' + ' en proporciones de los distintos grupos de ítems. El aumento real porcentual acumulado docente ' + ano +
+            ', en el primer cargo, fue de un <strong class="text-danger">' + format(aumentoRealAcumulado) + '%</strong>. ' + 'Mientras que la inflación nacional acumulada fue 😡 de un ' +
+            '<strong class="text-danger">' + format((ultimaInflacionAcumulada - 1) * 100) + '%</strong>.<br>' +
+            'También podemos observar que las proporciones de grupos de ítems, los ítems en blancos son los 👎 menores.';
         document.getElementById('aumento' + graficoId + ano + cargoN).innerHTML = aumentoRealAcumuladoText;
         return aumentoRealAcumulado;
     };

@@ -8,14 +8,12 @@ cargarChart1('2023', 'barras', 'Haber', dateInflacion, 'C2');
 cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'C2');
 cargarChart1('2023', 'barras', 'Haber', dateInflacion, 'CT');
 cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'CT');
-
 cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C1');
 cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'C1');
 cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C2');
 cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'C2');
 cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'CT');
 cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'CT');
-
 cargarChart3('2023', 'lineal', 'Lineal');
 cargarChart3('2024', 'lineal', 'Lineal');
 
@@ -23,14 +21,15 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo) {
     const DATOS = objeto;
 
     let arrayAcumuladoInflacion23 = [];
-    arrayAcumuladoInflacion23.push((DATOS['2023'][0] / 100) + 1);
+    const ultimaInflacion22 = 1.0;
+    arrayAcumuladoInflacion23.push(ultimaInflacion22 * ((DATOS['2023'][0] / 100) + 1));
     for (let i = 1; i < 12; i++) {
         arrayAcumuladoInflacion23[i] = arrayAcumuladoInflacion23[i - 1] * ((DATOS['2023'][i] / 100) + 1);
     };
 
     let arrayAcumuladoInflacion24 = [];
     const ultimaInflacion23 = ultimoIndice(arrayAcumuladoInflacion23);
-    arrayAcumuladoInflacion24.push((DATOS['2024'][0] / 100) + 1);
+    arrayAcumuladoInflacion24.push(ultimaInflacion23 * ((DATOS['2024'][0] / 100) + 1));
     for (let i = 1; i < 12; i++) {
         arrayAcumuladoInflacion24[i] = arrayAcumuladoInflacion24[i - 1] * ((DATOS['2024'][i] / 100) + 1);
     };
@@ -56,7 +55,7 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo) {
     for (let i = 0; i < 12; i++) {
         const DATOS_SALARIO = buscarDataMes(ano, i.toString());
         let blancos1 = (1 - desc) * (DATOS_SALARIO.basico1 + DATOS_SALARIO.zona36 * zonaIndice + DATOS_SALARIO.antiguedad37 * antiguegadIndice + DATOS_SALARIO.ayMatDidac62 * DATOS_SALARIO.basico1 + DATOS_SALARIO.jornadaExt624 * DATOS_SALARIO.basico1 * jornadaExt);
-        let grises1 = (1 - desc) * (DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625 + DATOS_SALARIO.adRemun2Cargo629 + DATOS_SALARIO.complDocPcial632);
+        let grises1 = (1 - desc) * (DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625);
         let negros1 = (DATOS_SALARIO.salarioFam3 + DATOS_SALARIO.ayudEscolar) * hijos + DATOS_SALARIO.asigEspLey140 + DATOS_SALARIO.compProv171 + DATOS_SALARIO.conectNac609;
         let haber1 = blancos1 + grises1 + negros1;
         let blancos2 = blancos1;

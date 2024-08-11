@@ -229,27 +229,3 @@ body, ul, li, p, a, label, input, div {
   justify-content: center;
   align-items: center;
 }
-
-input[name="chart1Radio"]:checked {
-  background-color: #68bb7d; /* Cambia el color de fondo cuando está seleccionado */
-  border-color: #4a8559; /* Cambia el color del borde cuando está seleccionado */
-}
-
-input[name="chart1CRadio"]:checked {
-  background-color: #68bb7d; /* Cambia el color de fondo cuando está seleccionado */
-  border-color: #4a8559; /* Cambia el color del borde cuando está seleccionado */
-}
-/* Aplica el estilo cuando el input de tipo radio con el name 'chartRadio' está seleccionado */
-input[name="chart2Radio"]:checked {
-  background-color: #68bb7d; /* Cambia el color de fondo cuando está seleccionado */
-  border-color: #4a8559; /* Cambia el color del borde cuando está seleccionado */
-}
-
-input[name="chart2CRadio"]:checked {
-  background-color: #68bb7d; /* Cambia el color de fondo cuando está seleccionado */
-  border-color: #4a8559; /* Cambia el color del borde cuando está seleccionado */
-}
-input[name="chart3Radio"]:checked {
-  background-color: #68bb7d; /* Cambia el color de fondo cuando está seleccionado */
-  border-color: #4a8559; /* Cambia el color del borde cuando está seleccionado */
-}

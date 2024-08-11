@@ -84,175 +84,202 @@
         </div>
     </nav>
     <!-- Close Header -->
-    <!-- Modal -->
-    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="w-100 pt-1 mb-5 text-right">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                    <button type="submit" class="input-group-text bg-success text-light">
-                        <i class="fa fa-fw fa-search text-white"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
     <!--Start CheckBox1-->
     <div class="container py-5 mb-3 text-center">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart1Radio" id="chart1Radio2023" value="2023" checked>
-            <label class="form-check-label" for="chart1Radio2023">2023</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart1Radio" id="chart1Radio2024" value="2024">
-            <label class="form-check-label" for="chart1Radio2024">2024</label>
-        </div>
-    </div>
-    <div class="container py-5 mb-3 text-center">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1C1Radio2023" value="C1" checked>
-            <label class="form-check-label" for="chartC1Radio2023">En el 1° Cargo</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1C2Radio2024" value="C2">
-            <label class="form-check-label" for="chart1C2Radio2024">En el 2° Cargo</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1CTRadio2024" value="CT">
-            <label class="form-check-label" for="chart1CTRadio2024">En el Total de Cargos</label>
+        <p>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
+                ⇋ Cambiar año y cantidad de cargos
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <div class="container py-5 mb-3 text-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart1Radio" id="chart1Radio2023"
+                            value="2023" checked>
+                        <label class="form-check-label" for="chart1Radio2023">2023</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart1Radio" id="chart1Radio2024"
+                            value="2024">
+                        <label class="form-check-label" for="chart1Radio2024">2024</label>
+                    </div>
+                </div>
+                <div class="container py-5 mb-3 text-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1C1Radio2023"
+                            value="C1" checked>
+                        <label class="form-check-label" for="chartC1Radio2023">En el 1° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1C2Radio2024"
+                            value="C2">
+                        <label class="form-check-label" for="chart1C2Radio2024">En el 2° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1CTRadio2024"
+                            value="CT">
+                        <label class="form-check-label" for="chart1CTRadio2024">En el Total de Cargos</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--End CheckBox1-->
     <!--Start Chart 1-->
     <div class="container py-5 mb-3 text-center" id="myChartHaber2023C1Div">
         <label for="myChartHaber2023C1" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoHaber2023C1">Chart 2023</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoHaber2023C1">Chart 2023</h5>
         </label>
         <canvas id="myChartHaber2023C1" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartHaber2024C1Div" hidden>
         <label for="myChartHaber2024C1" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoHaber2024C1">Chart 2024</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoHaber2024C1">Chart 2024</h5>
         </label>
         <canvas id="myChartHaber2024C1" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartHaber2023C2Div" hidden>
         <label for="myChartHaber2023C2" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoHaber2023C2">Chart 2023</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoHaber2023C2">Chart 2023</h5>
         </label>
         <canvas id="myChartHaber2023C2" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartHaber2024C2Div" hidden>
         <label for="myChartHaber2024C2" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoHaber2024C2">Chart 2024</h4>
+            <h45 class="mb-4 text-secondary" id="aumentoHaber2024C2">Chart 2024</h45>
         </label>
         <canvas id="myChartHaber2024C2" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartHaber2023CTDiv" hidden>
         <label for="myChartHaber2023CT" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoHaber2023CT">Chart 2023</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoHaber2023CT">Chart 2023</h5>
         </label>
         <canvas id="myChartHaber2023CT" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartHaber2024CTDiv" hidden>
         <label for="myChartHaber2024CT" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoHaber2024CT">Chart 2024</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoHaber2024CT">Chart 2024</h5>
         </label>
         <canvas id="myChartHaber2024CT" width="400" height="200"></canvas>
     </div>
     <!--End Chart 1-->
+    <div class="border-bottom mb-3" style="border-bottom: 1px solid !important;"></div>
     <!--Start CheckBox2-->
+
     <div class="container py-5 mb-3 text-center">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart2Radio" id="chart2Radio2023" value="2023" checked>
-            <label class="form-check-label" for="chart2Radio2023">2023</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart2Radio" id="chart2Radio2024" value="2024">
-            <label class="form-check-label" for="chart2Radio2024">2024</label>
-        </div>
-    </div>
-    <div class="container py-5 mb-3 text-center">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2C1Radio2023" value="C1" checked>
-            <label class="form-check-label" for="chart2C1Radio2023">En el 1° Cargo</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2C2Radio2024" value="C2">
-            <label class="form-check-label" for="chart2C2Radio2024">En el 2° Cargo</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2CTRadio2024" value="CT">
-            <label class="form-check-label" for="chart2CTRadio2024">En el Total de Cargos</label>
+        <p>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1"
+                aria-expanded="false" aria-controls="collapseExample1">
+                ⇋ Cambiar año y cantidad de cargos
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample1">
+            <div class="card card-body">
+                <div class="container py-5 mb-3 text-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart2Radio" id="chart2Radio2023" value="2023" checked>
+                        <label class="form-check-label" for="chart2Radio2023">2023</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart2Radio" id="chart2Radio2024" value="2024">
+                        <label class="form-check-label" for="chart2Radio2024">2024</label>
+                    </div>
+                </div>
+                <div class="container py-5 mb-3 text-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2C1Radio2023" value="C1" checked>
+                        <label class="form-check-label" for="chart2C1Radio2023">En el 1° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2C2Radio2024" value="C2">
+                        <label class="form-check-label" for="chart2C2Radio2024">En el 2° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2CTRadio2024" value="CT">
+                        <label class="form-check-label" for="chart2CTRadio2024">En el Total de Cargos</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--End CheckBox2-->
     <!--Start Chart 2-->
     <div class="container py-5 mb-3 text-center" id="myChartInflacion2023C1Div">
         <label for="myChartInflacion2023C1" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoInflacion2023C1">Chart C1 2023 inflación</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoInflacion2023C1">Chart C1 2023 inflación</h5>
         </label>
         <canvas id="myChartInflacion2023C1" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartInflacion2024C1Div" hidden>
         <label for="myChartInflacion2024C1" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoInflacion2024C1">Chart C1 2024 inflación</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoInflacion2024C1">Chart C1 2024 inflación</h5>
         </label>
         <canvas id="myChartInflacion2024C1" width="400" height="200"></canvas>
     </div>
 
     <div class="container py-5 mb-3 text-center" id="myChartInflacion2023C2Div" hidden>
         <label for="myChartInflacion2023C2" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoInflacion2023C2">Chart C2 2023 inflación</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoInflacion2023C2">Chart C2 2023 inflación</h5>
         </label>
         <canvas id="myChartInflacion2023C2" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartInflacion2024C2Div" hidden>
         <label for="myChartInflacion2024C2" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoInflacion2024C2">Chart C2 2024 inflación</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoInflacion2024C2">Chart C2 2024 inflación</h5>
         </label>
         <canvas id="myChartInflacion2024C2" width="400" height="200"></canvas>
     </div>
 
     <div class="container py-5 mb-3 text-center" id="myChartInflacion2023CTDiv" hidden>
         <label for="myChartInflacion2023CT" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoInflacion2023CT">Chart CT 2023 inflación</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoInflacion2023CT">Chart CT 2023 inflación</h5>
         </label>
         <canvas id="myChartInflacion2023CT" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartInflacion2024CTDiv" hidden>
         <label for="myChartInflacion2024CT" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoInflacion2024CT">Chart CT 2024 inflación</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoInflacion2024CT">Chart CT 2024 inflación</h5>
         </label>
         <canvas id="myChartInflacion2024CT" width="400" height="200"></canvas>
     </div>
     <!--End Chart 2-->
+    <div class="border-bottom mb-3" style="border-bottom: 1px solid !important;"></div>
     <!--Start CheckBox3-->
     <div class="container py-5 mb-3 text-center">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart3Radio" id="chart3Radio2023" value="2023" checked>
-            <label class="form-check-label" for="chart3Radio2023">2023</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="chart3Radio" id="chart3Radio2024" value="2024">
-            <label class="form-check-label" for="chart3Radio2024">2024</label>
+        <p>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+                aria-expanded="false" aria-controls="collapseExample2">
+                ⇋ Cambiar año
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample2">
+            <div class="card card-body">
+                <div class="container py-5 mb-3 text-center">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart3Radio" id="chart3Radio2023" value="2023" checked>
+                        <label class="form-check-label" for="chart3Radio2023">2023</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chart3Radio" id="chart3Radio2024" value="2024">
+                        <label class="form-check-label" for="chart3Radio2024">2024</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--End CheckBox3-->
     <!--End Chart 3-->
     <div class="container py-5 mb-3 text-center" id="myChartLineal2023Div">
         <label for="myChartLineal2023" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoLineal2023">Chart 2023</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoLineal2023">Chart 2023</h5>
         </label>
         <canvas id="myChartLineal2023" width="400" height="200"></canvas>
     </div>
     <div class="container py-5 mb-3 text-center" id="myChartLineal2024Div" hidden>
         <label for="myChartLineal2024" class="form-label">
-            <h4 class="mb-4 text-secondary" id="aumentoLineal2024">Chart 2024</h4>
+            <h5 class="mb-4 text-secondary" id="aumentoLineal2024">Chart 2024</h5>
         </label>
         <canvas id="myChartLineal2024" width="400" height="200"></canvas>
     </div>
@@ -333,7 +360,8 @@
                     <div class="col-12 text-center">
                         <p class="text-left text-light">
                             Copyright &copy; 2024 Docentes Autoconvocados Corrientes - Sector 2019 - Licencia MIT. Todos
-                            los derechos reservados. Designed by <a class="text-success" href="LICENSE.txt" target="_blank"><strong>augusalterats</strong></a>
+                            los derechos reservados. Designed by <a class="text-success" href="LICENSE.txt"
+                                target="_blank"><strong>augusalterats</strong></a>
                         </p>
                     </div>
                 </div>

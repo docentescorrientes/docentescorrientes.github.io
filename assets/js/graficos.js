@@ -5,9 +5,9 @@ const dateInflacion = date.inflacionNac;
 const aumentoAcum2023C1 = cargarChart1('2023', 'barras', 'Haber', dateInflacion, 'C1', [1.0, 1.0]);
 const aumentoAcum2023C2 = cargarChart1('2023', 'barras', 'Haber', dateInflacion, 'C2', [1.0, 1.0]);
 const aumentoAcum2023CT = cargarChart1('2023', 'barras', 'Haber', dateInflacion, 'CT', [1.0, 1.0]);
-const aumentoAcum2024C1 = 1 + cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'C1', aumentoAcum2023C1);
-const aumentoAcum2024C2 = 1 + cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'C2', aumentoAcum2023C2);
-const aumentoAcum2024CT = 1 + cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'CT', aumentoAcum2023CT);
+const aumentoAcum2024C1 = cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'C1', aumentoAcum2023C1);
+const aumentoAcum2024C2 = cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'C2', aumentoAcum2023C2);
+const aumentoAcum2024CT = cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'CT', aumentoAcum2023CT);
 
 
 cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C1');

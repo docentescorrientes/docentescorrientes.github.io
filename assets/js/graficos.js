@@ -168,6 +168,18 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo, acumuladoAnt) {
         }
     };
     const labelMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+    console.log(arrayBarrasDif[0][1]) //primer indice 0,1,2,3 blanco, gris, negro, total  segundo incice 0 a 11 meses
+    if (ano === '2024') {
+        let ultimoMesInflacion = ultimoIndice(arrayAcumuladoInflacion24);
+        console.log(ultimoMesInflacion[1])
+        for (let i = 0; i <= 3; i++) {
+            for (let j = 0; j < ultimoMesInflacion[1] - 1; j++) {
+                arrayBarrasDif[i][11-j] = null;
+            };
+        };
+    };
+
     if (tipo === 'barras') {
         chartBarras(ano, graficoId, [arrayBarrasDif[0], arrayBarrasDif[1], arrayBarrasDif[2], arrayBarrasDif[3]], labelMeses, opciones, cargoN);
         let x;

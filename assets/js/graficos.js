@@ -10,12 +10,12 @@ const aumentoAcum2024C2 = cargarChart1('2024', 'barras', 'Haber', dateInflacion,
 const aumentoAcum2024CT = cargarChart1('2024', 'barras', 'Haber', dateInflacion, 'CT', aumentoAcum2023CT);
 
 
-cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C1');
-cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'C1');
-cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C2');
-cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'C2');
-cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'CT');
-cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'CT');
+const ultimoPiso2023C1 = cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C1', [1.0, 1.0]);
+const ultimoPiso2023C2 = cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'C2', [1.0, 1.0]);
+const ultimoPiso2023CT = cargarChart2('2023', 'combinado', 'Inflacion', dateInflacion, 'CT', [1.0, 1.0]);
+const ultimoPiso2024C1 = cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'C1', ultimoPiso2023C1);
+const ultimoPiso2024C2 = cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'C2', ultimoPiso2023C2);
+const ultimoPiso2024CT = cargarChart2('2024', 'combinado', 'Inflacion', dateInflacion, 'CT', ultimoPiso2023CT);
 
 cargarChart3('2023', 'lineal', 'Lineal');
 cargarChart3('2024', 'lineal', 'Lineal');
@@ -172,7 +172,7 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo, acumuladoAnt) {
         let ultimoMesInflacion = ultimoIndice(arrayAcumuladoInflacion24);
         for (let i = 0; i <= 3; i++) {
             for (let j = 0; j < ultimoMesInflacion[1] - 1; j++) {
-                arrayBarrasDif[i][11-j] = null;
+                arrayBarrasDif[i][11 - j] = null;
             };
         };
     };
@@ -206,8 +206,8 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo, acumuladoAnt) {
         if (proporcionBlanco > 0.9) {
             proporcionBlancoText = '👍 aceptable'
         };
-        let aumentoRealAcumuladoText = '👉 Estos gráficos muestran cómo se incrementó el salario de manera discriminada en un primer y segundo cargo, así como en el total, ' +
-            'tomando como referencia un salario base (unidad salarial desde enero de 2023). Se destaca el crecimiento en proporciones de los distintos grupos de ítems. ' +
+        let aumentoRealAcumuladoText = '👉 El gráfico muestra cómo se incrementó el salario de manera discriminada en un primer y segundo cargo, así como en el total, ' +
+            'tomando como referencia un salario base inicial (unidad salarial desde enero de 2023). Se destaca el crecimiento en proporciones de los distintos grupos de ítems. ' +
             'El aumento real porcentual acumulado del salario docente en el ' + cargoText + ' desde enero de 2023 fue del <strong class="text-danger">' + format((aumentoSalario - 1) * 100) +
             '%</strong>, mientras que la inflación nacional acumulada alcanzó un <strong class="text-danger">' + format((aumentoInflacion - 1) * 100) + '%</strong>. ' +
             'Registrando una ' + cambio + ' del salario en un <strong class="text-danger">' + format((aumentoSalario - aumentoInflacion) * 100) + '%</strong>.' +
@@ -218,18 +218,17 @@ function cargarChart1(ano, tipo, graficoId, objeto, cargo, acumuladoAnt) {
     };
 };
 
-function cargarChart2(ano, tipo, graficoId, objeto, cargo) {
+function cargarChart2(ano, tipo, graficoId, objeto, cargo, ultimoPiso) {
     const cargoN = cargo;
     const DATOS = objeto;
     let arrayAcumuladoInflacion = [];
     let arrayAcumuladoInflacionDesc = [];
-    arrayAcumuladoInflacion.push((DATOS[ano][0] / 100) + 1);
-    arrayAcumuladoInflacionDesc.push(arrayAcumuladoInflacion[0] - 1);
+    arrayAcumuladoInflacion.push(1 + (DATOS[ano][0] / 100));
+    arrayAcumuladoInflacionDesc.push(1 - DATOS[ano][0] / 100);
     for (let i = 1; i < 12; i++) {
-        arrayAcumuladoInflacion[i] = arrayAcumuladoInflacion[i - 1] * ((DATOS[ano][i] / 100) + 1);
-        arrayAcumuladoInflacionDesc.push(arrayAcumuladoInflacion[i] - 1);
+        arrayAcumuladoInflacion.push(arrayAcumuladoInflacion[i - 1] * (1 + (DATOS[ano][i] / 100)));
+        arrayAcumuladoInflacionDesc.push(arrayAcumuladoInflacionDesc[i - 1] * (1 - DATOS[ano][i] / 100));
     };
-
     const arrayHaber1 = [];
     const arrayHaber2 = [];
     let arrayHaberTotal = [];
@@ -241,10 +240,13 @@ function cargarChart2(ano, tipo, graficoId, objeto, cargo) {
     for (let i = 0; i < 12; i++) {
         const DATOS_SALARIO = buscarDataMes(ano, i.toString());
         let blancos1 = (1 - desc) * (DATOS_SALARIO.basico1 + DATOS_SALARIO.zona36 * zonaIndice + DATOS_SALARIO.antiguedad37 * antiguegadIndice + DATOS_SALARIO.ayMatDidac62 * DATOS_SALARIO.basico1 + DATOS_SALARIO.jornadaExt624 * DATOS_SALARIO.basico1 * jornadaExt);
-        let gris1 = (1 - desc) * (DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625);
-        let negro1 = (DATOS_SALARIO.salarioFam3 + DATOS_SALARIO.ayudEscolar) * hijos + DATOS_SALARIO.asigEspLey140 + DATOS_SALARIO.compProv171 + DATOS_SALARIO.conectNac609;
-        let haber1 = blancos1 + gris1 + negro1;
-        let haber2 = blancos1 + negro1 + DATOS_SALARIO.adRemun2Cargo629;
+        let grises1 = (1 - desc) * (DATOS_SALARIO.adRemDoc193 + DATOS_SALARIO.plusRem603 + DATOS_SALARIO.plusRef625 + DATOS_SALARIO.complDocPcial632);
+        let negros1 = (DATOS_SALARIO.salarioFam3 + DATOS_SALARIO.ayudEscolar) * hijos + DATOS_SALARIO.asigEspLey140 + DATOS_SALARIO.compProv171 + DATOS_SALARIO.conectNac609;
+        let haber1 = blancos1 + grises1 + negros1;
+        let blancos2 = blancos1;
+        let grises2 = (1 - desc) * DATOS_SALARIO.adRemun2Cargo629 + DATOS_SALARIO.complDocPcial632;
+        let negros2 = negros1 + DATOS_SALARIO.progNacCompDoc168;
+        let haber2 = blancos2 + grises2 + negros2;
         let sdmng = DATOS_SALARIO.sdmng;
         let progNacCompDoc168 = sdmng - (haber1 + haber2);
         if (progNacCompDoc168 <= 0) {
@@ -261,12 +263,15 @@ function cargarChart2(ano, tipo, graficoId, objeto, cargo) {
         arrayHaberTotal = arrayHaber2;
     } else if (cargoN === 'CT') {
         arrayHaberTotal = arrayHaberTotal;
-    }
+    };
+
     const salarioAumentoAcum = (arrayHaberTotal[11] / arrayHaberTotal[0]);
-    const arrayHaberDif = [];
-    for (let j = 0; j < 12; j++) {
-        const difHaber = arrayHaberTotal[j] / arrayHaberTotal[0];
-        const haberReal = difHaber - arrayAcumuladoInflacionDesc[j];
+    console.log(salarioAumentoAcum)
+    const arrayHaberDif = [ultimoPiso[0] * arrayAcumuladoInflacionDesc[0]];
+    let difHaber, haberReal;
+    for (let j = 1; j < 12; j++) {
+        difHaber = arrayHaberTotal[j] / arrayHaberTotal[0];
+        haberReal = difHaber * arrayAcumuladoInflacionDesc[j];
         arrayHaberDif.push(haberReal);
     };
 
@@ -321,44 +326,32 @@ function cargarChart2(ano, tipo, graficoId, objeto, cargo) {
     const labelMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     if (tipo === 'combinado') {
         chartCombinado(ano, graficoId, arrayHaberDif, labelMeses, opciones, cargoN);
-        let ultimoIndice;
+        let ultimoIndiceInflacion;
         for (let k = 0; k < 12; k++) {
             if (!isNaN(arrayAcumuladoInflacion[k])) {
-                ultimoIndice = arrayAcumuladoInflacion[k];
+                ultimoIndiceInflacion = arrayAcumuladoInflacion[k];
             };
         };
-        const aumentoRealAcumulado = format((ultimoIndice - 1) * 100);
-        if (ano === '2023') {
-            let aumentoRealAcumuladoText = '👉 El gráfico muestra el salario real con aumentos, es decir, el salario nominal desvalorizado con la inflación.' +
-                'Los aumentos salariales fueron muy por debajo de la inflación y nunca se compensó la pérdida. La inflación anual acumulada ' + ano +
-                ' fue de un ' + aumentoRealAcumulado + '%';
-            const variacion = salarioAumentoAcum - ultimoIndice;
-            let variacionText;
-            if (variacion > 0) {
-                variacionText = '. Por lo que nuestro salario nominal con aumentos, superó 😎 a la inflación en un ' + format(Math.abs(variacion * 100)) + '%';
-            } else if (variacion === 0) {
-                variacionText = '. Por lo que nuestro salario nominal con aumentos, igualó 😬 a la inflación en un ' + format(Math.abs(variacion * 100)) + '%';
-            } else if (variacion < 0) {
-                variacionText = '. Por lo que nuestro salario nominal con aumentos, cayó 😡 con la inflación en un ' + format(Math.abs(variacion * 100)) + '%';
-            };
 
-            document.getElementById('aumento' + graficoId + ano + cargoN).innerHTML = aumentoRealAcumuladoText + variacionText;
-        } else {
-            let aumentoRealAcumuladoText = '👉 El gráfico muestra el salario real con aumentos, es decir, el salario nominal desvalorizado con la inflación.<br>' +
-                'Los aumentos salariales fueron muy por debajo de la inflación y nunca se compensó la pérdida.<br>La inflación anual acumulada ' + ano + ' es de un ' + aumentoRealAcumulado + '%';
-            const variacion = salarioAumentoAcum - ultimoIndice;
-            let variacionText;
-            if (variacion > 0) {
-                variacionText = '.<br>Por lo que nuestro salario nominal con aumentos, supera 😎 a la inflación en un ' + format(Math.abs(variacion * 100)) + '%';
-            } else if (variacion === 0) {
-                variacionText = '.<br>Por lo que nuestro salario nominal con aumentos, iguala 😬 a la inflación en un ' + format(Math.abs(variacion * 100)) + '%';
-            } else if (variacion < 0) {
-                variacionText = '.<br>Por lo que nuestro salario nominal con aumentos, cae 😡 con la inflación en un ' + format(Math.abs(variacion * 100)) + '%';
-            };
-
-            document.getElementById('aumento' + graficoId + ano + cargoN).innerHTML = aumentoRealAcumuladoText + variacionText + '<br>(sin tener en cuenta la caida del año pasado).';
+        const variacion = salarioAumentoAcum - ultimoIndiceInflacion * ultimoPiso[1];
+        let variacionText = '😬 igualación ';
+        if (variacion < 0) {
+            variacionText = '😡 caída ';
+        } else if (variacion > 0) {
+            variacionText = '😎 compensación '
         };
+
+        let aumentoRealAcumuladoText = '👉 El gráfico muestra la evolución del salario real, tomando como referencia un salario base inicial en enero de 2023. ' +
+            'Este análisis considera el salario nominal, con aumentos o no, ajustado por los efectos de la inflación. Si la barra del gráfico correspondiente a un ' +
+            'mes determinado se encuentra por 👎 debajo del valor 1 del índice de desvalorización salarial, significa que en ese mes se experimentó una pérdida del poder ' +
+            'adquisitivo en comparación con enero de 2023. Esto indica que los incrementos salariales fueron insuficientes para compensar la inflación, resultando en ' +
+            'una reducción del salario real. En ' + ano + ', la inflación anual acumulada fue del <strong class="text-danger">' + format((ultimoPiso[1] * ultimoIndiceInflacion - 1) * 100) +
+            '%</strong>, lo que ocasionó una ' + variacionText + ' del poder adquisitivo de nuestro salario nominal en un <strong class="text-danger">' + format(variacion * 100) +
+            '%</strong>, "respecto a enero del 2023", incluso con los aumentos dados. '
+        document.getElementById('aumento' + graficoId + ano + cargoN).innerHTML = aumentoRealAcumuladoText;
+        var inicioInflacion = ultimoIndiceInflacion;
     };
+    return [arrayHaberDif[11], inicioInflacion];
 };
 
 function cargarChart3(ano, tipo, graficoId) {

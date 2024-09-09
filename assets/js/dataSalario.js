@@ -1,9 +1,13 @@
 // Datos Variables 2023,2024
 function buscarDataMes(anoSelect, mesSelect) {
+    let basico1, salarioFam3, ayudEscolar, zona36, antiguedad37, ayMatDidac62, asigEspLey140, sdmng, progNacCompDoc168,
+        compProv171, adRemDoc193, plusRem603, conectNac609, bono622, jornadaExt624, plusRef625, adRemun2Cargo629,
+        complDocPcial632, segVida210, obraSocial212;
+
     if (anoSelect === '2023') {
         switch (mesSelect) {
             case "0":
-                var basico1 = 29036.75,
+                basico1 = 29036.75,
                     salarioFam3 = 2 * 7500.0,
                     ayudEscolar = 2 * 60.0,
                     zona36 = basico1,
@@ -25,7 +29,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "1":
-                var basico1 = 29036.75,
+                basico1 = 29036.75,
                     salarioFam3 = 7500.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -47,7 +51,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "2":
-                var basico1 = 29036.75 + 10000.0,
+                basico1 = 29036.75 + 10000.0,
                     salarioFam3 = 7500.0 + 2500.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -69,7 +73,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "3":
-                var basico1 = 39036.75 + 6000.0,
+                basico1 = 39036.75 + 6000.0,
                     salarioFam3 = 10000.0 + 5000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -91,7 +95,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "4":
-                var basico1 = 45036.75 + 4500.0,
+                basico1 = 45036.75 + 4500.0,
                     salarioFam3 = 15000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -113,7 +117,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "5-SAC":
-                var basico1 = 49536.75 * 0.5,
+                basico1 = 49536.75 * 0.5,
                     salarioFam3 = 0.0,
                     ayudEscolar = 0.0,
                     zona36 = basico1,
@@ -135,7 +139,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "5":
-                var basico1 = 49536.75,
+                basico1 = 49536.75,
                     salarioFam3 = 15000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -157,7 +161,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "6":
-                var basico1 = 49536.75 + 10000.0,
+                basico1 = 49536.75 + 10000.0,
                     salarioFam3 = 15000.0 + 5000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -179,7 +183,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "7":
-                var basico1 = 59536.75,
+                basico1 = 59536.75,
                     salarioFam3 = 20000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -201,7 +205,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "8":
-                var basico1 = 59536.75 + 7000.0,
+                basico1 = 59536.75 + 7000.0,
                     salarioFam3 = 20000.0 + 2000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -223,7 +227,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "9":
-                var basico1 = 66536.75,
+                basico1 = 66536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -245,7 +249,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "10":
-                var basico1 = 66536.75 + 7000.0,
+                basico1 = 66536.75 + 7000.0,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -267,7 +271,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "11-SAC":
-                var basico1 = 73536.75 * 0.5,
+                basico1 = 73536.75 * 0.5,
                     salarioFam3 = 0.0,
                     ayudEscolar = 0.0,
                     zona36 = basico1,
@@ -289,7 +293,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "11":
-                var basico1 = 73536.75,
+                basico1 = 73536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -314,7 +318,7 @@ function buscarDataMes(anoSelect, mesSelect) {
     } else if (anoSelect === '2024') {
         switch (mesSelect) {
             case "0":
-                var basico1 = 73536.75,
+                basico1 = 73536.75,
                     salarioFam3 = 2 * 22000.0,
                     ayudEscolar = 2 * 60.0,
                     zona36 = basico1,
@@ -336,7 +340,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "1":
-                var basico1 = 73536.75 + 15000.0,
+                basico1 = 73536.75 + 15000.0,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0,
                     zona36 = basico1,
@@ -358,7 +362,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "2":
-                var basico1 = 88536.75 + 9000.0,
+                basico1 = 88536.75 + 9000.0,
                     salarioFam3 = 22000.0 + 8000.0, //45000.0 asigHijoDiscap
                     ayudEscolar = 60.0 + 20000.0 + 100000.0,
                     zona36 = basico1,
@@ -380,7 +384,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "3":
-                var basico1 = 97536.75 + 15000.0,
+                basico1 = 97536.75 + 15000.0,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -402,7 +406,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "4":
-                var basico1 = 112536.75,
+                basico1 = 112536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -424,7 +428,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "5-SAC":
-                var basico1 = 112536.75 * 0.5,
+                basico1 = 112536.75 * 0.5,
                     salarioFam3 = 0.0,
                     ayudEscolar = 0.0,
                     zona36 = basico1,
@@ -446,7 +450,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "5":
-                var basico1 = 112536.75 + 15000.0,
+                basico1 = 112536.75 + 15000.0,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -468,7 +472,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "6":
-                var basico1 = 127536.75,
+                basico1 = 127536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -490,7 +494,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "7":
-                var basico1 = 127536.75 + 12753.675,
+                basico1 = 127536.75 + 15000.0,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -512,7 +516,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "8":
-                var basico1 = 140290.425,
+                basico1 = 142536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -534,7 +538,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "9":
-                var basico1 = 140290.425,
+                basico1 = 142536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -556,7 +560,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "10":
-                var basico1 = 140290.425,
+                basico1 = 142536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,
@@ -578,7 +582,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "11-SAC":
-                var basico1 = 140290.425 * 0.5,
+                basico1 = 142536.75 * 0.5,
                     salarioFam3 = 0.0,
                     ayudEscolar = 0.0,
                     zona36 = basico1,
@@ -600,7 +604,7 @@ function buscarDataMes(anoSelect, mesSelect) {
                     obraSocial212 = 0.05;
                 break;
             case "11":
-                var basico1 = 140290.425,
+                basico1 = 142536.75,
                     salarioFam3 = 22000.0,
                     ayudEscolar = 60.0 + 20000.0,
                     zona36 = basico1,

@@ -12,7 +12,7 @@ La estructura general de carpetas y archivos del proyecto es la siguiente:
 
 pagina-web/
 ├── index.html
-├── simulador.html
+├── error404.html
 ├── normas.html
 ├── graficos.html
 ├── pauta.html

@@ -15,7 +15,7 @@ pagina-web/
 ├── simulador.html
 ├── normas.html
 ├── graficos.html
-├── pauta.html
+├── error404.html
 ├── colaboracion.html
 ├── assets/
 │ ├── css

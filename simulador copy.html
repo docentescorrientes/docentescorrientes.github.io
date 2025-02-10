@@ -360,6 +360,21 @@
                     </div>
                 </div>
 
+
+                <div class="shadow-lg p-3 mb-5 bg-body rounded">
+                    <label for="miSelect" class="form-label">
+                        <b><abbr title="Clase de cargo o función docente, clase e índice de clase">
+                                Busca tu clase e índice de clase de cargo docentes aquí</abbr>:</b>
+                    </label>
+
+                    <select class="form-select" aria-label="Default select example" id="miSelect">
+                        <option selected>Buscar la clase e índice de clase del cargo de docente . . . </option>
+                    </select><br>
+                    <div class="alert alert-secondary" id="claseBuscada">
+                        <strong>👆 Esperando</strong> que seleccione cargo . . .
+                    </div>
+                </div>
+
                 <!-- Start Table -->
                 <div class="container mt-5" id="tableHaber" hidden>
                     <div class="card shadow-lg p-4">
@@ -375,8 +390,8 @@
                 <!-- End Table -->
 
                 <!-- Start Version -->
-                <div class="container mt-5" id="versionDiv">
-                    <h5 class="text-primary" style="--bs-text-opacity: 1.1; text-align: center;" id="versionH6">
+                <div class="shadow-lg p-3 mb-5 bg-body rounded" id="versionDiv">
+                    <h5 class="text-primary" style="--bs-text-opacity: 1.9; text-align: center;" id="versionH6">
                         Versión
                     </h5>
                 </div>

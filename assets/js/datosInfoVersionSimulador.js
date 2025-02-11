@@ -1,120 +1,102 @@
-//Start Versión
-const version = "5.0", fecha = 'Enero de 2025';
-document.getElementById('versionH6').insertAdjacentHTML("beforeend", version + '<br>' + fecha + '<br> @augusalterats');
-//End Versión
+// Start Versión
+const version = "5.0", fecha = "Enero de 2025";
+document.getElementById("versionH6").insertAdjacentHTML("beforeend", `${version}<br>${fecha}<br>@augusalterats`);
+// End Versión
 
-import dateGeneral from './date.js';
-const date = dateGeneral();
-var canastaBasica = date.canastaBasica;
-var canastaBasicaA = date.canastaBasicaA;
-var canastaBasicaBT = date.canastaBasicaBT;
-var canastaBasicaBA = date.canastaBasicaBA;
-var dolarBlue = date.dolarBlue;
-var inflacion = date.inflacionNac;
-var inflacionNea = date.inflacionNea;
-var sdmng = date.sdmng;
+import dateGeneral from "./date.js";
 
+console.log("Datos obtenidos de dateGeneral:", date);
 
-/*Datos Informativos y version en Simulador*/
-//Start Carga Datos Informativos
-const fechaHoy = new Date()
-let mesActual = fechaHoy.getMonth();
-let anoActual = fechaHoy.getFullYear();
-const h1ElementTitleDatosInfo = document.getElementById('datosInfoH1');
-h1ElementTitleDatosInfo.textContent += anoActual;
-const mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-// End Carga Datos Informativos
+const {
+    canastaBasica,
+    canastaBasicaA,
+    inflacionNac: inflacion,
+    canastaBasicaBT,
+    canastaBasicaBA,
+    dolarBlue,
+    inflacionNea,
+    sdmng
+} = date;
 
-// Start Busca último dato y lo carga Canasta Básica, Dolar Blue, Inlflación y SDNMG
-const idFechas = ['fechaCanastaBasica', 'fechaDolarBlue', 'fechaInflacion', 'fechaSdmng'];
-const idDatos = ['canastaBasica', 'dolarBlue', 'inflacion', 'sdmng'];
-const arrayDatos = [canastaBasica, dolarBlue, inflacion, sdmng];
-for (let i = 0; i < 4; i++) {
-    let datos = arrayDatos[i];
-    document.getElementById(idFechas[i]).textContent = mes[buscaUltimoDato(datos)[1]] + '/' + buscaUltimoDato(datos)[0];
-    document.getElementById(idDatos[i]).textContent = formatNumero(datos[buscaUltimoDato(datos)[0]][buscaUltimoDato(datos)[1]]);
-};
-document.getElementById('fechaCanastaBasicaT').textContent = mes[buscaUltimoDato(canastaBasica)[1]] + ' del ' + buscaUltimoDato(canastaBasica)[0];
-document.getElementById('canastaBasicaT').textContent = formatNumero(canastaBasica[buscaUltimoDato(canastaBasica)[0]][buscaUltimoDato(canastaBasica)[1]]);
-document.getElementById('canastaBasicaA').textContent = formatNumero(canastaBasicaA[buscaUltimoDato(canastaBasicaA)[0]][buscaUltimoDato(canastaBasicaA)[1]]);
+// Fecha actual
+const fechaHoy = new Date();
+const mesActual = fechaHoy.getMonth();
+const anoActual = fechaHoy.getFullYear();
 
-document.getElementById('fechaCanastaBasicaT2').textContent = mes[buscaUltimoDato(canastaBasicaBT)[1]] + ' del ' + buscaUltimoDato(canastaBasicaBT)[0];
-document.getElementById('canastaBasicaT2').textContent = formatNumero(canastaBasicaBT[buscaUltimoDato(canastaBasicaBT)[0]][buscaUltimoDato(canastaBasicaBT)[1]]);
-document.getElementById('canastaBasicaA2').textContent = formatNumero(canastaBasicaBA[buscaUltimoDato(canastaBasicaBA)[0]][buscaUltimoDato(canastaBasicaBA)[1]]);
+// Mostrar el año actual en el título
+document.getElementById("datosInfoH1").textContent += ` ${anoActual}`;
 
-document.getElementById("inflacionAntAcumulada").textContent = inflacionAcumulada(anoActual-1) + '%';
-document.getElementById("anoAntInflacion").textContent = (anoActual-1);
-document.getElementById("inflacionAcumulada").textContent = inflacionAcumulada(buscaUltimoDato(inflacion)[0]);
-document.getElementById("anoInflacion").textContent = anoActual;
+const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-document.getElementById("inflacionAntAcumuladaNea").textContent = inflacionAcumuladaNea(anoActual-1) + '%';
-document.getElementById("anoAntInflacionNea").textContent = (anoActual-1);
-document.getElementById("inflacionAcumuladaNea").textContent = inflacionAcumuladaNea(buscaUltimoDato(inflacionNea)[0]);
-document.getElementById("anoInflacionNea").textContent = anoActual;
+// Función para buscar el último dato disponible
+const buscaUltimoDato = (array) => {
+    if (!array) return [anoActual, 0]; // Validamos que el array exista
 
-//End Busca último dato y lo carga Canasta Básica, Dolar Blue, Inlflación y SDNMG
-
-//Start Funciones
-function mesText(mesN){
-    let mesReturn = mesN;
-    const mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    if(mesN === -1){
-        mesReturn = 11;
-    };
-    mesReturn = mes[mesReturn];
-    return mesReturn;
-};
-
-function buscaUltimoDato(array) {
     let ano = anoActual;
-    let mes;
-    if (array[ano][0] === '---') {
-        ano -= 1;
-        for (let i = 0; i < 12; i++) {
-            if (array[ano][i] !== '---') {
-                mes = i;
-            }
-        }
-    } else {
-        for (let i = 0; i < 12; i++) {
-            if (array[ano][i] !== '---') {
-                mes = i;
-            }
-        }
+
+    while (ano in array) { // Mientras haya datos en el año actual o anteriores
+        let mes = array[ano]?.findLastIndex((val) => val !== "---");
+
+        if (mes !== -1 && mes !== undefined) return [ano, mes]; // Si encontró un dato válido, lo devuelve
+
+        ano--; // Si no encontró datos, retrocede un año
     }
-    return [ano, mes];
-};
 
-function inflacionAcumulada(ano) {
-    let n = 0;
-    let acumulada = 1;
-    for (let i = 0; i < 12; i++) {
-        if (inflacion[ano][i] !== '---') {
-            acumulada *= 1 + (inflacion[ano][n] / 100);
-            n += 1;
-        }
-    }
-    acumulada = formatNumero(((acumulada - 1) * 100).toFixed(2))
-    return acumulada;
-};
-
-function inflacionAcumuladaNea(ano) {
-    let n = 0;
-    let acumulada = 1;
-    for (let i = 0; i < 12; i++) {
-        if (inflacionNea[ano][i] !== '---') {
-            acumulada *= 1 + (inflacionNea[ano][n] / 100);
-            n += 1;
-        }
-    }
-    acumulada = formatNumero(((acumulada - 1) * 100).toFixed(2))
-    return acumulada;
+    return [anoActual, 0]; // Si no encontró ningún dato, devuelve el año actual con 0
 };
 
 
-function formatNumero(number) {
-    const formattedNumber = number.toString().replace('.', ',');
-    const numberFormat = formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    return numberFormat;
+
+
+
+// Función para formatear números
+const formatNumero = (num) => (num ? num.toLocaleString("es-AR") : "0");
+
+// Función para calcular la inflación acumulada
+const calcularInflacionAcumulada = (array, ano) => {
+    if (!array[ano]) return "0,00";
+
+    let acumulada = array[ano].reduce((acc, val) => (val !== "---" ? acc * (1 + val / 100) : acc), 1);
+
+    return formatNumero(((acumulada - 1) * 100).toFixed(2));
 };
-//End Funciones
+
+// Cargar datos en los elementos del HTML
+const cargarDatos = () => {
+    // Dólar Blue
+    const [anoCanastaBT, mesCanastaBT] = buscaUltimoDato(canastaBasicaBT);
+    document.getElementById("fechaCanastaBasica").textContent = `${meses[mesCanastaBT]} / ${anoCanastaBT}`;
+    document.getElementById("canastaBasica").textContent = formatNumero(dolarBlue[anoCanastaBT]?.[mesCanastaBT]);
+
+    // Dólar Blue
+    const [anoDolar, mesDolar] = buscaUltimoDato(dolarBlue);
+    document.getElementById("fechaDolarBlue").textContent = `${meses[mesDolar]} / ${anoDolar}`;
+    document.getElementById("dolarBlue").textContent = formatNumero(dolarBlue[anoDolar]?.[mesDolar]);
+
+    // Canasta Básica Nacional
+    const [anoCB, mesCB] = buscaUltimoDato(canastaBasica);
+    document.getElementById("fechaCBNAC").textContent = `${meses[mesCB]} del ${anoCB}`;
+    document.getElementById("cbtNAC").textContent = formatNumero(canastaBasica[anoCB]?.[mesCB]);
+    document.getElementById("cbaNAC").textContent = formatNumero(canastaBasicaA[anoCB]?.[mesCB]);
+
+    // Canasta Básica Corrientes (ISEPCI)
+    const [anoCBT2, mesCBT2] = buscaUltimoDato(canastaBasicaBT);
+    document.getElementById("fechaCBNEA").textContent = `${meses[mesCBT2]} del ${anoCBT2}`;
+    document.getElementById("cbtNEA").textContent = formatNumero(canastaBasicaBT[anoCBT2]?.[mesCBT2]);
+    document.getElementById("cbaNEA").textContent = formatNumero(canastaBasicaBA[anoCBT2]?.[mesCBT2]);
+
+    // Inflación Nacional
+    document.getElementById("anoAntInflacion").textContent = anoActual - 1;
+    document.getElementById("inflacionAntAcumulada").textContent = calcularInflacionAcumulada(inflacion, anoActual - 1) + "%";
+    document.getElementById("anoInflacion").textContent = anoActual;
+    document.getElementById("inflacionAcumulada").textContent = calcularInflacionAcumulada(inflacion, buscaUltimoDato(inflacion)[0]) + "%";
+
+    // Inflación NEA
+    document.getElementById("anoAntInflacionNea").textContent = anoActual - 1;
+    document.getElementById("inflacionAntAcumuladaNea").textContent = calcularInflacionAcumulada(inflacionNea, anoActual - 1) + "%";
+    document.getElementById("anoInflacionNea").textContent = anoActual;
+    document.getElementById("inflacionAcumuladaNea").textContent = calcularInflacionAcumulada(inflacionNea, buscaUltimoDato(inflacionNea)[0]) + "%";
+};
+
+// Llamar a la función para cargar los datos en el HTML
+cargarDatos();

@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <select class="form-select tipoContrato" id="tipoContrato${i}" name="tipoContrato${i}" data-index="${i}" required>
                     <option value="" disabled selected>Seleccione si es permanente o temporario</option>
                     <option value="permanente">Permanente (Titular o Interino)</option>
-                    <option value="temporario">Temporario (Suplente)</option>
+                    <option value="temporario" disabled>Temporario (Suplente)</option>
                 </select>
                 <p class="text-muted">Indique si el contrato es temporal o permanente.</p>
     

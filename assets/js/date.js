@@ -1,4 +1,4 @@
-export default function dateGeneral() {
+export default function date() {
     //1) Nacional Canasta Básica Total (Pobreza) Hogar 2 según INDEC https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149 (ver informe cuadro 2)
     const canastaBTNac = {
         2023: [163538.68, 177062.87, 191228.05, 203360.69, 217915.79, 232426.83, 248962.01, 284686.95, 319422.04, 345295.45, 390456.32, 495798.32],
@@ -69,7 +69,7 @@ export default function dateGeneral() {
     };
 }
 
-const datosAnio = dateGeneral().dolarBlue[2025];
+const datosAnio = date().dolarBlue[2025];
 const datoMes = datosAnio[0]
 
 console.log(datoMes);

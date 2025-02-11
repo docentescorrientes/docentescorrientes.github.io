@@ -27,7 +27,7 @@ class Aumentos {
   }
 }
 
-// Agregar abajo de cada código el aumento (orden):
+// Agregar abajo de cada código el incremento (código, año, mes, incremento, b) (orden), ejemplo aumentos.agregarAumento("1 Básico Referencia", 2025, 3, 15800, "b");:
 const aumentos = new Aumentos();
 aumentos.agregarAumento("1 Básico Referencia", 2024, 8, 142536.75, "b");
 aumentos.agregarAumento("1 Básico Referencia", 2024, 10, 15000, "b");

@@ -174,55 +174,29 @@
 
         </div>
     </nav>
-    <!-- Close Header -->
-    <section class="bg-white py-5">
-        <div class="container">
-            <div class="row align-items-center py-5">
-                <div class="col-md-4 mx-auto">
-                    <img src="assets/img/about-hero-pauta.gif" alt="Logo DACorrientes - Sector 2019" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="bg-white mb-5">
-        <div class="cont-temporizador">
-            <div class="bloque">
-                <div class="dias" id="dias">00</div>
-                <p>DÍAS</p>
-            </div>
-            <div class="bloque">
-                <div class="horas" id="horas">00</div>
-                <p>HORAS</p>
-            </div>
-            <div class="bloque">
-                <div class="minutos" id="minutos">00</div>
-                <p>MINUTOS</p>
-            </div>
-            <div class="bloque">
-                <div class="segundos" id="segundos">00</div>
-                <p>SEGUNDOS</p>
-            </div>
-        </div>
-        <div class="container-xl mb-5">
-            <div class="row">
-                <div class="cont-temporizador">
-                    <div class="bloque">
-                        <h2 id="gasto" class="text-center">En el 2024 el Gobierno de la provincia de Corriente<br>
-                            gastará $ 3.200.000.000 en pauta publicitaria,
-                            aquí te mostramos cuanto gasta el mismo cada segundo.
-                        </h2>
-                        <h2 id="queda">
-                        </h2>
+
+
+    <section class="bg-light py-5">
+        <div class="container my-4">
+            <div class="container">
+
+
+                <div class="shadow-lg p-3 mb-5 bg-body rounded">
+                    <label for="miSelect" class="form-label">
+                        <b><abbr title="Clase de cargo o función docente, clase e índice de clase">
+                                Busca tu clase e índice de clase de cargo docentes aquí</abbr>:</b>
+                    </label>
+
+                    <select class="form-select" aria-label="Default select example" id="miSelect">
+                        <option selected>Buscar la clase e índice de clase del cargo de docente . . . </option>
+                    </select><br>
+                    <div class="alert alert-secondary" id="claseBuscada">
+                        <strong>👆 Esperando</strong> que seleccione cargo . . .
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
-    <!-- Modal -->
-    <!-- Start Content -->
-
-    <!-- End Content -->
     <!-- Start Brands -->
     <section class="bg-light py-5">
     </section>
@@ -308,7 +282,8 @@
                     <div class="col-12 text-center">
                         <p class="text-left text-light">
                             Copyright &copy; 2024 Docentes Autoconvocados Corrientes - Sector 2019 - Licencia MIT. Todos
-                            los derechos reservados. Designed by <a class="text-success" href="LICENSE.txt" target="_blank"><strong>augusalterats</strong></a>
+                            los derechos reservados. Designed by <a class="text-success" href="LICENSE.txt"
+                                target="_blank"><strong>augusalterats</strong></a>
                         </p>
                     </div>
                 </div>
@@ -323,127 +298,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End Script -->
     <script>
-        let date = new Date();
-        let horas = date.getHours();
-        let minutos = date.getMinutes();
-        let segundos = date.getSeconds();
-
-        let fechaInicial = new Date('2024-01-01 00:00:00');
-        let fechaFinal = date;
-        let dias = Math.trunc((fechaFinal - fechaInicial) / (1000 * 60 * 60 * 24));
-
-        if (dias >= 0) {
-            cargarSegundo();
-
-            //Definimos y ejecutamos los segundos
-            function cargarSegundo() {
-                let txtSegundos;
-                let txtGasto;
-                let formatGasto;
-                if (segundos > 59 || dias == 366) {
-                    segundos = 0;
-                }
-
-                //Mostrar Segundos en pantalla
-                if (segundos < 10) {
-                    txtSegundos = `0${segundos}`;
-                } else {
-                    txtSegundos = segundos;
-                }
-                document.getElementById('segundos').innerHTML = txtSegundos;
-                formatGasto = formatPesos(8743169.398907104 * dias + 364298.724954463 * horas + 6071.645415908 * minutos + 101.194090265 * segundos)
-                txtGasto = `En este momento el gasto del Gobierno Provincial<br> en 
-pauta publicitaria es <span style="color: rgb(179, 20, 20);">${formatGasto}</span>`
-
-                document.getElementById('gasto').innerHTML = txtGasto;
-                document.getElementById('queda').innerHTML = `Queda para gastar <span style="color: rgb(179, 20, 20);">${formatPesos(3200000000 - (8743169.398907104 * dias + 364298.724954463 * horas + 6071.645415908 * minutos + 101.194090265 * segundos))}</span>`;
-                segundos++;
-
-                cargarMinutos(segundos);
-            }
-
-            function formatPesos(number) {
-                const numberFormat = number.toLocaleString('es-AR', {
-                    style: 'currency',
-                    currency: 'ARS',
-                });
-                return numberFormat;
-            };
-
-            //Definimos y ejecutamos los minutos
-            function cargarMinutos(segundos) {
-                let txtMinutos;
-
-                if (segundos == 59 && minutos !== 59) {
-                    setTimeout(() => {
-                        minutos++;
-                    }, 1000)
-                } else if (segundos == 59 && minutos == 59) {
-                    setTimeout(() => {
-                        minutos = 0;
-                    }, 1000)
-                }
-
-                //Mostrar Minutos en pantalla
-                if (minutos < 10) {
-                    txtMinutos = `0${minutos}`;
-                } else {
-                    txtMinutos = minutos;
-                }
-                document.getElementById('minutos').innerHTML = txtMinutos;
-                cargarHoras(segundos, minutos);
-            }
-
-            //Definimos y ejecutamos las horas
-            function cargarHoras(segundos, minutos) {
-                let txtHoras;
-
-                if (segundos == 59 && minutos == 59 && horas !== 23) {
-                    setTimeout(() => {
-                        horas++;
-                    }, 1000)
-                } else if (segundos == 59 && minutos == 59 && horas == 23) {
-                    setTimeout(() => {
-                        horas = 0;
-                    }, 1000)
-                }
-
-                //Mostrar Horas en pantalla
-                if (horas < 10) {
-                    txtHoras = `0${horas}`;
-                } else {
-                    txtHoras = horas;
-                }
-                document.getElementById('horas').innerHTML = txtHoras;
-                cargarDias(segundos, minutos, horas)
-            }
-
-            //Definimos y ejecutamos los dias
-            function cargarDias(segundos, minutos, horas) {
-                let txtDias;
-
-                if (segundos == 59 && minutos == 59 && horas == 23 && dias !== 366) {
-                    setTimeout(() => {
-                        dias++;
-                    }, 1000)
-                } else if (segundos == 59 && minutos == 59 && horas == 23 && dias == 366) {
-                    setTimeout(() => {
-                        dias = 0;
-                    }, 1000)
-                }
-
-                //Mostrar Dias en pantalla
-                if (dias < 10) {
-                    txtDias = `0${dias}`;
-                } else {
-                    txtDias = dias;
-                }
-                document.getElementById('dias').innerHTML = txtDias;
-                return dias;
-            }
-            //Ejecutamos cada segundo
-            setInterval(cargarSegundo, 1000);
-        };
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('miSelect').addEventListener('change', function () {
+                var claseBuscadaDiv = document.getElementById('claseBuscada');
+                claseBuscadaDiv.classList.remove('alert-secondary');
+                claseBuscadaDiv.classList.add('alert-primary');
+            });
+        });
     </script>
 </body>
 

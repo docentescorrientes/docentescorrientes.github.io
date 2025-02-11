@@ -49,7 +49,7 @@ aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024
 
 // Negros: cod3SalFam (cod3xHijo, cod3xHijoDisc, cod3Esc, cod3EscDisc, Cod3AnualComplemVacac, cod3AyEsc), cod171CompDocPcial, cod622BonoNav3Tramos(dic100,ene200, feb200)
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 9, 251500, "n"); // ### Tope: hasta dos cargos
-aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 10, 34000, "n"); // ### Tope: hasta dos cargos
+aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 10, 35000, "n"); // ### Tope: hasta dos cargos
 
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 1, 22000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 2, 8000, "n"); // Tope: hasta un cargo y 2 hijos

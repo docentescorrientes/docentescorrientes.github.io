@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
                 <!-- Número de Clase -->
                 <label class="form-label" for="numeroClase${i}">a - Número de Clase del ${i}° Cargo</label>
-                <input type="number" class="form-control" id="numeroClase${i}" name="numeroClase${i}" min="20" max="411" placeholder="Ejemplo: 192" required>
+                <input type="number" class="form-control" id="numeroClase${i}" name="numeroClase${i}" min="20" max="411" placeholder="Ejemplo: 333 (de Maestro de Grado Escuela Común" required>
                 <p id="descripcionClase${i}" class="text-muted">Ingrese un número de clase válido entre 20 y 411.</p>
     
                 <!-- Tipo de Contrato -->

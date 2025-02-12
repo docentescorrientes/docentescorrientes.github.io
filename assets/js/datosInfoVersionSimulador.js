@@ -58,31 +58,6 @@ const cargarDatos = () => {
     document.getElementById("mesSdmng").textContent = `${meses[sdmng.posicion]}`;
     document.getElementById("sdmng").textContent = `${formatNumero(sdmng.valor)}`;
 
-//      mesSdmng sdmng
-
-
-
-
-
-    /*
-    // Dólar Blue
-    const [anoCanastaBT, mesCanastaBT] = buscaUltimoDato(canastaBasicaBT);
-    document.getElementById("fechaCanastaBasica").textContent = `${meses[mesCanastaBT]} / ${anoCanastaBT}`;
-    document.getElementById("canastaBasica").textContent = formatNumero(dolarBlue[anoCanastaBT]?.[mesCanastaBT]);
-
-    // Dólar Blue
-    const [anoDolar, mesDolar] = buscaUltimoDato(dolarBlue);
-    document.getElementById("fechaDolarBlue").textContent = `${meses[mesDolar]} / ${anoDolar}`;
-    document.getElementById("dolarBlue").textContent = formatNumero(dolarBlue[anoDolar]?.[mesDolar]);
-
-
-
-
-    // Inflación NEA
-    document.getElementById("anoAntInflacionNea").textContent = anoActual - 1;
-    document.getElementById("inflacionAntAcumuladaNea").textContent = calcularInflacionAcumulada(inflacionNea, anoActual - 1) + "%";
-    document.getElementById("anoInflacionNea").textContent = anoActual;
-    document.getElementById("inflacionAcumuladaNea").textContent = calcularInflacionAcumulada(inflacionNea, buscaUltimoDato(inflacionNea)[0]) + "%";  */
 };
 
 // Llamar a la función para cargar los datos en el HTML

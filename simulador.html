@@ -399,25 +399,23 @@
                     que debe cobrar un docente por cargo o su equivalente en horas cátedras. Según el INDEC: la
                     <strong>Canasta Básica
                         Total - CBT (Pobreza) </strong>es de <strong class="text-danger">$</strong><strong
-                        class="text-danger" id="cbtNAC"></strong> y la <strong>Canasta Básica Alimentaria - CBA
+                        class="text-danger" id="cbtNac"></strong> y la <strong>Canasta Básica Alimentaria - CBA
                         (Indigencia)</strong> es de <strong class="text-danger">$</strong><strong class="text-danger"
-                        id="cbaNAC"></strong> de hogar tipo 2 del mes de <a id="fechaCBNAC"></a>. Según
+                        id="cbaNac"></strong> de hogar tipo 2 del mes de <a id="fechacbtNac"></a>. Según
                     el Indice Barrial de Precios ISEPCI: la <strong>Canasta Básica
                         Total - CBT (Pobreza en Corrientes) </strong>es de <strong class="text-danger">$</strong><strong
-                        class="text-danger" id="cbtNEA"></strong> y la <strong>Canasta Básica Alimentaria - CBA
+                        class="text-danger" id="cbtNea"></strong> y la <strong>Canasta Básica Alimentaria - CBA
                         (Indigencia en Corrientes)</strong> es de <strong class="text-danger">$</strong><strong
-                        class="text-danger" id="cbaNEA"></strong> de hogar tipo 2 del mes de <a id="fechaCBNEA"></a>
+                        class="text-danger" id="cbaNea"></strong> de hogar tipo 2 del mes de <a id="fechacbtNea"></a>
                     (Relevamiento mensual realizado en 6 localidades de la provincia;
                     Corrientes Capital, Empedrado, Goya, Santa Rosa, Mercedes y Monte Caseros). La
                     <strong>Inflación Nacional Acumulada
-                    </strong><strong id="anoAntInflacion"></strong> fue de <strong class="text-danger"
-                        id="inflacionAntAcumulada"></strong> y la del <strong id="anoInflacion"></strong> desde el mes
-                    de enero es del <strong class="text-danger" id="inflacionAcumulada">2,7</strong><strong
-                        class="text-danger">%</strong>. La <strong>Inflación NEA Acumulada </strong><strong
-                        id="anoAntInflacionNea"></strong> fue de <strong class="text-danger"
-                        id="inflacionAntAcumuladaNea"></strong> y la del <strong id="anoInflacionNea"></strong> desde el
-                    mes de enero es del <strong class="text-danger" id="inflacionAcumuladaNea">2,9</strong><strong
-                        class="text-danger">%</strong>.
+                    </strong><strong id="anioAntInflAcumNac"></strong> fue de <strong class="text-danger"
+                        id="inflAntAcumNac"></strong> y la del <strong id="anioInflAcumNac"></strong> desde el mes
+                    de enero es del <strong class="text-danger" id="inflAcumNac">2,7</strong>. La <strong>Inflación NEA
+                        Acumulada </strong><strong id="anioAntInflAcumNea"></strong> fue de <strong class="text-danger"
+                        id="inflAntAcumNea"></strong> y la del <strong id="anioInflAcumNea"></strong> desde el
+                    mes de enero es del <strong class="text-danger" id="inflAcumNea"></strong>.
                 </p>
             </div>
         </div>
@@ -426,15 +424,15 @@
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-shopping-cart"></i></div>
-                    <h2 class="h5 mt-4 text-center">Canasta Básica (CBT)<br><a id="fechaCanastaBasica"></a><br>$<a
-                            id="canastaBasica"></a></h2>
+                    <h2 class="h5 mt-4 text-center">Canasta Básica (CBT)<br><a id="mescbtNac"></a><br>$<a
+                            id="infocbtNac"></a></h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-thermometer-half"></i></div>
-                    <h2 class="h5 mt-4 text-center">Dólar Blue<br><a id="fechaDolarBlue"></a><br>$<a id="dolarBlue"></a>
+                    <h2 class="h5 mt-4 text-center">Dólar Blue<br><a id="mesDolarBlue"></a><br>$<a id="dolarBlue"></a>
                     </h2>
                 </div>
             </div>
@@ -442,7 +440,7 @@
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
-                    <h2 class="h5 mt-4 text-center">Inflación Nac.<br><a id="fechaInflacion"></a><br><a
+                    <h2 class="h5 mt-4 text-center">Inflación Nac.<br><a id="mesInflacion"></a><br><a
                             id="inflacion"></a>%
                     </h2>
                 </div>
@@ -451,7 +449,7 @@
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-cogs"></i></div>
-                    <h2 class="h5 mt-4 text-center">Paritarias (SDMNG)<br><a id="fechaSdmng"></a><br>$<a id="sdmng"></a>
+                    <h2 class="h5 mt-4 text-center">Paritarias (SDMNG)<br><a id="mesSdmng"></a><br>$<a id="sdmng"></a>
                     </h2>
                 </div>
             </div>
@@ -565,17 +563,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById('miSelect').addEventListener('change', function () {
-                var claseBuscadaDiv = document.getElementById('claseBuscada');
-                claseBuscadaDiv.classList.remove('alert-secondary');
-                claseBuscadaDiv.classList.add('alert-primary');
-            });
-        });
-    </script>
-    <!-- End Script -->
 </body>
 
 </html>

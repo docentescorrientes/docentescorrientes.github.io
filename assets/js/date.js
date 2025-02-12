@@ -1,4 +1,4 @@
-export default function date() {
+export function dateGral() {
     //1) Nacional Canasta Básica Total (Pobreza) Hogar 2 según INDEC https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149 (ver informe cuadro 2)
     const canastaBTNac = {
         2023: [163538.68, 177062.87, 191228.05, 203360.69, 217915.79, 232426.83, 248962.01, 284686.95, 319422.04, 345295.45, 390456.32, 495798.32],
@@ -67,9 +67,60 @@ export default function date() {
         dolarBlue,
         sdmng
     };
-}
+};
 
-const datosAnio = date().dolarBlue[2025];
-const datoMes = datosAnio[0]
+export function obtenerUltimoValorValido(datos, clave) {
+    if (!datos[clave]) {
+        console.error(`La clave '${clave}' no existe en los datos.`);
+        return null;
+    }
 
-console.log(datoMes);
+    const años = Object.keys(datos[clave]).sort((a, b) => b - a);
+
+    for (const año of años) {
+        const valores = datos[clave][año];
+        for (let i = valores.length - 1; i >= 0; i--) {
+            if (valores[i] !== "---") {
+                return { valor: valores[i], año: parseInt(año), posicion: i };
+            }
+        }
+    }
+
+    return null; // Si no se encuentra ningún valor válido
+};
+
+export function calcularInflacionAcumulada(datos, clave) {
+    if (!datos[clave]) {
+        console.error(`La clave '${clave}' no existe en los datos.`);
+        return null;
+    }
+
+    const inflacionAcumulada = {};
+
+    for (const año in datos[clave]) {
+        const valores = datos[clave][año];
+        let acumulada = 1;
+
+        for (const valor of valores) {
+            if (valor !== "---") {
+                acumulada *= (1 + valor / 100);
+            }
+        }
+
+        inflacionAcumulada[año] = (acumulada - 1) * 100;
+    }
+
+    const anioActual = new Date().getFullYear();
+    let resultado = [];
+    let i = 0;
+
+    while (resultado.length < 2) {
+        let anio = anioActual - i;
+        if (inflacionAcumulada[anio] !== undefined && inflacionAcumulada[anio] !== 0) {
+            resultado.push({ anio, valor: inflacionAcumulada[anio] });
+        }
+        i += 1;
+    }
+
+    return resultado;
+};

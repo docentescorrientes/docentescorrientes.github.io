@@ -94,6 +94,12 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         }
 
         // --- Cálculo de ítems Negros ---
+        let mes = month;
+        let anualComplemVaca = 1;
+        if (mes == 1) {
+            anualComplemVaca = 2;
+        };
+
         const cantHijo = datosFormulario.children;
         const cantHijoDisc = datosFormulario.disabledChildren;
         const cantEsc = datosFormulario.schoolChildren;
@@ -101,10 +107,10 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         const itemsNegros = obtenerValores(year, month, "n");
         const topesN = [
             2 * itemsNegros[0].valor,
-            cantHijo * itemsNegros[1].valor,
-            cantHijoDisc * itemsNegros[2].valor,
-            cantEsc * itemsNegros[3].valor,
-            cantEscDisc * itemsNegros[4].valor,
+            2 * cantHijo * itemsNegros[1].valor,
+            2 * cantHijoDisc * itemsNegros[2].valor,
+            2 * cantEsc * itemsNegros[3].valor,
+            2 * cantEscDisc * itemsNegros[4].valor,
             cantEsc * itemsNegros[5].valor
         ];
         const resultadoNegros = calcularNegros(year, month, cociente7, cantHijo, cantHijoDisc, cantEsc, cantEscDisc);
@@ -186,11 +192,15 @@ function calcularNegros(year, month, cociente7, cantHijo, cantHijoDisc, cantEsc,
     let ayEscolMarzo = 0;
     if (month == 3) {
         ayEscolMarzo = itemsNegros[5].valor;
+    };
+    let anualComplemVaca = 1;
+    if (month == 1) {
+        anualComplemVaca = 2;
     }
-    arrayValor.push(itemsNegros[1].valor * (cantHijo - cantHijoDisc));
-    arrayValor.push(itemsNegros[2].valor * cantHijoDisc);
-    arrayValor.push(itemsNegros[3].valor * (cantEsc - cantEscDisc));
-    arrayValor.push(itemsNegros[4].valor * cantEscDisc);
+    arrayValor.push((itemsNegros[1].valor * (cantHijo - cantHijoDisc)) * 2);
+    arrayValor.push((itemsNegros[2].valor * cantHijoDisc) * 2);
+    arrayValor.push((itemsNegros[3].valor * (cantEsc - cantEscDisc)) * 2);
+    arrayValor.push((itemsNegros[4].valor * cantEscDisc) * 2);
     arrayValor.push(ayEscolMarzo * cantEsc);
     return arrayValor;
 }

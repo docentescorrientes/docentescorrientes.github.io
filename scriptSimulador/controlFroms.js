@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <select class="form-select nivelCargo" id="nivelCargo${i}" name="nivelCargo${i}" data-index="${i}" required>
                     <option value="" disabled selected>Seleccione el nivel correspondiente</option>
                     <option value="Inicial">Inicial/Primaria</option>
+                    <option value="Efa">Escuelas de Familia Agrícola (EFA)</option>
                     <option value="Medio">Medio/Secundaria</option>
                     <option value="Superior">Superior/Terciario</option>
                 </select>
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <option value="0.90">Zona D (90%)</option>
             `;
 
-            if (selectNivel.value === "Inicial") {
+            if (selectNivel.value === "Inicial" || selectNivel.value === "Efa") {
                 ubicacionSelect.innerHTML = opcionesInicialPrimaria;
             } else {
                 ubicacionSelect.innerHTML = opcionesMedioSuperior;

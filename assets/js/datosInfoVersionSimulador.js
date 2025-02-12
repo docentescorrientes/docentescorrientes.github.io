@@ -6,8 +6,7 @@ document.getElementById("versionH6").insertAdjacentHTML("beforeend", `${version}
 import { dateGral, obtenerUltimoValorValido, calcularInflacionAcumulada } from "./date.js";
 import { formatNumero } from "../../scriptSimulador/dataSalario.js";
 const datos = dateGral();
-console.log(obtenerUltimoValorValido(datos, 'canastaBTNac'));
-console.log(calcularInflacionAcumulada(datos, 'inflacionNac')); // Devuelve la inflación acumulada por año
+
 const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
 // Cargar datos en los elementos del HTML

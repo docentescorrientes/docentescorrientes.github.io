@@ -115,4 +115,9 @@ document.getElementById('recalculateButton').addEventListener('click', function 
     const alertClases = document.querySelector(".alert-danger")
     alertClases.hidden = true;
     document.getElementById("tableHaber").hidden = true;
+    document.getElementById("additionalChildrenFields").style.display = "none";
+    document.getElementById("additionalSchoolFields").style.display = "none";
+    // 📌 Mover la pantalla al inicio del formulario
+    document.querySelector("h2.text-center.text-success").scrollIntoView({ behavior: "smooth", block: "start" });
+
 });

@@ -95,9 +95,9 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
 
         // --- Cálculo de ítems Negros ---
         let mes = month;
-        let anualComplemVaca = 1;
+        let anualComplem = 1;
         if (mes == 1) {
-            anualComplemVaca = 2;
+            anualComplem = 2;
         };
 
         const cantHijo = datosFormulario.children;
@@ -106,11 +106,11 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         const cantEscDisc = datosFormulario.schoolDisabledChildren;
         const itemsNegros = obtenerValores(year, month, "n");
         const topesN = [
-            2 * itemsNegros[0].valor,
-            2 * cantHijo * itemsNegros[1].valor,
-            2 * cantHijoDisc * itemsNegros[2].valor,
-            2 * cantEsc * itemsNegros[3].valor,
-            2 * cantEscDisc * itemsNegros[4].valor,
+            anualComplem * itemsNegros[0].valor,
+            anualComplem * cantHijo * itemsNegros[1].valor,
+            anualComplem * cantHijoDisc * itemsNegros[2].valor,
+            anualComplem * cantEsc * itemsNegros[3].valor,
+            anualComplem * cantEscDisc * itemsNegros[4].valor,
             cantEsc * itemsNegros[5].valor
         ];
         const resultadoNegros = calcularNegros(year, month, cociente7, cantHijo, cantHijoDisc, cantEsc, cantEscDisc);
@@ -297,7 +297,6 @@ function generarTabla(year, month, arrayCodigo, arrayNombre, arrayValor, arrayCo
             const storedJSON = document.getElementById("versionH6").getAttribute("data-array");
             // const storedJSON = document.getElementById("versionH6").dataset.array;
             const arrayRecuperado = JSON.parse(storedJSON);
-            console.log(arrayRecuperado)
 
             // Creamos la nueva fila
             const newRow = document.createElement("tr");

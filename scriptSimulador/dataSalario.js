@@ -158,7 +158,7 @@ function buscarAumentos(anio, mes, dia) {
   tablaHTML += `
   <tr class="table-secondary">
     <td colspan="5" class="text-right small">*Resumen de aumentos a la fecha: ${dia}/${mes}/${anio}.
-    En las categorías 7 (por horas cátedra) un cargo se consideran 15 horas cátedra para secundaria y 12 horas cátedra para superior </td>
+    En las categorías 7 (por horas cátedra) un cargo se consideran 15 horas cátedra para secundaria y 12 horas cátedra para superior.</td>
   </tr>
 `;
 
@@ -167,7 +167,7 @@ function buscarAumentos(anio, mes, dia) {
   if (pruebaElement) {
     pruebaElement.innerHTML = tablaHTML;
   }
-  
+
   return exportados;
 };
 

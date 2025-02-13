@@ -74,10 +74,10 @@
                             <a class="nav-link" href="normas.html">Normas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="graficos.html">Gráficos</a>
+                            <a class="nav-link" href="error404.html">Gráficos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="error404.html">Info Datos</a>
+                            <a class="nav-link" href="infoDatos.html">Info Datos</a>
                         </li>
                     </ul>
                 </div>
@@ -86,8 +86,6 @@
         </div>
     </nav>
     <!-- Close Header -->
-
-    <!-- Modal -->
     <!-- Start Content -->
     <div class="container py-5">
         <div class="container pb-5">
@@ -95,26 +93,22 @@
                 <img class="card-img img-fluid" src="assets/img/brubank.svg" alt="Card image cap" id="product-detail">
             </div>
         </div>
-    </div>
-    <!-- End Content -->
-
-    <!-- Open Content -->
-    <div class="container py-5">
         <div class="container pb-5">
             <p class="text-center">
                 <button class="btn btn-success" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    data-bs-target="#collapseBru" aria-expanded="false" aria-controls="collapseBru">
                     Fondos a la fecha
                 </button>
             </p>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body text-center">
+            <div class="collapse" id="collapseBru">
+                <div class="card card-body text-center"  id="contenidoBru">
                     🍎 SBS GS RTA Fija - Fondos Común de inversión, Total invertido a la fecha 12/02/2025: <strong>$ 64.423,82</strong>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Close Content -->
+    <!-- End Content -->
+
 
     <!-- Start Brands -->
     <section class="bg-light py-5">
@@ -160,7 +154,7 @@
                         <li><a class="text-decoration-none" href="index.html">Inicio</a></li>
                         <li><a class="text-decoration-none" href="simulador.html">Simulador</a></li>
                         <li><a class="text-decoration-none" href="normas.html">Normas</a></li>
-                        <li><a class="text-decoration-none" href="graficos.html">Gráficos</a></li>
+                        <li><a class="text-decoration-none" href="error404.html">Gráficos</a></li>
                     </ul>
                 </div>
 
@@ -215,6 +209,13 @@
     <!-- End Footer -->
 
     <!-- Start Script -->
+    <script>
+        const fechaBru = "12 de enero del 2025";
+        const inversionBru = "64.423,82"
+        const nuevoTexto = `🍎 SBS GS RTA Fija - Fondos Común de inversión, Total invertido a la fecha ${fechaBru}: <strong>$ ${inversionBru}</strong>`;
+
+        document.getElementById("contenidoBru").innerHTML = nuevoTexto;
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End Script -->

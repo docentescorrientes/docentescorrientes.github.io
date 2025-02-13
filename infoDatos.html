@@ -160,7 +160,7 @@
                             <a class="nav-link" href="normas.html">Normas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="graficos.html">Gráficos</a>
+                            <a class="nav-link" href="error404.html">Gráficos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link position-relative text-decoration-none" href="colaboracion.html">
@@ -175,28 +175,61 @@
         </div>
     </nav>
 
-
     <section class="bg-light py-5">
         <div class="container my-4">
-            <div class="container">
+            <div class="shadow-lg p-4 bg-white rounded">
+                <h2 class="text-center text-success mb-3">Búsqueda de Clase e Índice de Cargo Docente</h2>
+                <p class="text-center text-dark fw-bold">
+                    <img src="./image/logo.png" alt="Logo Docentes Autoconvocados" width="35" height="35" class="me-2">
+                    Docentes Autoconvocados Corrientes - Sector 2019
+                </p>
 
+                <div class="mb-3">
+                    <label for="miSelect" class="form-label">Busca tu clase e índice de clase de cargo docentes
+                        aquí</label>
+                    <select class="form-select border-success" id="miSelect" name="miSelect" required
+                        aria-describedby="yearHelp">
+                        <option value="" selected disabled>Buscar la clase e índice de clase del cargo docente . . .
+                        </option>
+                    </select>
+                    <div id="miSelectHelp" class="form-text text-muted">Seleccione el año correspondiente.</div>
+                </div>
+                <div class="alert alert-secondary" id="claseBuscada">
+                    <strong>👆 Esperando</strong> que seleccione cargo . . .
+                </div>
+            </div>
+        </div>
 
-                <div class="shadow-lg p-3 mb-5 bg-body rounded">
-                    <label for="miSelect" class="form-label">
-                        <b><abbr title="Clase de cargo o función docente, clase e índice de clase">
-                                Busca tu clase e índice de clase de cargo docentes aquí</abbr>:</b>
-                    </label>
-
-                    <select class="form-select" aria-label="Default select example" id="miSelect">
-                        <option selected>Buscar la clase e índice de clase del cargo de docente . . . </option>
-                    </select><br>
-                    <div class="alert alert-secondary" id="claseBuscada">
-                        <strong>👆 Esperando</strong> que seleccione cargo . . .
+        <div class="container my-4">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item bg-white">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button bg-white text-black" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            📑 Resumen de montos y aumentos del cargo elegido
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="d-flex justify-content-center gap-3 mt-3" id="prueba"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+        <!-- Start Version -->
+        <div class="container mt-5" id="versionDiv">
+            <h6 class="text-success" style="--bs-text-opacity: 0.1; text-align: center;" id="versionH6">
+                ✳️ Versión
+            </h6>
+        </div>
+        <!-- End Version-->
     </section>
+
     <!-- Start Brands -->
     <section class="bg-light py-5">
     </section>
@@ -239,7 +272,7 @@
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="simulador.html">Simulador</a></li>
                         <li><a class="text-decoration-none" href="normas.html">Normas</a></li>
-                        <li><a class="text-decoration-none" href="graficos.html">Gráficos</a></li>
+                        <li><a class="text-decoration-none" href="error404.html">Gráficos</a></li>
                         <li><a class="text-decoration-none" href="colaboracion.html">Colaboración</a></li>
                     </ul>
                 </div>
@@ -294,18 +327,69 @@
     <!-- End Footer -->
 
     <!-- Start Script -->
+    <script type="module" src="scriptSimulador/datosClase.js"></script>
+    <script type="module" src="scriptSimulador/dataSalario.js"></script>
+    <script type="module" src="scriptSimulador/version.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById('miSelect').addEventListener('change', function () {
-                var claseBuscadaDiv = document.getElementById('claseBuscada');
-                claseBuscadaDiv.classList.remove('alert-secondary');
-                claseBuscadaDiv.classList.add('alert-primary');
+
+    <script type="module">
+        import { buscarDataClase, clases } from './scriptSimulador/datosClase.js';
+        import { exportados } from './scriptSimulador/dataSalario.js';
+        import { formatNumero } from "../../scriptSimulador/dataSalario.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const select = document.getElementById('miSelect');
+            const montoBasicoEsp = document.getElementById('montoReferencia');
+            const aumentoBasicoEsp = document.getElementById('aumentoReferencia');
+
+            // Obtener y ordenar los cargos alfabéticamente
+            const clasesDisponibles = Object.keys(clases)
+                .map(Number)
+                .map(numeroClase => ({ numeroClase, ...buscarDataClase(numeroClase) }))
+                .sort((a, b) => a.cargo.localeCompare(b.cargo, 'es', { sensitivity: 'base' }));
+
+            // Llenar el select con los cargos
+            clasesDisponibles.forEach(datos => {
+                const option = document.createElement('option');
+                option.value = datos.numeroClase;
+                option.textContent = datos.cargo;
+                select.appendChild(option);
+            });
+
+            // Manejar la selección
+            select.addEventListener('change', () => {
+                const claseSeleccionada = buscarDataClase(select.value);
+                const claseBuscadaDiv = document.getElementById('claseBuscada');
+
+                if (claseSeleccionada) {
+                    // Mostrar información en el div
+                    claseBuscadaDiv.innerHTML = `<strong>👉 Clase:</strong> ${claseSeleccionada.clase} <br>
+                                                 <strong>📌 Cargo:</strong> ${claseSeleccionada.cargo} <br> 
+                                                 <strong>💰 Valor Clase:</strong> ${claseSeleccionada.valorClase} <br> 
+                                                 <strong>📈 Índice Clase:</strong> ${claseSeleccionada.indiceClase.toFixed(5)}`;
+                    claseBuscadaDiv.classList.remove('alert-secondary');
+                    claseBuscadaDiv.classList.add('alert-success');
+
+                    let n = 1;
+                    if (claseSeleccionada.clase == 192) {
+                        n = 15;
+                    } else if (claseSeleccionada.clase == 191) {
+                        n = 12
+                    };
+
+                    // Calcular el nuevo valor para la celda (valorClase * indiceClase)
+                    montoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].totalAcumuladoHastaFecha * claseSeleccionada.indiceClase, "$");
+                    aumentoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].montoMostrar * claseSeleccionada.indiceClase, "$");
+                    const collapse = document.getElementById("collapseOne");
+                    collapse.classList.add("show"); // Desplegar
+                }
             });
         });
     </script>
+
+
 </body>
 
 </html>

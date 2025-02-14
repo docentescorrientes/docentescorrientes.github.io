@@ -124,7 +124,7 @@ export const clases = {
     370: { 'clase': 370, 'cargo': 'Maestro de Grado. Recup. Y Apoyo, Madur. Y Ap.', 'categoria': 5, 'valorClase': 1583, 'indiceClase': 1583 / 1400, 'nivel': '', 'apJub': 0.2 },
     371: { 'clase': 371, 'cargo': 'Maestro de Grado Educación Especial Educación Domiciliaria', 'categoria': 5, 'valorClase': 1583, 'indiceClase': 1583 / 1400, 'nivel': '', 'apJub': 0.2 },
     375: { 'clase': 375, 'cargo': 'Bibliotecario Nivel Primario', 'categoria': 5, 'valorClase': 2357, 'indiceClase': 2357 / 1400, 'nivel': '', 'apJub': 0.185 },
-    377: { 'clase': 377, 'cargo': 'Miembro de Junta (Básico + Ded. Exclusiva', 'categoria': 5, 'valorClase': 4000, 'indiceClase': 4000 / 1400, 'nivel': '', 'apJub': 0.185 },
+    377: { 'clase': 377, 'cargo': 'Miembro de Junta (Básico + Ded. Exclusiva)', 'categoria': 5, 'valorClase': 4000, 'indiceClase': 4000 / 1400, 'nivel': '', 'apJub': 0.185 },
     401: { 'clase': 401, 'cargo': 'Jefe de Coordinador Servicio Médico Asistencial', 'categoria': 5, 'valorClase': 2450, 'indiceClase': 2450 / 1400, 'nivel': '', 'apJub': 0.185 },
     402: { 'clase': 402, 'cargo': 'Jefe de División Servicio Médico Asistencial', 'categoria': 5, 'valorClase': 2099, 'indiceClase': 2099 / 1400, 'nivel': '', 'apJub': 0.185 },
     403: { 'clase': 403, 'cargo': 'Odontólogo', 'categoria': 5, 'valorClase': 1960, 'indiceClase': 1960 / 1400, 'nivel': '', 'apJub': 0.185 },

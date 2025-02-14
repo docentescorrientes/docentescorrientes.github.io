@@ -154,13 +154,15 @@ function buscarAumentos(anio, mes, dia) {
       </tr>
     `;
   });
-
   tablaHTML += `
+  <tr><td colspan="5" style="height: 10px;"></td></tr> <!-- Fila en blanco -->
   <tr class="table-secondary">
     <td colspan="5" class="text-right small">*Resumen de aumentos a la fecha: ${dia}/${mes}/${anio}.
-    En las categorías 7 (por horas cátedra) un cargo se consideran 15 horas cátedra para secundaria y 12 horas cátedra para superior.</td>
-  </tr>
-`;
+    En las categorías 7 (por horas cátedra) un cargo se consideran 15 horas cátedra para secundaria
+    y 12 horas cátedra para superior.<br>El Cód.629 Adicional Remunerativo 2° Cargo se corresponde solo
+    en el 2° cargo o 30 horas cátedras secundaria o 24 horas cátedras superior.</td>
+  </tr>`;
+
 
   tablaHTML += `</tbody></table>`;
   const pruebaElement = document.getElementById("prueba");

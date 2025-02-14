@@ -137,7 +137,6 @@ export const clases = {
     411: { 'clase': 411, 'cargo': 'Maestro de Grado Promotor Comunitario', 'categoria': 5, 'valorClase': 1400, 'indiceClase': 1400 / 1400, 'nivel': '', 'apJub': 0.2 }
 };
 
-
 export function buscarDataClase(numeroClase) {
     return clases[numeroClase] || null;
 }

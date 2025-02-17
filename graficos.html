@@ -17,6 +17,35 @@
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     <script src="https://kit.fontawesome.com/d58c5b9122.js" crossorigin="anonymous"></script>
+    <style>
+        /* Hacer los checkboxes más pequeños */
+        .form-check-input {
+            width: 0.9em;
+            /* Ancho más pequeño */
+            height: 0.9em;
+            /* Alto más pequeño */
+        }
+
+        /* Hacer el range input más pequeño */
+        .form-range {
+            width: 80%;
+            /* Ajustar al 100% del contenedor */
+            height: 0.3em;
+            /* Reducir el grosor */
+        }
+
+        /* Ajustar la fuente de los textos si se desea también */
+        .form-check-label {
+            font-size: 0.3em;
+            /* Tamaño de fuente más pequeño */
+        }
+
+        #antiguedadValor {
+            font-size: 0.3em;
+            /* Tamaño de texto del valor de antigüedad */
+        }
+    </style>
+
 </head>
 
 <body>
@@ -84,206 +113,75 @@
         </div>
     </nav>
     <!-- Close Header -->
-    <!--Start CheckBox1-->
-    <div class="container py-5 mb-3 text-center">
-        <p>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample">
-                ⇋ Cambiar año y cantidad de cargos
-            </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-                <div class="container py-5 mb-3 text-center">
+
+    <section class="bg-light py-5">
+        <div class="container my-4">
+            <div class="container">
+                <!-- Radios CB -->
+                <div class="container mb-4 text-center">
+                    <h6 class="text-primary ">Selecciona una opción:</h6>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart1Radio" id="chart1Radio2023"
-                            value="2023" checked>
-                        <label class="form-check-label" for="chart1Radio2023">2023</label>
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCB" id="cbtNac" value="0" checked>
+                        <label class="form-check-label" for="cbtNac">CBT Nacional</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart1Radio" id="chart1Radio2024"
-                            value="2024">
-                        <label class="form-check-label" for="chart1Radio2024">2024</label>
-                    </div>
-                </div>
-                <div class="container py-5 mb-3 text-center">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1C1Radio2023"
-                            value="C1" checked>
-                        <label class="form-check-label" for="chartC1Radio2023">En el 1° Cargo</label>
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCB" id="cbtNea" value="1">
+                        <label class="form-check-label" for="cbtNea">CBT NEA</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1C2Radio2024"
-                            value="C2">
-                        <label class="form-check-label" for="chart1C2Radio2024">En el 2° Cargo</label>
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCB" id="cbaNac" value="2">
+                        <label class="form-check-label" for="cbaNac">CBA Nacional</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart1CRadio" id="chart1CTRadio2024"
-                            value="CT">
-                        <label class="form-check-label" for="chart1CTRadio2024">En el Total de Cargos</label>
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCB" id="cbaNea" value="3">
+                        <label class="form-check-label" for="cbaNea">CBA NEA</label>
                     </div>
                 </div>
+                <!-- End Radios CB -->
+
+                <!-- Range Slider Antigüedad -->
+                <div class="container mb-4 text-center">
+                    <h6 class="text-primary">Seleccione su antigüedad:</h6>
+                    <input type="range" class="form-range" id="antiguedadRange" min="0" max="11" step="1">
+                    <p id="antiguedadValor" class="mt-2">Seleccione su antigüedad</p>
+                </div>
+                <!-- End Range Slider Antigüedad -->
+
+                <!-- Radios Cargos -->
+                <div class="container mb-4 text-center">
+                    <h6 class="text-primary ">Selecciona el cargo:</h6>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCargos" id="cargo1" value="1" checked>
+                        <label class="form-check-label" for="cargo1">1° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCargos" id="cargo2" value="2">
+                        <label class="form-check-label" for="cargo2">2° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCargos" id="cargo3" value="3">
+                        <label class="form-check-label" for="cargo3">3° Cargo</label>
+                    </div>
+                </div>
+                <!-- End Radios Antigüedad -->                
+
+                <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <div style="width: 100%; max-width: 1200px; height: 500px;">
+                        <canvas id="chartCB"></canvas>
+                    </div>
+                </div>
+
+                <!-- Start Version -->
+                <div class="container mt-5" id="versionDiv">
+                    <h6 class="text-success" style="--bs-text-opacity: 0.1; text-align: center;" id="versionH6">
+                        ✳️ Versión
+                    </h6>
+                </div>
+                <!-- End Version -->
             </div>
         </div>
-    </div>
-    <!--End CheckBox1-->
-    <!--Start Chart 1-->
-    <div class="container py-5 mb-3" id="myChartHaber2023C1Div">
-        <label for="myChartHaber2023C1" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoHaber2023C1">Chart 2023</h5>
-        </label>
-        <canvas id="myChartHaber2023C1" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartHaber2024C1Div" hidden>
-        <label for="myChartHaber2024C1" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoHaber2024C1">Chart 2024</h5>
-        </label>
-        <canvas id="myChartHaber2024C1" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartHaber2023C2Div" hidden>
-        <label for="myChartHaber2023C2" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoHaber2023C2">Chart 2023</h5>
-        </label>
-        <canvas id="myChartHaber2023C2" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartHaber2024C2Div" hidden>
-        <label for="myChartHaber2024C2" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoHaber2024C2">Chart 2024</h5>
-        </label>
-        <canvas id="myChartHaber2024C2" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartHaber2023CTDiv" hidden>
-        <label for="myChartHaber2023CT" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoHaber2023CT">Chart 2023</h5>
-        </label>
-        <canvas id="myChartHaber2023CT" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartHaber2024CTDiv" hidden>
-        <label for="myChartHaber2024CT" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoHaber2024CT">Chart 2024</h5>
-        </label>
-        <canvas id="myChartHaber2024CT" width="400" height="200"></canvas>
-    </div>
-    <!--End Chart 1-->
-    <div class="border-bottom mb-3" style="border-bottom: 1px solid !important;"></div>
-    <!--Start CheckBox2-->
+    </section>
 
-    <div class="container py-5 mb-3 text-center">
-        <p>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1"
-                aria-expanded="false" aria-controls="collapseExample1">
-                ⇋ Cambiar año y cantidad de cargos
-            </button>
-        </p>
-        <div class="collapse" id="collapseExample1">
-            <div class="card card-body">
-                <div class="container py-5 mb-3 text-center">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart2Radio" id="chart2Radio2023" value="2023" checked>
-                        <label class="form-check-label" for="chart2Radio2023">2023</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart2Radio" id="chart2Radio2024" value="2024">
-                        <label class="form-check-label" for="chart2Radio2024">2024</label>
-                    </div>
-                </div>
-                <div class="container py-5 mb-3 text-center">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2C1Radio2023" value="C1" checked>
-                        <label class="form-check-label" for="chart2C1Radio2023">En el 1° Cargo</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2C2Radio2024" value="C2">
-                        <label class="form-check-label" for="chart2C2Radio2024">En el 2° Cargo</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart2CRadio" id="chart2CTRadio2024" value="CT">
-                        <label class="form-check-label" for="chart2CTRadio2024">En el Total de Cargos</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--End CheckBox2-->
-    <!--Start Chart 2-->
-    <div class="container py-5 mb-3" id="myChartInflacion2023C1Div">
-        <label for="myChartInflacion2023C1" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoInflacion2023C1">Chart C1 2023 inflación</h5>
-        </label>
-        <canvas id="myChartInflacion2023C1" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartInflacion2024C1Div" hidden>
-        <label for="myChartInflacion2024C1" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoInflacion2024C1">Chart C1 2024 inflación</h5>
-        </label>
-        <canvas id="myChartInflacion2024C1" width="400" height="200"></canvas>
-    </div>
-
-    <div class="container py-5 mb-3" id="myChartInflacion2023C2Div" hidden>
-        <label for="myChartInflacion2023C2" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoInflacion2023C2">Chart C2 2023 inflación</h5>
-        </label>
-        <canvas id="myChartInflacion2023C2" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartInflacion2024C2Div" hidden>
-        <label for="myChartInflacion2024C2" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoInflacion2024C2">Chart C2 2024 inflación</h5>
-        </label>
-        <canvas id="myChartInflacion2024C2" width="400" height="200"></canvas>
-    </div>
-
-    <div class="container py-5 mb-3" id="myChartInflacion2023CTDiv" hidden>
-        <label for="myChartInflacion2023CT" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoInflacion2023CT">Chart CT 2023 inflación</h5>
-        </label>
-        <canvas id="myChartInflacion2023CT" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartInflacion2024CTDiv" hidden>
-        <label for="myChartInflacion2024CT" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoInflacion2024CT">Chart CT 2024 inflación</h5>
-        </label>
-        <canvas id="myChartInflacion2024CT" width="400" height="200"></canvas>
-    </div>
-    <!--End Chart 2-->
-    <div class="border-bottom mb-3" style="border-bottom: 1px solid !important;"></div>
-    <!--Start CheckBox3-->
-    <div class="container py-5 mb-3 text-center">
-        <p>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
-                aria-expanded="false" aria-controls="collapseExample2">
-                ⇋ Cambiar año
-            </button>
-        </p>
-        <div class="collapse" id="collapseExample2">
-            <div class="card card-body">
-                <div class="container py-5 mb-3 text-center">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart3Radio" id="chart3Radio2023" value="2023" checked>
-                        <label class="form-check-label" for="chart3Radio2023">2023</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="chart3Radio" id="chart3Radio2024" value="2024">
-                        <label class="form-check-label" for="chart3Radio2024">2024</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--End CheckBox3-->
-    <!--End Chart 3-->
-    <div class="container py-5 mb-3" id="myChartLineal2023Div">
-        <label for="myChartLineal2023" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoLineal2023">Chart 2023</h5>
-        </label>
-        <canvas id="myChartLineal2023" width="400" height="200"></canvas>
-    </div>
-    <div class="container py-5 mb-3" id="myChartLineal2024Div" hidden>
-        <label for="myChartLineal2024" class="form-label">
-            <h5 class="mb-4 text-secondary text-justify" id="aumentoLineal2024">Chart 2024</h5>
-        </label>
-        <canvas id="myChartLineal2024" width="400" height="200"></canvas>
-    </div>
-    <!--End Chart 3-->
     <!-- Start Brands -->
     <section class="bg-light py-5">
     </section>
@@ -371,11 +269,14 @@
     <!-- End Footer -->
     <!-- Start Script -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="module" src="assets/js/graficos.js"></script>
+
+    <script type="module" src="scriptSimulador/version.js"></script>
     <!-- End Script -->
 </body>
 

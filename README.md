@@ -14,7 +14,7 @@ pagina-web/
 ├── index.html
 ├── simulador.html
 ├── normas.html
-├── error404.html
+├── graficos.html
 ├── infoDatos.html
 ├── colaboracion.html
 ├── assets/

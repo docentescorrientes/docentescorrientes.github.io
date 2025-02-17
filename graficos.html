@@ -117,7 +117,65 @@
     <section class="bg-light py-5">
         <div class="container my-4">
             <div class="container">
-                <!-- Radios CB -->
+
+
+                <!-- Gráfico Salario Dolar-->
+                <div class="container mb-4 text-center">
+                    <h6 class="text-primary ">Selecciona una opción:</h6>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesDolar" id="pesos" value="0"
+                            checked>
+                        <label class="form-check-label" for="pesos">En Pesos</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesDolar" id="dolar" value="1">
+                        <label class="form-check-label" for="dolar">En Dolares</label>
+                    </div>
+                </div>
+
+                <div class="container mb-4 text-center">
+                    <h6 class="text-primary">Seleccione su antigüedad:</h6>
+                    <input type="range" class="form-range" id="antiguedadRangeDolar" min="0" max="11" step="1">
+                    <p id="antiguedadValorDolar" class="mt-2">Seleccione su antigüedad</p>
+                </div>
+
+                <div class="container mb-4 text-center">
+                    <h6 class="text-primary ">Selecciona el cargo:</h6>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCargosDolar" id="cargo1Dolar"
+                            value="1" checked>
+                        <label class="form-check-label" for="cargo1Dolar">1° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCargosDolar" id="cargo2Dolar"
+                            value="2">
+                        <label class="form-check-label" for="cargo2Dolar">2° Cargo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="grupoOpcionesCargosDolar" id="cargo3Dolar"
+                            value="3">
+                        <label class="form-check-label" for="cargo3Dolar">3° Cargo</label>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <div style="width: 100%; max-width: 1200px; height: 500px;">
+                        <canvas id="chartDolar"></canvas>
+                    </div>
+                </div>
+                <div class="container mt-4 text-center">
+                    <p class="text-muted" style="text-align: justify;">
+                        El gráfico salarial representa el valor del salario neto de maestra de grado cumún
+                        correspondiente a cada cargo en pesos o dolares blue cotizado al inicio de cada mes. Además, los
+                        puntos indican que montos se corresponde o representan en la composición del salario según la
+                        naturaleza de sus ítems blanco (remunerativos y bonificables), Grises (remunerativos no
+                        bonificables) y Negros (no remunerativos).
+                    </p>
+                </div>
+                <!-- End Gráfico Salario Dolar-->
+
+
+                <!-- Gráfico CB-->
                 <div class="container mb-4 text-center">
                     <h6 class="text-primary ">Selecciona una opción:</h6>
                     <div class="form-check form-check-inline">
@@ -138,17 +196,13 @@
                         <label class="form-check-label" for="cbaNea">CBA NEA</label>
                     </div>
                 </div>
-                <!-- End Radios CB -->
 
-                <!-- Range Slider Antigüedad -->
                 <div class="container mb-4 text-center">
                     <h6 class="text-primary">Seleccione su antigüedad:</h6>
                     <input type="range" class="form-range" id="antiguedadRange" min="0" max="11" step="1">
                     <p id="antiguedadValor" class="mt-2">Seleccione su antigüedad</p>
                 </div>
-                <!-- End Range Slider Antigüedad -->
 
-                <!-- Radios Cargos -->
                 <div class="container mb-4 text-center">
                     <h6 class="text-primary ">Selecciona el cargo:</h6>
                     <div class="form-check form-check-inline">
@@ -165,7 +219,6 @@
                         <label class="form-check-label" for="cargo3">3° Cargo</label>
                     </div>
                 </div>
-                <!-- End Radios Antigüedad -->
 
                 <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
                     <div style="width: 100%; max-width: 1200px; height: 500px;">
@@ -174,13 +227,15 @@
                 </div>
                 <div class="container mt-4 text-center">
                     <p class="text-muted" style="text-align: justify;">
-                        Este gráfico representa, en porcentaje, cuánto del salario neto correspondiente a cada cargo
-                        cubre una Canasta Básica Tipo 2, ya sea la total para no ser pobre o la alimentaria para no ser
-                        indigente, a nivel nacional o del NEA (barras). Además, los puntos indican que porcentaje
-                        representan en la composición del salario según la naturaleza de sus ítems blanco (remunerativos
-                        y bonificables), Grises (remunerativos no bonificables) y Negros (no remunerativos).
+                        El gráfico CB representa, en porcentaje, cuánto del salario neto de maestra de grado cumún
+                        correspondiente a cada cargo cubre una Canasta Básica Tipo 2, ya sea la total para no ser pobre
+                        o la alimentaria para no ser indigente, a nivel nacional o del NEA (barras). Además, los puntos
+                        indican que porcentaje representan en la composición del salario según la naturaleza de sus
+                        ítems blanco (remunerativos y bonificables), Grises (remunerativos no bonificables) y Negros (no
+                        remunerativos).
                     </p>
                 </div>
+                <!-- End Gráfico CB-->
 
                 <!-- Start Version -->
                 <div class="container mt-5" id="versionDiv">
@@ -285,8 +340,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script type="module" src="assets/js/graficos.js"></script>
-
+    <script type="module" src="assets/js/graficoCB.js"></script>
+    <script type="module" src="assets/js/graficoDolar.js"></script>
     <script type="module" src="scriptSimulador/version.js"></script>
     <!-- End Script -->
 </body>

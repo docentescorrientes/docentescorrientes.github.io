@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     };
 
-    const rangoAntiguedad = document.getElementById("antiguedadRange");
-    const valorAntiguedad = document.getElementById("antiguedadValor");
+    const rangoAntiguedad = document.getElementById("antiguedadRangeDolar");
+    const valorAntiguedad = document.getElementById("antiguedadValorDolar");
 
     const antiguedadOpciones = [
         "Menos a 1 año - 0%",
@@ -40,40 +40,40 @@ document.addEventListener("DOMContentLoaded", function () {
         return arrayTextValorAntiguedad;
     };
 
-    document.querySelectorAll('input[name="grupoOpcionesCB"]').forEach(input => {
+    document.querySelectorAll('input[name="grupoOpcionesDolar"]').forEach(input => {
         input.addEventListener("change", function () {
-            const arrayTextValorCB = obtenerValorYTextoSeleccionado("CB");
-            const arrayTextValorCargos = obtenerValorYTextoSeleccionado("Cargos");
-            const arrayTextValorAntiguedad = actualizarAntiguedad();
-            crearGrafico("chartCB", arrayTextValorCB.valor, arrayTextValorAntiguedad.valor, arrayTextValorCB.text, arrayTextValorCargos.valor);
+            const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
+            const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
+            const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
+            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
         });
     });
 
-    document.querySelectorAll('input[name="grupoOpcionesCargos"]').forEach(input => {
+    document.querySelectorAll('input[name="grupoOpcionesCargosDolar"]').forEach(input => {
         input.addEventListener("change", function () {
-            const arrayTextValorCB = obtenerValorYTextoSeleccionado("CB");
-            const arrayTextValorCargos = obtenerValorYTextoSeleccionado("Cargos");
-            const arrayTextValorAntiguedad = actualizarAntiguedad();
-            crearGrafico("chartCB", arrayTextValorCB.valor, arrayTextValorAntiguedad.valor, arrayTextValorCB.text, arrayTextValorCargos.valor);
+            const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
+            const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
+            const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
+            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
         });
     });
 
     // Evento para actualizar el valor en tiempo real
     rangoAntiguedad.addEventListener("input", function () {
-        const arrayTextValorCB = obtenerValorYTextoSeleccionado("CB");
-        const arrayTextValorCargos = obtenerValorYTextoSeleccionado("Cargos");
-        const arrayTextValorAntiguedad = actualizarAntiguedad();
-        crearGrafico("chartCB", arrayTextValorCB.valor, arrayTextValorAntiguedad.valor, arrayTextValorCB.text, arrayTextValorCargos.valor);
+        const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
+        const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
+        const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
+        crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
     });
 });
 
 
 function inicioGrafico() {
-    const opcionesCB = document.getElementsByName("grupoOpciones");
-    const rango = document.getElementById("antiguedadRange");
-    const valor = document.getElementById("antiguedadValor");
+    const opcionesDolar = document.getElementsByName("grupoOpcionesDolar");
+    const rango = document.getElementById("antiguedadRangeDolar");
+    const valor = document.getElementById("antiguedadValorDolar");
 
-    opcionesCB.value = 0;
+    opcionesDolar.value = 0;
     const antiguedadOpciones = [
         "Menos a 1 año - 0%",
         "1 año - 10%",
@@ -90,8 +90,7 @@ function inicioGrafico() {
     ];
     rango.value = 0;
     valor.innerText = antiguedadOpciones[0];
-
-    crearGrafico("chartCB", opcionesCB.value, 0, "CBT Nacional", 1);
+    crearGrafico("chartDolar", opcionesDolar.value, 0, "En Pesos", 1);
 };
 
 let chartInstance = null;
@@ -108,12 +107,15 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
     Chart.register(ChartDataLabels);
 
     const date = dateGral();
-    const arrayRef = ["canastaBTNac", "canastaBTNea", "canastaBANac", "canastaBANea"];
+    const arrayRef = ["pesos", "dolarBlue"];
 
     const fechaActual = new Date();
     const anio = fechaActual.getFullYear();
     const mes = fechaActual.getMonth();
-    const arrayDivisor = date[arrayRef[radioCheck]][anio]; //date.canastaBTNac[anio];
+    let arrayDivisor = new Array(12).fill(1);
+    if (radioCheck == 1) {
+        arrayDivisor = date[arrayRef[radioCheck]][anio];
+    };
 
     const tipoB = ["b", 1.3 + antiguedad];
     const tipoG1C = ["g", 1, 1, 1, 0, 1];
@@ -142,11 +144,11 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
         let gris = sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1];
         let negro = sumaGrupo(anio, n, tipoN) * factor[2];
         let total = sumaGrupo(anio, n, tipoB) + sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1] + sumaGrupo(anio, n, tipoN) * factor[2];
-
-        arrayBlanco.push(100 * blanco / total);
-        arrayGrisC.push(100 * gris / total);
-        arrayNegro.push(100 * negro / total);
-        arrayTotalC.push(100 * total / divisor);
+        
+        arrayBlanco.push(blanco / divisor);
+        arrayGrisC.push( gris / divisor);
+        arrayNegro.push( negro / divisor);
+        arrayTotalC.push(total / divisor);
     };
 
     // Datos actualizados con los 12 meses
@@ -154,7 +156,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [
             {
-                label: `Relativo a la ${comparacion}`,
+                label: `En ${comparacion}`,
                 type: 'bar',
                 data: arrayTotalC,
 
@@ -234,7 +236,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
             plugins: {
                 title: {
                     display: true,
-                    text: `Evolución del Salario Docente (${cargo}° Cargo) Mensual`,
+                    text: `Gráfico Salarial - Evolución del Salario Docente (${cargo}° Cargo) Mensual`,
                     font: {
                         size: 20,
                         weight: 'bold'
@@ -242,7 +244,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                 },
                 subtitle: { // 👈 Agregamos el subtítulo aquí
                     display: true,
-                    text: `Comparación con ${comparacion} a lo largo del año ${anio}`,
+                    text: `Comparación mensual del salario ${comparacion.toLowerCase()} a lo largo del año ${anio}`,
                     font: {
                         size: 14,
                         weight: 'normal'
@@ -257,7 +259,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                         size: 10,
                         weight: 'normal'
                     },
-                    formatter: (value) => value.toFixed(1) + '%'
+                    formatter: (value) => '$ ' + formatNumero(value)
                 }
             },
             scales: {
@@ -275,11 +277,11 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: (value) => value + '%'
+                        callback: (value) => '$ ' + formatNumero(value)
                     },
                     title: { // 👈 Agregamos el título del eje Y
                         display: true,
-                        text: 'Porcentaje',
+                        text: comparacion,
                         font: {
                             size: 14,
                             weight: 'bold'

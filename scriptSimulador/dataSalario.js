@@ -32,10 +32,11 @@ class Aumentos {
 const aumentos = new Aumentos();
 aumentos.agregarAumento("1 Básico", 2024, 8, 142536.75, "b");
 aumentos.agregarAumento("1 Básico", 2024, 10, 15000, "b");
+//aumentos.agregarAumento("1 Básico", 2025, 3, 15000, "b");
 
 // Grises: (Neto * 4/3)
 aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (solo un cargo)", 2023, 4, 23500 * 4 / 3, "g"); // Tope: hasta un cargo
-aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (solo un cargo)", 2023, 5, 10000 * 4 / 3, "g");
+//aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (solo un cargo)", 2023, 5, 10000 * 4 / 3, "g");
 
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 7, 47000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 8, 8000 * 4 / 3, "g"); // Tope: hasta un cargo
@@ -51,6 +52,7 @@ aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024
 // Negros: cod3SalFam (cod3xHijo, cod3xHijoDisc, cod3Esc, cod3EscDisc, Cod3AnualComplemVacac, cod3AyEsc), cod171CompDocPcial, cod622BonoNav3Tramos(dic100,ene200, feb200)
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 9, 251500, "n"); // ### Tope: hasta dos cargos
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 10, 35000, "n"); // ### Tope: hasta dos cargos
+aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2025, 3, 62500, "n"); // ### Tope: hasta dos cargos
 
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 1, 22000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 2, 8000, "n"); // Tope: hasta un cargo y 2 hijos
@@ -93,7 +95,7 @@ function buscarAumentos(anio, mes, dia) {
   aumentosArray.forEach(clave => {
     const [codigo, a, m, tipo] = clave.split("-").map((v, i) => (i > 0 && i < 3 ? parseInt(v) : v.trim()));
 
-    if (a < anio || (a === anio && m <= mes)) {
+    if (a <= anio || (a > anio)) {
       const claveActual = `${codigo}-${tipo}`;
 
       if (!ultimoAumentoPorCodigo[claveActual] ||

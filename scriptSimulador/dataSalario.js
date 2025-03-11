@@ -32,7 +32,7 @@ class Aumentos {
 const aumentos = new Aumentos();
 aumentos.agregarAumento("1 Básico", 2024, 8, 142536.75, "b");
 aumentos.agregarAumento("1 Básico", 2024, 10, 15000, "b");
-//aumentos.agregarAumento("1 Básico", 2025, 3, 15000, "b");
+aumentos.agregarAumento("1 Básico", 2025, 3, 20500, "b");
 
 // Grises: (Neto * 4/3)
 aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (solo un cargo)", 2023, 4, 23500 * 4 / 3, "g"); // Tope: hasta un cargo
@@ -48,11 +48,12 @@ aumentos.agregarAumento("629 Adicional Remunerativo 2° Cargo (solo en el 2° ca
 
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024, 9, 48700 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024, 10, 7825 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
+aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2025, 3, 30000 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
 
 // Negros: cod3SalFam (cod3xHijo, cod3xHijoDisc, cod3Esc, cod3EscDisc, Cod3AnualComplemVacac, cod3AyEsc), cod171CompDocPcial, cod622BonoNav3Tramos(dic100,ene200, feb200)
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 9, 251500, "n"); // ### Tope: hasta dos cargos
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 10, 35000, "n"); // ### Tope: hasta dos cargos
-aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2025, 3, 62500, "n"); // ### Tope: hasta dos cargos
+aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2025, 3, 30000, "n"); // ### Tope: hasta dos cargos
 
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 1, 22000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 2, 8000, "n"); // Tope: hasta un cargo y 2 hijos
@@ -65,6 +66,7 @@ aumentos.agregarAumento("3 Asignación por escolaridad de hijo discapacitado", 2
 
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 1, 20000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 2, 100000, "n"); // Tope: hasta un cargo y 2 hijos
+aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2025, 3, 120000, "n"); // Tope: hasta un cargo y 2 hijos
 
 // Descuentos: cod210SegVida -1709,03
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 10, -1553.67, "d"); // Tope: solo un cargo

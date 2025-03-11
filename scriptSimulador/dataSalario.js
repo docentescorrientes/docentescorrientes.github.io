@@ -35,8 +35,8 @@ aumentos.agregarAumento("1 Básico", 2024, 10, 15000, "b");
 aumentos.agregarAumento("1 Básico", 2025, 3, 20500, "b");
 
 // Grises: (Neto * 4/3)
-aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (solo un cargo)", 2023, 4, 23500 * 4 / 3, "g"); // Tope: hasta un cargo
-//aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (solo un cargo)", 2023, 5, 10000 * 4 / 3, "g");
+aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 23500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo
+
 
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 7, 47000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 8, 8000 * 4 / 3, "g"); // Tope: hasta un cargo
@@ -57,6 +57,7 @@ aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2025
 
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 1, 22000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 2, 8000, "n"); // Tope: hasta un cargo y 2 hijos
+aumentos.agregarAumento("3 Asignación por hijo", 2025, 3, 70000, "n"); // Tope: hasta un cargo y 2 hijos
 
 aumentos.agregarAumento("3 Asignación por hijo discapacitado", 2024, 1, 33000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo discapacitado", 2024, 2, 12000, "n"); // Tope: hasta un cargo y 2 hijos
@@ -66,7 +67,7 @@ aumentos.agregarAumento("3 Asignación por escolaridad de hijo discapacitado", 2
 
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 1, 20000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 2, 100000, "n"); // Tope: hasta un cargo y 2 hijos
-aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2025, 3, 120000, "n"); // Tope: hasta un cargo y 2 hijos
+aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2025, 3, 80000, "n"); // Tope: hasta un cargo y 2 hijos
 
 // Descuentos: cod210SegVida -1709,03
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 10, -1553.67, "d"); // Tope: solo un cargo
@@ -164,7 +165,8 @@ function buscarAumentos(anio, mes, dia) {
     <td colspan="5" class="text-right small">*Resumen de aumentos a la fecha: ${dia}/${mes}/${anio}.
     En las categorías 7 (por horas cátedra) un cargo se consideran 15 horas cátedra para secundaria
     y 12 horas cátedra para superior.<br>El Cód.629 Adicional Remunerativo 2° Cargo se corresponde solo
-    en el 2° cargo o 30 horas cátedras secundaria o 24 horas cátedras superior.</td>
+    en el 2° cargo o 30 horas cátedras secundaria o 24 horas cátedras superior antes del mes de marzo
+    del2025 donde desaparecieron este ítem y colocaron el Cód.193 en dos cargos.</td>
   </tr>`;
 
 

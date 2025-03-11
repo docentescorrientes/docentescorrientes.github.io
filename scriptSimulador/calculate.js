@@ -26,9 +26,17 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     let arrayValorB = new Array(arrayCodigoB.length).fill(0);
 
     // Arreglos para ítems Grises
+    const mes193 = parseInt(month);
+    let restruct193 = [1, 2];
+    let text193 = "Adicional Remunerativo Docente C/A (en solo un cargo)";
+    if (year === "2025" && mes193 >= 3) {
+        restruct193 = [2, 0];
+        text193 = "Adicional Remunerativo Docente C/A (en dos cargos)"
+    };       
+
     const arrayCodigoG = ["193", "603", "625", "629", "632", "📌"];
     const arrayNameG = [
-        "Adicional Remunerativo Docente C/A (en solo un cargo)",
+        text193,
         "Plus Unificado Remunerativo (en solo un cargo)",
         "Plus de Refuerzo Remunerativo (en solo un cargo)",
         "Adicional Remunerativo 2° Cargo (en solo un cargo)",
@@ -77,11 +85,12 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
 
         // --- Cálculo de ítems Grises ---
         const itemsGrises = obtenerValores(year, month, "g");
+
         const topesG = [
-            itemsGrises[0].valor,
+            restruct193[0] * itemsGrises[0].valor,
             itemsGrises[1].valor,
             itemsGrises[2].valor,
-            2 * itemsGrises[3].valor,
+            restruct193[1] * itemsGrises[3].valor,
             2 * itemsGrises[4].valor
         ];
         const resultadogrises = calcularGrises(year, month, cociente7);
@@ -91,8 +100,8 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
             } else {
                 arrayValorG[k] += resultadogrises[k];
             }
-        }
-
+        };
+    
         // --- Cálculo de ítems Negros ---
         let mes = month;
         let anualComplem = 1;

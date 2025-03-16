@@ -35,7 +35,7 @@ aumentos.agregarAumento("1 Básico", 2024, 10, 15000, "b");
 aumentos.agregarAumento("1 Básico", 2025, 3, 20500, "b");
 
 // Grises: (Neto * 4/3)
-aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 23500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo
+aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 33500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo
 
 
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 7, 47000 * 4 / 3, "g"); // Tope: hasta un cargo

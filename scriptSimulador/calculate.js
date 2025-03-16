@@ -390,22 +390,22 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     document.getElementById("bajarPDF").addEventListener("click", function () {
         const botonBajarPDF = document.getElementById("bajarPDF");
         const tableHaber = document.getElementById("tableHaber");
-    
+
         botonBajarPDF.classList.add("ocultar-boton");
         botonBajarPDF.disabled = true;
-    
+
         html2canvas(tableHaber, { scale: 0.8 }).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
-    
+
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF('p', 'mm', 'a4');
-    
+
             const imgWidth = 210;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
+
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
             pdf.save(`simulacion${year}/${month}_salario_DAC.pdf`);
-    
+
             botonBajarPDF.classList.remove("ocultar-boton");
         }).catch(error => {
             console.error("Error al generar el PDF:", error);
@@ -414,6 +414,18 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             alert("Hubo un error al generar el PDF. Por favor, inténtalo de nuevo.");
         });
     });
+
+    // Función para detectar si es un dispositivo móvil
+    function esDispositivoMovil() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
+    if (esDispositivoMovil()) {
+        const botonBajarPDF = document.getElementById("bajarPDF");
+        if (botonBajarPDF) {
+            botonBajarPDF.style.display = "none"; // Oculta el botón
+        }
+    }
 
 
 }
@@ -424,18 +436,3 @@ function generarTextoCompacto(contrato) {
     const horasCatedraTexto = contrato.horasCatedra ? `con ${contrato.horasCatedra} Horas Cátedra` : "";
     return `Clase ${contrato.claseInfo.clase} (Cargo: ${contrato.claseInfo.cargo}, de Ubicación geográfica: ${ubicacionPorcentaje} ${horasCatedraTexto})`;
 }
-
-// Función para detectar si es un dispositivo móvil
-function esDispositivoMovil() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-// Ocultar el botón "Bajar PDF" si es un dispositivo móvil
-document.addEventListener("DOMContentLoaded", function () {
-    if (esDispositivoMovil()) {
-        const botonBajarPDF = document.getElementById("bajarPDF");
-        if (botonBajarPDF) {
-            botonBajarPDF.style.display = "none"; // Oculta el botón
-        }
-    }
-});

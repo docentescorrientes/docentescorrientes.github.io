@@ -390,22 +390,22 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     document.getElementById("bajarPDF").addEventListener("click", function () {
         const botonBajarPDF = document.getElementById("bajarPDF");
         const tableHaber = document.getElementById("tableHaber");
-    
+
         botonBajarPDF.classList.add("ocultar-boton");
         botonBajarPDF.disabled = true;
-    
-        html2canvas(tableHaber, { scale: 0.1 }).then(canvas => {
+
+        html2canvas(tableHaber).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
-    
+
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF('p', 'mm', 'a4');
-    
+
             const imgWidth = 210;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
+
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
             pdf.save(`simulacion${year}/${month}_salario_DAC.pdf`);
-    
+
             botonBajarPDF.classList.remove("ocultar-boton");
         }).catch(error => {
             console.error("Error al generar el PDF:", error);

@@ -410,7 +410,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
             // Guarda el PDF con un nombre de archivo
-            pdf.save('tabla_salario.pdf');
+            pdf.save(`simulacion${year}/${month}_salario_DAC.pdf`);
 
             // Vuelve a mostrar el botón después de generar el PDF
             botonBajarPDF.classList.remove("ocultar-boton");

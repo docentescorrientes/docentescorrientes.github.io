@@ -25,18 +25,9 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     ];
     let arrayValorB = new Array(arrayCodigoB.length).fill(0);
 
-    // Arreglos para ítems Grises
-    const mes193 = parseInt(month);
-    let restruct193 = [1, 2];
-    let text193 = "Adicional Remunerativo Docente C/A (en solo un cargo)";
-    if (year === "2025" && mes193 >= 3) {
-        restruct193 = [2, 0];
-        text193 = "Adicional Remunerativo Docente C/A (en dos cargos)"
-    };       
-
     const arrayCodigoG = ["193", "603", "625", "629", "632", "📌"];
     const arrayNameG = [
-        text193,
+        "Adicional Remunerativo Docente C/A (en solo un cargo)",
         "Plus Unificado Remunerativo (en solo un cargo)",
         "Plus de Refuerzo Remunerativo (en solo un cargo)",
         "Adicional Remunerativo 2° Cargo (en solo un cargo)",
@@ -87,12 +78,14 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         const itemsGrises = obtenerValores(year, month, "g");
 
         const topesG = [
-            restruct193[0] * itemsGrises[0].valor,
-            itemsGrises[1].valor,
-            itemsGrises[2].valor,
-            restruct193[1] * itemsGrises[3].valor,
-            2 * itemsGrises[4].valor
+            itemsGrises[0].valor, //193 Ad. Rem. Doc C/A (1 cargo hasta 02/2025)
+            itemsGrises[1].valor, //603 Plus Unif
+            itemsGrises[2].valor, //625 Plus Ref
+            2 * itemsGrises[3].valor, //629 Ad Rem 2° Cargo (en el 2 cargo hasta 02/2025)
+            2 * itemsGrises[4].valor  //632 Compl Doc Pcial (en 2 cargos)
         ];
+        console.log(topesG)
+
         const resultadogrises = calcularGrises(year, month, cociente7);
         for (let k = 0; k < resultadogrises.length; k++) {
             if (arrayValorG[k] + resultadogrises[k] > topesG[k]) {
@@ -101,7 +94,7 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
                 arrayValorG[k] += resultadogrises[k];
             }
         };
-    
+
         // --- Cálculo de ítems Negros ---
         let mes = month;
         let anualComplem = 1;
@@ -115,7 +108,7 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         const cantEscDisc = datosFormulario.schoolDisabledChildren;
         const itemsNegros = obtenerValores(year, month, "n");
         const topesN = [
-            anualComplem * itemsNegros[0].valor,
+            2 * itemsNegros[0].valor,
             anualComplem * cantHijo * itemsNegros[1].valor,
             anualComplem * cantHijoDisc * itemsNegros[2].valor,
             anualComplem * cantEsc * itemsNegros[3].valor,
@@ -123,7 +116,9 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
             cantEsc * itemsNegros[5].valor
         ];
         const resultadoNegros = calcularNegros(year, month, cociente7, cantHijo, cantHijoDisc, cantEsc, cantEscDisc);
+        console.log(resultadoNegros)
         for (let l = 0; l < resultadoNegros.length; l++) {
+            console.log(resultadoNegros[l]," - ", topesN[l])
             if (arrayValor[l] + resultadoNegros[l] > topesN[l]) {
                 arrayValor[l] = topesN[l];
             } else {

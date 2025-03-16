@@ -293,7 +293,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
               </tbody>
           </table>
         <div class="d-flex justify-content-center gap-3 mt-3">
-            <button type="button" id="bajarPDF" class="btn btn-primary" disabled>Bajar PDF</button>
+            <button type="button" id="bajarPDF" class="btn btn-primary">Bajar PDF</button>
         </div><br>          
       </div>
   `;

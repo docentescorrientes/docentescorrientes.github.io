@@ -388,32 +388,30 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
 
     // Agrega un evento al botón "Bajar PDF"
     document.getElementById("bajarPDF").addEventListener("click", function () {
-        // Obtén el botón y el contenedor completo
         const botonBajarPDF = document.getElementById("bajarPDF");
         const tableHaber = document.getElementById("tableHaber");
-
-        // Oculta el botón temporalmente
+    
         botonBajarPDF.classList.add("ocultar-boton");
         botonBajarPDF.disabled = true;
-        // Usa html2canvas para capturar el contenedor completo
-        html2canvas(tableHaber).then(canvas => {
-            const imgData = canvas.toDataURL('image/png'); // Convierte la imagen a base64
-
-            // Usa la variable global jsPDF
+    
+        html2canvas(tableHaber, { scale: 0.8 }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+    
             const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF('p', 'mm', 'a4'); // Crea un nuevo documento PDF en formato A4
-
-            const imgWidth = 210; // Ancho de la página A4 en mm
-            const imgHeight = (canvas.height * imgWidth) / canvas.width; // Calcula la altura proporcional
-
-            // Agrega la imagen del contenedor completo al PDF
+            const pdf = new jsPDF('p', 'mm', 'a4');
+    
+            const imgWidth = 210;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-
-            // Guarda el PDF con un nombre de archivo
             pdf.save(`simulacion${year}/${month}_salario_DAC.pdf`);
-
-            // Vuelve a mostrar el botón después de generar el PDF
+    
             botonBajarPDF.classList.remove("ocultar-boton");
+        }).catch(error => {
+            console.error("Error al generar el PDF:", error);
+            botonBajarPDF.classList.remove("ocultar-boton");
+            botonBajarPDF.disabled = false;
+            alert("Hubo un error al generar el PDF. Por favor, inténtalo de nuevo.");
         });
     });
 

@@ -25,12 +25,19 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     ];
     let arrayValorB = new Array(arrayCodigoB.length).fill(0);
 
+    const anio193 = parseInt(year);
+    const mes193 = parseInt(month);
+    let text193 = "Adicional Remunerativo Docente C/A (en solo un cargo)";
+    if (anio193 >= 2025 && mes193 >= 3) {
+        text193 = "Adicional Remunerativo Docente C/A (en dos cargos)"
+    };
+
     const arrayCodigoG = ["193", "603", "625", "629", "632", "📌"];
     const arrayNameG = [
-        "Adicional Remunerativo Docente C/A (en solo un cargo)",
+        text193,
         "Plus Unificado Remunerativo (en solo un cargo)",
         "Plus de Refuerzo Remunerativo (en solo un cargo)",
-        "Adicional Remunerativo 2° Cargo (en solo un cargo)",
+        "Adicional Remunerativo 2° Cargo (en solo el 2° cargo)",
         "Complemento Docente Provincial (en dos cargos)",
         "∑ Total Ítems Grises"
     ];
@@ -77,14 +84,20 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         // --- Cálculo de ítems Grises ---
         const itemsGrises = obtenerValores(year, month, "g");
 
+        let nCargo193 = 1;
+        let nCargo629 = 2;
+        if (anio193 >= 2025 && mes193 >= 3) {
+            nCargo193 = 2;
+            nCargo629 = 0;
+        };        
+
         const topesG = [
-            itemsGrises[0].valor, //193 Ad. Rem. Doc C/A (1 cargo hasta 02/2025)
-            itemsGrises[1].valor, //603 Plus Unif
-            itemsGrises[2].valor, //625 Plus Ref
-            2 * itemsGrises[3].valor, //629 Ad Rem 2° Cargo (en el 2 cargo hasta 02/2025)
+            nCargo193 * itemsGrises[0].valor, //193 Ad. Rem. Doc C/A (1 cargo hasta 02/2025)
+            1 * itemsGrises[1].valor, //603 Plus Unif
+            1 * itemsGrises[2].valor, //625 Plus Ref
+            nCargo629 * itemsGrises[3].valor, //629 Ad Rem 2° Cargo (en el 2 cargo hasta 02/2025)
             2 * itemsGrises[4].valor  //632 Compl Doc Pcial (en 2 cargos)
         ];
-        console.log(topesG)
 
         const resultadogrises = calcularGrises(year, month, cociente7);
         for (let k = 0; k < resultadogrises.length; k++) {
@@ -116,9 +129,7 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
             cantEsc * itemsNegros[5].valor
         ];
         const resultadoNegros = calcularNegros(year, month, cociente7, cantHijo, cantHijoDisc, cantEsc, cantEscDisc);
-        console.log(resultadoNegros)
         for (let l = 0; l < resultadoNegros.length; l++) {
-            console.log(resultadoNegros[l]," - ", topesN[l])
             if (arrayValor[l] + resultadoNegros[l] > topesN[l]) {
                 arrayValor[l] = topesN[l];
             } else {

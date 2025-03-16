@@ -394,7 +394,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
         botonBajarPDF.classList.add("ocultar-boton");
         botonBajarPDF.disabled = true;
     
-        html2canvas(tableHaber, { scale: 0.8 }).then(canvas => {
+        html2canvas(tableHaber, { scale: 0.1 }).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
     
             const { jsPDF } = window.jspdf;

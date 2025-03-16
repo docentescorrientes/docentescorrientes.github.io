@@ -32,7 +32,7 @@ class Aumentos {
 const aumentos = new Aumentos();
 aumentos.agregarAumento("1 Básico", 2024, 8, 142536.75, "b");
 aumentos.agregarAumento("1 Básico", 2024, 10, 15000, "b");
-aumentos.agregarAumento("1 Básico", 2025, 3, 20500, "b");
+aumentos.agregarAumento("1 Básico", 2025, 3, 20000, "b");
 
 // Grises: (Neto * 4/3)
 aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 33500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo

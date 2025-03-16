@@ -425,3 +425,17 @@ function generarTextoCompacto(contrato) {
     return `Clase ${contrato.claseInfo.clase} (Cargo: ${contrato.claseInfo.cargo}, de Ubicación geográfica: ${ubicacionPorcentaje} ${horasCatedraTexto})`;
 }
 
+// Función para detectar si es un dispositivo móvil
+function esDispositivoMovil() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// Ocultar el botón "Bajar PDF" si es un dispositivo móvil
+document.addEventListener("DOMContentLoaded", function () {
+    if (esDispositivoMovil()) {
+        const botonBajarPDF = document.getElementById("bajarPDF");
+        if (botonBajarPDF) {
+            botonBajarPDF.style.display = "none"; // Oculta el botón
+        }
+    }
+});

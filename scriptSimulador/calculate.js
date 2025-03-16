@@ -89,7 +89,7 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         if (anio193 >= 2025 && mes193 >= 3) {
             nCargo193 = 2;
             nCargo629 = 0;
-        };        
+        };
 
         const topesG = [
             nCargo193 * itemsGrises[0].valor, //193 Ad. Rem. Doc C/A (1 cargo hasta 02/2025)
@@ -163,7 +163,7 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     arrayValorN.push(arrayValorN[0] + arrayValorN[1]);
 
     // --- Generar la tabla con los arreglos de Blancos, Grises y Negros ---
-    generarTabla(year, month,
+    generarTabla(year, month, datosFormulario,
         [...arrayCodigoB, ...arrayCodigoG, ...arrayCodigoN],
         [...arrayNameB, ...arrayNameG, ...arrayNameN],
         [...arrayValorB, ...arrayValorG, ...arrayValorN],
@@ -174,7 +174,6 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         ]
     );
 });
-
 
 // Función para calcular valores Blancos
 function calcularBlancos(year, month, seniority, indiceClase, ubicacionGeografica, jornada, ayMatDidac = 0.1) {
@@ -221,7 +220,7 @@ function calcularNegros(year, month, cociente7, cantHijo, cantHijoDisc, cantEsc,
 }
 
 // Función para generar la tabla con Bootstrap 5
-function generarTabla(year, month, arrayCodigo, arrayNombre, arrayValor, arrayColor) {
+function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, arrayValor, arrayColor) {
     let datos = arrayCodigo.map((codigo, index) => ({
         codigo,
         nombre: arrayNombre[index],
@@ -293,6 +292,9 @@ function generarTabla(year, month, arrayCodigo, arrayNombre, arrayValor, arrayCo
     tablaHTML += `
               </tbody>
           </table>
+        <div class="d-flex justify-content-center gap-3 mt-3">
+            <button type="button" id="bajarPDF" class="btn btn-primary">Bajar PDF</button>
+        </div><br>          
       </div>
   `;
 
@@ -340,6 +342,14 @@ function generarTabla(year, month, arrayCodigo, arrayNombre, arrayValor, arrayCo
     // Agregar acordeón con información adicional debajo de la tabla
     const valoresD = obtenerValores(year, month, "d");
     const cod210SV = valoresD.length > 0 ? valoresD[0].valor : 0;
+    const antiguedad = 100 * parseFloat(datosFormulario.seniority);
+    const cantCargos = datosFormulario.cargos.length > 1
+        ? datosFormulario.cargos.length + " clases"
+        : datosFormulario.cargos.length + " clase";
+
+
+    // Generar texto para cada contrato en el array
+    const textos = datosFormulario.cargos.map((contrato, index) => generarTextoCompacto(contrato, index));
     const textFinalAcordeon = `
       <div class="accordion mt-3" id="acordeonInfo">
           <div class="accordion-item">
@@ -352,17 +362,18 @@ function generarTabla(year, month, arrayCodigo, arrayNombre, arrayValor, arrayCo
               <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" 
                   data-bs-parent="#acordeonInfo">
                   <div class="accordion-body text-start">
-                      <ol>
-                          <li>Las simulaciones pueden variar dependiendo de cada docente, ya que algunos pueden contar con <strong>ítems especiales</strong>. 
-                          Por ejemplo, ciertos cargos incluyen ítems por tarea diferenciada. Algunos <strong>cargos directivos y gremiales</strong> tienen 
-                          un descuento menor en aportes jubilatorios (<strong>18.5%</strong> en lugar del <strong>20%</strong> que se aplica a la mayoría). 
-                          Pueden existir <strong>descuentos adicionales</strong>, como los <strong>aportes gremiales</strong> o descuento del <strong>Cód. 210 
-                          Seguro de vida (Life): </strong>${formatNumero(cod210SV, "$")}, lo que impacta en el cálculo final.</li>
-                          <li>No se puede realizar la simulación <strong>por cargos separados</strong>, ya que como <strong>nos pagan menos en el segundo y tercer 
-                          cargo</strong>, el resultado cambia si no se tiene en cuenta la cantidad total de cargos.</li>
-                          <li>No se incluye que ciertos cargos con menos de dieciocho (18) horas reloj semanales de carga horaria laboral, <strong>percibe el 50% de las 
-                          asignaciones</strong> a excepción de la de maternidad, previstas en el art. 25 de la ley N° 3.554/80.</li>
-                      </ol>
+                    <p>Simulación ${month}/${year} de docente con ${antiguedad}% antigüedad en ${cantCargos}: ${textos.join("; ")}.</p>
+                    <ol>
+                    <li>Las simulaciones pueden variar dependiendo de cada docente, ya que algunos pueden contar con <strong>ítems especiales</strong>. 
+                    Por ejemplo, ciertos cargos incluyen ítems por tarea diferenciada. Algunos <strong>cargos directivos y gremiales</strong> tienen 
+                    un descuento menor en aportes jubilatorios (<strong>18.5%</strong> en lugar del <strong>20%</strong> que se aplica a la mayoría). 
+                    Pueden existir <strong>descuentos adicionales</strong>, como los <strong>aportes gremiales</strong> o descuento del <strong>Cód. 210 
+                    Seguro de vida (Life): </strong>${formatNumero(cod210SV, "$")}, lo que impacta en el cálculo final.</li>
+                    <li>No se puede realizar la simulación <strong>por cargos separados</strong>, ya que como <strong>nos pagan menos en el segundo y tercer 
+                    cargo</strong>, el resultado cambia si no se tiene en cuenta la cantidad total de cargos.</li>
+                    <li>No se incluye que ciertos cargos con menos de dieciocho (18) horas reloj semanales de carga horaria laboral, <strong>percibe el 50% de las 
+                    asignaciones</strong> a excepción de la de maternidad, previstas en el art. 25 de la ley N° 3.554/80.</li>
+                    </ol>
                   </div>
               </div>
           </div>
@@ -370,5 +381,49 @@ function generarTabla(year, month, arrayCodigo, arrayNombre, arrayValor, arrayCo
   `;
     tablaResultados.insertAdjacentHTML("afterend", textFinalAcordeon);
     document.getElementById("tablaResultados").scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // Expande el acordeón temporalmente
+    const acordeon = document.getElementById("collapseOne");
+    acordeon.classList.remove("collapse"); // Expande el acordeón
+
+    // Agrega un evento al botón "Bajar PDF"
+    document.getElementById("bajarPDF").addEventListener("click", function () {
+        // Obtén el botón y el contenedor completo
+        const botonBajarPDF = document.getElementById("bajarPDF");
+        const tableHaber = document.getElementById("tableHaber");
+
+        // Oculta el botón temporalmente
+        botonBajarPDF.classList.add("ocultar-boton");
+        botonBajarPDF.disabled = true;
+        // Usa html2canvas para capturar el contenedor completo
+        html2canvas(tableHaber).then(canvas => {
+            const imgData = canvas.toDataURL('image/png'); // Convierte la imagen a base64
+
+            // Usa la variable global jsPDF
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4'); // Crea un nuevo documento PDF en formato A4
+
+            const imgWidth = 210; // Ancho de la página A4 en mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width; // Calcula la altura proporcional
+
+            // Agrega la imagen del contenedor completo al PDF
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+            // Guarda el PDF con un nombre de archivo
+            pdf.save('tabla_salario.pdf');
+
+            // Vuelve a mostrar el botón después de generar el PDF
+            botonBajarPDF.classList.remove("ocultar-boton");
+        });
+    });
+
+
+}
+
+// Función para generar el texto en el formato deseado
+function generarTextoCompacto(contrato) {
+    const ubicacionPorcentaje = parseFloat(contrato.ubicacionGeografica) * 100 + "%";
+    const horasCatedraTexto = contrato.horasCatedra ? `con ${contrato.horasCatedra} Horas Cátedra` : "";
+    return `Clase ${contrato.claseInfo.clase} (Cargo: ${contrato.claseInfo.cargo}, de Ubicación geográfica: ${ubicacionPorcentaje} ${horasCatedraTexto})`;
 }
 

@@ -434,5 +434,5 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
 function generarTextoCompacto(contrato) {
     const ubicacionPorcentaje = parseFloat(contrato.ubicacionGeografica) * 100 + "%";
     const horasCatedraTexto = contrato.horasCatedra ? `con ${contrato.horasCatedra} Horas Cátedra` : "";
-    return `Clase ${contrato.claseInfo.clase} (Cargo: ${contrato.claseInfo.cargo}, de Ubicación geográfica: ${ubicacionPorcentaje} ${horasCatedraTexto})`;
+    return `Clase ${contrato.claseInfo.clase}: Cargo: ${contrato.claseInfo.cargo}, de Ubicación geográfica: ${ubicacionPorcentaje} ${horasCatedraTexto}`;
 }

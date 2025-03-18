@@ -341,7 +341,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             newRowSalarioSinPluses.classList.add("table-success"); // Color secundario
             newRowSalarioSinPluses.innerHTML = `
             <td><strong>⚠️</strong></td>
-            <td class="text-start">Salario sin considerar Pluses</td>
+            <td class="text-start">Salario Real (Sin Pluses)</td>
             <td>${formatNumero(salarioBrutoSinPluses, "$")}</td>
             <td>${formatNumero(salarioNetoSinPluses - salarioBrutoSinPluses, "$")}</td>
             <td class="fw-bold border-2 border-success">${formatNumero(salarioNetoSinPluses, "$")}</td>

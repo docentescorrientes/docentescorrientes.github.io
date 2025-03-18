@@ -5,6 +5,8 @@ import { obtenerValores, formatNumero, obtenerNombreMes } from "./dataSalario.js
 const apJub = 0.2;
 const obSocial = 0.05;
 const DESCUENTO = apJub + obSocial;
+let valor603 = 0;
+let valor625 = 0;
 
 document.getElementById("dataForm").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -161,6 +163,9 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     }
     arrayValorN.push(sumaTotalN);
     arrayValorN.push(arrayValorN[0] + arrayValorN[1]);
+
+    valor603 = arrayValorG[1]; // Plus Unificado Remunerativo (Código 603)
+    valor625 = arrayValorG[2]; // Plus de Refuerzo Remunerativo (Código 625)
 
     // --- Generar la tabla con los arreglos de Blancos, Grises y Negros ---
     generarTabla(year, month, datosFormulario,
@@ -326,6 +331,22 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
           <td class="fw-bold border-2 border-success">${formatNumero(cod120SegVida + arrayRecuperado[1], "$")}</td>
       `;
             tbody.appendChild(newRow);
+
+
+            // Calcular el salario sin pluses
+            const salarioBrutoSinPluses = cod120SegVida + arrayRecuperado[0] - (valor603 + valor625);
+            const salarioNetoSinPluses = cod120SegVida + arrayRecuperado[1] - (valor603 + valor625) * 0.75;
+
+            const newRowSalarioSinPluses = document.createElement("tr");
+            newRowSalarioSinPluses.classList.add("table-success"); // Color secundario
+            newRowSalarioSinPluses.innerHTML = `
+            <td><strong>⚠️</strong></td>
+            <td class="text-start">Salario sin considerar Pluses</td>
+            <td>${formatNumero(salarioBrutoSinPluses, "$")}</td>
+            <td>${formatNumero(salarioNetoSinPluses - salarioBrutoSinPluses, "$")}</td>
+            <td class="fw-bold border-2 border-success">${formatNumero(salarioNetoSinPluses, "$")}</td>
+`;
+            tbody.appendChild(newRowSalarioSinPluses);
         }
     }
 

@@ -15,6 +15,31 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     const month = datosFormulario.month;
     const seniority = datosFormulario.seniority;
 
+    // Función para calcular la diferencia en días entre dos fechas
+    function calcularDias(fechaInicio, fechaFin) {
+        const inicio = new Date(fechaInicio);
+        const fin = new Date(fechaFin);
+        const diferencia = fin - inicio; // Diferencia en milisegundos
+        return Math.ceil(1 + diferencia / (1000 * 60 * 60 * 24)); // Convertir a días
+    };
+
+    function obtenerDiasDelMes(anio, mes) {
+        const fecha = new Date(anio, mes, 0); // El día 0 del mes siguiente es el último día del mes actual
+        return fecha.getDate(); // Devuelve el número de días del mes
+    }
+
+    // Iterar sobre el array de cargos y crear un nuevo array con la diferencia de días
+    const cargosRange = datosFormulario.cargos;
+    const diasArray = cargosRange.map(cargo => {
+        if (cargo.tipoContrato === "permanente") {
+            return 1; // Si es permanente, devolver 1
+        } else if (cargo.tipoContrato === "temporario" && cargo.fechaInicio && cargo.fechaFin) {
+            return calcularDias(cargo.fechaInicio, cargo.fechaFin) / obtenerDiasDelMes(year, month); // Calcular días si es temporario
+        } else {
+            return 0; // Si no hay fechas válidas, devolver 0
+        }
+    });
+
     // Arreglos para ítems Blancos
     const arrayCodigoB = ["1", "36", "37", "62", "624", "📌"];
     const arrayNameB = [
@@ -62,6 +87,8 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         const clase = datosFormulario.cargos[i].claseInfo.clase;
         const indiceClase = datosFormulario.cargos[i].claseInfo.indiceClase;
         const categoria = datosFormulario.cargos[i].claseInfo.categoria;
+        const dias = diasArray[i]
+        console.log(dias)
 
         let factor7 = datosFormulario.cargos[i].horasCatedra;
         let cociente7 = 1;

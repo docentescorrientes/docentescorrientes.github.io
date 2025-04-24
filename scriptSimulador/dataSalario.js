@@ -71,8 +71,8 @@ aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2025, 3, 80000, "n"); // Tope
 
 // Descuentos: cod210SegVida -1709,03
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 10, -1553.67, "d"); // Tope: solo un cargo
-aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -155.36, "d"); // Tope: solo un cargo
-
+aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -155.36, "d");
+aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -222.17, "d"); 
 
 export function obtenerValores(year, month, tipo) {
   const anio = parseInt(year);

@@ -166,7 +166,7 @@ function buscarAumentos(anio, mes, dia) {
     En las categorías 7 (por horas cátedra) un cargo se consideran 15 horas cátedra para secundaria
     y 12 horas cátedra para superior.<br>El Cód.629 Adicional Remunerativo 2° Cargo se corresponde solo
     en el 2° cargo o 30 horas cátedras secundaria o 24 horas cátedras superior antes del mes de marzo
-    del 2025 donde desaparecieron este ítem y colocaron el Cód.193 en dos cargos.</td>
+    del 2025 donde desapareció este ítem y colocaron el Cód.193 en dos cargos.</td>
   </tr>`;
 
 

@@ -400,7 +400,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     // Agregar acordeón con información adicional debajo de la tabla
     const valoresD = obtenerValores(year, month, "d");
     const cod210SV = valoresD.length > 0 ? valoresD[0].valor : 0;
-    const segurosCNP = valoresD
+    const segurosCNP = valoresD.length > 1 ? valoresD[1].valor : 0;  
     const antiguedad = 100 * parseFloat(datosFormulario.seniority);
     const cantCargos = datosFormulario.cargos.length > 1
         ? datosFormulario.cargos.length + " clases"

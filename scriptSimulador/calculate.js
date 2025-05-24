@@ -87,8 +87,7 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         const clase = datosFormulario.cargos[i].claseInfo.clase;
         const indiceClase = datosFormulario.cargos[i].claseInfo.indiceClase;
         const categoria = datosFormulario.cargos[i].claseInfo.categoria;
-        const dias = diasArray[i]
-        console.log(dias)
+        const dias = diasArray[i];
 
         let factor7 = datosFormulario.cargos[i].horasCatedra;
         let cociente7 = 1;
@@ -341,8 +340,9 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
         const tbody = tablaElement.querySelector("tbody");
         if (tbody) {
             // Obtenemos el valor para Seguro de Vida desde el grupo "d"
-            const segVida = obtenerValores(year, month, "d");
-            const cod120SegVida = segVida.length > 0 ? segVida[0].valor : 0;
+            const segurosD = obtenerValores(year, month, "d");
+            const cod120SegVida = segurosD.length > 0 ? segurosD[0].valor : 0;
+            const segurosCNPas = segurosD.length > 1 ? segurosD[1].valor : 0;
             const storedJSON = document.getElementById("versionH6").getAttribute("data-array");
             // const storedJSON = document.getElementById("versionH6").dataset.array;
             const arrayRecuperado = JSON.parse(storedJSON);
@@ -358,11 +358,21 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
           <td class="fw-bold border-2 border-success">${formatNumero(cod120SegVida + arrayRecuperado[1], "$")}</td>
       `;
             tbody.appendChild(newRow);
-
+            // Creamos la nueva fila para el Seguro CNP
+            const newRowSeguroCNP = document.createElement("tr");
+            newRowSeguroCNP.classList.add("table-secondary"); // Color secundario
+            newRowSeguroCNP.innerHTML = `
+          <td><strong>🏛</strong></td>
+          <td class="text-start">Seguro CNP (Banco Corrientes)</td>
+          <td>----</td>
+          <td>${formatNumero(segurosCNPas, "$")}</td>
+          <td class="fw-bold border-2 border-success">${formatNumero(segurosCNPas + cod120SegVida + arrayRecuperado[1], "$")}</td>
+      `;
+            tbody.appendChild(newRowSeguroCNP);
 
             // Calcular el salario sin pluses
-            const salarioBrutoSinPluses = cod120SegVida + arrayRecuperado[0] - (valor603 + valor625);
-            const salarioNetoSinPluses = cod120SegVida + arrayRecuperado[1] - (valor603 + valor625) * 0.75;
+            const salarioBrutoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[0] - (valor603 + valor625);
+            const salarioNetoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[1] - (valor603 + valor625) * 0.75;
 
             const newRowSalarioSinPluses = document.createElement("tr");
             newRowSalarioSinPluses.classList.add("table-success"); // Color secundario
@@ -390,6 +400,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     // Agregar acordeón con información adicional debajo de la tabla
     const valoresD = obtenerValores(year, month, "d");
     const cod210SV = valoresD.length > 0 ? valoresD[0].valor : 0;
+    const segurosCNP = valoresD
     const antiguedad = 100 * parseFloat(datosFormulario.seniority);
     const cantCargos = datosFormulario.cargos.length > 1
         ? datosFormulario.cargos.length + " clases"
@@ -416,7 +427,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
                     Por ejemplo, ciertos cargos incluyen ítems por tarea diferenciada. Algunos <strong>cargos directivos y gremiales</strong> tienen 
                     un descuento menor en aportes jubilatorios (<strong>18.5%</strong> en lugar del <strong>20%</strong> que se aplica a la mayoría). 
                     Pueden existir <strong>descuentos adicionales</strong>, como los <strong>aportes gremiales</strong> o descuento del <strong>Cód. 210 
-                    Seguro de vida (Life): </strong>${formatNumero(cod210SV, "$")}, lo que impacta en el cálculo final.</li>
+                    Seguro de vida (Life): </strong>${formatNumero(cod210SV, "$")} y <strong>Seguros CNP del Banco Corrientes: </strong> ${formatNumero(segurosCNP, "$")} , lo que impacta en el cálculo final.</li>
                     <li>No se puede realizar la simulación <strong>por cargos separados</strong>, ya que como <strong>nos pagan menos en el segundo y tercer 
                     cargo</strong>, el resultado cambia si no se tiene en cuenta la cantidad total de cargos.</li>
                     <li>No se incluye que ciertos cargos con menos de dieciocho (18) horas reloj semanales de carga horaria laboral, <strong>percibe el 50% de las 

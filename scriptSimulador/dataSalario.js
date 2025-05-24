@@ -74,6 +74,9 @@ aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 10, -1553.67, "d"); /
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -155.36, "d");
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -222.17, "d"); 
 
+// Descuentos: segurosCNP -4113.54
+aumentos.agregarAumento("Seguros CNP (Banco Corrientes)", 2025, 5, -4113.54, "d"); // Tope: solo un cargo
+
 export function obtenerValores(year, month, tipo) {
   const anio = parseInt(year);
   const mes = parseInt(month);

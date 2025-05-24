@@ -7,13 +7,15 @@ const obSocial = 0.05;
 const DESCUENTO = apJub + obSocial;
 let valor603 = 0;
 let valor625 = 0;
-
+// Función para capturar datos del formulario y calcular el salario
 document.getElementById("dataForm").addEventListener("submit", function (event) {
     event.preventDefault();
     let datosFormulario = capturarDatos(event);
     const year = datosFormulario.year;
     const month = datosFormulario.month;
     const seniority = datosFormulario.seniority;
+
+    const selectedTextMonth = document.getElementById("month").options[document.getElementById("month").selectedIndex].text;
 
     // Función para calcular la diferencia en días entre dos fechas
     function calcularDias(fechaInicio, fechaFin) {
@@ -193,6 +195,16 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     valor603 = arrayValorG[1]; // Plus Unificado Remunerativo (Código 603)
     valor625 = arrayValorG[2]; // Plus de Refuerzo Remunerativo (Código 625)
 
+    // --- Ajustes especiales para SAC Junio y SAC Diciembre ---
+    if (selectedTextMonth === "1° SAC Junio" || selectedTextMonth === "2° SAC Diciembre") {
+        arrayValorB = arrayValorB.map(valor => valor / 2); // Blancos a la mitad
+        arrayValorG = arrayValorG.map(valor => valor / 2); // Grises a la mitad
+        arrayValorN = arrayValorN.map(() => 0);             // Negros en cero
+
+        // También reiniciar el auxiliar arrayValor (por seguridad)
+        arrayValor = arrayValor.map(() => 0);
+    };
+
     // --- Generar la tabla con los arreglos de Blancos, Grises y Negros ---
     generarTabla(year, month, datosFormulario,
         [...arrayCodigoB, ...arrayCodigoG, ...arrayCodigoN],
@@ -341,8 +353,18 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
         if (tbody) {
             // Obtenemos el valor para Seguro de Vida desde el grupo "d"
             const segurosD = obtenerValores(year, month, "d");
-            const cod120SegVida = segurosD.length > 0 ? segurosD[0].valor : 0;
-            const segurosCNPas = segurosD.length > 1 ? segurosD[1].valor : 0;
+            let cod120SegVida = segurosD.length > 0 ? segurosD[0].valor : 0;
+            let segurosCNPas = segurosD.length > 1 ? segurosD[1].valor : 0;
+            let sumaPlusBruto = valor603 + valor625;
+            let sumaPlusNeto = (valor603 + valor625) * 0.75;
+            // Si el mes es Junio o Diciembre, se ajustan los valores
+            const selectedTextMonth = document.getElementById("month").options[document.getElementById("month").selectedIndex].text;
+            if (selectedTextMonth === "1° SAC Junio" || selectedTextMonth === "2° SAC Diciembre") {
+                cod120SegVida = 0;
+                segurosCNPas = 0;
+                sumaPlusBruto /=2;
+                sumaPlusNeto /=2;
+            }
             const storedJSON = document.getElementById("versionH6").getAttribute("data-array");
             // const storedJSON = document.getElementById("versionH6").dataset.array;
             const arrayRecuperado = JSON.parse(storedJSON);
@@ -371,8 +393,8 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             tbody.appendChild(newRowSeguroCNP);
 
             // Calcular el salario sin pluses
-            const salarioBrutoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[0] - (valor603 + valor625);
-            const salarioNetoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[1] - (valor603 + valor625) * 0.75;
+            const salarioBrutoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[0] - sumaPlusBruto;
+            const salarioNetoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[1] - sumaPlusNeto;
 
             const newRowSalarioSinPluses = document.createElement("tr");
             newRowSalarioSinPluses.classList.add("table-success"); // Color secundario
@@ -388,8 +410,9 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     }
 
     // Mostrar la tabla y actualizar textos relacionados
+    const selectedTextMonth = document.getElementById("month").options[document.getElementById("month").selectedIndex].text;
     document.getElementById("tableHaber").hidden = false;
-    document.getElementById("textTableHaberes").innerText = `Total de Haberes de ${obtenerNombreMes(month)} del ${year}`;
+    document.getElementById("textTableHaberes").innerText = `Total de Haberes de ${selectedTextMonth} del ${year}`;
 
     // Eliminar acordeón previo si existe para evitar duplicados
     let acordeonExistente = document.getElementById("acordeonInfo");
@@ -399,8 +422,14 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
 
     // Agregar acordeón con información adicional debajo de la tabla
     const valoresD = obtenerValores(year, month, "d");
-    const cod210SV = valoresD.length > 0 ? valoresD[0].valor : 0;
-    const segurosCNP = valoresD.length > 1 ? valoresD[1].valor : 0;  
+    let cod210SV = valoresD.length > 0 ? valoresD[0].valor : 0;
+    let segurosCNP = valoresD.length > 1 ? valoresD[1].valor : 0;
+    if (selectedTextMonth === "1° SAC Junio" || selectedTextMonth === "2° SAC Diciembre") {
+        cod210SV = 0;
+        segurosCNP = 0;
+    }
+
+
     const antiguedad = 100 * parseFloat(datosFormulario.seniority);
     const cantCargos = datosFormulario.cargos.length > 1
         ? datosFormulario.cargos.length + " clases"

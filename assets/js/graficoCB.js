@@ -149,6 +149,10 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
         arrayTotalC.push(100 * total / divisor);
     };
 
+    // Calcular el máximo valor de las barras
+    const maxValor = Math.max(...arrayTotalC);
+    const maxConMargen = Math.ceil(maxValor * 1.1 / 10) * 10;
+
     // Datos actualizados con los 12 meses
     const data = {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -274,6 +278,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                 },
                 y: {
                     beginAtZero: true,
+                    max: maxConMargen, // 👈 Usamos el valor calculado dinámicamente
                     ticks: {
                         callback: (value) => value + '%'
                     },

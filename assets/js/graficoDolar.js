@@ -144,12 +144,17 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
         let gris = sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1];
         let negro = sumaGrupo(anio, n, tipoN) * factor[2];
         let total = sumaGrupo(anio, n, tipoB) + sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1] + sumaGrupo(anio, n, tipoN) * factor[2];
-        
+
         arrayBlanco.push(blanco / divisor);
-        arrayGrisC.push( gris / divisor);
-        arrayNegro.push( negro / divisor);
+        arrayGrisC.push(gris / divisor);
+        arrayNegro.push(negro / divisor);
         arrayTotalC.push(total / divisor);
     };
+
+
+    const maxValor = Math.max(...arrayTotalC);
+    const maxConMargen = Math.ceil(maxValor * 1.1 / 100) * 100;
+
 
     // Datos actualizados con los 12 meses
     const data = {
@@ -276,6 +281,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                 },
                 y: {
                     beginAtZero: true,
+                    max: maxConMargen, // 👈 valor calculado dinámicamente
                     ticks: {
                         callback: (value) => '$ ' + formatNumero(value)
                     },

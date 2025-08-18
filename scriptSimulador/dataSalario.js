@@ -33,6 +33,7 @@ const aumentos = new Aumentos();
 aumentos.agregarAumento("1 Básico", 2024, 8, 142536.75, "b");
 aumentos.agregarAumento("1 Básico", 2024, 10, 15000, "b");
 aumentos.agregarAumento("1 Básico", 2025, 3, 20000, "b");
+aumentos.agregarAumento("1 Básico", 2025, 8, 21500, "b");
 
 // Grises: (Neto * 4/3)
 aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 33500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo
@@ -51,6 +52,7 @@ aumentos.agregarAumento("629 Adicional Remunerativo 2° Cargo (solo en el 2° ca
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024, 9, 48700 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024, 10, 7825 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2025, 3, 30000 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
+aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2025, 8, 149125 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
 
 // Negros: cod3SalFam (cod3xHijo, cod3xHijoDisc, cod3Esc, cod3EscDisc, Cod3AnualComplemVacac, cod3AyEsc), cod171CompDocPcial, cod622BonoNav3Tramos(dic100,ene200, feb200)
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 9, 251500, "n"); // ### Tope: hasta dos cargos

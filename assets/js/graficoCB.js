@@ -309,7 +309,7 @@ function sumaGrupo(anio, mes, tipo) {
     if (tipo[0] == "n") {
         desc = 1;
     }
-    console.log(objeto)
+//    console.log(objeto)
     objeto.forEach((item, index) => {
         suma += desc * item.valor * tipo[index + 1];
     });

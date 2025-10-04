@@ -27,8 +27,7 @@
                 <div>
                     <i class="fa-solid fa-chalkboard-user mx-2"></i>
                     <a class="navbar-sm-brand text-light text-decoration-none">DOCENTES AUTOCONVOCADOS CORRIENTES -
-                        SECTOR 2019 &nbsp;</a>
-                    <i class="fa-solid fa-circle-check" style="color: #327cfb;"></i>
+                        SECTOR 2019 &nbsp;</a><i class="fa-solid fa-circle-check" style="color: #327cfb;"></i>
                 </div>
                 <div>
                     <a class="text-light" href="https://www.facebook.com/Docentesautoconvocadosctescap" target="_blank"
@@ -45,23 +44,24 @@
     </nav>
     <!-- Close Top Nav -->
 
+
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+            <a class="navbar-brand text-primary logo h1 align-self-center" href="index.html">
                 <i class="fa-solid fa-chalkboard-user mx-2"></i>
                 DAC 2019
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+                data-bs-target="#templatemo_main_nav_blue" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
-                id="templatemo_main_nav">
+                id="templatemo_main_nav_blue">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
@@ -74,7 +74,7 @@
                             <a class="nav-link" href="normas.html">Normas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cue.html">CUE-Anexo</a>
+                            <a class="nav-link text-success" href="cue.html">CUE-Anexo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="graficos.html">Gráficos</a>
@@ -83,7 +83,7 @@
                             <a class="nav-link" href="infoDatos.html">Info Datos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-success d-inline-flex align-items-center" href="colaboracion.html">
+                            <a class="nav-link d-inline-flex align-items-center" href="colaboracion.html">
                                 <i class="fa fa-heart text-danger me-2"></i>
                                 Colaboración
                             </a>
@@ -91,34 +91,83 @@
                     </ul>
                 </div>
             </div>
-
         </div>
     </nav>
     <!-- Close Header -->
-    <!-- Start Content -->
-    <div class="container py-5">
-        <div class="container pb-5">
-            <div class="row">
-                <img class="card-img img-fluid" src="assets/img/brubank.svg" alt="Card image cap" id="product-detail">
+
+    <!-- Modal -->
+    <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="w-100 pt-1 mb-5 text-right">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-        <div class="container pb-5">
-            <p class="text-center">
-                <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBru"
-                    aria-expanded="false" aria-controls="collapseBru">
-                    Fondos a la fecha
-                </button>
-            </p>
-            <div class="collapse" id="collapseBru">
-                <div class="card card-body text-center" id="contenidoBru">
-                    🍎 SBS GS RTA Fija - Fondos Común de inversión, Total invertido a la fecha 12/02/2025: <strong>$
-                        64.423,82</strong>
+            <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                    <button type="submit" class="input-group-text bg-success text-light">
+                        <i class="fa fa-fw fa-search text-white"></i>
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-    <!-- End Content -->
 
+    <section class="py-5">
+        <!-- Nueva sección: Buscador de CUE -->
+        <section class="container py-5">
+            <div class="row text-center pt-5 pb-3">
+                <div class="col-lg-8 m-auto">
+                    <h1 class="h4">📚 Buscador de CUE de Establecimientos</h1>
+                </div>
+            </div>
+
+            <!-- Buscador centrado -->
+            <div class="d-flex justify-content-center mb-4">
+                <div class="input-group shadow-sm" style="max-width:500px;">
+                    <span class="input-group-text bg-light text-white">🔍</span>
+                    <input type="text" id="searchInput" class="form-control"
+                        placeholder="Escriba el nombre de la institución o localidad...">
+                </div>
+            </div>
+
+            <!-- Mensaje copia -->
+            <div id="copyAlert" class="alert alert-success d-none text-center" role="alert">
+                ✅ CUE-Anexo copiado al portapapeles
+            </div>
+
+            <!-- Mensaje informativo inicial -->
+            <div id="infoAlert" class="alert alert-info text-center" role="alert">
+                ℹ️ Escriba el nombre de una institución o localidad en el buscador para ver los resultados.
+            </div>
+
+            <!-- Tabla -->
+            <div class="table-responsive" id="resultsTable" style="display:none;">
+                <table class="table table-hover table-bordered table-sm align-middle shadow"
+                    style="border-radius:12px;overflow:hidden;">
+                    <thead class="table-primary text-center">
+                        <tr>
+                            <th style="width: 20%;">Localidad / Departamento</th>
+                            <th style="width: 35%;">Institución</th>
+                            <th style="width: 15%;">CUE-Anexo</th>
+                            <th style="width: 15%;">Nivel</th>
+                            <th style="width: 15%;">Jurisdicción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTable"></tbody>
+                </table>
+            </div>
+        </section>
+        <!-- Fin sección buscador -->
+
+    </section>
+    <!-- Close Banner -->
+
+    <!-- Start Section -->
+    <section class="container py-5">
+
+    </section>
+    <!-- End Section -->
 
     <!-- Start Brands -->
     <section class="bg-light py-5">
@@ -126,14 +175,13 @@
     </section>
     <!--End Brands-->
 
-
     <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+    <footer class="bg-dark" id="tempaltemo_footer_blue">
         <div class="container">
             <div class="row">
 
                 <div class="col-md-4 pt-5">
-                    <h2 class="h2 text-success border-bottom pb-3 border-light logo"><i
+                    <h2 class="h2 text-primary border-bottom pb-3 border-light logo"><i
                             class="fa-solid fa-chalkboard-user mx-2"></i>DAC - SECTOR 2019</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
@@ -163,8 +211,8 @@
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="index.html">Inicio</a></li>
                         <li><a class="text-decoration-none" href="simulador.html">Simulador</a></li>
-                        <li><a class="text-decoration-none" href="normas.html">Normas</a></li>
                         <li><a class="text-decoration-none" href="graficos.html">Gráficos</a></li>
+                        <li><a class="text-decoration-none" href="colaboracion.html">Colaboración</a></li>
                     </ul>
                 </div>
 
@@ -205,8 +253,7 @@
                 <div class="row pt-2">
                     <div class="col-12 text-center">
                         <p class="text-left text-light">
-                            Copyright &copy; 2024 Docentes Autoconvocados Corrientes - Sector 2019 - Licencia MIT.
-                            Todos
+                            Copyright &copy; 2024 Docentes Autoconvocados Corrientes - Sector 2019 - Licencia MIT. Todos
                             los derechos reservados. Designed by <a class="text-success" href="LICENSE.txt"
                                 target="_blank"><strong>augusalterats</strong></a>
                         </p>
@@ -217,19 +264,101 @@
 
     </footer>
     <!-- End Footer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script>
+        Papa.parse("Establecimientos NE y CUE - Establecimientos Corrientes.csv", {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            transformHeader: header => header.trim(),
+            complete: function (results) {
+                const data = results.data;
+                const tableBody = document.getElementById("dataTable");
+                const resultsTable = document.getElementById("resultsTable");
+                const copyAlert = document.getElementById("copyAlert");
+                const infoAlert = document.getElementById("infoAlert");
+
+                function renderTable(filterText = "") {
+                    tableBody.innerHTML = "";
+                    let count = 0;
+
+                    if (!filterText.trim()) {
+                        resultsTable.style.display = "none";
+                        infoAlert.style.display = "block";
+                        infoAlert.className = "alert alert-info text-center";
+                        infoAlert.textContent = "ℹ️ Escriba el nombre de una institución o localidad en el buscador para ver los resultados.";
+                        return;
+                    }
+
+                    data.forEach(row => {
+                        const texto = ((row["Nombre de Institución"] || "") + " " + (row["Localidad"] || "")).toLowerCase();
+                        if (texto.includes(filterText.toLowerCase())) {
+                            const cue = row["CUE-Anexo"] || "";
+
+                            // Unificar niveles
+                            const niveles = [];
+                            if (row["Inicial"] && row["Inicial"].toUpperCase() === "SI") niveles.push("Inicial");
+                            if (row["Primario"] && row["Primario"].toUpperCase() === "SI") niveles.push("Primario");
+                            if (row["Secundario"] && row["Secundario"].toUpperCase() === "SI") niveles.push("Secundario");
+                            if (row["Superior"] && row["Superior"].toUpperCase() === "SI") niveles.push("Superior");
+
+                            const nivelTexto = niveles.length > 0 ? niveles.join(", ") : "-----";
+
+                            const tr = document.createElement("tr");
+                            tr.innerHTML = `
+                        <td class="text-center">
+                          <div><strong>${row["Localidad"] || ""}</strong></div>
+                          <div class="text-muted" style="font-size:12px;">${row["Departamento"] || ""}</div>
+                        </td>
+                        <td class="text-center">${row["Nombre de Institución"] || ""}</td>
+                        <td>
+                          ${cue}
+                          ${cue ? `<button class="btn btn-sm btn-outline-primary ms-2 copy-btn" data-cue="${cue}">Copiar</button>` : ""}
+                        </td>
+                        <td class="text-center">${nivelTexto}</td>
+                        <td class="text-center">${row["Nivel Jurisdiccional"] || ""}</td>
+                    `;
+                            tableBody.appendChild(tr);
+                            count++;
+                        }
+                    });
+
+                    if (count > 0) {
+                        resultsTable.style.display = "block";
+                        infoAlert.style.display = "none";
+                    } else {
+                        resultsTable.style.display = "none";
+                        infoAlert.style.display = "block";
+                        infoAlert.className = "alert alert-warning text-center";
+                        infoAlert.textContent = "⚠️ No se encontraron resultados. Intente con otro nombre o localidad.";
+                    }
+
+                    // Botones de copiar
+                    document.querySelectorAll(".copy-btn").forEach(btn => {
+                        btn.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            const cue = btn.getAttribute("data-cue");
+                            navigator.clipboard.writeText(cue).then(() => {
+                                copyAlert.classList.remove("d-none");
+                                setTimeout(() => copyAlert.classList.add("d-none"), 2000);
+                            });
+                        });
+                    });
+                }
+
+                // Buscador en vivo
+                document.getElementById("searchInput").addEventListener("input", (e) => {
+                    renderTable(e.target.value);
+                });
+            }
+        });
+    </script>
+
 
     <!-- Start Script -->
-    <script>
-        const fechaBru = "12 de enero del 2025";
-        const inversionBru = "64.423,82"
-        const nuevoTexto = `🍎 SBS GS RTA Fija - Fondos Común de inversión, Total invertido a la fecha ${fechaBru}: <strong>$ ${inversionBru}</strong>`;
-
-        document.getElementById("contenidoBru").innerHTML = nuevoTexto;
-    </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End Script -->
-
 </body>
 
 </html>

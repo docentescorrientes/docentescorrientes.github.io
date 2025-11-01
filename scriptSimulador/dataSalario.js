@@ -74,10 +74,11 @@ aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 1, 20000, "n"); // Tope
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 2, 100000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2025, 3, 80000, "n"); // Tope: hasta un cargo y 2 hijos
 
-// Descuentos: cod210SegVida -1709,03
+// Descuentos: cod210SegVida -2163
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 10, -1553.67, "d"); // Tope: solo un cargo
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -155.36, "d");
-aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -222.17, "d"); 
+aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -222.17, "d");
+aumentos.agregarAumento("210 Seguro de Vida (Life)", 2025, 8, -231.8, "d"); 
 
 // Descuentos: segurosCNP -4113.54
 aumentos.agregarAumento("Seguros CNP (Banco Corrientes)", 2025, 5, -4113.54, "d"); // Tope: solo un cargo

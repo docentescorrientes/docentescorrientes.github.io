@@ -213,7 +213,8 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                         size: 10,
                         weight: 'normal'
                     },
-                    formatter: (value) => '$ ' + formatNumero(value)
+                    formatter: (value) => '$ ' + formatNumero(value),
+                    clamp: true
                 }
             },
             {
@@ -275,7 +276,8 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                         size: 10,
                         weight: 'normal'
                     },
-                    formatter: (value) => '$ ' + formatNumero(value)
+                    formatter: (value) => '$ ' + formatNumero(value),
+                    clamp: true
                 }
             },
             scales: {

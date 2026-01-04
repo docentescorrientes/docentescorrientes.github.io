@@ -211,7 +211,8 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                         size: 10,
                         weight: 'normal'
                     },
-                    formatter: (value) => value.toFixed(1) + '%'
+                    formatter: (value) => value.toFixed(1) + '%',
+                    clamp: true
                 }
             },
             {
@@ -273,7 +274,8 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                         size: 10,
                         weight: 'normal'
                     },
-                    formatter: (value) => value.toFixed(1) + '%'
+                    formatter: (value) => value.toFixed(1) + '%',
+                    clamp: true
                 }
             },
             scales: {

@@ -204,7 +204,17 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                 backgroundColor: 'rgba(13, 110, 253, 0.2)',
                 borderWidth: 2,
                 tension: 0, // Línea recta
-                fill: false
+                fill: false,
+                datalabels: {
+                    anchor: 'end',
+                    align: 'bottom',
+                    color: 'rgba(8, 8, 8, 0.7)',
+                    font: {
+                        size: 10,
+                        weight: 'normal'
+                    },
+                    formatter: (value) => '$ ' + formatNumero(value)
+                }
             },
             {
                 label: 'Grises',

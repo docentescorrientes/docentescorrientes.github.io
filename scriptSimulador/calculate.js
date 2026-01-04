@@ -56,7 +56,8 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
 
     const anio193 = parseInt(year);
     const mes193 = parseInt(month);
-
+    console.log("Año 193:", anio193, "Mes 193:", mes193);
+    // Arreglos para ítems Grises
     let text193 = "Adicional Remunerativo Docente C/A (en solo un cargo)";
     if (anio193 > 2025 || (anio193 === 2025 && mes193 >= 3)) {
         text193 = "Adicional Remunerativo Docente C/A (en dos cargos)"

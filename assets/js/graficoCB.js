@@ -112,6 +112,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
 
     const fechaActual = new Date();
     const anio = fechaActual.getFullYear() - 1;
+    console.log("Año seleccionado para el gráfico:", anio);
     const mes = fechaActual.getMonth();
     const arrayDivisor = date[arrayRef[radioCheck]][anio]; //date.canastaBTNac[anio];
 

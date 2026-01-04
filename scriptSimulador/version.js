@@ -1,4 +1,4 @@
 // Start Versión
-const version = "5.3", fecha = "Octubre de 2025";
+const version = "5.4", fecha = "Enero de 2026";
 document.getElementById("versionH6").insertAdjacentHTML("beforeend", `${version}<br>${fecha}<br>@augusalterats`);
 // End Versión

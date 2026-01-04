@@ -110,7 +110,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
     const arrayRef = ["pesos", "dolarBlue"];
 
     const fechaActual = new Date();
-    const anio = fechaActual.getFullYear();
+    const anio = fechaActual.getFullYear() - 1;
     const mes = fechaActual.getMonth();
     let arrayDivisor = new Array(12).fill(1);
     if (radioCheck == 1) {
@@ -137,8 +137,9 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
         //    factor = [1, 1, 2];
     };
 
-    for (let i = 0; i < mes; i++) {
+    for (let i = 0; i < 12; i++) {
         const divisor = arrayDivisor[i];
+        if (divisor === '---') continue; // Saltar si no hay dato
         const n = i + 1;
         let blanco = sumaGrupo(anio, n, tipoB);
         let gris = sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1];

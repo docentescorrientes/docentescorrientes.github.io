@@ -56,8 +56,9 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
 
     const anio193 = parseInt(year);
     const mes193 = parseInt(month);
+
     let text193 = "Adicional Remunerativo Docente C/A (en solo un cargo)";
-    if (anio193 >= 2025 && mes193 >= 3) {
+    if (anio193 > 2025 || (anio193 === 2025 && mes193 >= 3)) {
         text193 = "Adicional Remunerativo Docente C/A (en dos cargos)"
     };
 
@@ -116,7 +117,7 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
 
         let nCargo193 = 1;
         let nCargo629 = 2;
-        if (anio193 >= 2025 && mes193 >= 3) {
+        if (anio193 > 2025 || (anio193 === 2025 && mes193 >= 3)) {
             nCargo193 = 2;
             nCargo629 = 0;
         };
@@ -170,12 +171,14 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
 
     // Ajuste adicional para ítems Grises
     const itemsGrises = obtenerValores(year, month, "g");
-    if (arrayValorG[3] < itemsGrises[3].valor) {
-        arrayValorG[3] = 0; // menos de 1 cargo
-    } else if (arrayValorG[3] >= itemsGrises[3].valor && arrayValorG[3] < 2 * itemsGrises[3].valor) {
-        arrayValorG[3] -= itemsGrises[3].valor;
-    } else if (arrayValorG[3] >= 2 * itemsGrises[3].valor) {
-        arrayValorG[3] = itemsGrises[3].valor;
+    if (anio193 < 2025 || (anio193 === 2025 && mes193 < 3)) {
+        if (arrayValorG[3] < itemsGrises[3].valor) {
+            arrayValorG[3] = 0; // menos de 1 cargo
+        } else if (arrayValorG[3] >= itemsGrises[3].valor && arrayValorG[3] < 2 * itemsGrises[3].valor) {
+            arrayValorG[3] -= itemsGrises[3].valor;
+        } else if (arrayValorG[3] >= 2 * itemsGrises[3].valor) {
+            arrayValorG[3] = itemsGrises[3].valor;
+        }
     }
 
     let sumaTotalG = 0;

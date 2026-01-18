@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+
+<head>
+    <title>DACorrientes - Sector 2019</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+
+    <!-- fonts style -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <script src="https://kit.fontawesome.com/d58c5b9122.js" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bs-today: #6388c0;
+            --bs-feriado-bg: #f0f0f0;
+            --bs-aviso-bg: #5ea36e;
+            --bs-weekend: #f0f0f0;
+            --bs-rango-bg: #ffffff;
+        }
+
+        .month-header {
+            background-color: #5c80a7;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+        }
+
+        .calendar-table {
+            font-size: 0.85rem;
+            table-layout: fixed;
+            margin-bottom: 0;
+        }
+
+        .calendar-table th {
+            background: #fff;
+            text-align: center;
+            border: none;
+            font-size: 0.75rem;
+            color: #999;
+            padding: 8px 0;
+        }
+
+        .calendar-table td {
+            text-align: center;
+            height: 40px;
+            vertical-align: middle;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Estilos de celdas */
+        .weekend {
+            background-color: var(--bs-weekend) !important;
+        }
+
+        .feriado {
+            background-color: var(--bs-feriado-bg) !important;
+            color: #856404;
+            font-weight: 900;
+        }
+
+        .aviso {
+            background-color: var(--bs-aviso-bg) !important;
+            color: white !important;
+            font-weight: 900;
+        }
+
+        .rango {
+            background-color: var(--bs-rango-bg) !important;
+            color: #333333 !important;
+            font-weight: 600;
+            border: 1px solid #cccccc;
+        }
+
+        .today {
+            background-color: var(--bs-today) !important;
+            color: white !important;
+            font-weight: bold;
+            border-radius: 11%;
+            transform: scale(0.8);
+        }
+
+        .calendar-table td:hover:not(.empty) {
+            filter: brightness(0.9);
+            z-index: 1;
+        }
+
+        .legend {
+            font-size: 0.8rem;
+        }
+
+        .box {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .tooltip-inner {
+            background-color: #3a4b37 !important;
+            white-space: pre-wrap !important;
+            text-align: left !important;
+            max-width: 800px !important;
+        }
+
+        .tooltip {
+            max-width: 100% !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Start Top Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa-solid fa-chalkboard-user mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none">DOCENTES AUTOCONVOCADOS CORRIENTES -
+                        SECTOR 2019 &nbsp;</a><i class="fa-solid fa-circle-check" style="color: #327cfb;"></i>
+                </div>
+                <div>
+                    <a class="text-light" href="https://www.facebook.com/Docentesautoconvocadosctescap" target="_blank"
+                        rel="sponsored"><i class="fa-brands fa-facebook fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/docentesautoconvocadosctes" target="_blank"><i
+                            class="fa-brands fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/DACorrientesCap" target="_blank">
+                        <i class="fa-brands fa-x-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.youtube.com/channel/UCQvKTsiO6uuYuCk_WGamyqA"
+                        target="_blank"><i class="fa-brands fa-youtube fa-sm fa-fw me-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Top Nav -->
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-primary logo h1 align-self-center" href="index.html">
+                <i class="fa-solid fa-chalkboard-user mx-2"></i>
+                DAC 2019
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#templatemo_main_nav_blue" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+                id="templatemo_main_nav_blue">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="simulador.html">Simulador</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="normas.html">Normas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cue.html">CUE-Anexo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="graficos.html">Gráficos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="infoDatos.html">Info Datos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-inline-flex align-items-center" href="colaboracion.html">
+                                <i class="fa fa-heart text-danger me-2"></i>
+                                Colaboración
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="calendario.html">🗓️ Calendario</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+    <!-- Calendario Section -->
+    <section class="py-5">
+        <div class="container-fluid px-4">
+            <header class="py-4 d-flex justify-content-between align-items-center flex-wrap border-bottom mb-4">
+                <h1 class="fw-bold m-0 text-secondary">🗓️ Calendario Escolar 2026 - Res. N° 4.706/25</h1>
+                <div class="d-flex gap-3 legend flex-wrap mt-2">
+                    <div><span class="box" style="background: var(--bs-today)"></span>Hoy</div>
+                    <div><span class="box" style="background: var(--bs-feriado-bg)"></span>Feriado/Asueto/Día no laboral/Receso
+                    </div>
+                </div>
+            </header>
+
+            <div id="resumenMesActual"
+                style="display:none; background: #e7f3ff; border-left: 4px solid #0056b3; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+                <h4 id="tituloMesActual" style="margin-top: 0; color: #0056b3;"></h4>
+                <div id="detallesMesActual" style="font-size: 0.95rem; line-height: 1.6;"></div>
+            </div>
+
+            <div id="calendarGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            </div>
+        </div>
+    </section>
+    <!-- Close Calendario Section -->
+
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer_blue">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-primary border-bottom pb-3 border-light logo"><i
+                            class="fa-solid fa-chalkboard-user mx-2"></i>DAC - SECTOR 2019</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            Provincia de Corrientes - Argentina
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none" href="dacsector2019@gmail.com">dacsector2019@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="#">Estatuto</a></li>
+                        <li><a class="text-decoration-none" href="https://bit.ly/Régimendelicencias"
+                                target="_blank">Licencias</a></li>
+                        <li><a class="text-decoration-none" href="calendario.html">Calendario Escolar</a></li>
+                        <li><a class="text-decoration-none" href="#">Efemérides</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Navegador</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="index.html">Inicio</a></li>
+                        <li><a class="text-decoration-none" href="simulador.html">Simulador</a></li>
+                        <li><a class="text-decoration-none" href="graficos.html">Gráficos</a></li>
+                        <li><a class="text-decoration-none" href="colaboracion.html">Colaboración</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-light mb-4">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto mx-auto text-center">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.facebook.com/Docentesautoconvocadosctescap"><i
+                                    class="fa-brands fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://www.instagram.com/docentesautoconvocadosctes"><i
+                                    class="fa-brands fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank"
+                                href="https://twitter.com/DACorrientesCap"><i
+                                    class="fa-brands fa-x-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light" href="https://www.youtube.com/channel/UCQvKTsiO6uuYuCk_WGamyqA"
+                                target="_blank"><i class="fa-brands fa-youtube fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12 text-center">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2024 Docentes Autoconvocados Corrientes - Sector 2019 - Licencia MIT. Todos
+                            los derechos reservados. Designed by <a class="text-primary" href="LICENSE.txt"
+                                target="_blank"><strong>augusalterats</strong></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End Footer -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const year = 2026;
+
+        // 1. CONFIGURACIÓN DE FECHAS ESPECIALES (Feriados y eventos propios)
+        const eventosEspecialesArray = [
+            // Feriados
+            //Enero
+            { fecha: "0-1", texto: "Año Nuevo (Nac. Inamovible).", clase: "feriado" },
+            //Febrero
+            { fecha: "1-16", texto: "Lunes de Carnaval (Nac. Inamovible).", clase: "feriado" },
+            { fecha: "1-17", texto: "Martes de Carnaval (Nac. Inamovible)", clase: "feriado" },
+            //Marzo
+            { fecha: "2-23", texto: "Día no laborable (Nac. con fines turísticos).", clase: "feriado" },
+            { fecha: "2-24", texto: "Día Nacional de la Memoria por la Verdad y la Justicia (Nac. Inamovible).", clase: "feriado" },
+            //Abril
+            { fecha: "3-2", texto: "Jueves Santo (Nac. Inamovible).", clase: "feriado" },
+            { fecha: "3-2", texto: "Día del Veterano y de los Caídos en la Guerra de Malvinas y Jueves Santo (Nac. Inamovible).", clase: "feriado" },
+            { fecha: "3-3", texto: "Viernes Santo (Nac. Inamovible).", clase: "feriado" },
+            //Mayo
+            { fecha: "4-1", texto: "Día del Trabajador (Nac. Inamovible).", clase: "feriado" },
+            { fecha: "4-25", texto: "Día de la Revolución de Mayo (Nac. Inamovible).", clase: "feriado" },
+            //Junio
+            { fecha: "5-15", texto: "Paso a la Inmortalidad del Gral. Don Martín Miguel de Güemes (Nac. Trasladable 17/6).", clase: "feriado" },
+            { fecha: "5-20", texto: "Paso a la Inmortalidad del Gral. Manuel Belgrano (Nac. Inamovible).", clase: "feriado" },
+            { fecha: "5-20", texto: "Conmemoración del Aniversario del Fallecimiento del creador de la Bandera Nacional el Gral. Manuel Joaquín del Corazón de Jesús Belgrano Ley N° 12.361 (Pcial. Permanente).", clase: "feriado" },
+            //Julio
+            { fecha: "6-9", texto: "Día de la Independencia (Nac. Inamovible).", clase: "feriado" },
+            { fecha: "6-10", texto: "Día no laborable (Nac. con fines turísticos).", clase: "feriado" },
+            //Agosto
+            { fecha: "7-17", texto: "Día del Paso a la Inmortalidad del General José de San Martín (Nac. Trasladable).", clase: "feriado" },
+            { fecha: "7-17", texto: "Conmemoración del Aniversario del Fallecimiento del General José Francisco de San Martín Ley N° 5.874 (Pcial. Permanente).", clase: "feriado" },
+            //Septiembre
+            //Octubre
+            { fecha: "9-12", texto: "Día de la Raza (Nac. Trasladable).", clase: "feriado" },
+            //Noviembre
+            { fecha: "10-23", texto: "Día de la Soberanía Nacional (Nac. Trasladable 20/11).", clase: "feriado" },
+            //Diciembre
+            { fecha: "11-7", texto: "Día no laborable (Nac. con fines turísticos).", clase: "feriado" },
+            { fecha: "11-8", texto: "Inmaculada Concepción de María (Nac. Inamovible).", clase: "feriado" },
+            { fecha: "11-25", texto: "Navidad (Nac. Inamovible).", clase: "feriado" },
+
+            // Anexo II - Distribución de Actividades Escolares 2026:
+            //Enero
+            { fecha: "0-2", texto: "Entrega de llaves al responsable institucional o Autoridad Policial, por parte del Directivo - Todos.", clase: "feriado" },
+            { rango: { mes: 0, desde: 2, hasta: 31 }, texto: "Receso escolar, con suspensión total de actividades, a excepción de las Escuelas Secundarias Técnicas con Especialidad Agropecuaria, EFA y Centros de Educación Física - Todos. 02/01 al 09/02.", clase: "feriado" },
+            { rango: { mes: 1, desde: 1, hasta: 9 }, texto: "Receso escolar, con suspensión total de actividades, a excepción de las Escuelas Secundarias Técnicas con Especialidad Agropecuaria, EFA y Centros de Educación Física - Todos. 02/01 al 09/02.", clase: "feriado" },
+            { rango: { mes: 0, desde: 2, hasta: 30 }, texto: "Continuidad de cursado de la modalidad de Educación Secundaria a Distancia Ñemboja Digital - EPJA. 02/01 al 30/01.", clase: "rango" },
+            { rango: { mes: 0, desde: 3, hasta: 30 }, texto: "Actividades de verano: Colonias de Vacaciones, Cursos de Natación, Proyectos de recreación y deportes. Acciones de escuelas de verano - C.E.F. 02/01 al 30/01.", clase: "rango" },
+            //Febrero
+            { rango: { mes: 1, desde: 3, hasta: 13 }, texto: "Actividades de verano: Colonias de Vacaciones, Cursos de Natación, Proyectos de recreación y deportes. Acciones de escuelas de verano - C.E.F. 03/02 al 13/02.", clase: "rango" },
+            { fecha: "1-10", texto: "Inicio del Periodo Escolar. Presentación del Personal de Conducción, Administrativos, Preceptores y Docentes con Funciones Administrativas - Todos.", clase: "aviso" },
+            { fecha: "1-10", texto: "Inscripción para Alfabetización, niveles primario y secundario - EPJA y ECE.", clase: "aviso" },
+            { rango: { mes: 1, desde: 10, hasta: 13 }, texto: "Inscripción en línea para estudiantes del Nivel Inicial (sala de 4 y 5 años), Nivel Primario (primer grado) y Nivel Secundario (primer año) 2° Llamado-Inicial, Primario y Secundario. 10/02 al 13/02.", clase: "rango" },
+            { rango: { mes: 1, desde: 10, hasta: 28 }, texto: "Periodo de organización institucional - Todos. 10/02 al 28/02.", clase: "rango" },
+            { rango: { mes: 1, desde: 10, hasta: 28 }, texto: "Carga Matricular Ciclo o Período Lectivo 2026 de todos los niveles educativos, de los establecimientos perteneciente al Ministerio de Educación. Registro en Gestión Educativa de los estudiantes con CUD - Todos. 10/02 al 14/03.", clase: "rango" },
+            { rango: { mes: 2, desde: 1, hasta: 14 }, texto: "Carga Matricular Ciclo o Período Lectivo 2026 de todos los niveles educativos, de los establecimientos perteneciente al Ministerio de Educación. Registro en Gestión Educativa de los estudiantes con CUD - Todos. 10/02 al 14/03.", clase: "rango" },
+            { rango: { mes: 1, desde: 11, hasta: 20 }, texto: "Realización de reuniones de departamentos. Formulación de propuestas integradas y planificación de la instancia de fortalecimiento de las trayectorias escolares para los estudiantes ingresantes a 1° año. Se realiza una vez al mes - Secundario. 11/02 al 20/02.", clase: "rango" },
+            { rango: { mes: 1, desde: 11, hasta: 13 }, texto: "Inscripción para evaluaciones, no regulares, previas y para completar estudios - Secundario y Di.G.E.P. 11/02 al 13/02.", clase: "rango" },
+            { fecha: "1-18", texto: "Presentación del Personal Docente. Primer encuentro institucional.", clase: "aviso" },
+            { rango: { mes: 1, desde: 19, hasta: 28 }, texto: "Clase de apoyo escolar a estudiantes en proceso de aprobación, intensificación de la enseñanza y de los aprendizajes. Evaluación - Primario y Di.G.E.P. 19/02 al 28/02.", clase: "rango" },
+            { rango: { mes: 1, desde: 19, hasta: 28 }, texto: "Exámenes regulares, no regulares, previos y para completar estudios - Secundario y Di.G.E.P. 19/02 al 28/02.", clase: "rango" },
+
+            //Julio
+            { rango: { mes: 6, desde: 13, hasta: 24 }, texto: "Período de receso escolar de invierno.", clase: "feriado" }
+        ];
+
+        // Función para consolidar eventos con fechas duplicadas y expandir rangos
+        function consolidarEventos(eventos) {
+            const eventosPorFecha = {};
+
+            // Definir prioridad de clases (mayor número = mayor prioridad)
+            const prioridadClase = {
+                'aviso': 3,
+                'feriado': 2,
+                'rango': 1,
+                '': 0
+            };
+
+            eventos.forEach(evento => {
+                let fechasAaplicar = [];
+
+                if (evento.rango) {
+                    // Expandir rango de fechas
+                    const { mes, desde, hasta } = evento.rango;
+                    for (let dia = desde; dia <= hasta; dia++) {
+                        fechasAaplicar.push(`${mes}-${dia}`);
+                    }
+                } else if (evento.fecha) {
+                    // Fecha única
+                    fechasAaplicar.push(evento.fecha);
+                }
+
+                fechasAaplicar.forEach(fecha => {
+                    if (!eventosPorFecha[fecha]) {
+                        eventosPorFecha[fecha] = {
+                            textos: [],
+                            clase: evento.clase
+                        };
+                    } else {
+                        // Mantener la clase de mayor prioridad
+                        const prioridadActual = prioridadClase[eventosPorFecha[fecha].clase] || 0;
+                        const prioridadNueva = prioridadClase[evento.clase] || 0;
+                        if (prioridadNueva > prioridadActual) {
+                            eventosPorFecha[fecha].clase = evento.clase;
+                        }
+                    }
+                    eventosPorFecha[fecha].textos.push({ texto: evento.texto, clase: evento.clase });
+                });
+            });
+
+            const eventosEspeciales = {};
+            Object.keys(eventosPorFecha).forEach(fecha => {
+                const item = eventosPorFecha[fecha];
+                // Ordenar textos por prioridad: aviso, rango, feriado
+                item.textos.sort((a, b) => {
+                    const prioA = prioridadClase[a.clase] || 0;
+                    const prioB = prioridadClase[b.clase] || 0;
+                    return prioB - prioA; // Mayor prioridad primero
+                });
+                eventosEspeciales[fecha] = {
+                    texto: item.textos.map((t, i) => `${i + 1}. ${t.texto}`).join('<br>'),
+                    clase: item.clase
+                };
+            });
+
+            return eventosEspeciales;
+        }
+
+        const eventosEspeciales = consolidarEventos(eventosEspecialesArray);
+
+        const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        const daysHeader = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+
+        // Función para generar resumen del mes actual
+        function generarResumenMesActual() {
+            const now = new Date();
+            const mesActual = now.getMonth();
+            const nombreMes = months[mesActual];
+
+            let eventosUnicos = new Map(); // Guardar eventos únicos con su info
+
+            Object.keys(eventosEspeciales).forEach(fecha => {
+                const [mesFecha, dia] = fecha.split('-').map(Number);
+                if (mesFecha === mesActual) {
+                    const textoCompleto = eventosEspeciales[fecha].texto;
+                    const clase = eventosEspeciales[fecha].clase;
+
+                    // Parsear los eventos individuales (separados por <br>)
+                    const eventosEnFecha = textoCompleto.split('<br>');
+                    eventosEnFecha.forEach(evento => {
+                        // Remover la numeración (ej: "1. ", "2. ")
+                        const eventoLimpio = evento.replace(/^\d+\.\s*/, '').trim();
+
+                        // Guardar solo la primera ocurrencia
+                        if (!eventosUnicos.has(eventoLimpio)) {
+                            eventosUnicos.set(eventoLimpio, { dia, clase });
+                        }
+                    });
+                }
+            });
+
+            // Convertir a array
+            let eventosDelMes = Array.from(eventosUnicos, ([texto, info]) => ({
+                texto,
+                dia: info.dia,
+                clase: info.clase
+            }));
+
+            const resumenDiv = document.getElementById('resumenMesActual');
+            const tituloDiv = document.getElementById('tituloMesActual');
+            const detallesDiv = document.getElementById('detallesMesActual');
+
+            if (eventosDelMes.length > 0) {
+                tituloDiv.textContent = `📌 ${nombreMes} de ${year}`;
+                let html = '<strong>Eventos principales:</strong><ul style="margin: 10px 0; padding-left: 20px;">';
+                eventosDelMes.forEach(evento => {
+                    // Si no es rango, mostrar la fecha en formato DD/MM
+                    if (evento.clase !== 'rango') {
+                        const fechaFormato = `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
+                        html += `<li><strong>${fechaFormato}</strong>: ${evento.texto}</li>`;
+                    } else {
+                        html += `<li>${evento.texto}</li>`;
+                    }
+                });
+                html += '</ul>';
+                detallesDiv.innerHTML = html;
+                resumenDiv.style.display = 'block';
+            } else {
+                resumenDiv.style.display = 'none';
+            }
+        }
+
+        function initCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const now = new Date();
+
+            months.forEach((name, monthIdx) => {
+                const firstDay = new Date(year, monthIdx, 1).getDay();
+                const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
+                const { feriados, avisos, rangos } = contarEventosPorMes(monthIdx);
+
+                let html = `
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                        <div class="month-header">${name}</div>
+                        <table class="table calendar-table">
+                            <thead><tr>${daysHeader.map(d => `<th>${d}</th>`).join('')}</tr></thead>
+                            <tbody>`;
+
+                let date = 1;
+                for (let i = 0; i < 6; i++) {
+                    html += '<tr>';
+                    for (let j = 0; j < 7; j++) {
+                        if (i === 0 && j < firstDay) {
+                            html += '<td class="empty"></td>';
+                        } else if (date > daysInMonth) {
+                            html += '<td class="empty"></td>';
+                        } else {
+                            const key = `${monthIdx}-${date}`;
+                            const info = eventosEspeciales[key];
+                            let classes = [];
+
+                            // Determinar etiqueta (Tooltip)
+                            // Si hay evento especial usa ese texto, sino arma la fecha genérica
+                            let tooltipText = info ? info.texto : `${date} de ${name}`;
+
+                            // Clases visuales
+                            if (j === 0) classes.push('weekend');
+                            if (info) {
+                                // Si es domingo y tiene clase rango, mantener weekend
+                                if (j === 0 && info.clase === 'rango') {
+                                    // No agregar la clase rango, mantener solo weekend
+                                } else {
+                                    classes.push(info.clase);
+                                }
+                            }
+
+                            // Hoy (compara día, mes y año real)
+                            if (date === now.getDate() && monthIdx === now.getMonth() && year === now.getFullYear()) {
+                                classes.push('today');
+                                tooltipText = "Hoy: " + tooltipText;
+                            }
+
+                            // Determinar tooltip: en domingos y sábados de rango, mostrar solo la fecha
+                            let tooltipFinal = tooltipText;
+                            if (info && info.clase === 'rango' && (j === 0 || j === 6)) {
+                                tooltipFinal = `${date} de ${name}`;
+                            }
+                            
+                            html += `<td class="${classes.join(' ')}" 
+                                     data-bs-toggle="tooltip" 
+                                     data-bs-title="${tooltipFinal}">
+                                     ${date}
+                                 </td>`;
+                            date++;
+                        }
+                    }
+                    html += '</tr>';
+                    if (date > daysInMonth) break;
+                }
+                html += `</tbody></table></div></div>`;
+                grid.innerHTML += html;
+            });
+
+            // Activar los Tooltips de Bootstrap
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el, {
+                html: true
+            }));
+        }
+
+        // Función para contar eventos por mes
+        function contarEventosPorMes(mes) {
+            let feriados = 0, avisos = 0, rangos = 0;
+            Object.keys(eventosEspeciales).forEach(fecha => {
+                const [mesFecha, dia] = fecha.split('-').map(Number);
+                if (mesFecha === mes) {
+                    if (eventosEspeciales[fecha].clase === 'feriado') feriados++;
+                    else if (eventosEspeciales[fecha].clase === 'aviso') avisos++;
+                    else if (eventosEspeciales[fecha].clase === 'rango') rangos++;
+                }
+            });
+            return { feriados, avisos, rangos };
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            generarResumenMesActual();
+            initCalendar();
+        });
+    </script>
+</body>
+
+</html>

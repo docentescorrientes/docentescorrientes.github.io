@@ -241,6 +241,13 @@
             <div id="calendarGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
             </div>
         </div>
+        <!-- Start Version -->
+        <div class="container mt-5" id="versionDiv">
+            <h6 class="text-primary" style="--bs-text-opacity: 0.1; text-align: center;" id="versionH6">
+                &#x2733;Versión
+            </h6>
+        </div>
+        <!-- End Version-->
     </section>
     <!-- Close Calendario Section -->
 
@@ -398,9 +405,21 @@
             { rango: { mes: 1, desde: 19, hasta: 28 }, texto: "Clase de apoyo escolar a estudiantes en proceso de aprobación, intensificación de la enseñanza y de los aprendizajes. Evaluación - Primario y Di.G.E.P. 19/02 al 28/02.", clase: "rango" },
             { rango: { mes: 1, desde: 19, hasta: 28 }, texto: "Exámenes regulares, no regulares, previos y para completar estudios - Secundario y Di.G.E.P. 19/02 al 28/02.", clase: "rango" },
             { rango: { mes: 1, desde: 19, hasta: 21 }, texto: "Articulación entre niveles. Sin suspención de actuvidades áulicas - Todos. 19/02 al 21/02.", clase: "rango" },
+            { rango: { mes: 1, desde: 19, hasta: 20 }, texto: "Exámenes libres de 3° a 6° grado - Primario y Di.G.E.P. 19/02 al 20/02.", clase: "rango" },
+            { rango: { mes: 1, desde: 18, hasta: 20 }, texto: "Inscripción de estudiantes (2° a 6° grado) - Primario. 18/02 al 20/02.", clase: "rango" },
 
+            { rango: { mes: 1, desde: 19, hasta: 23 }, texto: "Inscripción de estudiantes de 2° a 6°/7° año - Secundario. 19/02 al 23/02.", clase: "rango" },
+            { fecha: "1-23", texto: "Último plazo para la presentación de Invenatrio actualizado año 2025 a División de Inventario y Bienes Patrimoniales. C.G.E. Inicial y Primario.", clase: "aviso" },
+            { rango: { mes: 1, desde: 23, hasta: 27 }, texto: "Fortalecimiento de la Trayectorias Escolares a los estudiantes ingresantes al primer año del Nivel Secundario. Intensificación de la enseñanza en Lengua, Matemática y Lengua Extranjera - Secundario. 23/02 al 27/02.", clase: "rango" },
+            { fecha: "1-27", texto: "Último plazo para la presentación ante Junta de Clasificación las hojas de concepto de Personal Directivo correspondiente al año 2025 - Inicial, Primario, Adultos y Especial.", clase: "aviso" },
+            //Marzo
+            
             //Julio
-            { rango: { mes: 6, desde: 13, hasta: 24 }, texto: "Período de receso escolar de invierno.", clase: "feriado" }
+            { rango: { mes: 6, desde: 13, hasta: 24 }, texto: "Período de receso escolar de invierno.", clase: "feriado" },
+            //Diciembre
+            { fecha: "11-11", texto: "Finalización Segundo Cuatrimestre - Todos.", clase: "aviso" },
+            { fecha: "11-18", texto: "Finalización del Ciclo o Período Lectivo 2026 - Todos.", clase: "aviso" },
+
         ];
 
         // Función para consolidar eventos con fechas duplicadas y expandir rangos
@@ -647,6 +666,9 @@
             });
         });
     </script>
+
+    <script type="module" src="scriptSimulador/version.js"></script>
+
 </body>
 
 </html>

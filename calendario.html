@@ -608,16 +608,24 @@
                             // Si hay evento especial usa ese texto, sino arma la fecha genérica
                             let tooltipText = info ? info.texto : `${date} de ${name}`;
 
-                            // Clases visuales
-                            if (j === 0) classes.push('weekend');
-                            if (info) {
-                                // Si es domingo y tiene clase rango, mantener weekend
-                                if (j === 0 && info.clase === 'rango') {
-                                    // No agregar la clase rango, mantener solo weekend
-                                } else {
-                                    classes.push(info.clase);
-                                }
-                            }
+// Clases visuales
+const esDomingo = j === 0;
+const esSabado = j === 6;
+
+// 1️⃣ Pintar sábados y domingos SOLO si NO es aviso
+if ((esDomingo || esSabado) && (!info || info.clase !== 'aviso')) {
+    classes.push('weekend');
+}
+
+// 2️⃣ Agregar clase del evento (aviso tiene prioridad)
+if (info) {
+    // Si es rango en finde, mantener gris
+    if ((esDomingo || esSabado) && info.clase === 'rango') {
+        // no se agrega la clase rango
+    } else {
+        classes.push(info.clase);
+    }
+}
 
                             // Hoy (compara día, mes y año real)
                             if (date === now.getDate() && monthIdx === now.getMonth() && year === now.getFullYear()) {

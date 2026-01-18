@@ -187,7 +187,7 @@
                                 <i class="fa fa-heart text-danger me-2"></i>
                                 Colaboración
                             </a>
-                        </li> 
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-primary" href="calendario.html">🗓️ Calendario</a>
                         </li>
@@ -205,10 +205,32 @@
                 <h1 class="fw-bold m-0 text-secondary">🗓️ Calendario Escolar 2026 - Res. N° 4.706/25</h1>
                 <div class="d-flex gap-3 legend flex-wrap mt-2">
                     <div><span class="box" style="background: var(--bs-today)"></span>Hoy</div>
-                    <div><span class="box" style="background: var(--bs-feriado-bg)"></span>Feriado/Asueto/Día no laboral/Receso
+                    <div><span class="box" style="background: var(--bs-feriado-bg)"></span>Feriado/Asueto/Día no
+                        laboral/Receso
                     </div>
                 </div>
             </header>
+
+            <div class="mb-3 d-flex justify-content-center">
+                <div style="max-width: 250px;">
+                    <label for="mesSelector" class="form-label"><strong>Seleccionar mes:</strong></label>
+                    <select id="mesSelector" class="form-select">
+                        <option value="-1">Mes actual</option>
+                        <option value="0">Enero</option>
+                        <option value="1">Febrero</option>
+                        <option value="2">Marzo</option>
+                        <option value="3">Abril</option>
+                        <option value="4">Mayo</option>
+                        <option value="5">Junio</option>
+                        <option value="6">Julio</option>
+                        <option value="7">Agosto</option>
+                        <option value="8">Septiembre</option>
+                        <option value="9">Octubre</option>
+                        <option value="10">Noviembre</option>
+                        <option value="11">Diciembre</option>
+                    </select>
+                </div>
+            </div>
 
             <div id="resumenMesActual"
                 style="display:none; background: #e7f3ff; border-left: 4px solid #0056b3; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
@@ -375,6 +397,7 @@
             { fecha: "1-18", texto: "Presentación del Personal Docente. Primer encuentro institucional.", clase: "aviso" },
             { rango: { mes: 1, desde: 19, hasta: 28 }, texto: "Clase de apoyo escolar a estudiantes en proceso de aprobación, intensificación de la enseñanza y de los aprendizajes. Evaluación - Primario y Di.G.E.P. 19/02 al 28/02.", clase: "rango" },
             { rango: { mes: 1, desde: 19, hasta: 28 }, texto: "Exámenes regulares, no regulares, previos y para completar estudios - Secundario y Di.G.E.P. 19/02 al 28/02.", clase: "rango" },
+            { rango: { mes: 1, desde: 19, hasta: 21 }, texto: "Articulación entre niveles. Sin suspención de actuvidades áulicas - Todos. 19/02 al 21/02.", clase: "rango" },
 
             //Julio
             { rango: { mes: 6, desde: 13, hasta: 24 }, texto: "Período de receso escolar de invierno.", clase: "feriado" }
@@ -447,10 +470,10 @@
         const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
         const daysHeader = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
 
-        // Función para generar resumen del mes actual
-        function generarResumenMesActual() {
+        // Función para generar resumen de un mes específico
+        function generarResumenMes(mesIndex) {
             const now = new Date();
-            const mesActual = now.getMonth();
+            let mesActual = mesIndex === -1 ? now.getMonth() : mesIndex;
             const nombreMes = months[mesActual];
 
             let eventosUnicos = new Map(); // Guardar eventos únicos con su info
@@ -468,8 +491,15 @@
                         const eventoLimpio = evento.replace(/^\d+\.\s*/, '').trim();
 
                         // Guardar solo la primera ocurrencia
+                        // Detectar si el texto corresponde a un rango (viene de un evento clase "rango")
+                        const esRango = /\d{2}\/\d{2}\s+al\s+\d{2}\/\d{2}/.test(eventoLimpio);
+
                         if (!eventosUnicos.has(eventoLimpio)) {
-                            eventosUnicos.set(eventoLimpio, { dia, clase });
+                            eventosUnicos.set(eventoLimpio, {
+                                dia,
+                                clase,
+                                esRango
+                            });
                         }
                     });
                 }
@@ -479,7 +509,8 @@
             let eventosDelMes = Array.from(eventosUnicos, ([texto, info]) => ({
                 texto,
                 dia: info.dia,
-                clase: info.clase
+                clase: info.clase,
+                esRango: info.esRango
             }));
 
             const resumenDiv = document.getElementById('resumenMesActual');
@@ -490,9 +521,9 @@
                 tituloDiv.textContent = `📌 ${nombreMes} de ${year}`;
                 let html = '<strong>Eventos principales:</strong><ul style="margin: 10px 0; padding-left: 20px;">';
                 eventosDelMes.forEach(evento => {
-                    // Si no es rango, mostrar la fecha en formato DD/MM
-                    if (evento.clase !== 'rango') {
-                        const fechaFormato = `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
+                    if (!evento.esRango) {
+                        const fechaFormato =
+                            `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
                         html += `<li><strong>${fechaFormato}</strong>: ${evento.texto}</li>`;
                     } else {
                         html += `<li>${evento.texto}</li>`;
@@ -504,6 +535,11 @@
             } else {
                 resumenDiv.style.display = 'none';
             }
+        }
+
+        // Función para generar resumen del mes actual (mantener por compatibilidad)
+        function generarResumenMesActual() {
+            generarResumenMes(-1);
         }
 
         function initCalendar() {
@@ -562,7 +598,7 @@
                             if (info && info.clase === 'rango' && (j === 0 || j === 6)) {
                                 tooltipFinal = `${date} de ${name}`;
                             }
-                            
+
                             html += `<td class="${classes.join(' ')}" 
                                      data-bs-toggle="tooltip" 
                                      data-bs-title="${tooltipFinal}">
@@ -602,6 +638,13 @@
         document.addEventListener('DOMContentLoaded', function () {
             generarResumenMesActual();
             initCalendar();
+
+            // Event listener para el selector de mes
+            const mesSelector = document.getElementById('mesSelector');
+            mesSelector.addEventListener('change', function () {
+                const mesSeleccionado = parseInt(this.value);
+                generarResumenMes(mesSeleccionado);
+            });
         });
     </script>
 </body>

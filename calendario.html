@@ -61,12 +61,22 @@
         /* Estilos de celdas */
         .weekend {
             background-color: var(--bs-weekend) !important;
+            background: linear-gradient(135deg,
+                    #e0e0e0 0%,
+                    #e0e0e0 0%,
+                    transparent 100%,
+                    transparent 50%) !important;
         }
 
         .feriado {
             background-color: var(--bs-feriado-bg) !important;
             color: #856404;
             font-weight: 900;
+            background: linear-gradient(135deg,
+                    #e0e0e0 0%,
+                    #e0e0e0 0%,
+                    transparent 100%,
+                    transparent 50%) !important;
         }
 
         .aviso {
@@ -120,6 +130,15 @@
 
         .tooltip {
             max-width: 100% !important;
+        }
+
+        /* Sábados con mitad gris en diagonal */
+        .sabado-diagonal {
+            background: linear-gradient(135deg,
+                    #e0e0e0 0%,
+                    #e0e0e0 0%,
+                    transparent 100%,
+                    transparent 50%) !important;
         }
     </style>
 </head>
@@ -408,6 +427,11 @@
             { rango: { mes: 0, desde: 2, hasta: 30 }, texto: "Continuidad de cursado de la modalidad de Educación Secundaria a Distancia Ñemboja Digital - EPJA. 02/01 al 30/01.", clase: "rango" },
             { rango: { mes: 0, desde: 3, hasta: 30 }, texto: "Actividades de verano: Colonias de Vacaciones, Cursos de Natación, Proyectos de recreación y deportes. Acciones de escuelas de verano - C.E.F. 02/01 al 30/01.", clase: "rango" },
             //Febrero
+            { rango: { mes: 1, desde: 1, hasta: 17 }, texto: "Presentación a Dpto. de Personal Docente del C.G.E. hojas de concepto profesional del personal directivo y docentes 2025 de cada establecimiento con nómina detallando: Apellido/s Nombre/s, D.N.I., cargo y N° de legajo de C.G.E. Calendario Escolar 2025 Res. N° 6.589/24  - Inicial y Primaria. 22/12/25 al 17/02/26.", clase: "rango" },
+            { rango: { mes: 1, desde: 1, hasta: 17 }, texto: "Presentación a Dpto. Personal Administrativo del C.G.E. hojas de concepto del personal de servicio y administrativo (planta permanente) 2025. Calendario Escolar 2025 Res. N° 6.589/24  - Inicial y Primaria. 22/12/25 al 17/02/26", clase: "rango" },
+            { rango: { mes: 1, desde: 1, hasta: 28 }, texto: "Egreso de alumnos que adeudan materias a través del sistema Gestión Escolar. Calendario Escolar 2025 Res. N° 6.589/24 - Primario y Secundario. 01/02 al 28/02.", clase: "rango" },
+
+
             { rango: { mes: 1, desde: 3, hasta: 13 }, texto: "Actividades de verano: Colonias de Vacaciones, Cursos de Natación, Proyectos de recreación y deportes. Acciones de escuelas de verano - C.E.F. 03/02 al 13/02.", clase: "rango" },
             { fecha: "1-10", texto: "Inicio del Periodo Escolar. Presentación del Personal de Conducción, Administrativos, Preceptores y Docentes con Funciones Administrativas - Todos.", clase: "aviso" },
             { fecha: "1-10", texto: "Inscripción para Alfabetización, niveles primario y secundario - EPJA y ECE.", clase: "aviso" },
@@ -491,10 +515,10 @@
             { rango: { mes: 7, desde: 10, hasta: 18 }, texto: "Reunión de Padres/tutores/responsables para la notificación de los informes individuales de avances de los aprendizajes o de la situación académica del estudiante correspondiente al primer cuatrimestre, según el nivel que cursa - Todos. 10/08 al 18/08.", clase: "rango" },
             //Septiembre
             { rango: { mes: 8, desde: 18, hasta: 23 }, texto: "Jornada de estudiantes. Sin suspención de actividades - Secundario. 18/08 al 23/08.", clase: "rango" },
-            { fecha: "8-30", texto: "Carga completa de títulos correspondientes a egresados período julio-agosto 2026 - Sistema Federal de Títulos Digital. Res. CFE N° 440/23 y 479/24 - Secundario y Di.G.E.P.", clase: "aviso" }, 
+            { fecha: "8-30", texto: "Carga completa de títulos correspondientes a egresados período julio-agosto 2026 - Sistema Federal de Títulos Digital. Res. CFE N° 440/23 y 479/24 - Secundario y Di.G.E.P.", clase: "aviso" },
             //Octubre
             { rango: { mes: 9, desde: 6, hasta: 9 }, texto: "Quinto Encuentro Institucional. Sin suspención de actividades áulicas - Todos. 06/10 al 09/10.", clase: "rango" },
-            { fecha: "9-30", texto: "Vencimiento del plazo uso del derecho de admisión para el ciclo lectivo 2027, el cual deberá ser comunicado de manera fehaciente - Di.G.E.P.", clase: "aviso" }, 
+            { fecha: "9-30", texto: "Vencimiento del plazo uso del derecho de admisión para el ciclo lectivo 2027, el cual deberá ser comunicado de manera fehaciente - Di.G.E.P.", clase: "aviso" },
             //Noviembre
 
 
@@ -680,14 +704,19 @@
                             // Si hay evento especial usa ese texto, sino arma la fecha genérica
                             let tooltipText = info ? info.texto : `${date} de ${name}`;
 
-                            // Clases visuales
                             const esDomingo = j === 0;
                             const esSabado = j === 6;
 
-                            // 1️⃣ Pintar sábados y domingos SOLO si NO es aviso
-                            if ((esDomingo || esSabado) && (!info || info.clase !== 'aviso')) {
+                            // Domingo gris completo
+                            if (esDomingo && (!info || info.clase !== 'aviso')) {
                                 classes.push('weekend');
                             }
+
+                            // Sábado con mitad diagonal
+                            if (esSabado && (!info || info.clase !== 'aviso')) {
+                                classes.push('sabado-diagonal');
+                            }
+
 
                             // 2️⃣ Agregar clase del evento (aviso tiene prioridad)
                             if (info) {

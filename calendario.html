@@ -264,9 +264,11 @@
                             <div class="col-md-6">
                                 <h6 class="fw-bold mb-1">Anexo I: Disposiciones Generales</h6>
                                 <ul class="mb-0">
-                                    <li><strong>Ciclo Escolar:</strong> 10 de febrero del 2026 al 26 de febrero del 2027.
+                                    <li><strong>Ciclo Escolar:</strong> 10 de febrero del 2026 al 26 de febrero del
+                                        2027.
                                     </li>
-                                    <li><strong>Período Lectivo 2026:</strong> 02 de marzo al 18 de diciembre del 2026. <span id="diasLectivo" class="badge bg-light text-dark border ms-1"></span>
+                                    <li><strong>Período Lectivo 2026:</strong> 02 de marzo al 18 de diciembre del 2026.
+                                        <span id="diasLectivo" class="badge bg-light text-dark border ms-1"></span>
                                     </li>
                                 </ul>
                             </div>
@@ -274,10 +276,13 @@
                             <!-- Columna derecha -->
                             <div class="col-md-6">
                                 <ul class="mb-0">
-                                    <li><strong>Primer Cuatrimestre:</strong> 02 de marzo al 31 de julio del 2026. <span id="diasC1" class="badge bg-light text-dark border ms-1"></span></li>
+                                    <li><strong>Primer Cuatrimestre:</strong> 02 de marzo al 31 de julio del 2026. <span
+                                            id="diasC1" class="badge bg-light text-dark border ms-1"></span></li>
                                     <li><strong>Receso Escolar de Invierno:</strong> 13 de julio al 24 de julio del
                                         2026.</li>
-                                    <li><strong>Segundo Cuatrimestre:</strong> 01 de agosto al 11 de diciembre del 2026. <span id="diasC2" class="badge bg-light text-dark border ms-1"></span></li>
+                                    <li><strong>Segundo Cuatrimestre:</strong> 01 de agosto al 11 de diciembre del 2026.
+                                        <span id="diasC2" class="badge bg-light text-dark border ms-1"></span>
+                                    </li>
                                     </li>
                                 </ul>
                             </div>
@@ -311,8 +316,13 @@
                     <i class="fa-solid fa-circle-info me-2 text-success"></i><strong>Nota:</strong> Las fechas pueden
                     estar sujetas a modificaciones según disposiciones oficiales, como feriados con fines turísticos,
                     sujetos a Decreto Presidencial. Actos de Forma II, sin suspensión de actividades, se celebrará en
-                    cada establecimiento la fecha de la fundación de la localidad el día anterior hábil (Decreto
-                    N°2.580/86 y Ley N° 6.494). Respecto a los Actos de Forma III, la institución organizará las
+                    cada establecimiento la fecha de la fundación de la localidad el día anterior hábil (<a
+                        href="https://drive.google.com/file/d/1IsBSb_OMUBP3h3Uq92_cJM5JreQwWMF4/view?usp=sharing"
+                        target="_blank" class="text-decoration-none text-success">Decreto
+                        N°2.580/86</a> y <a
+                        href="https://drive.google.com/file/d/1zIkOjzZp0Ezv888k68KVDWF-ieNjYzGt/view?usp=sharing"
+                        target="_blank" class="text-decoration-none text-success">Ley N° 6.494</a>). Respecto a los Actos de Forma
+                    III, la institución organizará las
                     actividades que considere valiosas para el desarrollo del proceso educativo a efectos de conmemorar
                     las fechas efemérides del Anexo IV.
                 </div>
@@ -1030,7 +1040,7 @@
             const grid = document.getElementById('calendarGrid');
             const now = new Date();
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-//            const today = new Date(2026, 2, 15); // Fecha fija para pruebas: 15 de Marzo de 2026
+            //            const today = new Date(2026, 2, 15); // Fecha fija para pruebas: 15 de Marzo de 2026
             months.forEach((name, monthIdx) => {
                 const firstDay = new Date(year, monthIdx, 1).getDay();
                 const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
@@ -1173,17 +1183,17 @@
             let dias = 0;
             let current = new Date(inicio);
             const end = new Date(fin);
-            
+
             while (current <= end) {
                 const dayOfWeek = current.getDay();
                 const m = current.getMonth();
                 const d = current.getDate();
                 const key = `${m}-${d}`;
                 const info = eventosEspeciales[key];
-                
+
                 const esFinde = (dayOfWeek === 0 || dayOfWeek === 6);
                 const esFeriado = (info && info.clase === 'feriado');
-                
+
                 if (!esFinde && !esFeriado) {
                     dias++;
                 }
@@ -1228,7 +1238,7 @@
                 } else {
                     restantes = calcularDiasRango(today, fin);
                 }
-                
+
                 if (restantes === total) return `${total} días`;
                 if (restantes === 0) return `Finalizado (${total} días)`;
                 return `${restantes} días restantes (de ${total})`;

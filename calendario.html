@@ -1029,7 +1029,8 @@
         function initCalendar() {
             const grid = document.getElementById('calendarGrid');
             const now = new Date();
-
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+//            const today = new Date(2026, 2, 15); // Fecha fija para pruebas: 15 de Marzo de 2026
             months.forEach((name, monthIdx) => {
                 const firstDay = new Date(year, monthIdx, 1).getDay();
                 const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
@@ -1045,6 +1046,8 @@
                 const finC2 = new Date(year, 11, 11);  // 11 de Diciembre
 
                 let diasDeClase = 0;
+                let diasRestantes = 0;
+
                 for (let d = 1; d <= daysInMonth; d++) {
                     const dateObj = new Date(year, monthIdx, d);
                     const enRangoClases = (dateObj >= inicioC1 && dateObj <= finC1) || (dateObj >= inicioC2 && dateObj <= finC2);
@@ -1055,14 +1058,24 @@
                         const info = eventosEspeciales[key];
                         const esFinde = (dayOfWeek === 0 || dayOfWeek === 6);
                         const esFeriado = (info && info.clase === 'feriado');
-                        if (!esFinde && !esFeriado) diasDeClase++;
+                        if (!esFinde && !esFeriado) {
+                            diasDeClase++;
+                            if (dateObj >= today) diasRestantes++;
+                        }
                     }
+                }
+
+                let badgeContent = '';
+                if (diasDeClase > 0) {
+                    if (diasRestantes === diasDeClase) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días de clases">${diasDeClase}</span>`;
+                    else if (diasRestantes > 0) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días restantes / Total">${diasRestantes}/${diasDeClase}</span>`;
+                    else badgeContent = `<span class="badge bg-secondary text-light ms-1" style="font-size:0.7em" title="Finalizado">${diasDeClase}</span>`;
                 }
 
                 let html = `
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm overflow-hidden">
-                        <div class="month-header">${name} ${diasDeClase > 0 ? `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días de clases">${diasDeClase}</span>` : ''}</div>
+                        <div class="month-header">${name} ${badgeContent}</div>
                         <table class="table calendar-table">
                             <thead><tr>${daysHeader.map(d => `<th>${d}</th>`).join('')}</tr></thead>
                             <tbody>`;
@@ -1203,18 +1216,36 @@
                 generarResumenMes(parseInt(this.value), true);
             });
 
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+            function getDiasRestantesTexto(inicio, fin) {
+                const total = calcularDiasRango(inicio, fin);
+                let restantes = 0;
+                if (today <= inicio) {
+                    restantes = total;
+                } else if (today > fin) {
+                    restantes = 0;
+                } else {
+                    restantes = calcularDiasRango(today, fin);
+                }
+                
+                if (restantes === total) return `${total} días`;
+                if (restantes === 0) return `Finalizado (${total} días)`;
+                return `${restantes} días restantes (de ${total})`;
+            }
+
             // Calcular y mostrar días totales en el resumen superior
             const inicioLectivo = new Date(year, 2, 2);
             const finLectivo = new Date(year, 11, 18);
-            document.getElementById('diasLectivo').textContent = `${calcularDiasRango(inicioLectivo, finLectivo)} días`;
+            document.getElementById('diasLectivo').textContent = getDiasRestantesTexto(inicioLectivo, finLectivo);
 
             const inicioC1 = new Date(year, 2, 2);
             const finC1 = new Date(year, 6, 31);
-            document.getElementById('diasC1').textContent = `${calcularDiasRango(inicioC1, finC1)} días`;
+            document.getElementById('diasC1').textContent = getDiasRestantesTexto(inicioC1, finC1);
 
             const inicioC2 = new Date(year, 7, 1);
             const finC2 = new Date(year, 11, 11);
-            document.getElementById('diasC2').textContent = `${calcularDiasRango(inicioC2, finC2)} días`;
+            document.getElementById('diasC2').textContent = getDiasRestantesTexto(inicioC2, finC2);
         });
 
 

@@ -1018,17 +1018,55 @@
             if (eventosDelMes.length > 0) {
                 tituloDiv.textContent = `📌 ${nombreMes} de ${year}`;
 
-                let html = '<strong>Eventos principales:</strong><ul class="mb-0">';
+                // Separar eventos generales y efemérides
+                const eventosGenerales = [];
+                const eventosEfemerides = [];
+
                 eventosDelMes.forEach(evento => {
-                    if (!evento.esRango) {
-                        const fechaFormato =
-                            `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
-                        html += `<li><strong>${fechaFormato}</strong>: ${evento.texto}</li>`;
+                    if (evento.texto.toLowerCase().includes('(efeméride)')) {
+                        eventosEfemerides.push(evento);
                     } else {
-                        html += `<li>${evento.texto}</li>`;
+                        eventosGenerales.push(evento);
                     }
                 });
-                html += '</ul>';
+
+                // Ordenar por día
+                const sortFn = (a, b) => a.dia - b.dia;
+                eventosGenerales.sort(sortFn);
+                eventosEfemerides.sort(sortFn);
+
+                let html = '';
+
+                // Sección Eventos Generales
+                if (eventosGenerales.length > 0) {
+                    html += '<strong>Eventos principales:</strong><ul class="mb-2">';
+                    eventosGenerales.forEach(evento => {
+                        if (!evento.esRango) {
+                            const fechaFormato =
+                                `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
+                            html += `<li><strong>${fechaFormato}</strong>: ${evento.texto}</li>`;
+                        } else {
+                            html += `<li>${evento.texto}</li>`;
+                        }
+                    });
+                    html += '</ul>';
+                }
+
+                // Sección Efemérides
+                if (eventosEfemerides.length > 0) {
+                    if (eventosGenerales.length > 0) html += '<hr>';
+                    html += '<strong>Efemérides:</strong><ul class="mb-0">';
+                    eventosEfemerides.forEach(evento => {
+                        if (!evento.esRango) {
+                            const fechaFormato =
+                                `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
+                            html += `<li><strong>${fechaFormato}</strong>: ${evento.texto}</li>`;
+                        } else {
+                            html += `<li>${evento.texto}</li>`;
+                        }
+                    });
+                    html += '</ul>';
+                }
 
                 detallesDiv.innerHTML = html;
                 resumenDiv.style.display = 'block';

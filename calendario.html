@@ -541,7 +541,7 @@
             { fecha: "2-10", texto: "Día Nacional del Guitarrista Argentino. (Efeméride)", clase: "acto" },
             { fecha: "2-12", texto: "Día del Escudo Nacional Argentino. (Efeméride)", clase: "acto" },
             { fecha: "2-14", texto: "Día de las Escuelas de Frontera. (Efeméride)", clase: "acto" },
-            { rango: { mes: 2, desde: 17, hasta: 22 }, texto: "Semana de la Lengua Francesa y la Francofonía (OIF), año 1998. (Efeméride). 17/03 al 22/03.", clase: "acto" },
+            { rango: { mes: 2, desde: 17, hasta: 22 }, texto: "Semana de la Lengua Francesa y la Francofonía (OIF), año 1998 (Efeméride). 17/03 al 22/03.", clase: "acto" },
             { fecha: "2-20", texto: "Día Internacional de la Francofonía, decreto de la OIF, año 1998. (Efeméride)", clase: "acto" },
             { fecha: "2-21", texto: "Día Mundial de la Poesía. (Efeméride)", clase: "acto" },
             { fecha: "2-22", texto: "Día Mundial del Agua. (Efeméride)", clase: "acto" },
@@ -609,7 +609,7 @@
             { fecha: "5-13", texto: "Día del Escritor. (Efeméride)", clase: "acto" },
             { fecha: "5-14", texto: "Día Mundial del Donante de Sangre. (Efeméride)", clase: "acto" },
             { fecha: "5-15", texto: "Día Nacional del Libro. (Efeméride)", clase: "acto" },
-            { rango: { mes: 5, desde: 16, hasta: 20 }, texto: "Festas Juninas (Convención de la UNESCO de 2003 para la Salvaguardia del Patrimonio Cultural Inmaterial). (Efeméride). 16/06 al 20/06.", clase: "acto" },
+            { rango: { mes: 5, desde: 16, hasta: 20 }, texto: "Festas Juninas (Convención de la UNESCO de 2003 para la Salvaguardia del Patrimonio Cultural Inmaterial) (Efeméride). 16/06 al 20/06.", clase: "acto" },
             { fecha: "5-17", texto: "Día Nacional de la Libertad Latinoamericana. (Efeméride)", clase: "acto" },
             { fecha: "5-20", texto: "Día de la Bandera y del Fallecimiento de Manuel Belgrano. (Efeméride)", clase: "acto" },
             { fecha: "5-21", texto: "Día de la Confraternidad Antártica. (Efeméride)", clase: "acto" },
@@ -655,8 +655,8 @@
             { fecha: "8-13", texto: "Día del Bibliotecario. (Efeméride)", clase: "acto" },
             { fecha: "8-13", texto: "Día del Profesor de Natación. (Efeméride)", clase: "acto" },
             { fecha: "8-13", texto: "Día del Intérprete de la Lengua de Señas Argentina. (Efeméride)", clase: "acto" },
-            { rango: { mes: 8, desde: 14, hasta: 18 }, texto: "Semana de las Lenguas. (Efeméride). 14/09 al 18/09.", clase: "acto" },
-            { rango: { mes: 8, desde: 15, hasta: 19 }, texto: "Semana de las Lenguas para el diálogo y el desarrollo. (Efeméride). 15/09 al 19/09.", clase: "acto" },
+            { rango: { mes: 8, desde: 14, hasta: 18 }, texto: "Semana de las Lenguas (Efeméride). 14/09 al 18/09.", clase: "acto" },
+            { rango: { mes: 8, desde: 15, hasta: 19 }, texto: "Semana de las Lenguas para el diálogo y el desarrollo (Efeméride). 15/09 al 19/09.", clase: "acto" },
             { fecha: "8-15", texto: "Día Internacional de la Democracia. (Efeméride)", clase: "acto" },
             { fecha: "8-16", texto: "Día de la Juventud. (Efeméride)", clase: "acto" },
             { fecha: "8-16", texto: "Día Internacional de la Prevención de la Capa de Ozono. (Efeméride)", clase: "acto" },
@@ -714,7 +714,7 @@
             { fecha: "9-16", texto: "Día Mundial de la Alimentación. (Efeméride)", clase: "acto" },
             { fecha: "9-18", texto: "Día Mundial de Protección de la Naturaleza. (Efeméride)", clase: "acto" },
             { fecha: "9-19", texto: "Día Internacional de lucha contra el Cáncer de Mama. (Efeméride)", clase: "acto" },
-            { rango: { mes: 9, desde: 20, hasta: 24 }, texto: "Semana de la Lengua Italiana en el Mundo. Dirección General de Promoción Cultural y de Cooperación de las Relaciones Exteriores de Italia, la Academia della Crusca y la Confederación Suiza, año 2001. (Efeméride)", clase: "acto" },
+            { rango: { mes: 9, desde: 20, hasta: 24 }, texto: "Semana de la Lengua Italiana en el Mundo. Dirección General de Promoción Cultural y de Cooperación de las Relaciones Exteriores de Italia, la Academia della Crusca y la Confederación Suiza, año 2001 (Efeméride)", clase: "acto" },
             { fecha: "9-23", texto: "Día Mundial del Mol, para homenajear a una legendaria disciplina científica: la Química, para dar a conocer su importancia y contribución a la humanidad. (Efeméride)", clase: "acto" },
             { fecha: "9-24", texto: "Día de las Naciones Unidas. (Efeméride)", clase: "acto" },
             { fecha: "9-24", texto: "Día Internacional de las Bibliotecas. (Efeméride)", clase: "acto" },
@@ -1057,12 +1057,13 @@
                     if (eventosGenerales.length > 0) html += '<hr>';
                     html += '<strong>Efemérides:</strong><ul class="mb-0">';
                     eventosEfemerides.forEach(evento => {
+                        const textoSinEtiqueta = evento.texto.replace(/\s*\(Efeméride\)/i, '').trim();
                         if (!evento.esRango) {
                             const fechaFormato =
                                 `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
-                            html += `<li><strong>${fechaFormato}</strong>: ${evento.texto}</li>`;
+                            html += `<li><strong>${fechaFormato}</strong>: ${textoSinEtiqueta}</li>`;
                         } else {
-                            html += `<li>${evento.texto}</li>`;
+                            html += `<li>${textoSinEtiqueta}</li>`;
                         }
                     });
                     html += '</ul>';

@@ -341,6 +341,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
           </table>
         <div class="d-flex justify-content-center gap-3 mt-3">
             <button type="button" id="bajarPDF" class="btn btn-primary">Bajar PDF</button>
+            <button type="button" id="recalculateButtonTable" class="btn btn-success">Volver a simular</button>
         </div><br>          
       </div>
   `;
@@ -477,6 +478,11 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     // Expande el acordeón temporalmente
     const acordeon = document.getElementById("collapseOne");
     acordeon.classList.remove("collapse"); // Expande el acordeón
+
+    // Agrega un evento al botón "Volver a Simular" de la tabla
+    document.getElementById("recalculateButtonTable").addEventListener("click", function () {
+        document.getElementById('recalculateButton').click();
+    });
 
     // Agrega un evento al botón "Bajar PDF"
     document.getElementById("bajarPDF").addEventListener("click", function () {

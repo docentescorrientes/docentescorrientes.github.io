@@ -279,7 +279,8 @@
                                     <li><strong>Primer Cuatrimestre:</strong> 02 de marzo al 31 de julio del 2026. <span
                                             id="diasC1" class="badge bg-light text-dark border ms-1"></span></li>
                                     <li><strong>Receso Escolar de Invierno:</strong> 13 de julio al 24 de julio del
-                                        2026.</li>
+                                        2026. <span id="diasReceso" class="badge bg-light text-dark border ms-1"></span>
+                                    </li>
                                     <li><strong>Segundo Cuatrimestre:</strong> 01 de agosto al 11 de diciembre del 2026.
                                         <span id="diasC2" class="badge bg-light text-dark border ms-1"></span>
                                     </li>
@@ -321,7 +322,8 @@
                         target="_blank" class="text-decoration-none text-success">Decreto
                         N°2.580/86</a> y <a
                         href="https://drive.google.com/file/d/1zIkOjzZp0Ezv888k68KVDWF-ieNjYzGt/view?usp=sharing"
-                        target="_blank" class="text-decoration-none text-success">Ley N° 6.494</a>). Respecto a los Actos de Forma
+                        target="_blank" class="text-decoration-none text-success">Ley N° 6.494</a>). Respecto a los
+                    Actos de Forma
                     III, la institución organizará las
                     actividades que considere valiosas para el desarrollo del proceso educativo a efectos de conmemorar
                     las fechas efemérides del Anexo IV. Calendario Escolar Corrientes 2026: <a
@@ -439,6 +441,16 @@
 
     <script>
         const year = 2026;
+
+        // Fechas clave del ciclo lectivo
+        const inicioLectivo = new Date(year, 2, 2);
+        const finLectivo = new Date(year, 11, 18);
+        const inicioC1 = new Date(year, 2, 2);
+        const finC1 = new Date(year, 6, 31);
+        const inicioReceso = new Date(year, 6, 13);
+        const finReceso = new Date(year, 6, 24);
+        const inicioC2 = new Date(year, 7, 1);
+        const finC2 = new Date(year, 11, 11);
 
         // 1. CONFIGURACIÓN DE FECHAS ESPECIALES (Feriados y eventos propios)
         const eventosEspecialesArray = [
@@ -897,7 +909,6 @@
             { fecha: "11-18", texto: "Finalización del Ciclo o Período Lectivo 2026 - Todos.", clase: "aviso" },
             { rango: { mes: 11, desde: 21, hasta: 31 }, texto: "Presentación a Dpto. de Personal Docente del C.G.E. hojas de concepto profesional del personal directivo y docentes 2026 de cada establecimiento con nómina detallando: Apellido/s Nombre/s, D.N.I., cargo y N° de legajo de C.G.E. Calendario Escolar 2026 Res. N° 4.706/25 - Inicial y Primaria. 21/12/26 al 17/02/27.", clase: "rango" },
             { rango: { mes: 11, desde: 21, hasta: 31 }, texto: "Presentación a Dpto. Personal Administrativo del C.G.E. hojas de concepto del personal de servicio y administrativo (planta permanente) 2026. Calendario Escolar 2026 Res. N° 4.706/25  - Inicial y Primaria. 21/12/26 al 17/02/27.", clase: "rango" },
-
         ];
 
         // Función para consolidar eventos con fechas duplicadas y expandir rangos
@@ -1042,7 +1053,7 @@
             const grid = document.getElementById('calendarGrid');
             const now = new Date();
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            //            const today = new Date(2026, 2, 15); // Fecha fija para pruebas: 15 de Marzo de 2026
+            //const today = new Date(2026, 2, 15); // Fecha fija para pruebas: 15 de Marzo de 2026
             months.forEach((name, monthIdx) => {
                 const firstDay = new Date(year, monthIdx, 1).getDay();
                 const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
@@ -1052,13 +1063,9 @@
                 // Filtrando por cuatrimestres:
                 // 1° Cuatrimestre: 02/03/2026 al 31/07/2026
                 // 2° Cuatrimestre: 01/08/2026 al 11/12/2026
-                const inicioC1 = new Date(year, 2, 2); // 2 de Marzo
-                const finC1 = new Date(year, 6, 31);   // 31 de Julio
-                const inicioC2 = new Date(year, 7, 1); // 1 de Agosto
-                const finC2 = new Date(year, 11, 11);  // 11 de Diciembre
 
                 let diasDeClase = 0;
-                let diasRestantes = 0;
+                let diasTranscurridos = 0;
 
                 for (let d = 1; d <= daysInMonth; d++) {
                     const dateObj = new Date(year, monthIdx, d);
@@ -1072,16 +1079,16 @@
                         const esFeriado = (info && info.clase === 'feriado');
                         if (!esFinde && !esFeriado) {
                             diasDeClase++;
-                            if (dateObj >= today) diasRestantes++;
+                            if (dateObj <= today) diasTranscurridos++;
                         }
                     }
                 }
 
                 let badgeContent = '';
                 if (diasDeClase > 0) {
-                    if (diasRestantes === diasDeClase) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días de clases">${diasDeClase}</span>`;
-                    else if (diasRestantes > 0) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días restantes / Total">${diasRestantes}/${diasDeClase}</span>`;
-                    else badgeContent = `<span class="badge bg-secondary text-light ms-1" style="font-size:0.7em" title="Finalizado">${diasDeClase}</span>`;
+                    if (diasTranscurridos === 0) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días de clases">${diasDeClase}</span>`;
+                    else if (diasTranscurridos < diasDeClase) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días transcurridos / Total">${diasTranscurridos}/${diasDeClase}</span>`;
+                    else badgeContent = `<span class="badge bg-secondary text-light ms-1" style="font-size:0.7em" title="Finalizado">${diasDeClase}/${diasDeClase}</span>`;
                 }
 
                 let html = `
@@ -1204,6 +1211,21 @@
             return dias;
         }
 
+        function calcularDiasHabiles(inicio, fin) {
+            let dias = 0;
+            let current = new Date(inicio);
+            const end = new Date(fin);
+
+            while (current <= end) {
+                const dayOfWeek = current.getDay();
+                if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                    dias++;
+                }
+                current.setDate(current.getDate() + 1);
+            }
+            return dias;
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
 
             const now = new Date();
@@ -1230,15 +1252,15 @@
 
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-            function getDiasRestantesTexto(inicio, fin) {
-                const total = calcularDiasRango(inicio, fin);
+            function getDiasRestantesTexto(inicio, fin, countFn = calcularDiasRango) {
+                const total = countFn(inicio, fin);
                 let restantes = 0;
                 if (today <= inicio) {
                     restantes = total;
                 } else if (today > fin) {
                     restantes = 0;
                 } else {
-                    restantes = calcularDiasRango(today, fin);
+                    restantes = countFn(today, fin);
                 }
 
                 if (restantes === total) return `${total} días`;
@@ -1247,16 +1269,12 @@
             }
 
             // Calcular y mostrar días totales en el resumen superior
-            const inicioLectivo = new Date(year, 2, 2);
-            const finLectivo = new Date(year, 11, 18);
             document.getElementById('diasLectivo').textContent = getDiasRestantesTexto(inicioLectivo, finLectivo);
 
-            const inicioC1 = new Date(year, 2, 2);
-            const finC1 = new Date(year, 6, 31);
             document.getElementById('diasC1').textContent = getDiasRestantesTexto(inicioC1, finC1);
 
-            const inicioC2 = new Date(year, 7, 1);
-            const finC2 = new Date(year, 11, 11);
+            document.getElementById('diasReceso').textContent = getDiasRestantesTexto(inicioReceso, finReceso, calcularDiasHabiles);
+
             document.getElementById('diasC2').textContent = getDiasRestantesTexto(inicioC2, finC2);
         });
 

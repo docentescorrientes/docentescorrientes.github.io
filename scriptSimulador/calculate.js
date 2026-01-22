@@ -339,11 +339,11 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     tablaHTML += `
               </tbody>
           </table>
+      </div>
         <div class="d-flex justify-content-center gap-3 mt-3">
             <button type="button" id="bajarPDF" class="btn btn-primary">Bajar PDF</button>
             <button type="button" id="recalculateButtonTable" class="btn btn-success">Volver a simular</button>
         </div><br>          
-      </div>
   `;
 
     // Insertar la tabla en el contenedor

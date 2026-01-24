@@ -7,11 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const alertClases = document.querySelector(".alert-danger"); // Buscamos la alerta
     alertClases.after(clasesContainer); // Insertamos el contenedor después del alert
 
-
-
-    // Insertamos el contenedor después del alert
-    alertClases.after(clasesContainer);
-
     cantidadClasesInputs.forEach(input => {
         input.addEventListener("change", function () {
             const cantidad = parseInt(this.value) || 0;

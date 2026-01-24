@@ -298,6 +298,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // Evento para cerrar el alert cuando se complete el mes y el año
             const alertCloseBtn = alert.querySelector('.btn-close');
             alertCloseBtn.addEventListener('click', () => {
+                const yearField = document.getElementById("year");
+                const monthField = document.getElementById("month");
                 if (missing === "both" || missing === "year") {
                     yearField.focus();
                 } else if (missing === "month") {

@@ -22,7 +22,7 @@
         :root {
             --bs-today: #6388c0;
             --bs-feriado-bg: #f0f0f0;
-            --bs-aviso-bg: #7db48a;
+            --bs-aviso-bg: #568c63;
             --bs-weekend: #f0f0f0;
             --bs-rango-bg: #ffffff;
         }
@@ -81,7 +81,12 @@
 
         .aviso {
             background-color: var(--bs-aviso-bg) !important;
-            color: white !important;
+            background: linear-gradient(135deg,
+                    var(--bs-aviso-bg) 0%,
+                    var(--bs-aviso-bg) 0%,
+                    transparent 100%,
+                    transparent 50%) !important;
+            color: #3d3d3d !important;
             font-weight: bold;
             border-radius: 11%;
             transform: scale(1.0);
@@ -134,8 +139,13 @@
         }
 
         .today {
-            background: var(--bs-today) !important;
-            color: white !important;
+            background-color: var(--bs-today) !important;
+            background: linear-gradient(135deg,
+                    var(--bs-today) 0%,
+                    var(--bs-today) 0%,
+                    transparent 100%,
+                    transparent 50%) !important;
+            color: #333 !important;
             font-weight: bold;
             border-radius: 11%;
             transform: scale(1.0);

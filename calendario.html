@@ -96,14 +96,6 @@
             border: 1px solid #cccccc;
         }
 
-        .today {
-            background-color: var(--bs-today) !important;
-            color: white !important;
-            font-weight: bold;
-            border-radius: 11%;
-            transform: scale(1.0);
-        }
-
         .calendar-table td:hover:not(.empty) {
             filter: brightness(0.9);
             z-index: 1;
@@ -139,6 +131,14 @@
                     #e0e0e0 0%,
                     transparent 100%,
                     transparent 50%) !important;
+        }
+
+        .today {
+            background: var(--bs-today) !important;
+            color: white !important;
+            font-weight: bold;
+            border-radius: 11%;
+            transform: scale(1.0);
         }
     </style>
 </head>
@@ -442,6 +442,12 @@
 
     <script>
         const year = 2026;
+
+        // Función para obtener la fecha actual (permite simular fechas para pruebas)
+        function getFechaActual() {
+            //|return new Date(2026, 1, 23); // Descomentar para probar una fecha específica
+            return new Date();
+        }
 
         // Fechas clave del ciclo lectivo
         const inicioLectivo = new Date(year, 2, 2);
@@ -1094,9 +1100,8 @@
 
         function initCalendar() {
             const grid = document.getElementById('calendarGrid');
-            const now = new Date();
+            const now = getFechaActual();
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            //const today = new Date(2026, 2, 15); // Fecha fija para pruebas: 15 de Marzo de 2026
             months.forEach((name, monthIdx) => {
                 const firstDay = new Date(year, monthIdx, 1).getDay();
                 const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
@@ -1271,7 +1276,7 @@
 
         document.addEventListener('DOMContentLoaded', function () {
 
-            const now = new Date();
+            const now = getFechaActual();
             const mesActual = now.getMonth(); // 0–11
 
             const mesSelector = document.getElementById('mesSelector');

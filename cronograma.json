@@ -1,37 +1,40 @@
 {
-    "_titulo1": "Cód. 603 - Plus Unificado de Enero",
-    "_titulo2": "Cód. 625 - Plus de Refuerzo de Enero",
-    "titulo3": "Salario Real de Enero (sin pluses)",
+    "anio": "2026",
+    "mes": "01",
+    "mes_nombre": "Enero",
+    "_titulo1": "Cód. 603 - Plus Unificado",
+    "_titulo2": "Cód. 625 - Plus de Refuerzo",
+    "titulo3": "Salario Real (sin pluses)",
     "dias": [
         {
             "dia": "1°",
             "dni": "0 y 1",
-            "fecha": "2026-01-26",
-            "fecha_cajeros": "2026-01-24"
+            "fecha": "26",
+            "fecha_cajeros": "24"
         },
         {
             "dia": "2°",
             "dni": "2 y 3",
-            "fecha": "2026-01-27",
-            "_fecha_cajeros": "2026-01-24"
+            "fecha": "27",
+            "_fecha_cajeros": "24"
         },
         {
             "dia": "3°",
             "dni": "4 y 5",
-            "fecha": "2026-01-28",
-            "_fecha_cajeros": "2026-01-24"
+            "fecha": "28",
+            "_fecha_cajeros": "24"
         },
         {
             "dia": "4°",
             "dni": "6 y 7",
-            "fecha": "2026-01-29",
-            "_fecha_cajeros": "2026-01-24"
+            "fecha": "29",
+            "_fecha_cajeros": "24"
         },
         {
             "dia": "5°",
             "dni": "8 y 9",
-            "fecha": "2026-01-30",
-            "_fecha_cajeros": "2026-01-24"
+            "fecha": "30",
+            "_fecha_cajeros": "24"
         }
     ]
 }

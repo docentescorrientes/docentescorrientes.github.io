@@ -469,8 +469,11 @@
                 if (!response.ok) throw new Error('No se pudo cargar el cronograma');
                 const data = await response.json();
 
-                const titulo = data.titulo1 || data.titulo2 || data.titulo3;
+                let titulo = data.titulo1 || data.titulo2 || data.titulo3;
                 if (titulo) {
+                    if (data.mes_nombre) {
+                        titulo += " de " + data.mes_nombre;
+                    }
                     document.getElementById('cronograma-titulo').textContent = titulo;
                 }
 
@@ -478,10 +481,9 @@
 
                 const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long' };
 
-                // Función para crear fecha local desde string YYYY-MM-DD
-                const crearFecha = (fechaStr) => {
-                    const [anio, mes, dia] = fechaStr.split('-').map(Number);
-                    return new Date(anio, mes - 1, dia);
+                // Función para crear fecha local usando año y mes del JSON
+                const crearFecha = (dia) => {
+                    return new Date(data.anio, data.mes - 1, dia);
                 };
 
                 data.dias.forEach(item => {

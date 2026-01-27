@@ -498,7 +498,7 @@
 
                     const fecha = crearFecha(item.fecha);
                     if (fecha.getTime() === hoy.getTime()) {
-                        tr.classList.add('table-primary');
+                        tr.style.backgroundColor = '#e3f2fd';
                     }
                     let fechaTexto = fecha.toLocaleDateString('es-ES', opcionesFecha);
                     // Capitalizar primera letra

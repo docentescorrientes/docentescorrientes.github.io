@@ -512,7 +512,7 @@
                         cellContent += `<small class="text-muted" style="font-size: 0.75em; display: block; line-height: 1; margin-top: 2px;">* Disponible en cajeros el ${textoCajeros}</small>`;
                     }
 
-                    tr.innerHTML = `<td class="align-middle">${item.dia}</td><td class="align-middle">${item.dni}</td><td class="align-middle">${cellContent}</td>`;
+                    tr.innerHTML = `<td class="align-middle">${item.dia}</td><td class="align-middle text-nowrap">${item.dni}</td><td class="align-middle">${cellContent}</td>`;
                     tbody.appendChild(tr);
                 });
             } catch (error) {

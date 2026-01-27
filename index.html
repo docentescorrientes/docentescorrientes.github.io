@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
-                                <h1 class="h1 text-success"><b>Cronograma</b> de Pagos</h1>
+                                <h1 class="h1 text-success" id="cronograma-main-title"><b>Cronograma</b> de Pagos</h1>
                                 <h3 class="h2" id="cronograma-titulo">Fechas de cobro del mes</h3>
                                 <p>
                                     Mantente informado sobre las <strong>fechas de pago</strong> de plus, sueldo y
@@ -468,6 +468,10 @@
                 const response = await fetch('cronograma.json');
                 if (!response.ok) throw new Error('No se pudo cargar el cronograma');
                 const data = await response.json();
+
+                if (data.anio) {
+                    document.getElementById('cronograma-main-title').innerHTML = `<b>Cronograma</b> de Pagos ${data.anio}`;
+                }
 
                 let titulo = data.titulo1 || data.titulo2 || data.titulo3;
                 if (titulo) {

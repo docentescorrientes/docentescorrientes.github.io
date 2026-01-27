@@ -134,9 +134,43 @@
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="3"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="4"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="5"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
+                <div class="container">
+                    <div class="row p-5">
+                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                            <img class="img-fluid" src="./assets/img/banner_img_00.svg" alt="">
+                        </div>
+                        <div class="col-lg-6 mb-0 d-flex align-items-center">
+                            <div class="text-align-left">
+                                <h1 class="h1 text-success"><b>Cronograma</b> de Pagos</h1>
+                                <h3 class="h2" id="cronograma-titulo">Fechas de cobro del mes</h3>
+                                <p>
+                                    Mantente informado sobre las <strong>fechas de pago</strong> de plus, sueldo y
+                                    aguinaldo.
+                                </p>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered text-center align-middle">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <th>Día</th>
+                                                <th>DNI terminados en</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cronograma-pagos">
+                                            <!-- Se carga dinámicamente desde cronograma.json -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
@@ -426,6 +460,56 @@
         let startYear = 2019;
         let difference = currentYear - startYear;
         document.getElementById('añosPasados').textContent = 'ya hace unos ' + difference + ' años';
+
+        async function cargarCronograma() {
+            const tbody = document.getElementById('cronograma-pagos');
+
+            try {
+                const response = await fetch('cronograma.json');
+                if (!response.ok) throw new Error('No se pudo cargar el cronograma');
+                const data = await response.json();
+
+                const titulo = data.titulo1 || data.titulo2 || data.titulo3;
+                if (titulo) {
+                    document.getElementById('cronograma-titulo').textContent = titulo;
+                }
+
+                tbody.innerHTML = ''; // Limpiar contenido
+
+                const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long' };
+
+                // Función para crear fecha local desde string YYYY-MM-DD
+                const crearFecha = (fechaStr) => {
+                    const [anio, mes, dia] = fechaStr.split('-').map(Number);
+                    return new Date(anio, mes - 1, dia);
+                };
+
+                data.dias.forEach(item => {
+                    const tr = document.createElement('tr');
+
+                    const fecha = crearFecha(item.fecha);
+                    let fechaTexto = fecha.toLocaleDateString('es-ES', opcionesFecha);
+                    // Capitalizar primera letra
+                    fechaTexto = fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1);
+
+                    let cellContent = `<div style="line-height: 1.2; margin-bottom: 0;">${fechaTexto}</div>`;
+
+                    if (item.fecha_cajeros) {
+                        const fechaCajeros = crearFecha(item.fecha_cajeros);
+                        const textoCajeros = fechaCajeros.toLocaleDateString('es-ES', opcionesFecha);
+                        cellContent += `<small class="text-muted" style="font-size: 0.75em; display: block; line-height: 1; margin-top: 2px;">* Disponible en cajeros el ${textoCajeros}</small>`;
+                    }
+
+                    tr.innerHTML = `<td class="align-middle">${item.dia}</td><td class="align-middle">${item.dni}</td><td class="align-middle">${cellContent}</td>`;
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                console.error('Error cargando cronograma:', error);
+                tbody.innerHTML = '<tr><td colspan="3" class="text-center">No hay información disponible</td></tr>';
+            }
+        }
+
+        cargarCronograma();
     </script>
     <!-- End Script -->
 </body>

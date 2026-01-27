@@ -486,10 +486,16 @@
                     return new Date(data.anio, data.mes - 1, dia);
                 };
 
+                const hoy = new Date();
+                hoy.setHours(0, 0, 0, 0);
+
                 data.dias.forEach(item => {
                     const tr = document.createElement('tr');
 
                     const fecha = crearFecha(item.fecha);
+                    if (fecha.getTime() === hoy.getTime()) {
+                        tr.classList.add('table-primary');
+                    }
                     let fechaTexto = fecha.toLocaleDateString('es-ES', opcionesFecha);
                     // Capitalizar primera letra
                     fechaTexto = fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1);

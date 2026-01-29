@@ -68,7 +68,8 @@
                     transparent 50%) !important;
         }
 
-        .feriado {
+        .feriado,
+        .actividad {
             background-color: var(--bs-feriado-bg) !important;
             color: #852904;
             font-weight: 900;
@@ -796,9 +797,9 @@
 
             // Anexo II - Distribución de Actividades Escolares 2026:
             //Enero
-            { fecha: "0-2", texto: "Entrega de llaves al responsable institucional o Autoridad Policial, por parte del Directivo - Todos.", clase: "feriado" },
-            { rango: { mes: 0, desde: 2, hasta: 31 }, texto: "Receso escolar, con suspensión total de actividades, a excepción de las Escuelas Técnicas con Especialidad Agropecuaria, EFA y Centros de Educación Física - Todos. 02/01 al 09/02.", clase: "feriado" },
-            { rango: { mes: 1, desde: 1, hasta: 9 }, texto: "Receso escolar, con suspensión total de actividades, a excepción de las Escuelas Técnicas con Especialidad Agropecuaria, EFA y Centros de Educación Física - Todos. 02/01 al 09/02.", clase: "feriado" },
+            { fecha: "0-2", texto: "Entrega de llaves al responsable institucional o Autoridad Policial, por parte del Directivo - Todos.", clase: "actividad" },
+            { rango: { mes: 0, desde: 2, hasta: 31 }, texto: "Receso escolar, con suspensión total de actividades, a excepción de las Escuelas Técnicas con Especialidad Agropecuaria, EFA y Centros de Educación Física - Todos. 02/01 al 09/02.", clase: "actividad" },
+            { rango: { mes: 1, desde: 1, hasta: 9 }, texto: "Receso escolar, con suspensión total de actividades, a excepción de las Escuelas Técnicas con Especialidad Agropecuaria, EFA y Centros de Educación Física - Todos. 02/01 al 09/02.", clase: "actividad" },
             { rango: { mes: 0, desde: 2, hasta: 30 }, texto: "Continuidad de cursado de la modalidad de Educación Secundaria a Distancia &quot;Ñemboja Digital&quot;. El cursado es continuo durante todo el año - EPJA. 02/01 al 30/01.", clase: "rango" },
             { rango: { mes: 0, desde: 3, hasta: 30 }, texto: "Actividades de verano: Colonias de Vacaciones, Cursos de Natación, Proyectos de recreación y deportes. Acciones de escuelas de verano - C.E.F. 02/01 al 30/01.", clase: "rango" },
             //Febrero
@@ -874,7 +875,7 @@
             { fecha: "5-30", texto: "Actualización de datos de estudiantes con Discapacidad y Docentes de Apoyo a la Inclusión en el Sistema de Gestión Educativa - Inicial, Primario, Secundario y EPJA.", clase: "aviso" },
             //Julio
             { rango: { mes: 6, desde: 1, hasta: 6 }, texto: "Inscripción para evaluaciones de estudiantes no regulares, previos y para completar estudios - Secundario y Di.G.E.P. 01/07 al 06/07.", clase: "rango" },
-            { rango: { mes: 6, desde: 13, hasta: 24 }, texto: "Período de receso escolar de invierno - Todos. 13/07 al 24/07.", clase: "feriado" },
+            { rango: { mes: 6, desde: 13, hasta: 24 }, texto: "Período de receso escolar de invierno - Todos. 13/07 al 24/07.", clase: "actividad" },
             { rango: { mes: 6, desde: 27, hasta: 31 }, texto: "Instancia de enseñanza y de aprendizaje complementario de apoyo institucional a las trayectorias escolares. Asistencia de la totalidad de los estudiantes - Primario y Di.G.E.P. 27/07 al 31/07", clase: "rango" },
             { rango: { mes: 6, desde: 27, hasta: 31 }, texto: "Instancia de enseñanza y de aprendizaje complementario de apoyo institucional a las trayectorias escolares. Asistencia de la totalidad de los estudiantes - Secundario y Di.G.E.P. 27/07 al 31/07", clase: "rango" },
             { rango: { mes: 6, desde: 27, hasta: 31 }, texto: "Evaluaciones no regulares, previas y para completar estudios (ante comisión evaluadora). Sin suspensión de actividades - Secundario y Di.G.E.P. 27/07 al 31/07", clase: "rango" },
@@ -937,6 +938,7 @@
             // Definir prioridad de clases (mayor número = mayor prioridad)
             const prioridadClase = {
                 'feriado': 3,
+                'actividad': 3,
                 'aviso': 2,
                 'rango': 1,
                 '': 0
@@ -985,7 +987,8 @@
                 });
                 eventosEspeciales[fecha] = {
                     texto: item.textos.map((t, i) => `${i + 1}. ${t.texto}`).join('<br>'),
-                    clase: item.clase
+                    clase: item.clase,
+                    eventos: item.textos
                 };
             });
 
@@ -1006,20 +1009,27 @@
 
             let eventosUnicos = new Map();
 
-            Object.keys(eventosEspeciales).forEach(fecha => {
+            // Ordenar claves para asegurar orden cronológico (importante para rangos)
+            const fechasOrdenadas = Object.keys(eventosEspeciales).sort((a, b) => {
+                const [mesA, diaA] = a.split('-').map(Number);
+                const [mesB, diaB] = b.split('-').map(Number);
+                return mesA - mesB || diaA - diaB;
+            });
+
+            fechasOrdenadas.forEach(fecha => {
                 const [mesFecha, dia] = fecha.split('-').map(Number);
                 if (mesFecha === mesActual) {
-                    const textoCompleto = eventosEspeciales[fecha].texto;
-                    const clase = eventosEspeciales[fecha].clase;
-
-                    textoCompleto.split('<br>').forEach(evento => {
-                        const eventoLimpio = evento.replace(/^\d+\.\s*/, '').trim();
-                        const esRango = /\d{2}\/\d{2}\s+al\s+\d{2}\/\d{2}/.test(eventoLimpio);
-
-                        if (!eventosUnicos.has(eventoLimpio)) {
-                            eventosUnicos.set(eventoLimpio, { dia, clase, esRango });
-                        }
-                    });
+                    const eventosDia = eventosEspeciales[fecha].eventos;
+                    if (eventosDia) {
+                        eventosDia.forEach(eventoObj => {
+                            const eventoLimpio = eventoObj.texto;
+                            const claseEvento = eventoObj.clase;
+                            const esRango = /\d{2}\/\d{2}\s+al\s+\d{2}\/\d{2}/.test(eventoLimpio);
+                            if (!eventosUnicos.has(eventoLimpio)) {
+                                eventosUnicos.set(eventoLimpio, { dia, clase: claseEvento, esRango });
+                            }
+                        });
+                    }
                 }
             });
 
@@ -1039,10 +1049,13 @@
 
                 // Separar eventos generales y efemérides
                 const eventosGenerales = [];
+                const eventosFeriados = [];
                 const eventosEfemerides = [];
 
                 eventosDelMes.forEach(evento => {
-                    if (evento.texto.toLowerCase().includes('(efeméride)')) {
+                    if (evento.clase === 'feriado') {
+                        eventosFeriados.push(evento);
+                    } else if (evento.texto.toLowerCase().includes('(efeméride)')) {
                         eventosEfemerides.push(evento);
                     } else {
                         eventosGenerales.push(evento);
@@ -1052,6 +1065,7 @@
                 // Ordenar por día
                 const sortFn = (a, b) => a.dia - b.dia;
                 eventosGenerales.sort(sortFn);
+                eventosFeriados.sort(sortFn);
                 eventosEfemerides.sort(sortFn);
 
                 let html = '';
@@ -1072,9 +1086,26 @@
                     html += '</ul>';
                 }
 
+                // Sección Feriados
+                if (eventosFeriados.length > 0) {
+                    if (eventosGenerales.length > 0) html += '<hr>';
+                    html += '<strong>Feriados:</strong><ul class="mb-2">';
+                    eventosFeriados.forEach(evento => {
+                        if (!evento.esRango) {
+                            const fechaFormato =
+                                `${String(evento.dia).padStart(2, '0')}/${String(mesActual + 1).padStart(2, '0')}`;
+                            html += `<li><strong>${fechaFormato}</strong>: ${evento.texto}</li>`;
+                        } else {
+                            const textoConNegrita = evento.texto.replace(/(\d{2}\/\d{2}\s+al\s+\d{2}\/\d{2}\.?)\s*$/, '<strong>$1</strong>');
+                            html += `<li>${textoConNegrita}</li>`;
+                        }
+                    });
+                    html += '</ul>';
+                }
+
                 // Sección Efemérides
                 if (eventosEfemerides.length > 0) {
-                    if (eventosGenerales.length > 0) html += '<hr>';
+                    if (eventosGenerales.length > 0 || eventosFeriados.length > 0) html += '<hr>';
                     html += '<strong>Efemérides:</strong><ul class="mb-0">';
                     eventosEfemerides.forEach(evento => {
                         const textoSinEtiqueta = evento.texto.replace(/\s*\(Efeméride\)/i, '').trim();

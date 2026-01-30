@@ -1165,7 +1165,8 @@
                         const info = eventosEspeciales[key];
                         const esFinde = (dayOfWeek === 0 || dayOfWeek === 6);
                         const esFeriado = (info && info.clase === 'feriado');
-                        if (!esFinde && !esFeriado) {
+                        const esReceso = (info && info.clase === 'actividad');
+                        if (!esFinde && !esFeriado && !esReceso) {
                             diasDeClase++;
                             if (dateObj <= today) diasTranscurridos++;
                         }
@@ -1290,8 +1291,9 @@
 
                 const esFinde = (dayOfWeek === 0 || dayOfWeek === 6);
                 const esFeriado = (info && info.clase === 'feriado');
+                const esReceso = (info && info.clase === 'actividad');
 
-                if (!esFinde && !esFeriado) {
+                if (!esFinde && !esFeriado && !esReceso) {
                     dias++;
                 }
                 current.setDate(current.getDate() + 1);

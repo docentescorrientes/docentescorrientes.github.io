@@ -377,6 +377,20 @@
             const montoBasicoEsp = document.getElementById('montoReferencia');
             const aumentoBasicoEsp = document.getElementById('aumentoReferencia');
 
+            // Ocultar el código 629 si la fecha es marzo 2025 o posterior
+            const fechaActual = new Date();
+            const anio = fechaActual.getFullYear();
+            const mes = fechaActual.getMonth() + 1;
+
+            if (anio > 2025 || (anio === 2025 && mes >= 3)) {
+                const filas = document.querySelectorAll("#prueba table tbody tr");
+                filas.forEach(fila => {
+                    if (fila.cells[0] && fila.cells[0].textContent.includes("629")) {
+                        fila.style.display = "none";
+                    }
+                });
+            }
+
             // Obtener y ordenar los cargos alfabéticamente
             const clasesDisponibles = Object.keys(clases)
                 .map(Number)

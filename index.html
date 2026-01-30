@@ -360,7 +360,7 @@
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="p-3 bg-white shadow-lg rounded">
                     <div class="video-responsive">
-                        <iframe src="https://www.youtube.com/embed/6_gPcFXRQPE?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&fs=0&loop=1&playlist=6_gPcFXRQPE"
+                        <iframe id="youtubeVideo" src=""
                             title="Video institucional" allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
@@ -552,6 +552,13 @@
         }
 
         cargarCronograma();
+
+        // Configuración del video de YouTube
+        const videoId = "6_gPcFXRQPE"; // 📝 Cambia este ID por el del nuevo video
+        const videoFrame = document.getElementById('youtubeVideo');
+        if (videoFrame) {
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&fs=0&loop=1&playlist=${videoId}`;
+        }
     </script>
     <!-- End Script -->
 </body>

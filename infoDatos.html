@@ -209,19 +209,21 @@
             </div>
         </div>
 
-        <div class="container-fluid my-4">
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item bg-white">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button bg-white text-black" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            📑 Resumen de montos y aumentos del cargo elegido
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="table-responsive mt-3" id="prueba"></div>
+        <div class="container my-4">
+            <div class="shadow-lg p-4 bg-white rounded">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed bg-white text-success shadow-none" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <span class="h5 text-center w-100 mb-0">📑 Resumen de montos y aumentos del cargo elegido</span>
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body px-0">
+                                <div class="table-responsive mt-3" id="prueba"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -393,8 +395,9 @@
                     // Calcular el nuevo valor para la celda (valorClase * indiceClase)
                     montoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].totalAcumuladoHastaFecha * claseSeleccionada.indiceClase, "$");
                     aumentoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].montoMostrar * claseSeleccionada.indiceClase, "$");
-                    const collapse = document.getElementById("collapseOne");
-                    collapse.classList.add("show"); // Desplegar
+
+                    const collapseElement = document.getElementById("collapseOne");
+                    new bootstrap.Collapse(collapseElement, { toggle: false }).show();
                 }
             });
         });

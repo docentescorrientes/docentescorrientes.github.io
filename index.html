@@ -480,7 +480,7 @@
             const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
             const horaFormateada = fechaActual.toLocaleTimeString('es-ES');
-            document.getElementById('fechaAbrir').textContent = "Hoy: " + horaFormateada + " - " + fechaFormateada;
+            document.getElementById('fechaAbrir').textContent = horaFormateada + " - " + fechaFormateada;
         }
         actualizarReloj();
         setInterval(actualizarReloj, 1000);

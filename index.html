@@ -475,15 +475,15 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Obtiene la fecha actual
-        const fechaActual = new Date();
-
-        // Formatea la fecha en un formato legible (dd/mm/aaaa)
-        const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const fechaFormateada = "Hoy: " + fechaActual.toLocaleDateString('es-ES', opciones);
-
-        // Muestra la fecha en el contenedor
-        document.getElementById('fechaAbrir').textContent = fechaFormateada;
+        function actualizarReloj() {
+            const fechaActual = new Date();
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+            const horaFormateada = fechaActual.toLocaleTimeString('es-ES');
+            document.getElementById('fechaAbrir').textContent = "Hoy: " + horaFormateada + " - " + fechaFormateada;
+        }
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
 
         let today = new Date();
         let currentYear = today.getFullYear();

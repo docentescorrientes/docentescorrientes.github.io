@@ -554,10 +554,12 @@
         cargarCronograma();
 
         // Configuración del video de YouTube
-        const videoId = "BtU6xmHN-ls"; // 📝 Cambia este ID por el del nuevo video
+        // ⚠️ IMPORTANTE: Busca el ID del canal @SISEArgentina (empieza con "UC") y pégalo aquí abajo.
+        // Ejemplo: const channelId = "UC9X..."; 
+        const channelId = "UC2RkL2eATR1V6H8g4eNfA5Q"; 
         const videoFrame = document.getElementById('youtubeVideo');
         if (videoFrame) {
-            videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&fs=0&loop=1&playlist=${videoId}`;
+            videoFrame.src = `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&controls=0&modestbranding=1&rel=0`;
         }
     </script>
     <!-- End Script -->

@@ -376,6 +376,7 @@
             const select = document.getElementById('miSelect');
             const montoBasicoEsp = document.getElementById('montoReferencia');
             const aumentoBasicoEsp = document.getElementById('aumentoReferencia');
+            const montoNetoEsp = document.getElementById('netoReferencia');
 
             // Ocultar el código 629 si la fecha es marzo 2025 o posterior
             const fechaActual = new Date();
@@ -429,6 +430,7 @@
                     // Calcular el nuevo valor para la celda (valorClase * indiceClase)
                     montoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].totalAcumuladoHastaFecha * claseSeleccionada.indiceClase, "$");
                     aumentoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].montoMostrar * claseSeleccionada.indiceClase, "$");
+                    montoNetoEsp.textContent = formatNumero(n * exportados["1 Básico"].totalAcumuladoHastaFecha * claseSeleccionada.indiceClase * 0.75, "$");
 
                     const collapseElement = document.getElementById("collapseOne");
                     new bootstrap.Collapse(collapseElement, { toggle: false }).show();

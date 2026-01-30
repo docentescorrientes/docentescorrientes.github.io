@@ -119,13 +119,14 @@ function buscarAumentos(anio, mes, dia) {
   });
 
   let tablaHTML = `
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered text-center align-middle">
       <thead class="table-secondary">
         <tr>
           <th>Código</th>
           <th>Última Actualización (Mes/Año)</th>
           <th>Monto Último Aumento</th>
-          <th>Total Actual</th>
+          <th>Total Bruto</th>
+          <th>Total Neto</th>
           <th>% Actualización</th>
         </tr>
       </thead>
@@ -149,6 +150,12 @@ function buscarAumentos(anio, mes, dia) {
     // Calcular % de actualización (último aumento / total acumulado anterior)
     const porcentajeActualizacion = totalAcumuladoAnterior ? (monto / totalAcumuladoAnterior) * 100 : 0;
 
+    // Calcular Total Neto
+    let totalNeto = totalAcumuladoHastaFecha;
+    if (tipo === "b" || tipo === "g") {
+      totalNeto = totalAcumuladoHastaFecha * 0.75;
+    }
+
     // Determinar la clase de color según el tipo
     let rowClass = "";
     switch (tipo) {
@@ -160,18 +167,19 @@ function buscarAumentos(anio, mes, dia) {
 
     tablaHTML += `
       <tr class="${rowClass}">
-        <td>${codigo}</td>
+        <td class="text-start">${codigo}</td>
         <td>${mes}/${anio}</td>
         <td id="aumentoReferencia">${formatNumero(montoMostrar, "$")}</td>
-        <td id="montoReferencia">${formatNumero(totalAcumuladoHastaFecha, "$")}</td>  
+        <td id="montoReferencia">${formatNumero(totalAcumuladoHastaFecha, "$")}</td>
+        <td id="netoReferencia">${formatNumero(totalNeto, "$")}</td>
         <td>${formatNumero(porcentajeActualizacion.toFixed(2))}%</td>
       </tr>
     `;
   });
   tablaHTML += `
-  <tr><td colspan="5" style="height: 10px;"></td></tr> <!-- Fila en blanco -->
+  <tr><td colspan="6" style="height: 10px;"></td></tr> <!-- Fila en blanco -->
   <tr class="table-secondary">
-    <td colspan="5" class="text-right small">*Resumen de aumentos a la fecha: ${dia}/${mes}/${anio}.
+    <td colspan="6" class="text-right small">*Resumen de aumentos a la fecha: ${dia}/${mes}/${anio}.
     En las categorías 7 (por horas cátedra) un cargo se consideran 15 horas cátedra para secundaria
     y 12 horas cátedra para superior.<br>El Cód.629 Adicional Remunerativo 2° Cargo se corresponde solo
     en el 2° cargo o 30 horas cátedras secundaria o 24 horas cátedras superior antes del mes de marzo

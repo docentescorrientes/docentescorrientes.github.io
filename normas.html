@@ -203,12 +203,13 @@
 
     </section>
     <!-- End Section -->
-    <!-- Start Brands -->
-    <section class="bg-light py-5">
-
+   <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <p class="text-center" id="fechaAbrir">Hoy:</p>
+        </div>
     </section>
-    <!--End Brands-->
-
+    <!-- End Featured Product -->
 
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer_blue">
@@ -300,6 +301,17 @@
     </footer>
     <!-- End Footer -->
 
+   <script>
+        function actualizarReloj() {
+            const fechaActual = new Date();
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+            const horaFormateada = fechaActual.toLocaleTimeString('es-ES');
+            document.getElementById('fechaAbrir').textContent = horaFormateada + " - " + fechaFormateada;
+        }
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
+    </script>
 
     <!-- Start Script -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

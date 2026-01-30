@@ -175,7 +175,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="calendario.html"><i class="fa-solid fa-calendar-days me-2 text-success"></i> Calendario</a>
+                            <a class="nav-link" href="calendario.html"><i
+                                    class="fa-solid fa-calendar-days me-2 text-success"></i> Calendario</a>
                         </li>
                     </ul>
                 </div>
@@ -184,7 +185,7 @@
         </div>
     </nav>
 
-    <section class="bg-light py-5">
+    <section class="bg-white py-5">
         <div class="container my-4">
             <div class="shadow-lg p-4 bg-white rounded">
                 <h2 class="text-center text-success mb-3">Búsqueda de Clase e Índice de Cargo Docente</h2>
@@ -214,9 +215,11 @@
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item border-0">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed bg-white text-success shadow-none" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                <span class="h5 text-center w-100 mb-0">📑 Resumen de montos y aumentos del cargo elegido</span>
+                            <button class="accordion-button collapsed bg-white text-success shadow-none" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+                                aria-controls="collapseOne">
+                                <span class="h5 text-center w-100 mb-0">📑 Resumen de montos y aumentos del cargo
+                                    elegido</span>
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
@@ -230,9 +233,9 @@
             </div>
         </div>
 
-    <div class="container mt-4">
-        <hr>
-    </div>
+        <div class="container mt-4">
+            <hr>
+        </div>
 
         <!-- Start Version -->
         <div class="container mt-5" id="versionDiv">
@@ -243,10 +246,14 @@
         <!-- End Version-->
     </section>
 
-    <!-- Start Brands -->
-    <section class="bg-light py-5">
+    <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <p class="text-center" id="fechaAbrir">Hoy:</p>
+        </div>
     </section>
-    <!--End Brands-->
+    <!-- End Featured Product -->
+
 
 
     <!-- Start Footer -->
@@ -273,10 +280,12 @@
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
                         <li><a class="text-decoration-none" href="#">Estatuto</a></li>
-                        <li><a class="text-decoration-none" href="https://drive.google.com/file/d/1SzJ_k9b2E_4Kmo9Ja9Fs7ENDNJZIvKYp/view?usp=sharing"
+                        <li><a class="text-decoration-none"
+                                href="https://drive.google.com/file/d/1SzJ_k9b2E_4Kmo9Ja9Fs7ENDNJZIvKYp/view?usp=sharing"
                                 target="_blank">Licencias</a></li>
                         <li><a class="text-decoration-none" href="calendario.html">Calendario Escolar</a></li>
-                        <li><a class="text-decoration-none" href="https://notebooklm.google.com/notebook/87faccaa-62aa-4506-8118-6af3d73d008d?authuser=4&pageId=none"
+                        <li><a class="text-decoration-none"
+                                href="https://notebooklm.google.com/notebook/87faccaa-62aa-4506-8118-6af3d73d008d?authuser=4&pageId=none"
                                 target="_blank">ChatIA DAC</a></li>
                     </ul>
                 </div>
@@ -329,8 +338,8 @@
                     <div class="col-12 text-center">
                         <p class="text-left text-light">
                             Copyright &copy; 2024 Docentes Autoconvocados Corrientes - Sector 2019 - Licencia MIT. Todos
-                            los derechos reservados. Designed by <a class="text-success text-decoration-none" href="LICENSE.txt"
-                                target="_blank"><strong>augusalterats</strong></a>
+                            los derechos reservados. Designed by <a class="text-success text-decoration-none"
+                                href="LICENSE.txt" target="_blank"><strong>augusalterats</strong></a>
                         </p>
                     </div>
                 </div>
@@ -341,6 +350,17 @@
     <!-- End Footer -->
 
     <!-- Start Script -->
+    <script>
+        function actualizarReloj() {
+            const fechaActual = new Date();
+            const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+            const horaFormateada = fechaActual.toLocaleTimeString('es-ES');
+            document.getElementById('fechaAbrir').textContent = horaFormateada + " - " + fechaFormateada;
+        }
+        actualizarReloj();
+        setInterval(actualizarReloj, 1000);
+    </script>
     <script type="module" src="scriptSimulador/datosClase.js"></script>
     <script type="module" src="scriptSimulador/dataSalario.js"></script>
     <script type="module" src="scriptSimulador/version.js"></script>

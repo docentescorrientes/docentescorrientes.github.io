@@ -1,40 +1,40 @@
 {
     "anio": "2026",
-    "mes": "01",
-    "mes_nombre": "Enero",
-    "_titulo1": "Cód. 603 - Plus Unificado",
+    "mes": "02",
+    "mes_nombre": "Febrero",
+    "titulo1": "Cód. 603 - Plus Unificado",
     "_titulo2": "Cód. 625 - Plus de Refuerzo",
-    "titulo3": "Salario Real (sin pluses)",
+    "_titulo3": "Salario Real (sin pluses)",
     "dias": [
         {
             "dia": "1°",
             "dni": "0 y 1",
-            "fecha": "26",
-            "fecha_cajeros": "24"
+            "fecha": "5",
+            "_fecha_cajeros": ""
         },
         {
             "dia": "2°",
             "dni": "2 y 3",
-            "fecha": "27",
-            "_fecha_cajeros": "24"
+            "fecha": "6",
+            "_fecha_cajeros": ""
         },
         {
             "dia": "3°",
             "dni": "4 y 5",
-            "fecha": "28",
-            "_fecha_cajeros": "24"
+            "fecha": "9",
+            "fecha_cajeros": "7"
         },
         {
             "dia": "4°",
             "dni": "6 y 7",
-            "fecha": "29",
-            "_fecha_cajeros": "24"
+            "fecha": "10",
+            "_fecha_cajeros": ""
         },
         {
             "dia": "5°",
             "dni": "8 y 9",
-            "fecha": "30",
-            "_fecha_cajeros": "24"
+            "fecha": "11",
+            "_fecha_cajeros": ""
         }
     ]
 }

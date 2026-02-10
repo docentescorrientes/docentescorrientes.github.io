@@ -2,39 +2,39 @@
     "anio": "2026",
     "mes": "02",
     "mes_nombre": "Febrero",
-    "titulo1": "Cód. 603 - Plus Unificado",
-    "_titulo2": "Cód. 625 - Plus de Refuerzo y 3° Tramo de Bono Navedeño",
+    "_titulo1": "Cód. 603 - Plus Unificado",
+    "titulo2": "Cód. 625 - Plus de Refuerzo y 3° Tramo de Bono Navedeño",
     "_titulo3": "Salario Real (sin pluses)",
     "dias": [
         {
             "dia": "1°",
             "dni": "0 y 1",
-            "fecha": "5",
+            "fecha": "12",
             "_fecha_cajeros": ""
         },
         {
             "dia": "2°",
             "dni": "2 y 3",
-            "fecha": "6",
+            "fecha": "13",
             "_fecha_cajeros": ""
         },
         {
             "dia": "3°",
             "dni": "4 y 5",
-            "fecha": "9",
-            "fecha_cajeros": "7"
+            "fecha": "18",
+            "fecha_cajeros": "14"
         },
         {
             "dia": "4°",
             "dni": "6 y 7",
-            "fecha": "10",
-            "_fecha_cajeros": ""
+            "fecha": "19",
+            "fecha_cajeros": "16"
         },
         {
             "dia": "5°",
             "dni": "8 y 9",
-            "fecha": "11",
-            "_fecha_cajeros": ""
+            "fecha": "20",
+            "fecha_cajeros": "17"
         }
     ]
 }

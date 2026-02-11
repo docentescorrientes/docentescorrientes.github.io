@@ -514,8 +514,11 @@
                     document.getElementById('cronograma-main-title').innerHTML = `<b>Cronograma</b> de Pagos ${data.anio}`;
                 }
 
-                let titulo = data.titulo1 || data.titulo2 || data.titulo3;
-                if (titulo) {
+                // Buscar el cronograma activo
+                const cronogramaActivo = data.cronogramas ? data.cronogramas.find(c => c.activo) : null;
+
+                if (cronogramaActivo) {
+                    let titulo = cronogramaActivo.titulo;
                     if (data.mes_nombre) {
                         titulo += " de " + data.mes_nombre;
                     }
@@ -534,7 +537,8 @@
                 const hoy = new Date();
                 hoy.setHours(0, 0, 0, 0);
 
-                data.dias.forEach(item => {
+                if (cronogramaActivo && cronogramaActivo.dias) {
+                    cronogramaActivo.dias.forEach(item => {
                     const tr = document.createElement('tr');
 
                     const fecha = crearFecha(item.fecha);
@@ -555,7 +559,8 @@
 
                     tr.innerHTML = `<td class="align-middle">${item.dia}</td><td class="align-middle text-nowrap">${item.dni}</td><td class="align-middle">${cellContent}</td>`;
                     tbody.appendChild(tr);
-                });
+                    });
+                }
             } catch (error) {
                 console.error('Error cargando cronograma:', error);
                 tbody.innerHTML = '<tr><td colspan="3" class="text-center">No hay información disponible</td></tr>';

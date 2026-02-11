@@ -28,13 +28,13 @@
             "dia": "4°",
             "dni": "6 y 7",
             "fecha": "19",
-            "fecha_cajeros": "16"
+            "_fecha_cajeros": ""
         },
         {
             "dia": "5°",
             "dni": "8 y 9",
             "fecha": "20",
-            "fecha_cajeros": "17"
+            "_fecha_cajeros": ""
         }
     ]
 }

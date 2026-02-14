@@ -51,6 +51,21 @@
             pointer-events: none;
             /* 🔒 Bloquea clicks */
         }
+
+        .video-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(13, 110, 253, 0.5);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 10;
+            font-size: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -371,6 +386,9 @@
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="p-1 bg-white shadow-lg rounded-4">
                     <div class="video-responsive">
+                        <div class="video-overlay">
+                            <i class="fa-solid fa-chalkboard-user me-1"></i> DAC - 2019
+                        </div>
                         <iframe id="youtubeVideo" src="" title="Video institucional" allow="autoplay; encrypted-media"
                             allowfullscreen>
                         </iframe>

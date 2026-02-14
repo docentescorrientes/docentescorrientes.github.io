@@ -534,6 +534,7 @@
                     return new Date(data.anio, data.mes - 1, dia);
                 };
 
+                // Define aquí la fecha manual: Año, Mes (0=Enero, 1=Febrero...), Día
                 const hoy = new Date();
                 hoy.setHours(0, 0, 0, 0);
 
@@ -542,21 +543,26 @@
                     const tr = document.createElement('tr');
 
                     const fecha = crearFecha(item.fecha);
+                    let claseFecha = "";
                     if (fecha.getTime() === hoy.getTime()) {
+                        claseFecha = "text-dark fw-bold";
                         tr.style.backgroundColor = '#e3f2fd';
                     }
                     let fechaTexto = fecha.toLocaleDateString('es-ES', opcionesFecha);
                     // Capitalizar primera letra
                     fechaTexto = fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1);
 
-                    let cellContent = `<div style="line-height: 1.2; margin-bottom: 0;">${fechaTexto}</div>`;
+                    let cellContent = `<div class="${claseFecha}" style="line-height: 1.2; margin-bottom: 0;">${fechaTexto}</div>`;
 
                     if (item.fecha_cajeros) {
                         const fechaCajeros = crearFecha(item.fecha_cajeros);
                         const textoCajeros = fechaCajeros.toLocaleDateString('es-ES', opcionesFecha);
 
                         const esHoyCajero = fechaCajeros.getTime() === hoy.getTime();
-                        const claseCajero = esHoyCajero ? "text-danger fw-bold" : "text-muted";
+                        if (esHoyCajero) {
+                            tr.style.backgroundColor = '#e3f2fd';
+                        }
+                        const claseCajero = esHoyCajero ? "text-dark fw-bold" : "text-muted";
                         cellContent += `<small class="${claseCajero}" style="font-size: 0.75em; display: block; line-height: 1; margin-top: 2px;">* Disponible en cajeros el ${textoCajeros}</small>`;
                     }
 

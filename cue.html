@@ -394,6 +394,55 @@
                 document.getElementById("searchInput").addEventListener("input", (e) => {
                     renderTable(e.target.value);
                 });
+
+                // Efecto de escritura dinámica en el placeholder con datos del CSV
+                const inputSearch = document.getElementById("searchInput");
+                
+                // Preparar listas completas para selección aleatoria
+                const allInstitutions = data
+                    .map(row => row["Nombre de Institución"])
+                    .filter(n => n && n.length > 5 && n.length < 40); // Filtrar nombres muy cortos o largos
+                
+                const allLocalities = [...new Set(data.map(row => row["Localidad"]).filter(l => l))];
+
+                let currentText = "Buscar institución o localidad...";
+                let charIdx = 0;
+                let isDeleting = false;
+
+                function typeEffect() {
+                    if (isDeleting) {
+                        inputSearch.placeholder = currentText.substring(0, charIdx - 1);
+                        charIdx--;
+                    } else {
+                        inputSearch.placeholder = currentText.substring(0, charIdx + 1);
+                        charIdx++;
+                    }
+
+                    let typeSpeed = isDeleting ? 40 : 80;
+
+                    if (!isDeleting && charIdx === currentText.length) {
+                        isDeleting = true;
+                        typeSpeed = 2000; // Pausa al terminar de escribir la frase
+                    } else if (isDeleting && charIdx === 0) {
+                        isDeleting = false;
+                        
+                        // Seleccionar nueva frase aleatoria
+                        if (Math.random() > 0.5 && allInstitutions.length > 0) {
+                            const randomInst = allInstitutions[Math.floor(Math.random() * allInstitutions.length)];
+                            currentText = `Por ej. Institución: ${randomInst}`;
+                        } else if (allLocalities.length > 0) {
+                            const randomLoc = allLocalities[Math.floor(Math.random() * allLocalities.length)];
+                            currentText = `Por ej. Localidad: ${randomLoc}`;
+                        }
+                        
+                        typeSpeed = 500; // Pausa antes de escribir la siguiente
+                    }
+
+                    setTimeout(typeEffect, typeSpeed);
+                }
+
+                // Iniciar el efecto si hay frases disponibles
+                if (allInstitutions.length > 0 || allLocalities.length > 0) typeEffect();
             }
         });
     </script>

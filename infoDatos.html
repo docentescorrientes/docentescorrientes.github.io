@@ -461,6 +461,40 @@
                 select.appendChild(option);
             });
 
+            // Efecto de escritura dinámica en el placeholder (primera opción del select)
+            const placeholderOption = select.options[0];
+            const allCargos = clasesDisponibles.map(c => c.cargo);
+            
+            let currentText = "Buscar cargo docente...";
+            let charIdx = 0;
+            let isDeleting = false;
+
+            function typeEffect() {
+                if (isDeleting) {
+                    placeholderOption.textContent = currentText.substring(0, charIdx - 1);
+                    charIdx--;
+                } else {
+                    placeholderOption.textContent = currentText.substring(0, charIdx + 1);
+                    charIdx++;
+                }
+
+                let typeSpeed = isDeleting ? 40 : 80;
+
+                if (!isDeleting && charIdx === currentText.length) {
+                    isDeleting = true;
+                    typeSpeed = 2000; 
+                } else if (isDeleting && charIdx === 0) {
+                    isDeleting = false;
+                    const randomCargo = allCargos[Math.floor(Math.random() * allCargos.length)];
+                    currentText = `Por ej.: ${randomCargo}`;
+                    typeSpeed = 500;
+                }
+
+                setTimeout(typeEffect, typeSpeed);
+            }
+
+            if (allCargos.length > 0) typeEffect();
+
             // Manejar la selección
             select.addEventListener('change', () => {
                 const claseSeleccionada = buscarDataClase(select.value);

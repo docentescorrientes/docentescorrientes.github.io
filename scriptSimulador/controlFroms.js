@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <select class="form-select ubicacionGeografica" name="ubicacionGeografica${i}" id="ubicacionGeografica${i}" required>
                     <option value="" disabled selected>Seleccione la ubicación</option>
                 </select>
-                <p class="text-muted">Seleccione la ubicación geográfica de la institución.</p>
+                <p class="text-muted">Art. N° 43 del Estatuto Docente - Ley N° 3.723/82 y Decretos Reglamentarios.</p>
     
                 <!-- Selección de Jornada -->
                 <div id="jornadaContainer${i}" style="display: none;">

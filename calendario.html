@@ -261,7 +261,7 @@
                 <!-- Columna derecha: selector -->
                 <div class="col-md-3">
                     <label for="mesSelector" class="form-label"><strong>Seleccionar mes:</strong></label>
-                    <select id="mesSelector" class="form-select">
+                    <select id="mesSelector" class="form-select fw-normal">
                         <option value="-1">Mes actual</option>
                         <option value="0">Enero</option>
                         <option value="1">Febrero</option>
@@ -1354,6 +1354,72 @@
 
             // 👉 Seleccionar automáticamente el mes actual
             mesSelector.value = "-1";
+
+            // Efecto de escritura dinámica en el placeholder (primera opción del select)
+            const placeholderOption = mesSelector.options[0];
+            
+            let currentText = "Mes actual";
+            let charIdx = 0;
+            let isDeleting = false;
+            let isDotAnimation = false;
+            let dotCount = 0;
+            let dotCycles = 0;
+
+            function typeEffect() {
+                if (isDotAnimation) {
+                    placeholderOption.textContent = "Mes actual" + ".".repeat(dotCount);
+                    dotCount++;
+                    if (dotCount > 3) {
+                        dotCount = 0;
+                        dotCycles++;
+                    }
+
+                    if (dotCycles >= 3) { 
+                        isDotAnimation = false;
+                        isDeleting = true;
+                        charIdx = "Mes actual".length;
+                        setTimeout(typeEffect, 1000);
+                    } else {
+                        setTimeout(typeEffect, 500);
+                    }
+                    return;
+                }
+
+                if (isDeleting) {
+                    placeholderOption.textContent = currentText.substring(0, charIdx - 1);
+                    charIdx--;
+                } else {
+                    placeholderOption.textContent = currentText.substring(0, charIdx + 1);
+                    charIdx++;
+                }
+
+                let typeSpeed = isDeleting ? 40 : 80;
+
+                if (!isDeleting && charIdx === currentText.length) {
+                    if (currentText === "Mes actual") {
+                        isDotAnimation = true;
+                        dotCount = 0;
+                        dotCycles = 0;
+                        typeSpeed = 500;
+                    } else {
+                        isDeleting = true;
+                        typeSpeed = 2000; 
+                    }
+                } else if (isDeleting && charIdx === 0) {
+                    isDeleting = false;
+                    if (currentText === "Mes actual") {
+                        const randomMonth = months[Math.floor(Math.random() * months.length)];
+                        currentText = `Seleccione un mes: ${randomMonth}`;
+                    } else {
+                        currentText = "Mes actual";
+                    }
+                    typeSpeed = 500;
+                }
+
+                setTimeout(typeEffect, typeSpeed);
+            }
+
+            typeEffect();
 
             const collapseEl = document.getElementById('collapseResumen');
             resumenCollapse = new bootstrap.Collapse(collapseEl, {

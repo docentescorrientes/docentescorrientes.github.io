@@ -368,7 +368,7 @@
             const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
             const horaFormateada = fechaActual.toLocaleTimeString('es-ES');
-            document.getElementById('fechaAbrir').textContent = horaFormateada + " - " + fechaFormateada;
+            document.getElementById('fechaAbrir').innerHTML = '<i class="fa-regular fa-clock"></i> ' + horaFormateada + " - " + '<i class="fa-regular fa-calendar"></i> ' + fechaFormateada;
         }
         actualizarReloj();
         setInterval(actualizarReloj, 1000);

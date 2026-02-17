@@ -468,6 +468,7 @@
             let currentText = "Buscar cargo docente...";
             let charIdx = 0;
             let isDeleting = false;
+            let timeoutId = null;
 
             function typeEffect() {
                 if (isDeleting) {
@@ -490,10 +491,25 @@
                     typeSpeed = 500;
                 }
 
-                setTimeout(typeEffect, typeSpeed);
+                timeoutId = setTimeout(typeEffect, typeSpeed);
             }
 
             if (allCargos.length > 0) typeEffect();
+
+            // Detener animación al interactuar para evitar problemas en móviles
+            select.addEventListener('focus', () => {
+                clearTimeout(timeoutId);
+                placeholderOption.textContent = "Buscar cargo docente...";
+            });
+
+            select.addEventListener('blur', () => {
+                if (select.value === "") {
+                    isDeleting = false;
+                    charIdx = 0;
+                    currentText = "Buscar cargo docente...";
+                    typeEffect();
+                }
+            });
 
             // Animación de puntos suspensivos en el mensaje de espera
             const claseBuscadaDiv = document.getElementById('claseBuscada');

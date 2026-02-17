@@ -626,6 +626,9 @@
                     const domEl = document.getElementById(el.id);
                     if (!domEl) return;
                     
+                    // Detener animación si el elemento tiene el foco para evitar problemas en móviles
+                    if (document.activeElement === domEl) return;
+                    
                     if (!el.lastBaseText) {
                         let currentText = "";
                         if (el.type === "select") {

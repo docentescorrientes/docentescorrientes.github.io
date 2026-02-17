@@ -1364,6 +1364,7 @@
             let isDotAnimation = false;
             let dotCount = 0;
             let dotCycles = 0;
+            let timeoutId = null;
 
             function typeEffect() {
                 if (isDotAnimation) {
@@ -1378,9 +1379,9 @@
                         isDotAnimation = false;
                         isDeleting = true;
                         charIdx = "Mes actual".length;
-                        setTimeout(typeEffect, 1000);
+                        timeoutId = setTimeout(typeEffect, 1000);
                     } else {
-                        setTimeout(typeEffect, 500);
+                        timeoutId = setTimeout(typeEffect, 500);
                     }
                     return;
                 }
@@ -1416,10 +1417,26 @@
                     typeSpeed = 500;
                 }
 
-                setTimeout(typeEffect, typeSpeed);
+                timeoutId = setTimeout(typeEffect, typeSpeed);
             }
 
             typeEffect();
+
+            // Detener animación al interactuar para evitar problemas en móviles
+            mesSelector.addEventListener('focus', () => {
+                clearTimeout(timeoutId);
+                placeholderOption.textContent = "Mes actual";
+            });
+
+            mesSelector.addEventListener('blur', () => {
+                if (mesSelector.value === "-1") {
+                    isDeleting = false;
+                    isDotAnimation = false;
+                    charIdx = 0;
+                    currentText = "Mes actual";
+                    typeEffect();
+                }
+            });
 
             const collapseEl = document.getElementById('collapseResumen');
             resumenCollapse = new bootstrap.Collapse(collapseEl, {

@@ -206,7 +206,7 @@
                 <div class="mb-3">
                     <label for="miSelect" class="form-label">Busca tu clase e índice de clase de cargo docentes
                         aquí</label>
-                    <select class="form-select border-success" id="miSelect" name="miSelect" required
+                    <select class="form-select border-success fw-normal" id="miSelect" name="miSelect" required
                         aria-describedby="yearHelp">
                         <option value="" selected disabled>Buscar la clase e índice de clase del cargo docente . . .
                         </option>
@@ -486,7 +486,7 @@
                 } else if (isDeleting && charIdx === 0) {
                     isDeleting = false;
                     const randomCargo = allCargos[Math.floor(Math.random() * allCargos.length)];
-                    currentText = `Por ej.: ${randomCargo}`;
+                    currentText = `Selecciona el Cargo: ${randomCargo}`;
                     typeSpeed = 500;
                 }
 
@@ -494,6 +494,23 @@
             }
 
             if (allCargos.length > 0) typeEffect();
+
+            // Animación de puntos suspensivos en el mensaje de espera
+            const claseBuscadaDiv = document.getElementById('claseBuscada');
+            const baseMsg = '<strong>👆 Esperando</strong> que seleccione cargo';
+            let dotsCount = 3;
+            
+            const dotsInterval = setInterval(() => {
+                if (!claseBuscadaDiv.classList.contains('alert-secondary')) {
+                    clearInterval(dotsInterval);
+                    return;
+                }
+                
+                dotsCount = (dotsCount + 1) % 4;
+                let dotsStr = "";
+                for(let i=0; i<dotsCount; i++) dotsStr += " .";
+                claseBuscadaDiv.innerHTML = baseMsg + dotsStr;
+            }, 500);
 
             // Manejar la selección
             select.addEventListener('change', () => {

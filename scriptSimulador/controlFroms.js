@@ -1,4 +1,4 @@
-import { buscarDataClase } from "./datosClase.js";
+import { buscarDataClase, clases } from "./datosClase.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     controlHijos();
@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
         clasesContainer.innerHTML = ""; // Limpiar contenido previo
 
         for (let i = 1; i <= cantidad; i++) {
+            const keys = Object.keys(clases);
+            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            const placeholderText = `Ejemplo: ${randomKey} (${clases[randomKey].cargo})`;
+
             const divClase = document.createElement("div");
             divClase.classList.add("mb-3", "border", "border-success", "p-3", "rounded");
 
@@ -30,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
                 <!-- Número de Clase -->
                 <label class="form-label" for="numeroClase${i}">a - Número de Clase del ${i}° Cargo</label>
-                <input type="number" class="form-control" id="numeroClase${i}" name="numeroClase${i}" min="20" max="411" placeholder="Ejemplo: 333 (de Maestro de Grado Escuela Común)" required>
+                <input type="number" class="form-control" id="numeroClase${i}" name="numeroClase${i}" min="20" max="411" placeholder="${placeholderText}" required>
                 <p id="descripcionClase${i}" class="text-muted">Ingrese un número de clase válido entre 20 y 411.</p>
     
                 <!-- Tipo de Contrato -->

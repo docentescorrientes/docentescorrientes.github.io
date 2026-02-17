@@ -592,6 +592,67 @@
         actualizarReloj();
         setInterval(actualizarReloj, 1000);
     </script>
+    <script type="module">
+        import { clases } from './scriptSimulador/datosClase.js';
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const elements = [
+                { id: "year", type: "select" },
+                { id: "month", type: "select" },
+                { id: "seniority", type: "select" },
+                { id: "childrenTotal", type: "input" },
+                { id: "childrenDisabled", type: "input" },
+                { id: "childrenSchool", type: "input" },
+                { id: "childrenSchoolDisabled", type: "input" }
+            ];
+
+            // Agregar elementos dinámicos (hasta 5 cargos)
+            for (let i = 1; i <= 5; i++) {
+                elements.push({ id: `numeroClase${i}`, type: "input", isClassInput: true });
+                elements.push({ id: `tipoContrato${i}`, type: "select" });
+                elements.push({ id: `nivelCargo${i}`, type: "select" });
+                elements.push({ id: `ubicacionGeografica${i}`, type: "select" });
+                elements.push({ id: `jornada${i}`, type: "select" });
+                elements.push({ id: `horasCatedra${i}`, type: "input" });
+            }
+
+            let dotCount = 0;
+            setInterval(() => {
+                dotCount = (dotCount + 1) % 4;
+                const dots = ".".repeat(dotCount);
+                const changeText = dotCount === 0;
+
+                elements.forEach(el => {
+                    const domEl = document.getElementById(el.id);
+                    if (!domEl) return;
+                    
+                    if (!el.lastBaseText) {
+                        let currentText = "";
+                        if (el.type === "select") {
+                            if (domEl.options.length > 0) currentText = domEl.options[0].text;
+                        } else {
+                            currentText = domEl.placeholder;
+                        }
+                        el.lastBaseText = currentText.replace(/\.+$/, '');
+                    }
+                    
+                    if (el.isClassInput && changeText) {
+                        const keys = Object.keys(clases);
+                        if (keys.length > 0) {
+                            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+                            el.lastBaseText = `Ejemplo: ${randomKey} (${clases[randomKey].cargo})`;
+                        }
+                    }
+
+                    if (el.type === "select") {
+                        if (domEl.options.length > 0) domEl.options[0].text = el.lastBaseText + dots;
+                    } else {
+                        domEl.placeholder = el.lastBaseText + dots;
+                    }
+                });
+            }, 500);
+        });
+    </script>
 
     <!-- Start Script viejo-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

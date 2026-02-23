@@ -58,6 +58,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    const anioSelect = document.getElementById("anioSelectCB");
+    if (anioSelect) {
+        anioSelect.addEventListener("change", function () {
+            const arrayTextValorCB = obtenerValorYTextoSeleccionado("CB");
+            const arrayTextValorCargos = obtenerValorYTextoSeleccionado("Cargos");
+            const arrayTextValorAntiguedad = actualizarAntiguedad();
+            crearGrafico("chartCB", arrayTextValorCB.valor, arrayTextValorAntiguedad.valor, arrayTextValorCB.text, arrayTextValorCargos.valor);
+        });
+    }
+
     // Evento para actualizar el valor en tiempo real
     rangoAntiguedad.addEventListener("input", function () {
         const arrayTextValorCB = obtenerValorYTextoSeleccionado("CB");
@@ -111,7 +121,8 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
     const arrayRef = ["canastaBTNac", "canastaBTNea", "canastaBANac", "canastaBANea"];
 
     const fechaActual = new Date();
-    const anio = fechaActual.getFullYear() - 1;
+    const anioSelect = document.getElementById("anioSelectCB");
+    const anio = anioSelect ? parseInt(anioSelect.value) : fechaActual.getFullYear();
     console.log("Año seleccionado para el gráfico:", anio);
     const mes = fechaActual.getMonth();
     const arrayDivisor = date[arrayRef[radioCheck]][anio]; //date.canastaBTNac[anio];
@@ -137,8 +148,11 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
     };
 
     for (let i = 0; i < 12; i++) {
-        const divisor = arrayDivisor[i];
-        if (divisor === '---') continue; // Saltar si no hay dato
+        let divisor = arrayDivisor[i];
+        if (typeof divisor === 'string' && divisor !== '---') {
+            divisor = parseFloat(divisor.replace(/\./g, '').replace(',', '.'));
+        }
+        if (divisor === '---' || !divisor) continue; // Saltar si no hay dato
         const n = i + 1;
         let blanco = sumaGrupo(anio, n, tipoB);
         let gris = sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1];

@@ -58,6 +58,16 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    const anioSelect = document.getElementById("anioSelectDolar");
+    if (anioSelect) {
+        anioSelect.addEventListener("change", function () {
+            const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
+            const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
+            const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
+            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
+        });
+    }
+
     // Evento para actualizar el valor en tiempo real
     rangoAntiguedad.addEventListener("input", function () {
         const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
@@ -110,7 +120,8 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
     const arrayRef = ["pesos", "dolarBlue"];
 
     const fechaActual = new Date();
-    const anio = fechaActual.getFullYear() - 1;
+    const anioSelect = document.getElementById("anioSelectDolar");
+    const anio = anioSelect ? parseInt(anioSelect.value) : fechaActual.getFullYear();
     const mes = fechaActual.getMonth();
     let arrayDivisor = new Array(12).fill(1);
     if (radioCheck == 1) {
@@ -139,7 +150,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
 
     for (let i = 0; i < 12; i++) {
         const divisor = arrayDivisor[i];
-        if (divisor === '---') continue; // Saltar si no hay dato
+        if (divisor === '---' || (date.dolarBlue[anio] && date.dolarBlue[anio][i] === '---')) continue; // Saltar si no hay dato
         const n = i + 1;
         let blanco = sumaGrupo(anio, n, tipoB);
         let gris = sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1];

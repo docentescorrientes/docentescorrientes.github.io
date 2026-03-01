@@ -462,7 +462,6 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
         const botonVolverSimular = document.getElementById("recalculateButtonTable");
         const tableHaber = document.getElementById("tableHaber");
 
-        botonBajarPDF.classList.add("ocultar-boton");
         botonBajarPDF.disabled = true;
         if (botonVolverSimular) botonVolverSimular.classList.add("ocultar-boton");
 
@@ -484,12 +483,10 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
             pdf.save(`simulacion${year}/${month}_salario_DAC.pdf`);
 
-            botonBajarPDF.classList.remove("ocultar-boton");
             botonBajarPDF.disabled = false;
             if (botonVolverSimular) botonVolverSimular.classList.remove("ocultar-boton");
         }).catch(error => {
             console.error("Error al generar el PDF:", error);
-            botonBajarPDF.classList.remove("ocultar-boton");
             botonBajarPDF.disabled = false;
             if (botonVolverSimular) botonVolverSimular.classList.remove("ocultar-boton");
             alert("Hubo un error al generar el PDF. Por favor, inténtalo de nuevo.");

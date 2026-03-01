@@ -307,23 +307,25 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             totalBruto += item.valor;
             totalDescuento += descuento;
             totalNeto += neto;
+            let descuentoTexto = descuento === 0 ? "----" : formatNumero(-descuento, "$");
             seccionHTML += `
           <tr class="table-${item.color}">
               <td><strong>${item.codigo}</strong></td>
               <td class="text-start">${item.nombre}</td>
               <td>${formatNumero(item.valor, "$")}</td>
-              <td>${formatNumero(-descuento, "$")}</td>
+              <td>${descuentoTexto}</td>
               <td>${formatNumero(neto, "$")}</td>
           </tr>
       `;
         });
 
         if (totalBruto > 0) {
+            let totalDescuentoTexto = totalDescuento === 0 ? "----" : formatNumero(-totalDescuento, "$");
             seccionHTML += `
           <tr class="table-light fw-bold">
               <td colspan="2">∑ Total ${titulo}</td>
               <td>${formatNumero(totalBruto, "$")}</td>
-              <td>${formatNumero(-totalDescuento, "$")}</td>
+              <td>${totalDescuentoTexto}</td>
               <td class="fw-bold border-2 border-success">${formatNumero(totalNeto, "$")}</td>
           </tr>
           <tr class="table-light"><td colspan="5" style="height: 10px; border: none;"></td></tr>
@@ -485,7 +487,6 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             pdf.save(`simulacion${year}/${month}_salario_DAC.pdf`);
 
             botonBajarPDF.classList.remove("ocultar-boton");
-            botonBajarPDF.disabled = false;
             if (botonVolverSimular) botonVolverSimular.classList.remove("ocultar-boton");
         }).catch(error => {
             console.error("Error al generar el PDF:", error);
@@ -495,19 +496,6 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             alert("Hubo un error al generar el PDF. Por favor, inténtalo de nuevo.");
         });
     });
-
-    // Función para detectar si es un dispositivo móvil
-    function esDispositivoMovil() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    };
-
-    if (esDispositivoMovil()) {
-        const botonBajarPDF = document.getElementById("bajarPDF");
-        if (botonBajarPDF) {
-            botonBajarPDF.style.display = "none"; // Oculta el botón
-        }
-    }
-
 
 }
 

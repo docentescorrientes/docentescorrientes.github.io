@@ -495,20 +495,6 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             alert("Hubo un error al generar el PDF. Por favor, inténtalo de nuevo.");
         });
     });
-
-    // Función para detectar si es un dispositivo móvil
-    function esDispositivoMovil() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    };
-
-    if (esDispositivoMovil()) {
-        const botonBajarPDF = document.getElementById("bajarPDF");
-        if (botonBajarPDF) {
-            botonBajarPDF.style.display = "none"; // Oculta el botón
-        }
-    }
-
-
 }
 
 // Función para generar el texto en el formato deseado

@@ -443,35 +443,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
 
     // Generar texto para cada contrato en el array
     const textos = datosFormulario.cargos.map((contrato, index) => generarTextoCompacto(contrato, index));
-    const textFinalAcordeon = `
-      <div class="accordion mt-3" id="acordeonInfo">
-          <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                      data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                      👉🏼 Información adicional sobre la simulación, descuentos y componentes del salario.
-                  </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" 
-                  data-bs-parent="#acordeonInfo">
-                  <div class="accordion-body text-start">
-                    <p>Simulación ${month}/${year} de docente con ${antiguedad}% antigüedad en ${cantCargos}: ${textos.join("; ")}.</p>
-                    <ol>
-                    <li>Las simulaciones pueden variar dependiendo de cada docente, ya que algunos pueden contar con <strong>ítems especiales</strong>. 
-                    Por ejemplo, ciertos cargos incluyen ítems por tarea diferenciada. Algunos <strong>cargos directivos y gremiales</strong> tienen 
-                    un descuento menor en aportes jubilatorios (<strong>18.5%</strong> en lugar del <strong>20%</strong> que se aplica a la mayoría). 
-                    Pueden existir <strong>descuentos adicionales</strong>, como los <strong>aportes gremiales</strong> o descuento del <strong>Cód. 210 
-                    Seguro de vida (Life): </strong>${formatNumero(cod210SV, "$")} y <strong>Seguros CNP del Banco Corrientes: </strong> ${formatNumero(segurosCNP, "$")} , lo que impacta en el cálculo final.</li>
-                    <li>No se puede realizar la simulación <strong>por cargos separados</strong>, ya que como <strong>nos pagan menos en el segundo y tercer 
-                    cargo</strong>, el resultado cambia si no se tiene en cuenta la cantidad total de cargos.</li>
-                    <li>No se incluye que ciertos cargos con menos de dieciocho (18) horas reloj semanales de carga horaria laboral, <strong>percibe el 50% de las 
-                    asignaciones</strong> a excepción de la de maternidad, previstas en el art. 25 de la ley N° 3.554/80.</li>
-                    </ol>
-                  </div>
-              </div>
-          </div>
-      </div>
-  `;
+    const textFinalAcordeon = `<div class="accordion mt-3" id="acordeonInfo"><div class="accordion-item"><h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="white-space: nowrap;">👉🏼 Información adicional sobre la simulación, descuentos y componentes del salario.</button></h2><div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordeonInfo"><div class="accordion-body text-start"><p>Simulación ${month}/${year} de docente con ${antiguedad}% antigüedad en ${cantCargos}: ${textos.join("; ")}.</p><ol><li>Las simulaciones pueden variar dependiendo de cada docente, ya que algunos pueden contar con <strong>ítems especiales</strong>. Por ejemplo, ciertos cargos incluyen ítems por tarea diferenciada. Algunos <strong>cargos directivos y gremiales</strong> tienen un descuento menor en aportes jubilatorios (<strong>18.5%</strong> en lugar del <strong>20%</strong> que se aplica a la mayoría). Pueden existir <strong>descuentos adicionales</strong>, como los <strong>aportes gremiales</strong> o descuento del <strong>Cód. 210 Seguro de vida (Life): </strong>${formatNumero(cod210SV, "$")} y <strong>Seguros CNP del Banco Corrientes: </strong> ${formatNumero(segurosCNP, "$")} , lo que impacta en el cálculo final.</li><li>No se puede realizar la simulación <strong>por cargos separados</strong>, ya que como <strong>nos pagan menos en el segundo y tercer cargo</strong>, el resultado cambia si no se tiene en cuenta la cantidad total de cargos.</li><li>No se incluye que ciertos cargos con menos de dieciocho (18) horas reloj semanales de carga horaria laboral, <strong>percibe el 50% de las asignaciones</strong> a excepción de la de maternidad, previstas en el art. 25 de la ley N° 3.554/80.</li></ol></div></div></div></div>`;
     tablaResultados.insertAdjacentHTML("afterend", textFinalAcordeon);
     document.getElementById("tablaResultados").scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -487,12 +459,20 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
     // Agrega un evento al botón "Bajar PDF"
     document.getElementById("bajarPDF").addEventListener("click", function () {
         const botonBajarPDF = document.getElementById("bajarPDF");
+        const botonVolverSimular = document.getElementById("recalculateButtonTable");
         const tableHaber = document.getElementById("tableHaber");
 
         botonBajarPDF.classList.add("ocultar-boton");
         botonBajarPDF.disabled = true;
+        if (botonVolverSimular) botonVolverSimular.classList.add("ocultar-boton");
 
-        html2canvas(tableHaber, { scale: 0.8 }).then(canvas => {
+        // Configuración para asegurar que la tabla salga completa en móviles
+        const options = {
+            scale: 2, // Mejor calidad
+            windowWidth: 1200 // Simula pantalla de escritorio
+        };
+
+        html2canvas(tableHaber, options).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
 
             const { jsPDF } = window.jspdf;
@@ -505,10 +485,13 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             pdf.save(`simulacion${year}/${month}_salario_DAC.pdf`);
 
             botonBajarPDF.classList.remove("ocultar-boton");
+            botonBajarPDF.disabled = false;
+            if (botonVolverSimular) botonVolverSimular.classList.remove("ocultar-boton");
         }).catch(error => {
             console.error("Error al generar el PDF:", error);
             botonBajarPDF.classList.remove("ocultar-boton");
             botonBajarPDF.disabled = false;
+            if (botonVolverSimular) botonVolverSimular.classList.remove("ocultar-boton");
             alert("Hubo un error al generar el PDF. Por favor, inténtalo de nuevo.");
         });
     });

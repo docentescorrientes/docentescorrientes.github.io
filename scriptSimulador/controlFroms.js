@@ -341,6 +341,8 @@ function controlHijos() {
     const additionalChildrenFields = document.getElementById("additionalChildrenFields"); // Contenedor hijos con discapacidad
     const additionalSchoolFields = document.getElementById("additionalSchoolFields"); // Contenedor hijos escolarizados con discapacidad
     const schoolDisabledChildrenInput = document.getElementById("childrenSchoolDisabled"); // Hijos escolarizados con discapacidad
+    const childrenSchoolContainer = document.getElementById("childrenSchoolContainer"); // Contenedor Hijos escolarizados
+    const labelCantidadClases = document.getElementById("labelCantidadClases"); // Label cantidad clases
 
     childrenInput.addEventListener("input", function (event) {
         let totalHijos = parseInt(event.target.value) || 0;
@@ -353,6 +355,17 @@ function controlHijos() {
 
         // Mostrar u ocultar los campos adicionales
         additionalChildrenFields.style.display = totalHijos > 0 ? "block" : "none";
+
+        if (totalHijos > 0) {
+            childrenSchoolContainer.style.display = "block";
+            labelCantidadClases.textContent = "6 - Cantidad de números de clases por cargo.";
+            if (schoolChildrenInput.value == 0) schoolChildrenInput.value = "";
+        } else {
+            childrenSchoolContainer.style.display = "none";
+            schoolChildrenInput.value = 0;
+            schoolChildrenInput.dispatchEvent(new Event('input'));
+            labelCantidadClases.textContent = "5 - Cantidad de números de clases por cargo.";
+        }
 
         // Hacer requeridos los campos solo si hay hijos a cargo
         disabledChildrenInput.required = totalHijos > 0;

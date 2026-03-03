@@ -117,6 +117,8 @@ document.getElementById('recalculateButton').addEventListener('click', function 
     document.getElementById("tableHaber").hidden = true;
     document.getElementById("additionalChildrenFields").style.display = "none";
     document.getElementById("additionalSchoolFields").style.display = "none";
+    document.getElementById("childrenSchoolContainer").style.display = "none";
+    document.getElementById("labelCantidadClases").textContent = "5 - Cantidad de números de clases por cargo.";
     // 📌 Mover la pantalla al inicio del formulario
     document.querySelector("h2.text-center.text-success").scrollIntoView({ behavior: "smooth", block: "start" });
 

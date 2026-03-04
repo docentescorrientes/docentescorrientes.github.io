@@ -320,6 +320,8 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
         });
 
         if (totalBruto > 0) {
+            totalBruto -= 0.01;
+            totalNeto -= 0.01;
             let totalDescuentoTexto = totalDescuento === 0 ? "----" : formatNumero(-totalDescuento, "$");
             seccionHTML += `
           <tr class="table-light fw-bold">
@@ -387,21 +389,10 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
           <td class="fw-bold border-2 border-success">${formatNumero(cod120SegVida + arrayRecuperado[1], "$")}</td>
       `;
             tbody.appendChild(newRow);
-            // Creamos la nueva fila para el Seguro CNP
-            const newRowSeguroCNP = document.createElement("tr");
-            newRowSeguroCNP.classList.add("table-secondary"); // Color secundario
-            newRowSeguroCNP.innerHTML = `
-          <td><strong>🏛</strong></td>
-          <td class="text-start">Seguro CNP (Banco Corrientes)</td>
-          <td>----</td>
-          <td>${formatNumero(segurosCNPas, "$")}</td>
-          <td class="fw-bold border-2 border-success">${formatNumero(segurosCNPas + cod120SegVida + arrayRecuperado[1], "$")}</td>
-      `;
-            tbody.appendChild(newRowSeguroCNP);
 
             // Calcular el salario sin pluses
-            const salarioBrutoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[0] - sumaPlusBruto;
-            const salarioNetoSinPluses = segurosCNPas + cod120SegVida + arrayRecuperado[1] - sumaPlusNeto;
+            const salarioBrutoSinPluses = cod120SegVida + arrayRecuperado[0] - sumaPlusBruto;
+            const salarioNetoSinPluses = cod120SegVida + arrayRecuperado[1] - sumaPlusNeto;
 
             const newRowSalarioSinPluses = document.createElement("tr");
             newRowSalarioSinPluses.classList.add("table-success"); // Color secundario
@@ -413,6 +404,18 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             <td class="fw-bold border-2 border-success">${formatNumero(salarioNetoSinPluses, "$")}</td>
 `;
             tbody.appendChild(newRowSalarioSinPluses);
+
+            // Creamos la nueva fila para el Seguro CNP
+            const newRowSeguroCNP = document.createElement("tr");
+            newRowSeguroCNP.classList.add("table-secondary"); // Color secundario
+            newRowSeguroCNP.innerHTML = `
+          <td><strong>🏛</strong></td>
+          <td class="text-start">Seguro CNP (Banco Corrientes)</td>
+          <td>----</td>
+          <td>${formatNumero(segurosCNPas, "$")}</td>
+          <td class="fw-bold border-2 border-success">${formatNumero(segurosCNPas + cod120SegVida + arrayRecuperado[1], "$")}</td>
+      `;
+            tbody.appendChild(newRowSeguroCNP);
         }
     }
 

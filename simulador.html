@@ -31,6 +31,18 @@
             background-color: #ffffff;
             z-index: -1;
         }
+        .text-brubank {
+            color: #6F2CFF !important;
+        }
+        .btn-brubank {
+            background-color: #6F2CFF !important;
+            border-color: #6F2CFF !important;
+            color: white !important;
+        }
+        .btn-brubank:hover {
+            background-color: #5820d6 !important;
+            border-color: #5820d6 !important;
+        }
     </style>
 </head>
 
@@ -370,8 +382,14 @@
                                 <p> 💡 Ten en cuenta que los valores de cada ítem o código es la suma total de cada uno
                                     de los mismos de todos tus recibos.<br>👏 Esperamos que este simulador sea una
                                     herramienta valiosa para ti, 💪 ayudándote a visualizar y comprender mejor tu
-                                    situación financiera como educador.<br>👍 Podés donar con lo que puedas a nuestra
-                                    cuenta con alias: <strong class="text-primary">autoconvocadoctes</strong><br>¡😍
+                                    situación financiera como educador.</p>
+                                <div class="text-center border p-3 rounded mb-3 bg-muted">
+                                    <img src="assets/img/brubank.png" alt="Brubank" style="height: 40px;" class="mb-2">
+                                    <p class="mb-1 small">CBU: <span id="cbuText" class="user-select-all">1430001713011607450015</span></p>
+                                    <p class="mb-1">Alias: <strong id="aliasText" class="text-brubank fs-5 user-select-all">autoconvocadoctes</strong></p>
+                                    <p class="mb-0 small">Nro. Cuenta: <span id="cuentaText" class="user-select-all">1301160745001</span></p>
+                                </div>
+                                <p>👍 Podés donar con lo que puedas a nuestra cuenta.<br>¡😍
                                     Gracias por confiar en nosotros y por apoyarnos en nuestro camino a una educación de
                                     calidad!<br><br>
                                 <figcaption class="blockquote-footer" style="text-align: right">
@@ -379,7 +397,7 @@
                                 </figcaption>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-brubank w-100" id="btnCopiarAlias"><i class="fa-regular fa-copy me-2"></i>Copiar Alias</button>
                             </div>
                         </div>
                     </div>
@@ -721,6 +739,24 @@
         document.addEventListener('DOMContentLoaded', function () {
             var myModal = new bootstrap.Modal(document.getElementById('myModal'));
             myModal.show();
+
+            const btnCopiar = document.getElementById('btnCopiarAlias');
+            if (btnCopiar) {
+                btnCopiar.addEventListener('click', function () {
+                    const alias = document.getElementById('aliasText').innerText;
+                    navigator.clipboard.writeText(alias).then(function () {
+                        const originalHTML = btnCopiar.innerHTML;
+                        btnCopiar.innerHTML = '<i class="fa-solid fa-check me-2"></i>¡Copiado!';
+                        btnCopiar.classList.remove('btn-brubank');
+                        btnCopiar.classList.add('btn-success');
+                        setTimeout(function () {
+                            btnCopiar.innerHTML = originalHTML;
+                            btnCopiar.classList.remove('btn-success');
+                            btnCopiar.classList.add('btn-brubank');
+                        }, 2000);
+                    });
+                });
+            }
         });
     </script>
 </body>

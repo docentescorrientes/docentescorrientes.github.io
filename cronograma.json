@@ -1,40 +1,40 @@
 {
     "anio": "2026",
-    "mes": "02",
-    "mes_nombre": "Febrero",
+    "mes": "03",
+    "mes_nombre": "Marzo",
     "cronogramas": [
         {
             "titulo": "Cód. 603 - Plus Unificado",
-            "activo":false,
+            "activo":true,
             "dias": [
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "5",
-                    "_fecha_cajeros": ""
+                    "fecha": "9",
+                    "fecha_cajeros": "7"
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "6",
+                    "fecha": "10",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "9",
-                    "fecha_cajeros": "7"
+                    "fecha": "11",
+                    "_fecha_cajeros": "7"
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "10",
+                    "fecha": "12",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "11",
+                    "fecha": "13",
                     "_fecha_cajeros": ""
                 }
             ]
@@ -46,20 +46,20 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "12",
-                    "_fecha_cajeros": ""
+                    "fecha": "16",
+                    "fecha_cajeros": "14"
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "13",
+                    "fecha": "17",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
                     "fecha": "18",
-                    "fecha_cajeros": "14"
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
@@ -77,36 +77,36 @@
         },
         {
             "titulo": "Salario Real (sin pluses)",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "23",
-                    "fecha_cajeros": "21"
+                    "fecha": "25",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "24",
+                    "fecha": "26",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "25",
+                    "fecha": "27",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "26",
-                    "_fecha_cajeros": ""
+                    "fecha": "30",
+                    "fecha_cajeros": "28"
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "27",
+                    "fecha": "31",
                     "_fecha_cajeros": ""
                 }                
             ]

@@ -35,6 +35,8 @@ aumentos.agregarAumento("1 Básico", 2024, 10, 15000, "b");
 aumentos.agregarAumento("1 Básico", 2025, 3, 20000, "b");
 aumentos.agregarAumento("1 Básico", 2025, 8, 22000, "b");
 
+aumentos.agregarAumento("1 Básico", 2026, 3, 57436, "b");
+
 // Grises: (Neto * 4/3)
 aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 33500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo
 
@@ -53,12 +55,15 @@ aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2024, 10, 7825 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2025, 3, 30000 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
 aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2025, 8, 149125 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
+aumentos.agregarAumento("632 Complemento Docente Provincial (en 2 cargos)", 2026, 3, 44500 * 4 / 3, "g"); // ### Tope: hasta dos cargos.
+
 
 // Negros: cod3SalFam (cod3xHijo, cod3xHijoDisc, cod3Esc, cod3EscDisc, Cod3AnualComplemVacac, cod3AyEsc), cod171CompDocPcial, cod622BonoNav3Tramos(dic100,ene200, feb200)
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 9, 251500, "n"); // ### Tope: hasta dos cargos
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2024, 10, 35000, "n"); // ### Tope: hasta dos cargos
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2025, 3, 30000, "n"); // ### Tope: hasta dos cargos
 aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2025, 8, -79125, "n"); // ### Tope: hasta dos cargos
+aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2026, 3, -59344, "n"); // ### Tope: hasta dos cargos (ESTE)
 
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 1, 22000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 2, 8000, "n"); // Tope: hasta un cargo y 2 hijos

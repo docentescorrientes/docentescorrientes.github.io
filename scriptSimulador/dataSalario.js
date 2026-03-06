@@ -142,6 +142,10 @@ function buscarAumentos(anio, mes, dia) {
   Object.keys(ultimoAumentoPorCodigo).forEach(clave => {
     const { anio, mes, monto, tipo } = ultimoAumentoPorCodigo[clave];
     const codigo = clave.split("-")[0];
+    let codigoMostrar = codigo;
+    if (codigo === "1 Básico") {
+      codigoMostrar = "1 Básico (en todos los cargos y se bonifica)";
+    }
 
     // Obtener el total acumulado hasta la fecha dada
     const totalAcumuladoHastaFecha = aumentos.obtenerTotalPorCodigoHasta(codigo, anio, mes, tipo);
@@ -173,7 +177,7 @@ function buscarAumentos(anio, mes, dia) {
 
     tablaHTML += `
       <tr class="${rowClass}">
-        <td class="text-start">${codigo}</td>
+        <td class="text-start">${codigoMostrar}</td>
         <td>${mes}/${anio}</td>
         <td id="aumentoReferencia">${formatNumero(montoMostrar, "$")}</td>
         <td id="montoReferencia">${formatNumero(totalAcumuladoHastaFecha, "$")}</td>

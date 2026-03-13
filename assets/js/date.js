@@ -40,7 +40,7 @@ export function dateGral() {
         2023: [5.65, 7.76, 6.25, 8.34, 7.29, 6.61, 6.26, 14.18, 12.95, 7.40, 12.83, 28.35],
         2024: [19.50, 10.9, 10.3, 6.3, 3.7, 4.4, 4.6, 4.4, 3.3, 2.6, 1.8, 2.9],
         2025: [2.50, 1.9, 3.1, 2.7, 1.3, 1.1, 1.7, 1.7, 1.8, 2.2, 2.4, 2.6],
-        2026: [3.8, 3.5, '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
+        2026: [3.8, 3.1, '---', '---', '---', '---', '---', '---', '---', '---', '---', '---']
     };
     // El valor del dólar blue (dolar blue cotización fin del mes) https://www.dolarito.ar/cotizaciones-historicas/dolar/informal/2026/cotizacion-historica-del-dolar-informal-a%C3%B1o-2026 */
     const dolarBlue = {

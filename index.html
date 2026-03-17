@@ -532,8 +532,30 @@
                     document.getElementById('cronograma-main-title').innerHTML = `<b>Cronograma</b> de Pagos ${data.anio}`;
                 }
 
-                // Buscar el cronograma activo
-                const cronogramaActivo = data.cronogramas ? data.cronogramas.find(c => c.activo) : null;
+                // Determinar dinámicamente el cronograma activo basándose en la fecha actual
+                let cronogramaActivo = null;
+                if (data.cronogramas && data.cronogramas.length > 0) {
+                    const hoyCalc = new Date();
+                    const anio = parseInt(data.anio);
+                    const mes = parseInt(data.mes) - 1; // En JavaScript los meses van de 0 a 11
+
+                    let indiceActivo = data.cronogramas.length - 1; // Por defecto dejamos el último
+
+                    for (let i = 0; i < data.cronogramas.length; i++) {
+                        const crono = data.cronogramas[i];
+                        if (crono.dias && crono.dias.length > 0) {
+                            const ultimoDiaItem = crono.dias[crono.dias.length - 1];
+                            const ultimoDia = parseInt(ultimoDiaItem.fecha);
+                            // Fecha límite a las 23:59:59 del último día de ese bloque
+                            const fechaLimite = new Date(anio, mes, ultimoDia, 23, 59, 59);
+                            if (hoyCalc <= fechaLimite) {
+                                indiceActivo = i;
+                                break; // Si hoy es menor o igual al último día, este es el cronograma actual
+                            }
+                        }
+                    }
+                    cronogramaActivo = data.cronogramas[indiceActivo];
+                }
 
                 if (cronogramaActivo) {
                     let titulo = cronogramaActivo.titulo;

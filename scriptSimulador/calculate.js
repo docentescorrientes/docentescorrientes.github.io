@@ -320,8 +320,8 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
         });
 
         if (totalBruto > 0) {
-            totalBruto -= 0.01;
-            totalNeto -= 0.01;
+            totalBruto -= 0.02;
+            totalNeto -= 0.02;
             let totalDescuentoTexto = totalDescuento === 0 ? "----" : formatNumero(-totalDescuento, "$");
             seccionHTML += `
           <tr class="table-light fw-bold">

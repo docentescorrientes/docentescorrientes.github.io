@@ -125,7 +125,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
     const anio = anioSelect ? parseInt(anioSelect.value) : fechaActual.getFullYear();
     console.log("Año seleccionado para el gráfico:", anio);
     const mes = fechaActual.getMonth();
-    const arrayDivisor = date[arrayRef[radioCheck]][anio]; //date.canastaBTNac[anio];
+    const arrayDivisor = date[arrayRef[radioCheck]][anio] || []; // Prevención por si el año aún no está definido
 
     const tipoB = ["b", 1.3 + antiguedad];
     const tipoG1C = ["g", 1, 1, 1, 0, 1];
@@ -148,11 +148,17 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
     };
 
     for (let i = 0; i < 12; i++) {
-        let divisor = arrayDivisor[i];
+        let divisor = arrayDivisor[i] || null;
         if (typeof divisor === 'string' && divisor !== '---') {
             divisor = parseFloat(divisor.replace(/\./g, '').replace(',', '.'));
         }
-        if (divisor === '---' || !divisor) continue; // Saltar si no hay dato
+        if (divisor === '---' || !divisor) {
+            arrayBlanco.push(null);
+            arrayGrisC.push(null);
+            arrayNegro.push(null);
+            arrayTotalC.push(null);
+            continue; // Dejar hueco en el gráfico si no hay dato
+        }
         const n = i + 1;
         let blanco = sumaGrupo(anio, n, tipoB);
         let gris = sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1];
@@ -225,7 +231,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                         size: 10,
                         weight: 'normal'
                     },
-                    formatter: (value) => value.toFixed(1) + '%',
+                    formatter: (value) => value === null ? '' : value.toFixed(1) + '%',
                     clamp: true
                 }
             },
@@ -288,7 +294,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                         size: 10,
                         weight: 'normal'
                     },
-                    formatter: (value) => value.toFixed(1) + '%',
+                    formatter: (value) => value === null ? '' : value.toFixed(1) + '%',
                     clamp: true
                 }
             },

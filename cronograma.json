@@ -1,47 +1,47 @@
 {
     "anio": "2026",
-    "mes": "03",
+    "mes": "04",
     "mes_nombre": "Marzo",
     "cronogramas": [
         {
             "titulo": "Cód. 603 - Plus Unificado",
-            "activo":false,
+            "activo":true,
             "dias": [
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "5",
+                    "fecha": "10",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "6",
-                    "_fecha_cajeros": ""
+                    "fecha": "13",
+                    "fecha_cajeros": "11"
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "9",
-                    "fecha_cajeros": "7"
+                    "fecha": "14",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "10",
+                    "fecha": "15",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "11",
+                    "fecha": "16",
                     "_fecha_cajeros": ""
                 }
             ]
         },
         {
             "titulo": "Cód. 625 - Plus de Refuerzo",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",

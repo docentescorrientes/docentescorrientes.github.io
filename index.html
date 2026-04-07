@@ -559,8 +559,13 @@
 
                 if (cronogramaActivo) {
                     let titulo = cronogramaActivo.titulo;
-                    if (data.mes_nombre) {
-                        titulo += " de " + data.mes_nombre;
+                    if (data.mes) {
+                        const mesesNombres = [
+                            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                        ];
+                        const numeroMes = parseInt(data.mes, 10);
+                        titulo += " de " + mesesNombres[numeroMes - 1];
                     }
                     document.getElementById('cronograma-titulo').textContent = titulo;
                 }

@@ -402,6 +402,30 @@
     <script type="module" src="assets/js/graficoDolar.js"></script>
     <script type="module" src="scriptSimulador/version.js"></script>
 
+    <script>
+        // Sincronizar los selectores de año para que ambos cambien al mismo tiempo
+        document.addEventListener("DOMContentLoaded", function() {
+            const anioSelectCB = document.getElementById("anioSelectCB");
+            const anioSelectDolar = document.getElementById("anioSelectDolar");
+
+            if (anioSelectCB && anioSelectDolar) {
+                anioSelectCB.addEventListener("change", function() {
+                    if (anioSelectDolar.value !== this.value) {
+                        anioSelectDolar.value = this.value;
+                        anioSelectDolar.dispatchEvent(new Event('change'));
+                    }
+                });
+
+                anioSelectDolar.addEventListener("change", function() {
+                    if (anioSelectCB.value !== this.value) {
+                        anioSelectCB.value = this.value;
+                        anioSelectCB.dispatchEvent(new Event('change'));
+                    }
+                });
+            }
+        });
+    </script>
+
     <!-- particles.js -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>

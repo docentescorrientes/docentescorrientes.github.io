@@ -215,18 +215,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                 backgroundColor: 'rgba(13, 110, 253, 0.2)',
                 borderWidth: 2,
                 tension: 0, // Línea recta
-                fill: false,
-                datalabels: {
-                    anchor: 'end',
-                    align: 'bottom',
-                    color: 'rgba(8, 8, 8, 0.7)',
-                    font: {
-                        size: 10,
-                        weight: 'normal'
-                    },
-                    formatter: (value) => '$ ' + formatNumero(value),
-                    clamp: true
-                }
+                fill: false
             },
             {
                 label: 'Grises',
@@ -280,8 +269,35 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                     color: 'gray' // Color opcional del subtítulo
                 },
                 datalabels: {  // Mostrar valores en barras y líneas
-                    anchor: 'end',
-                    align: 'top',
+                    anchor: function(context) {
+                        // 'end' para las barras, 'center' para las líneas para mejor distribución
+                        return context.datasetIndex === 0 ? 'end' : 'center';
+                    },
+                    align: function(context) {
+                        if (context.datasetIndex === 0) return 'top';
+
+                        const index = context.dataIndex;
+                        const datasets = context.chart.data.datasets;
+                        const currentVal = context.dataset.data[index];
+
+                        if (currentVal === null || currentVal === undefined) return 'top';
+
+                        // Obtener todos los valores de las líneas en este mes
+                        let lines = [];
+                        for (let i = 1; i < datasets.length; i++) {
+                            const val = datasets[i].data[index];
+                            if (val !== null && val !== undefined) {
+                                lines.push({ val: val, dsIndex: i });
+                            }
+                        }
+                        if (lines.length <= 1) return 'top';
+                        // Ordenar de menor a mayor y ubicar (abajo, medio-derecha, arriba)
+                        lines.sort((a, b) => a.val - b.val);
+                        const myRank = lines.findIndex(v => v.dsIndex === context.datasetIndex);
+                        if (myRank === lines.length - 1) return 'top';
+                        if (myRank === 0) return 'bottom';
+                        return 'right';
+                    },
                     color: 'rgba(8, 8, 8, 0.7)',
                     font: {
                         size: 10,

@@ -16,9 +16,9 @@ export function dateGral() {
     // El valor de la inflación IPC Nacional https://www.economia.gob.ar/datos/ (valores a mediado del mes estan publicados)
     const inflacionNac = {
         2023: [6.03, 6.63, 7.68, 8.40, 7.77, 5.95, 6.34, 12.44, 12.75, 8.30, 12.81, 25.47],
-        2024: [20.61, 13.24, 11.01, 8.83, 4.20, 4.58, 4.0, 4.2, 3.5, 2.7, 2.4, 2.7],
+        2024: [20.61, 13.24, 11.01, 8.83, 4.20, 4.58, 4.00, 4.20, 3.50, 2.70, 2.40, 2.70],
         2025: [2.20, 2.40, 3.70, 2.80, 1.50, 1.60, 1.90, 1.90, 2.10, 2.30, 2.50, 2.80],
-        2026: [2.9, 2.9, 3.4, '---', '---', '---', '---', '---', '---', '---', '---', '---']
+        2026: [2.90, 2.90, 3.40, '---', '---', '---', '---', '---', '---', '---', '---', '---']
     };
     //2) NEA Canasta Básica Total (Pobreza) según IBP https://www.facebook.com/profile.php?id=100063494113015
     const canastaBTNea = {
@@ -38,9 +38,9 @@ export function dateGral() {
     // El valor de la inflación IPC Noreste https://www.economia.gob.ar/datos/ (valores a mediado del mes estan publicados)
     const inflacionNea = {
         2023: [5.65, 7.76, 6.25, 8.34, 7.29, 6.61, 6.26, 14.18, 12.95, 7.40, 12.83, 28.35],
-        2024: [19.50, 10.9, 10.3, 6.3, 3.7, 4.4, 4.6, 4.4, 3.3, 2.6, 1.8, 2.9],
-        2025: [2.50, 1.9, 3.1, 2.7, 1.3, 1.1, 1.7, 1.7, 1.8, 2.2, 2.4, 2.6],
-        2026: [3.8, 3.1, 4.1, '---', '---', '---', '---', '---', '---', '---', '---', '---']
+        2024: [19.50, 10.90, 10.30, 6.30, 3.70, 4.40, 4.60, 4.40, 3.30, 2.60, 1.80, 2.90],
+        2025: [2.50, 1.90, 3.10, 2.70, 1.30, 1.10, 1.70, 1.70, 1.80, 2.20, 2.40, 2.60],
+        2026: [3.80, 3.10, 4.10, '---', '---', '---', '---', '---', '---', '---', '---', '---']
     };
     // El valor del dólar blue (dolar blue cotización fin del mes) https://www.dolarito.ar/cotizaciones-historicas/dolar/informal/2026/cotizacion-historica-del-dolar-informal-a%C3%B1o-2026 */
     const dolarBlue = {

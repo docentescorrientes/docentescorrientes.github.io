@@ -45,31 +45,31 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "15",
+                    "fecha": "14",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "18",
-                    "fecha_cajeros": "16"
+                    "fecha": "15",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "19",
-                    "_fecha_cajeros": ""
+                    "fecha": "18",
+                    "fecha_cajeros": "16"
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "20",
+                    "fecha": "19",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "21",
+                    "fecha": "20",
                     "_fecha_cajeros": ""
                 }
             ]

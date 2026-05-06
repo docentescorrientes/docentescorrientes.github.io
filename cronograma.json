@@ -1,6 +1,6 @@
 {
     "anio": "2026",
-    "mes": "04",
+    "mes": "05",
     "cronogramas": [
         {
             "titulo": "Cód. 603 - Plus Unificado",
@@ -9,31 +9,31 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "09",
+                    "fecha": "07",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "10",
+                    "fecha": "08",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "13",
-                    "fecha_cajeros": "11"
+                    "fecha": "11",
+                    "fecha_cajeros": "09"
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "14",
+                    "fecha": "12",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "15",
+                    "fecha": "13",
                     "_fecha_cajeros": ""
                 }
             ]
@@ -45,31 +45,31 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "16",
+                    "fecha": "15",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "17",
-                    "_fecha_cajeros": ""
+                    "fecha": "18",
+                    "fecha_cajeros": "16"
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "20",
-                    "fecha_cajeros": "18"
+                    "fecha": "19",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "21",
+                    "fecha": "20",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "22",
+                    "fecha": "21",
                     "_fecha_cajeros": ""
                 }
             ]
@@ -81,31 +81,31 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "24",
+                    "fecha": "22",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "27",
-                    "fecha_cajeros": "25"
+                    "fecha": "26",
+                    "fecha_cajeros": "23"
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "28",
+                    "fecha": "27",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "29",
+                    "fecha": "28",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "30",
+                    "fecha": "29",
                     "_fecha_cajeros": ""
                 }                
             ]

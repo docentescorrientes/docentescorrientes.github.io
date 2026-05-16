@@ -67,7 +67,7 @@ aumentos.agregarAumento("171 Compensador Docente Provincial (en 2 cargos)", 2026
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 1, 22000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo", 2024, 2, 8000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo", 2025, 3, 70000, "n"); // Tope: hasta un cargo y 2 hijos
-aumentos.agregarAumento("3 Asignación por hijo", 2025, 5, 50000, "n"); // Tope: hasta un cargo y 2 hijos
+aumentos.agregarAumento("3 Asignación por hijo", 2026, 5, 50000, "n"); // Tope: hasta un cargo y 2 hijos
 
 aumentos.agregarAumento("3 Asignación por hijo discapacitado", 2024, 1, 33000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Asignación por hijo discapacitado", 2024, 2, 12000, "n"); // Tope: hasta un cargo y 2 hijos

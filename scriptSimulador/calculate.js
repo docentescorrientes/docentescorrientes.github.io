@@ -12,10 +12,17 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     event.preventDefault();
     let datosFormulario = capturarDatos(event);
     const year = datosFormulario.year;
-    const month = datosFormulario.month;
+    let month = datosFormulario.month;
     const seniority = datosFormulario.seniority;
 
     const selectedTextMonth = document.getElementById("month").options[document.getElementById("month").selectedIndex].text;
+
+    // Forzar exclusivamente el mes de Junio (6) y Diciembre (12) para los aguinaldos
+    if (selectedTextMonth === "1° SAC Junio") {
+        month = 6;
+    } else if (selectedTextMonth === "2° SAC Diciembre") {
+        month = 12;
+    }
 
     // Función para calcular la diferencia en días entre dos fechas
     function calcularDias(fechaInicio, fechaFin) {

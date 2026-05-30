@@ -526,50 +526,65 @@
             try {
                 const response = await fetch('cronograma.json');
                 if (!response.ok) throw new Error('No se pudo cargar el cronograma');
-                const data = await response.json();
+                const arrayData = await response.json(); // Ahora es un array de meses
 
-                if (data.anio) {
-                    document.getElementById('cronograma-main-title').innerHTML = `<b>Cronograma</b> de Pagos ${data.anio}`;
+                let mesDataActivo = null;
+                let cronogramaActivo = null;
+                const hoyCalc = new Date();
+
+                // 1. Buscar si algún cronograma tiene activo === true en cualquier mes
+                for (const mesData of arrayData) {
+                    const cronoForzado = mesData.cronogramas.find(crono => crono.activo === true);
+                    if (cronoForzado) {
+                        mesDataActivo = mesData;
+                        cronogramaActivo = cronoForzado;
+                        break;
+                    }
                 }
 
-                // Determinar dinámicamente el cronograma activo basándose en la fecha actual
-                let cronogramaActivo = null;
-                if (data.cronogramas && data.cronogramas.length > 0) {
-                    // Primero verificamos si hay algún cronograma forzado como activo
-                    cronogramaActivo = data.cronogramas.find(crono => crono.activo === true);
-                    
-                    if (!cronogramaActivo) {
-                        const hoyCalc = new Date();
-                        const anio = parseInt(data.anio);
-                        const mes = parseInt(data.mes) - 1; // En JavaScript los meses van de 0 a 11
-    
-                        let indiceActivo = data.cronogramas.length - 1; // Por defecto dejamos el último
-    
-                        for (let i = 0; i < data.cronogramas.length; i++) {
-                            const crono = data.cronogramas[i];
+                // 2. Si no hay forzado, buscamos el cronograma actual según la fecha
+                if (!cronogramaActivo) {
+                    for (const mesData of arrayData) {
+                        const anio = parseInt(mesData.anio);
+                        const mes = parseInt(mesData.mes) - 1; // En JavaScript los meses van de 0 a 11
+                        
+                        for (let i = 0; i < mesData.cronogramas.length; i++) {
+                            const crono = mesData.cronogramas[i];
                             if (crono.dias && crono.dias.length > 0) {
                                 const ultimoDiaItem = crono.dias[crono.dias.length - 1];
                                 const ultimoDia = parseInt(ultimoDiaItem.fecha);
                                 // Fecha límite a las 23:59:59 del último día de ese bloque
                                 const fechaLimite = new Date(anio, mes, ultimoDia, 23, 59, 59);
+                                
                                 if (hoyCalc <= fechaLimite) {
-                                    indiceActivo = i;
+                                    mesDataActivo = mesData;
+                                    cronogramaActivo = crono;
                                     break; // Si hoy es menor o igual al último día, este es el cronograma actual
                                 }
                             }
                         }
-                        cronogramaActivo = data.cronogramas[indiceActivo];
+                        if (cronogramaActivo) break;
                     }
                 }
 
-                if (cronogramaActivo) {
+                // 3. Si por fecha ya pasaron todos, mostramos el último de la lista
+                if (!cronogramaActivo && arrayData.length > 0) {
+                    mesDataActivo = arrayData[arrayData.length - 1];
+                    cronogramaActivo = mesDataActivo.cronogramas[mesDataActivo.cronogramas.length - 1];
+                }
+
+                if (mesDataActivo && mesDataActivo.anio) {
+                    document.getElementById('cronograma-main-title').innerHTML = `<b>Cronograma</b> de Pagos ${mesDataActivo.anio}`;
+                }
+
+                if (cronogramaActivo && mesDataActivo) {
                     let titulo = cronogramaActivo.titulo;
-                    if (data.mes) {
+                    if (mesDataActivo.mes) {
                         const mesesNombres = [
                             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
                         ];
-                        const numeroMes = parseInt(data.mes, 10);
+                        const numeroMes = parseInt(mesDataActivo.mes, 10);
                         titulo += " de " + mesesNombres[numeroMes - 1];
                     }
                     document.getElementById('cronograma-titulo').textContent = titulo;
@@ -581,7 +596,7 @@
 
                 // Función para crear fecha local usando año y mes del JSON
                 const crearFecha = (dia) => {
-                    return new Date(data.anio, data.mes - 1, dia);
+                    return new Date(mesDataActivo.anio, mesDataActivo.mes - 1, dia);
                 };
 
                 // Define aquí la fecha manual: Año, Mes (0=Enero, 1=Febrero...), Día

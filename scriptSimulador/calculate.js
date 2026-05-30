@@ -401,11 +401,18 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
             const salarioBrutoSinPluses = cod120SegVida + arrayRecuperado[0] - sumaPlusBruto;
             const salarioNetoSinPluses = cod120SegVida + arrayRecuperado[1] - sumaPlusNeto;
 
+            let textoSalarioSinPluses = "Salario Real (Sin Pluses)";
+            if (selectedTextMonth === "1° SAC Junio") {
+                textoSalarioSinPluses = "SAC- Jun Real (Sin Pluses)";
+            } else if (selectedTextMonth === "2° SAC Diciembre") {
+                textoSalarioSinPluses = "SAC- Dic Real (Sin Pluses)";
+            }
+
             const newRowSalarioSinPluses = document.createElement("tr");
             newRowSalarioSinPluses.classList.add("table-success"); // Color secundario
             newRowSalarioSinPluses.innerHTML = `
             <td><strong>⚠️</strong></td>
-            <td class="text-start">Salario Real (Sin Pluses)</td>
+            <td class="text-start">${textoSalarioSinPluses}</td>
             <td>${formatNumero(salarioBrutoSinPluses, "$")}</td>
             <td>${formatNumero(salarioNetoSinPluses - salarioBrutoSinPluses, "$")}</td>
             <td class="fw-bold border-2 border-success">${formatNumero(salarioNetoSinPluses, "$")}</td>

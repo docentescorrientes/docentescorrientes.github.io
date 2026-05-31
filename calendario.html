@@ -366,7 +366,7 @@
         <!-- End Version-->
     </section>
     <!-- Close Calendario Section -->
-        <!-- Start Featured Product -->
+    <!-- Start Featured Product -->
     <section class="bg-light">
         <div class="container py-5">
             <p class="text-center text-success" id="fechaAbrir">Hoy:</p>
@@ -641,6 +641,7 @@
             { fecha: "4-17", texto: "Día Mundial de las Telecomunicaciones y de la Sociedad de la Información / Día Mundial de Internet. (Efeméride)", clase: "acto" },
             { fecha: "4-18", texto: "Día Internacional de los Museos. (Efeméride)", clase: "acto" },
             { fecha: "4-30", texto: "Día Nacional de la Donación de Órganos. (Efeméride)", clase: "acto" },
+            { fecha: "4-31", texto: "Día del Matemático. En conmemoración de la muerte de Évariste Galois (1811-1832). (Efeméride)", clase: "acto" },
             { fecha: "4-31", texto: "Día Mundial de la lucha contra el Tabaquismo. (Efeméride)", clase: "acto" },
             //Junio
             { fecha: "5-1", texto: "Día Internacional del Fallecimiento de Helen Keller. (Efeméride)", clase: "acto" },
@@ -1357,7 +1358,7 @@
 
             // Efecto de escritura dinámica en el placeholder (primera opción del select)
             const placeholderOption = mesSelector.options[0];
-            
+
             let currentText = "Mes actual";
             let charIdx = 0;
             let isDeleting = false;
@@ -1375,7 +1376,7 @@
                         dotCycles++;
                     }
 
-                    if (dotCycles >= 3) { 
+                    if (dotCycles >= 3) {
                         isDotAnimation = false;
                         isDeleting = true;
                         charIdx = "Mes actual".length;
@@ -1404,7 +1405,7 @@
                         typeSpeed = 500;
                     } else {
                         isDeleting = true;
-                        typeSpeed = 2000; 
+                        typeSpeed = 2000;
                     }
                 } else if (isDeleting && charIdx === 0) {
                     isDeleting = false;

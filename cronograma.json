@@ -77,7 +77,7 @@
         },
         {
             "titulo": "Salario Real (sin pluses)",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",
@@ -119,36 +119,36 @@
     "cronogramas": [
         {
             "titulo": "Cód. 603 - Plus Unificado",
-            "activo": false,
+            "activo": true,
             "dias": [
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "08",
+                    "fecha": "05",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "09",
-                    "_fecha_cajeros": ""
+                    "fecha": "08",
+                    "fecha_cajeros": "06"
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "10",
+                    "fecha": "09",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "11",
+                    "fecha": "10",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "12",
+                    "fecha": "11",
                     "_fecha_cajeros": ""
                 }
             ]
@@ -160,32 +160,32 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "15",
+                    "fecha": "16",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "16",
+                    "fecha": "17",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "17",
+                    "fecha": "18",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "18",
-                    "fecha_cajeros": ""
+                    "fecha": "19",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "21",
-                    "fecha_cajeros": "19"
+                    "fecha": "22",
+                    "fecha_cajeros": "20"
                 }
             ]
         },

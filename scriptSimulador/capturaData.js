@@ -47,6 +47,17 @@ export function capturarDatos(event) {
 
     for (let i = 1; i <= maxCargos; i++) {
         let numeroClase = getValue(`numeroClase${i}`);
+        
+        // Manejar el caso especial de la clase 175
+        if (numeroClase == "175") {
+            let opcion = getValue(`opcionClase175_${i}`);
+            if (opcion == "6") {
+                numeroClase = "1756";
+            } else {
+                numeroClase = "1754";
+            }
+        }
+
         let tipoContrato = getValue(`tipoContrato${i}`);
         let fechaInicio = tipoContrato === "temporario" ? getValue(`fechaInicio${i}`) : null;
         let fechaFin = tipoContrato === "temporario" ? getValue(`fechaFin${i}`) : null;

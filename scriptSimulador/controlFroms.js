@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 1; i <= cantidad; i++) {
             const keys = Object.keys(clases);
             const randomKey = keys[Math.floor(Math.random() * keys.length)];
-            const placeholderText = `Ejemplo: ${randomKey} (${clases[randomKey].cargo})`;
+            let displayKey = randomKey;
+            if (randomKey === '1754' || randomKey === '1756') displayKey = '175';
+            const placeholderText = `Ejemplo: ${displayKey} (${clases[randomKey].cargo})`;
 
             const divClase = document.createElement("div");
             divClase.classList.add("mb-3", "border", "border-success", "p-3", "rounded");
@@ -37,6 +39,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="number" class="form-control" id="numeroClase${i}" name="numeroClase${i}" min="20" max="411" placeholder="${placeholderText}" required>
                 <p id="descripcionClase${i}" class="text-muted">Ingrese un número de clase válido entre 20 y 411.</p>
     
+                <!-- Opciones Clase 175 (Oculto inicialmente) -->
+                <div id="opcionesClase175Container${i}" style="display: none;" class="mb-2">
+                    <label class="form-label text-primary" for="opcionClase175_${i}">Seleccione las horas del Jefe de Departamento:</label>
+                    <select class="form-select border-primary" id="opcionClase175_${i}" name="opcionClase175_${i}">
+                        <option value="4" selected>Con 4 horas cátedra</option>
+                        <option value="6">Con 6 horas cátedra</option>
+                    </select>
+                </div>
+
                 <!-- Tipo de Contrato -->
                 <label class="form-label mt-2" for="tipoContrato${i}">b - Tipo de contrato del ${i}° cargo</label>
                 <select class="form-select tipoContrato" id="tipoContrato${i}" name="tipoContrato${i}" data-index="${i}" required disabled>
@@ -98,15 +109,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         clasesContainer.addEventListener("input", function (event) {
-            // Verifica si el evento ocurrió en un input de número de clase
-            if (event.target.matches("input[id^='numeroClase']")) {
-                const numeroClase = parseInt(event.target.value); // Convertimos a número
-                const index = event.target.id.replace("numeroClase", ""); // Extraemos el índice
+            // Verifica si el evento ocurrió en un input de número de clase o en su select de horas
+            if (event.target.matches("input[id^='numeroClase']") || event.target.matches("select[id^='opcionClase175_']")) {
+                let index;
+                if (event.target.matches("input[id^='numeroClase']")) {
+                    index = event.target.id.replace("numeroClase", "");
+                } else {
+                    index = event.target.id.replace("opcionClase175_", "");
+                }
+                
+                const inputNumeroClase = document.getElementById(`numeroClase${index}`);
+                let numeroClase = parseInt(inputNumeroClase.value); // Convertimos a número
+                
                 const descripcion = document.getElementById(`descripcionClase${index}`);
                 const jornadaContainer = document.getElementById(`jornadaContainer${index}`);
                 const horasCatedraContainer = document.getElementById(`horasCatedraContainer${index}`);
                 const jornadaElement = document.getElementById(`jornada${index}`);
                 const horasCatedraElement = document.getElementById(`horasCatedra${index}`);
+                const opcionesClase175Container = document.getElementById(`opcionesClase175Container${index}`);
+                const opcionClase175 = document.getElementById(`opcionClase175_${index}`);
+
+                // Lógica especial para la clase 175
+                if (numeroClase === 175) {
+                    opcionesClase175Container.style.display = "block";
+                    if (opcionClase175.value === "6") {
+                        numeroClase = 1756;
+                    } else {
+                        numeroClase = 1754;
+                    }
+                } else {
+                    if (opcionesClase175Container) opcionesClase175Container.style.display = "none";
+                }
 
                 if (!isNaN(numeroClase)) {
                     const claseInfo = buscarDataClase(numeroClase);

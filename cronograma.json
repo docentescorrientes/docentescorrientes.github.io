@@ -119,7 +119,7 @@
     "cronogramas": [
         {
             "titulo": "Cód. 603 - Plus Unificado",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",
@@ -155,7 +155,7 @@
         },
         {
             "titulo": "Cód. 625 - Plus de Refuerzo y 1/2 Aguinaldo",
-            "activo": false,
+            "activo": true,
             "dias": [
                 {
                     "dia": "1°",

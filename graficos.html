@@ -166,8 +166,8 @@
                 <div class="container mb-4 text-center">
                     <h6 class="text-primary">Selecciona el año:</h6>
                     <select class="form-select w-auto d-inline-block" id="anioSelectCB">
-                        <option value="2025" selected>2025</option>
-                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                        <option value="2026" selected>2026</option>
                     </select>
                 </div>
 
@@ -229,8 +229,8 @@
                 <div class="container mb-4 text-center">
                     <h6 class="text-primary">Selecciona el año:</h6>
                     <select class="form-select w-auto d-inline-block" id="anioSelectDolar">
-                        <option value="2025" selected>2025</option>
-                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                        <option value="2026" selected>2026</option>
                     </select>
                 </div>
 
@@ -404,19 +404,19 @@
 
     <script>
         // Sincronizar los selectores de año para que ambos cambien al mismo tiempo
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const anioSelectCB = document.getElementById("anioSelectCB");
             const anioSelectDolar = document.getElementById("anioSelectDolar");
 
             if (anioSelectCB && anioSelectDolar) {
-                anioSelectCB.addEventListener("change", function() {
+                anioSelectCB.addEventListener("change", function () {
                     if (anioSelectDolar.value !== this.value) {
                         anioSelectDolar.value = this.value;
                         anioSelectDolar.dispatchEvent(new Event('change'));
                     }
                 });
 
-                anioSelectDolar.addEventListener("change", function() {
+                anioSelectDolar.addEventListener("change", function () {
                     if (anioSelectCB.value !== this.value) {
                         anioSelectCB.value = this.value;
                         anioSelectCB.dispatchEvent(new Event('change'));

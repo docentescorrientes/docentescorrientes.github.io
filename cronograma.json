@@ -155,7 +155,7 @@
         },
         {
             "titulo": "Cód. 625 - Plus de Refuerzo y 1/2 Aguinaldo",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",
@@ -191,7 +191,7 @@
         },
         {
             "titulo": "Salario Real (sin pluses)",
-            "activo": false,
+            "activo": true,
             "dias": [
                 {
                     "dia": "1°",
@@ -214,8 +214,8 @@
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "27",
-                    "fecha_cajeros": ""
+                    "fecha": "29",
+                    "fecha_cajeros": "27"
                 },
                 {
                     "dia": "5°",

@@ -158,6 +158,14 @@
             border-radius: 11%;
             transform: scale(1.0);
         }
+
+        /* Ajuste para la vista de un solo mes para que no se vea "achatado" */
+        .g-4>.col-12 {
+            flex: 0 0 auto;
+            width: 500px; /* Ancho fijo para la vista de un solo mes */
+            max-width: 100%; /* Asegura que se adapte en pantallas más pequeñas */
+        }
+
     </style>
 </head>
 
@@ -665,6 +673,7 @@
             { fecha: "5-21", texto: "Día de la Confraternidad Antártica. (Efeméride)", clase: "acto" },
             { fecha: "5-26", texto: "Día Internacional de la lucha contra el uso indebido de drogas. (Efeméride)", clase: "acto" },
             { fecha: "5-26", texto: "Día Mundial de la Lucha contra el Narcotráfico. (Efeméride)", clase: "acto" },
+            { fecha: "5-27", texto: "Día del Biólogo. (Efeméride)", clase: "acto" },
             { fecha: "5-26", texto: "Aniversario de la firma de la Carta de las Naciones Unidas. (Efeméride)", clase: "acto" },
             { fecha: "5-30", texto: "Día Internacional del Parlamentarismo. (Efeméride)", clase: "acto" },
             //Julio
@@ -1170,11 +1179,10 @@
             generarResumenMes(-1);
         }
 
-        function initCalendar() {
+        function generarCalendarioHTML(monthIdx, year, today, now, isSingleView = false) {
             const grid = document.getElementById('calendarGrid');
-            const now = getFechaActual();
-            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            months.forEach((name, monthIdx) => {
+            const name = months[monthIdx];
+            const wrapperClass = isSingleView ? 'col-12 col-md-8 col-lg-6 mx-auto' : 'col';
                 const firstDay = new Date(year, monthIdx, 1).getDay();
                 const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
                 const { feriados, avisos, rangos } = contarEventosPorMes(monthIdx);
@@ -1211,7 +1219,7 @@
                 }
 
                 let html = `
-                <div class="col">
+                <div class="${wrapperClass}">
                     <div class="card h-100 border-0 shadow-sm overflow-hidden">
                         <div class="month-header">${name} ${badgeContent}</div>
                         <table class="table calendar-table">
@@ -1283,14 +1291,33 @@
                     if (date > daysInMonth) break;
                 }
                 html += `</tbody></table></div></div>`;
-                grid.innerHTML += html;
-            });
+            return html;
+        }
 
+        function initCalendar(mesSeleccionado = -1) {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = ''; // Limpiar la cuadrícula
+            const now = getFechaActual();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            
+            if (mesSeleccionado === -1) { // Mostrar todos los meses
+                // Restauramos las clases para la vista de cuadrícula
+                grid.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4';
+                months.forEach((name, monthIdx) => {
+                    grid.innerHTML += generarCalendarioHTML(monthIdx, year, today, now, false);
+                });
+            } else { // Mostrar solo el mes seleccionado
+                // Limpiamos las clases de cuadrícula para que el col-md-6 funcione correctamente
+                grid.className = 'row g-4';
+                grid.innerHTML = generarCalendarioHTML(mesSeleccionado, year, today, now, true);
+            }
+            
             // Activar los Tooltips de Bootstrap
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
             [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el, {
                 html: true
             }));
+
         }
 
         // Función para contar eventos por mes
@@ -1450,6 +1477,7 @@
             initCalendar();
 
             mesSelector.addEventListener('change', function () {
+                initCalendar(parseInt(this.value));
                 generarResumenMes(parseInt(this.value), true);
             });
 

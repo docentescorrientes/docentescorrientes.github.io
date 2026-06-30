@@ -1478,7 +1478,7 @@
 
             mesSelector.addEventListener('change', function () {
                 initCalendar(parseInt(this.value));
-                generarResumenMes(parseInt(this.value), true);
+                generarResumenMes(parseInt(this.value), false);
             });
 
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());

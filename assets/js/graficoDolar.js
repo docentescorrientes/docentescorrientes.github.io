@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     inicioGrafico();
     function obtenerValorYTextoSeleccionado(variable) {
         const seleccionado = document.querySelector(`input[name="grupoOpciones${variable}"]:checked`);
-        if (seleccionado) {
+        if (seleccionado) {            
             const textoSeleccionado = document.querySelector(`label[for="${seleccionado.id}"]`).textContent;
             const arrayTextValor = { text: textoSeleccionado, valor: seleccionado.value };
             return arrayTextValor;
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
             const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
             const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
-            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
+            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text.replace('En ', ''), arrayTextValorCargosDolar.valor);
         });
     });
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
             const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
             const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
-            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
+            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text.replace('En ', ''), arrayTextValorCargosDolar.valor);
         });
     });
 
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
             const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
             const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
-            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
+            crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text.replace('En ', ''), arrayTextValorCargosDolar.valor);
         });
     }
 
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const arrayTextValorDolar = obtenerValorYTextoSeleccionado("Dolar");
         const arrayTextValorCargosDolar = obtenerValorYTextoSeleccionado("CargosDolar");
         const arrayTextValorAntiguedadDolar = actualizarAntiguedad();
-        crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text, arrayTextValorCargosDolar.valor);
+        crearGrafico("chartDolar", arrayTextValorDolar.valor, arrayTextValorAntiguedadDolar.valor, arrayTextValorDolar.text.replace('En ', ''), arrayTextValorCargosDolar.valor);
     });
 });
 
@@ -100,7 +100,7 @@ function inicioGrafico() {
     ];
     rango.value = 0;
     valor.innerText = antiguedadOpciones[0];
-    crearGrafico("chartDolar", opcionesDolar.value, 0, "En Pesos", 1);
+    crearGrafico("chartDolar", opcionesDolar.value, 0, "Pesos", 1);
 };
 
 let chartInstance = null;
@@ -173,7 +173,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [
             {
-                label: `En ${comparacion}`,
+                label: `En ${comparacion.toLowerCase()}`,
                 type: 'bar',
                 data: arrayTotalC,
 
@@ -261,7 +261,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                 },
                 subtitle: { // 👈 Agregamos el subtítulo aquí
                     display: true,
-                    text: `Comparación mensual del salario ${comparacion.toLowerCase()} a lo largo del año ${anio}`,
+                    text: `Comparación mensual del salario en ${comparacion.toLowerCase()} a lo largo del año ${anio}`,
                     font: {
                         size: 14,
                         weight: 'normal'
@@ -327,7 +327,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                     },
                     title: { // 👈 Agregamos el título del eje Y
                         display: true,
-                        text: comparacion,
+                        text: `En ${comparacion}`,
                         font: {
                             size: 14,
                             weight: 'bold'

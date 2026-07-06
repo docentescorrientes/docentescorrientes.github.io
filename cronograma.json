@@ -46,32 +46,32 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "16",
+                    "fecha": "20",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "17",
+                    "fecha": "21",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "18",
+                    "fecha": "22",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "19",
+                    "fecha": "23",
                     "fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "22",
-                    "fecha_cajeros": "20"
+                    "fecha": "24",
+                    "_fecha_cajeros": ""
                 }
             ]
         },
@@ -82,31 +82,31 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "22",
+                    "fecha": "27",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "26",
-                    "fecha_cajeros": "23"
+                    "fecha": "28",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "27",
+                    "fecha": "29",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "28",
+                    "fecha": "30",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "29",
+                    "fecha": "31",
                     "_fecha_cajeros": ""
                 }                
             ]

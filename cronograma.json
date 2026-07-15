@@ -47,7 +47,7 @@
                     "dia": "1°",
                     "dni": "0 y 1",
                     "fecha": "20",
-                    "_fecha_cajeros": ""
+                    "fecha_cajeros": "18"
                 },
                 {
                     "dia": "2°",
@@ -83,7 +83,7 @@
                     "dia": "1°",
                     "dni": "0 y 1",
                     "fecha": "27",
-                    "_fecha_cajeros": ""
+                    "fecha_cajeros": "25"
                 },
                 {
                     "dia": "2°",

@@ -86,7 +86,8 @@ aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 10, -1553.67, "d"); /
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -155.36, "d");
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -222.17, "d");
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2025, 10, -231.80, "d");
-aumentos.agregarAumento("210 Seguro de Vida (Life)", 2026, 5, -130.00, "d"); 
+aumentos.agregarAumento("210 Seguro de Vida (Life)", 2026, 5, -130.00, "d");
+aumentos.agregarAumento("210 Seguro de Vida (Life)", 2026, 7, -230.00, "d"); 
 
 // Descuentos: segurosCNP -4113.54
 aumentos.agregarAumento("Seguros CNP (Banco Corrientes)", 2025, 5, -4113.54, "d"); // Tope: solo un cargo

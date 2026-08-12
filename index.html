@@ -180,9 +180,75 @@
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="3"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="4"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="5"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="6"></li>
+            <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="7"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item payment-banner" style="display: none;">
+                <div class="container">
+                    <div class="row p-5">
+                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                            <img class="img-fluid" src="./assets/img/banner_cronograma.svg" alt="">
+                        </div>
+                        <div class="col-lg-6 mb-0 d-flex align-items-center">
+                            <div class="text-align-left">
+                                <h1 class="h1 text-success" id="cronograma-main-title-plus-unificado"><b>Cronograma</b> de Pagos</h1>
+                                <h3 class="h2" id="cronograma-titulo-plus-unificado">Fechas de cobro del mes</h3>
+                                <p>
+                                    Mantente informado sobre las <strong>fechas de pago</strong> del Plus Unificado.
+                                </p>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered text-center align-middle">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <th>Día</th>
+                                                <th>DNI</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cronograma-pagos-plus-unificado">
+                                            <!-- Se carga dinámicamente desde cronograma.json -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item payment-banner" style="display: none;">
+                <div class="container">
+                    <div class="row p-5">
+                        <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                            <img class="img-fluid" src="./assets/img/banner_cronograma.svg" alt="">
+                        </div>
+                        <div class="col-lg-6 mb-0 d-flex align-items-center">
+                            <div class="text-align-left">
+                                <h1 class="h1 text-success" id="cronograma-main-title-plus-refuerzo"><b>Cronograma</b> de Pagos</h1>
+                                <h3 class="h2" id="cronograma-titulo-plus-refuerzo">Fechas de cobro del mes</h3>
+                                <p>
+                                    Mantente informado sobre las <strong>fechas de pago</strong> del Plus de Refuerzo.
+                                </p>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered text-center align-middle">
+                                        <thead class="table-success">
+                                            <tr>
+                                                <th>Día</th>
+                                                <th>DNI</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cronograma-pagos-plus-refuerzo">
+                                            <!-- Se carga dinámicamente desde cronograma.json -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item payment-banner" style="display: none;">
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
@@ -191,7 +257,7 @@
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left">
                                 <h1 class="h1 text-success" id="cronograma-main-title"><b>Cronograma</b> de Pagos</h1>
-                                <h3 class="h2" id="cronograma-titulo">Fechas de cobro del mes</h3>
+                                <h3 class="h2" id="cronograma-titulo-sueldo">Fechas de cobro del mes</h3>
                                 <p>
                                     Mantente informado sobre las <strong>fechas de pago</strong> de plus, sueldo y
                                     aguinaldo.
@@ -205,7 +271,7 @@
                                                 <th>Fecha</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="cronograma-pagos">
+                                        <tbody id="cronograma-pagos-sueldo">
                                             <!-- Se carga dinámicamente desde cronograma.json -->
                                         </tbody>
                                     </table>
@@ -215,7 +281,7 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item active">
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
@@ -520,124 +586,111 @@
         let difference = currentYear - startYear;
         document.getElementById('añosPasados').textContent = 'ya hace unos ' + difference + ' años';
 
-        async function cargarCronograma() {
-            const tbody = document.getElementById('cronograma-pagos');
+        function buscarCronograma(arrayData, tipo) {
+            let mesDataActivo = null;
+            let cronogramaActivo = null;
+            const hoyCalc = new Date();
 
-            try {
-                const response = await fetch('cronograma.json');
-                if (!response.ok) throw new Error('No se pudo cargar el cronograma');
-                const arrayData = await response.json(); // Ahora es un array de meses
+            // 1. Buscar si algún cronograma del tipo especificado tiene activo === true
+            for (const mesData of arrayData) {
+                const cronoForzado = mesData.cronogramas.find(crono => crono.tipo === tipo && crono.activo === true);
+                if (cronoForzado) {
+                    mesDataActivo = mesData;
+                    cronogramaActivo = cronoForzado;
+                    return { mesDataActivo, cronogramaActivo };
+                }
+            }
 
-                let mesDataActivo = null;
-                let cronogramaActivo = null;
-                const hoyCalc = new Date();
+            return { mesDataActivo: null, cronogramaActivo: null };
+        }
 
-                // 1. Buscar si algún cronograma tiene activo === true en cualquier mes
-                for (const mesData of arrayData) {
-                    const cronoForzado = mesData.cronogramas.find(crono => crono.activo === true);
-                    if (cronoForzado) {
-                        mesDataActivo = mesData;
-                        cronogramaActivo = cronoForzado;
-                        break;
-                    }
+        function renderizarCronograma(resultado, tipo) {
+            const { mesDataActivo, cronogramaActivo } = resultado;
+            const tbody = document.getElementById(`cronograma-pagos-${tipo.replace(' ', '-')}`);
+            const mainTitle = document.getElementById(`cronograma-main-title${tipo === 'sueldo' ? '' : '-' + tipo.replace(' ', '-')}`); // El main title del sueldo no tiene sufijo
+            const titulo = document.getElementById(`cronograma-titulo-${tipo.replace(' ', '-')}`);
+            const bannerElement = tbody.closest('.carousel-item');
+
+            if (mesDataActivo && cronogramaActivo) {
+                // Hacer visible el banner
+                bannerElement.style.display = '';
+
+                // Activar el primer banner de pago que se encuentre
+                const activeBanner = document.querySelector('.carousel-item.active');
+                if (activeBanner && !activeBanner.classList.contains('payment-banner')) {
+                    activeBanner.classList.remove('active');
+                    bannerElement.classList.add('active');
                 }
 
-                // 2. Si no hay forzado, buscamos el cronograma actual según la fecha
-                if (!cronogramaActivo) {
-                    for (const mesData of arrayData) {
-                        const anio = parseInt(mesData.anio);
-                        const mes = parseInt(mesData.mes) - 1; // En JavaScript los meses van de 0 a 11
-                        
-                        for (let i = 0; i < mesData.cronogramas.length; i++) {
-                            const crono = mesData.cronogramas[i];
-                            if (crono.dias && crono.dias.length > 0) {
-                                const ultimoDiaItem = crono.dias[crono.dias.length - 1];
-                                const ultimoDia = parseInt(ultimoDiaItem.fecha);
-                                // Fecha límite a las 23:59:59 del último día de ese bloque
-                                const fechaLimite = new Date(anio, mes, ultimoDia, 23, 59, 59);
-                                
-                                if (hoyCalc <= fechaLimite) {
-                                    mesDataActivo = mesData;
-                                    cronogramaActivo = crono;
-                                    break; // Si hoy es menor o igual al último día, este es el cronograma actual
-                                }
-                            }
-                        }
-                        if (cronogramaActivo) break;
-                    }
+
+                if (mainTitle) mainTitle.innerHTML = `<b>Cronograma</b> de Pagos ${mesDataActivo.anio}`;
+                
+                let tituloTexto = cronogramaActivo.titulo;
+                if (mesDataActivo.mes) {
+                    const mesesNombres = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+                    tituloTexto += " de " + mesesNombres[parseInt(mesDataActivo.mes, 10) - 1];
                 }
+                if (titulo) titulo.textContent = tituloTexto;
 
-                // 3. Si por fecha ya pasaron todos, mostramos el último de la lista
-                if (!cronogramaActivo && arrayData.length > 0) {
-                    mesDataActivo = arrayData[arrayData.length - 1];
-                    cronogramaActivo = mesDataActivo.cronogramas[mesDataActivo.cronogramas.length - 1];
-                }
-
-                if (mesDataActivo && mesDataActivo.anio) {
-                    document.getElementById('cronograma-main-title').innerHTML = `<b>Cronograma</b> de Pagos ${mesDataActivo.anio}`;
-                }
-
-                if (cronogramaActivo && mesDataActivo) {
-                    let titulo = cronogramaActivo.titulo;
-                    if (mesDataActivo.mes) {
-                        const mesesNombres = [
-                            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-                        ];
-                        const numeroMes = parseInt(mesDataActivo.mes, 10);
-                        titulo += " de " + mesesNombres[numeroMes - 1];
-                    }
-                    document.getElementById('cronograma-titulo').textContent = titulo;
-                }
-
-                tbody.innerHTML = ''; // Limpiar contenido
-
+                tbody.innerHTML = '';
                 const opcionesFecha = { weekday: 'long', day: 'numeric', month: 'long' };
-
-                // Función para crear fecha local usando año y mes del JSON
-                const crearFecha = (dia) => {
-                    return new Date(mesDataActivo.anio, mesDataActivo.mes - 1, dia);
-                };
-
-                // Define aquí la fecha manual: Año, Mes (0=Enero, 1=Febrero...), Día
                 const hoy = new Date();
                 hoy.setHours(0, 0, 0, 0);
 
-                if (cronogramaActivo && cronogramaActivo.dias) {
-                    cronogramaActivo.dias.forEach(item => {
+                cronogramaActivo.dias.forEach(item => {
                     const tr = document.createElement('tr');
+                    const fecha = new Date(mesDataActivo.anio, mesDataActivo.mes - 1, item.fecha);
+                    let claseFecha = (fecha.getTime() === hoy.getTime()) ? "text-dark fw-bold" : "";
+                    if (claseFecha) tr.style.backgroundColor = '#e3f2fd';
 
-                    const fecha = crearFecha(item.fecha);
-                    let claseFecha = "";
-                    if (fecha.getTime() === hoy.getTime()) {
-                        claseFecha = "text-dark fw-bold";
-                        tr.style.backgroundColor = '#e3f2fd';
-                    }
                     let fechaTexto = fecha.toLocaleDateString('es-ES', opcionesFecha);
-                    // Capitalizar primera letra
                     fechaTexto = fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1);
 
                     let cellContent = `<div class="${claseFecha}" style="line-height: 1.2; margin-bottom: 0;">${fechaTexto}</div>`;
 
-                    if (item.fecha_cajeros) {
-                        const fechaCajeros = crearFecha(item.fecha_cajeros);
-                        const textoCajeros = fechaCajeros.toLocaleDateString('es-ES', opcionesFecha);
-
-                        const esHoyCajero = fechaCajeros.getTime() === hoy.getTime();
-                        if (esHoyCajero) {
-                            tr.style.backgroundColor = '#e3f2fd';
-                        }
-                        const claseCajero = esHoyCajero ? "text-dark fw-bold" : "text-dark";
-                        cellContent += `<small class="${claseCajero}" style="font-size: 0.75em; display: block; line-height: 1; margin-top: 2px;">* Disponible en cajeros el ${textoCajeros}</small>`;
+                    if (item.fecha_cajeros && item.fecha_cajeros.trim() !== "") {
+                        const fechaCajeros = new Date(mesDataActivo.anio, mesDataActivo.mes - 1, item.fecha_cajeros);
+                        let fechaCajerosTexto = fechaCajeros.toLocaleDateString('es-ES', opcionesFecha);
+                        fechaCajerosTexto = fechaCajerosTexto.charAt(0).toUpperCase() + fechaCajerosTexto.slice(1);
+                        cellContent += `<div style="font-size: 15px !important; font-weight: bold; color: #000; line-height: 1;">* Disponible en cajeros: ${fechaCajerosTexto}</div>`;
                     }
 
                     tr.innerHTML = `<td class="align-middle">${item.dia}</td><td class="align-middle text-nowrap">${item.dni}</td><td class="align-middle">${cellContent}</td>`;
                     tbody.appendChild(tr);
-                    });
-                }
+                });
+            } else {
+                bannerElement.remove(); // Si no está activo, lo quitamos del DOM
+            }
+        }
+
+        async function cargarCronograma() {
+            try {
+                const response = await fetch('cronograma.json');
+                if (!response.ok) throw new Error('No se pudo cargar el cronograma');
+                const arrayData = await response.json();
+
+                renderizarCronograma(buscarCronograma(arrayData, 'plus unificado'), 'plus-unificado');
+                renderizarCronograma(buscarCronograma(arrayData, 'plus refuerzo'), 'plus-refuerzo');
+                renderizarCronograma(buscarCronograma(arrayData, 'sueldo'), 'sueldo');
+
+                // Reajustar los indicadores del carrusel
+                const carousel = document.getElementById('template-mo-zay-hero-carousel');
+                const indicators = carousel.querySelector('.carousel-indicators');
+                const items = carousel.querySelectorAll('.carousel-inner .carousel-item');
+                indicators.innerHTML = ''; // Limpiar indicadores existentes
+
+                items.forEach((item, index) => {
+                    const indicator = document.createElement('li');
+                    indicator.setAttribute('data-bs-target', '#template-mo-zay-hero-carousel');
+                    indicator.setAttribute('data-bs-slide-to', index);
+                    if (index === 0) {
+                        indicator.classList.add('active');
+                    }
+                    indicators.appendChild(indicator);
+                });
+
             } catch (error) {
                 console.error('Error cargando cronograma:', error);
-                tbody.innerHTML = '<tr><td colspan="3" class="text-center">No hay información disponible</td></tr>';
             }
         }
 
@@ -648,7 +701,7 @@
         const channelId = "UC2RkL2eATR1V6H8g4eNfA5Q";
         const videoFrame = document.getElementById('youtubeVideo');
         if (videoFrame) {
-            videoFrame.src = `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&controls=0&modestbranding=1&rel=0`;
+            videoFrame.src = `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=0&mute=1&controls=0&modestbranding=1&rel=0`;
         }
     </script>
     <!-- particles.js -->

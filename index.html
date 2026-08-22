@@ -455,7 +455,7 @@
                         <div class="video-overlay">
                             <i class="fa-solid fa-chalkboard-user me-1"></i> DAC - 2019
                         </div>
-                        <iframe id="youtubeVideo" src="" title="Video institucional" allow="autoplay; encrypted-media"
+                        <iframe id="youtubeVideo" src="" title="Video institucional" allow="autoplay; encrypted-media; fullscreen"
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -701,7 +701,7 @@
         const channelId = "UC2RkL2eATR1V6H8g4eNfA5Q";
         const videoFrame = document.getElementById('youtubeVideo');
         if (videoFrame) {
-            videoFrame.src = `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=0&mute=1&controls=0&modestbranding=1&rel=0`;
+            videoFrame.src = `https://www.youtube.com/embed/live_stream?channel=${channelId}&autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1`;
         }
     </script>
     <!-- particles.js -->

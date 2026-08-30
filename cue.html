@@ -137,42 +137,42 @@
                     Docentes Autoconvocados Corrientes - Sector 2019
                 </p>
 
-            <!-- Buscador centrado -->
-            <div class="d-flex justify-content-center mb-4 mt-4">
-                <div class="input-group shadow-sm" style="max-width:500px;">
-                    <span class="input-group-text bg-light text-white">🔍</span>
-                    <input type="text" id="searchInput" class="form-control fw-normal"
-                        placeholder="Escriba el nombre de la institución o localidad...">
+                <!-- Buscador centrado -->
+                <div class="d-flex justify-content-center mb-4 mt-4">
+                    <div class="input-group shadow-sm" style="max-width:500px;">
+                        <span class="input-group-text bg-light text-white">🔍</span>
+                        <input type="text" id="searchInput" class="form-control fw-normal"
+                            placeholder="Escriba el nombre de la institución o localidad...">
+                    </div>
                 </div>
-            </div>
 
-            <!-- Mensaje copia -->
-            <div id="copyAlert" class="alert alert-success d-none text-center" role="alert">
-                ✅ CUE-Anexo copiado al portapapeles
-            </div>
+                <!-- Mensaje copia -->
+                <div id="copyAlert" class="alert alert-success d-none text-center" role="alert">
+                    ✅ CUE-Anexo copiado al portapapeles
+                </div>
 
-            <!-- Mensaje informativo inicial -->
-            <div id="infoAlert" class="alert alert-light text-center" role="alert">
-                <i class="fa-solid fa-circle-info me-2 text-primary"></i> Escriba el nombre de una institución o
-                localidad en el buscador para ver los resultados.
-            </div>
+                <!-- Mensaje informativo inicial -->
+                <div id="infoAlert" class="alert alert-light text-center" role="alert">
+                    <i class="fa-solid fa-circle-info me-2 text-primary"></i> Escriba el nombre de una institución o
+                    localidad en el buscador para ver los resultados.
+                </div>
 
-            <!-- Tabla -->
-            <div class="table-responsive" id="resultsTable" style="display:none;">
-                <table class="table table-hover table-bordered table-sm align-middle shadow"
-                    style="border-radius:12px;overflow:hidden;">
-                    <thead class="table-primary text-center">
-                        <tr>
-                            <th style="width: 20%;">Localidad / Departamento</th>
-                            <th style="width: 35%;">Institución</th>
-                            <th style="width: 15%;">CUE-Anexo</th>
-                            <th style="width: 15%;">Nivel</th>
-                            <th style="width: 15%;">Jurisdicción</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dataTable"></tbody>
-                </table>
-            </div>
+                <!-- Tabla -->
+                <div class="table-responsive" id="resultsTable" style="display:none;">
+                    <table class="table table-hover table-bordered table-sm align-middle shadow"
+                        style="border-radius:12px;overflow:hidden;">
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th style="width: 20%;">Localidad / Departamento</th>
+                                <th style="width: 35%;">Institución</th>
+                                <th style="width: 15%;">CUE-Anexo</th>
+                                <th style="width: 15%;">Nivel</th>
+                                <th style="width: 15%;">Jurisdicción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- Fin sección buscador -->
@@ -230,7 +230,9 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing">Estatuto</a></li>
+                        <li><a class="text-decoration-none"
+                                href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing"
+                                target="_blank">Estatuto</a></li>
                         <li><a class="text-decoration-none"
                                 href="https://drive.google.com/file/d/1SzJ_k9b2E_4Kmo9Ja9Fs7ENDNJZIvKYp/view?usp=sharing"
                                 target="_blank">Licencias</a></li>
@@ -399,12 +401,12 @@
 
                 // Efecto de escritura dinámica en el placeholder con datos del CSV
                 const inputSearch = document.getElementById("searchInput");
-                
+
                 // Preparar listas completas para selección aleatoria
                 const allInstitutions = data
                     .map(row => row["Nombre de Institución"])
                     .filter(n => n && n.length > 5 && n.length < 40); // Filtrar nombres muy cortos o largos
-                
+
                 const allLocalities = [...new Set(data.map(row => row["Localidad"]).filter(l => l))];
 
                 let currentText = "Buscar institución o localidad...";
@@ -427,7 +429,7 @@
                         typeSpeed = 2000; // Pausa al terminar de escribir la frase
                     } else if (isDeleting && charIdx === 0) {
                         isDeleting = false;
-                        
+
                         // Seleccionar nueva frase aleatoria
                         if (Math.random() > 0.5 && allInstitutions.length > 0) {
                             const randomInst = allInstitutions[Math.floor(Math.random() * allInstitutions.length)];
@@ -436,7 +438,7 @@
                             const randomLoc = allLocalities[Math.floor(Math.random() * allLocalities.length)];
                             currentText = `Por ej. Localidad: ${randomLoc}`;
                         }
-                        
+
                         typeSpeed = 500; // Pausa antes de escribir la siguiente
                     }
 

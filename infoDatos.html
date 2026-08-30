@@ -288,7 +288,9 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing">Estatuto</a></li>
+                        <li><a class="text-decoration-none"
+                                href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing"
+                                target="_blank">Estatuto</a></li>
                         <li><a class="text-decoration-none"
                                 href="https://drive.google.com/file/d/1SzJ_k9b2E_4Kmo9Ja9Fs7ENDNJZIvKYp/view?usp=sharing"
                                 target="_blank">Licencias</a></li>
@@ -464,7 +466,7 @@
             // Efecto de escritura dinámica en el placeholder (primera opción del select)
             const placeholderOption = select.options[0];
             const allCargos = clasesDisponibles.map(c => c.cargo);
-            
+
             let currentText = "Buscar cargo docente...";
             let charIdx = 0;
             let isDeleting = false;
@@ -483,7 +485,7 @@
 
                 if (!isDeleting && charIdx === currentText.length) {
                     isDeleting = true;
-                    typeSpeed = 2000; 
+                    typeSpeed = 2000;
                 } else if (isDeleting && charIdx === 0) {
                     isDeleting = false;
                     const randomCargo = allCargos[Math.floor(Math.random() * allCargos.length)];
@@ -515,16 +517,16 @@
             const claseBuscadaDiv = document.getElementById('claseBuscada');
             const baseMsg = '<strong>👆 Esperando</strong> que seleccione cargo';
             let dotsCount = 3;
-            
+
             const dotsInterval = setInterval(() => {
                 if (!claseBuscadaDiv.classList.contains('alert-secondary')) {
                     clearInterval(dotsInterval);
                     return;
                 }
-                
+
                 dotsCount = (dotsCount + 1) % 4;
                 let dotsStr = "";
-                for(let i=0; i<dotsCount; i++) dotsStr += " .";
+                for (let i = 0; i < dotsCount; i++) dotsStr += " .";
                 claseBuscadaDiv.innerHTML = baseMsg + dotsStr;
             }, 500);
 

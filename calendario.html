@@ -162,10 +162,11 @@
         /* Ajuste para la vista de un solo mes para que no se vea "achatado" */
         .g-4>.col-12 {
             flex: 0 0 auto;
-            width: 500px; /* Ancho fijo para la vista de un solo mes */
-            max-width: 100%; /* Asegura que se adapte en pantallas más pequeñas */
+            width: 500px;
+            /* Ancho fijo para la vista de un solo mes */
+            max-width: 100%;
+            /* Asegura que se adapte en pantallas más pequeñas */
         }
-
     </style>
 </head>
 
@@ -405,7 +406,10 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing">Estatuto</a></li>
+                        <li><a class="text-decoration-none"
+                                href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing"
+                                target="_blank">Estatuto</a>
+                        </li>
                         <li><a class="text-decoration-none"
                                 href="https://drive.google.com/file/d/1SzJ_k9b2E_4Kmo9Ja9Fs7ENDNJZIvKYp/view?usp=sharing"
                                 target="_blank">Licencias</a></li>
@@ -1183,42 +1187,42 @@
             const grid = document.getElementById('calendarGrid');
             const name = months[monthIdx];
             const wrapperClass = isSingleView ? 'col-12 col-md-8 col-lg-6 mx-auto' : 'col';
-                const firstDay = new Date(year, monthIdx, 1).getDay();
-                const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
-                const { feriados, avisos, rangos } = contarEventosPorMes(monthIdx);
+            const firstDay = new Date(year, monthIdx, 1).getDay();
+            const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
+            const { feriados, avisos, rangos } = contarEventosPorMes(monthIdx);
 
-                // Calcular días de clases (no feriados, ni sábados, ni domingos)
-                // Filtrando por cuatrimestres:
+            // Calcular días de clases (no feriados, ni sábados, ni domingos)
+            // Filtrando por cuatrimestres:
 
-                let diasDeClase = 0;
-                let diasTranscurridos = 0;
+            let diasDeClase = 0;
+            let diasTranscurridos = 0;
 
-                for (let d = 1; d <= daysInMonth; d++) {
-                    const dateObj = new Date(year, monthIdx, d);
-                    const enRangoClases = (dateObj >= inicioC1 && dateObj <= finC1) || (dateObj >= inicioC2 && dateObj <= finC2);
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateObj = new Date(year, monthIdx, d);
+                const enRangoClases = (dateObj >= inicioC1 && dateObj <= finC1) || (dateObj >= inicioC2 && dateObj <= finC2);
 
-                    if (enRangoClases) {
-                        const dayOfWeek = dateObj.getDay();
-                        const key = `${monthIdx}-${d}`;
-                        const info = eventosEspeciales[key];
-                        const esFinde = (dayOfWeek === 0 || dayOfWeek === 6);
-                        const esFeriado = (info && info.clase === 'feriado');
-                        const esReceso = (info && info.clase === 'actividad');
-                        if (!esFinde && !esFeriado && !esReceso) {
-                            diasDeClase++;
-                            if (dateObj <= today) diasTranscurridos++;
-                        }
+                if (enRangoClases) {
+                    const dayOfWeek = dateObj.getDay();
+                    const key = `${monthIdx}-${d}`;
+                    const info = eventosEspeciales[key];
+                    const esFinde = (dayOfWeek === 0 || dayOfWeek === 6);
+                    const esFeriado = (info && info.clase === 'feriado');
+                    const esReceso = (info && info.clase === 'actividad');
+                    if (!esFinde && !esFeriado && !esReceso) {
+                        diasDeClase++;
+                        if (dateObj <= today) diasTranscurridos++;
                     }
                 }
+            }
 
-                let badgeContent = '';
-                if (diasDeClase > 0) {
-                    if (diasTranscurridos === 0) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días de clases">${diasDeClase}</span>`;
-                    else if (diasTranscurridos < diasDeClase) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días transcurridos / Total">${diasTranscurridos}/${diasDeClase}</span>`;
-                    else badgeContent = `<span class="badge bg-secondary text-light ms-1" style="font-size:0.7em" title="Finalizado">${diasDeClase}/${diasDeClase}</span>`;
-                }
+            let badgeContent = '';
+            if (diasDeClase > 0) {
+                if (diasTranscurridos === 0) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días de clases">${diasDeClase}</span>`;
+                else if (diasTranscurridos < diasDeClase) badgeContent = `<span class="badge bg-light text-dark ms-1" style="font-size:0.7em" title="Días transcurridos / Total">${diasTranscurridos}/${diasDeClase}</span>`;
+                else badgeContent = `<span class="badge bg-secondary text-light ms-1" style="font-size:0.7em" title="Finalizado">${diasDeClase}/${diasDeClase}</span>`;
+            }
 
-                let html = `
+            let html = `
                 <div class="${wrapperClass}">
                     <div class="card h-100 border-0 shadow-sm overflow-hidden">
                         <div class="month-header">${name} ${badgeContent}</div>
@@ -1226,71 +1230,71 @@
                             <thead><tr>${daysHeader.map(d => `<th>${d}</th>`).join('')}</tr></thead>
                             <tbody>`;
 
-                let date = 1;
-                for (let i = 0; i < 6; i++) {
-                    html += '<tr>';
-                    for (let j = 0; j < 7; j++) {
-                        if (i === 0 && j < firstDay) {
-                            html += '<td class="empty"></td>';
-                        } else if (date > daysInMonth) {
-                            html += '<td class="empty"></td>';
-                        } else {
-                            const key = `${monthIdx}-${date}`;
-                            const info = eventosEspeciales[key];
-                            let classes = [];
+            let date = 1;
+            for (let i = 0; i < 6; i++) {
+                html += '<tr>';
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        html += '<td class="empty"></td>';
+                    } else if (date > daysInMonth) {
+                        html += '<td class="empty"></td>';
+                    } else {
+                        const key = `${monthIdx}-${date}`;
+                        const info = eventosEspeciales[key];
+                        let classes = [];
 
-                            // Determinar etiqueta (Tooltip)
-                            // Si hay evento especial usa ese texto, sino arma la fecha genérica
-                            let tooltipText = info ? info.texto : `${date} de ${name}`;
+                        // Determinar etiqueta (Tooltip)
+                        // Si hay evento especial usa ese texto, sino arma la fecha genérica
+                        let tooltipText = info ? info.texto : `${date} de ${name}`;
 
-                            const esDomingo = j === 0;
-                            const esSabado = j === 6;
+                        const esDomingo = j === 0;
+                        const esSabado = j === 6;
 
-                            // Domingo gris completo
-                            if (esDomingo && (!info || info.clase !== 'aviso')) {
-                                classes.push('weekend');
+                        // Domingo gris completo
+                        if (esDomingo && (!info || info.clase !== 'aviso')) {
+                            classes.push('weekend');
+                        }
+
+                        // Sábado con mitad diagonal
+                        if (esSabado && (!info || info.clase !== 'aviso')) {
+                            classes.push('sabado-diagonal');
+                        }
+
+
+                        // 2️⃣ Agregar clase del evento (aviso tiene prioridad)
+                        if (info) {
+                            // Si es rango en finde, mantener gris
+                            if ((esDomingo || esSabado) && info.clase === 'rango') {
+                                // no se agrega la clase rango
+                            } else {
+                                classes.push(info.clase);
                             }
+                        }
 
-                            // Sábado con mitad diagonal
-                            if (esSabado && (!info || info.clase !== 'aviso')) {
-                                classes.push('sabado-diagonal');
-                            }
+                        // Hoy (compara día, mes y año real)
+                        if (date === now.getDate() && monthIdx === now.getMonth() && year === now.getFullYear()) {
+                            classes.push('today');
+                            tooltipText = "Hoy: " + tooltipText;
+                        }
 
+                        // Determinar tooltip: en domingos y sábados de rango, mostrar solo la fecha
+                        let tooltipFinal = tooltipText;
+                        //                            if (info && info.clase === 'rango' && (j === 0 || j === 6)) {
+                        //                                tooltipFinal = `${date} de ${name}`;
+                        //                            }
 
-                            // 2️⃣ Agregar clase del evento (aviso tiene prioridad)
-                            if (info) {
-                                // Si es rango en finde, mantener gris
-                                if ((esDomingo || esSabado) && info.clase === 'rango') {
-                                    // no se agrega la clase rango
-                                } else {
-                                    classes.push(info.clase);
-                                }
-                            }
-
-                            // Hoy (compara día, mes y año real)
-                            if (date === now.getDate() && monthIdx === now.getMonth() && year === now.getFullYear()) {
-                                classes.push('today');
-                                tooltipText = "Hoy: " + tooltipText;
-                            }
-
-                            // Determinar tooltip: en domingos y sábados de rango, mostrar solo la fecha
-                            let tooltipFinal = tooltipText;
-                            //                            if (info && info.clase === 'rango' && (j === 0 || j === 6)) {
-                            //                                tooltipFinal = `${date} de ${name}`;
-                            //                            }
-
-                            html += `<td class="${classes.join(' ')}" 
+                        html += `<td class="${classes.join(' ')}" 
                                      data-bs-toggle="tooltip" 
                                      data-bs-title="${tooltipFinal}">
                                      ${date}
                                  </td>`;
-                            date++;
-                        }
+                        date++;
                     }
-                    html += '</tr>';
-                    if (date > daysInMonth) break;
                 }
-                html += `</tbody></table></div></div>`;
+                html += '</tr>';
+                if (date > daysInMonth) break;
+            }
+            html += `</tbody></table></div></div>`;
             return html;
         }
 
@@ -1299,7 +1303,7 @@
             grid.innerHTML = ''; // Limpiar la cuadrícula
             const now = getFechaActual();
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            
+
             if (mesSeleccionado === -1) { // Mostrar todos los meses
                 // Restauramos las clases para la vista de cuadrícula
                 grid.className = 'row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4';
@@ -1311,7 +1315,7 @@
                 grid.className = 'row g-4';
                 grid.innerHTML = generarCalendarioHTML(mesSeleccionado, year, today, now, true);
             }
-            
+
             // Activar los Tooltips de Bootstrap
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
             [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el, {

@@ -31,14 +31,17 @@
             background-color: #ffffff;
             z-index: -1;
         }
+
         .text-brubank {
             color: #6F2CFF !important;
         }
+
         .btn-brubank {
             background-color: #6F2CFF !important;
             border-color: #6F2CFF !important;
             color: white !important;
         }
+
         .btn-brubank:hover {
             background-color: #5820d6 !important;
             border-color: #5820d6 !important;
@@ -308,7 +311,8 @@
 
                             <!-- Grupo de radios en línea: Cantidad de clases distintas -->
                             <div class="mb-3">
-                                <label class="form-label d-block" for="clase1" id="labelCantidadClases">5 - Cantidad de números de clases por
+                                <label class="form-label d-block" for="clase1" id="labelCantidadClases">5 - Cantidad de
+                                    números de clases por
                                     cargo.</label>
                                 <div class="form-check form-check-inline mx-5">
                                     <input class="form-check-input" type="radio" name="cantidadClases" id="clase1"
@@ -385,9 +389,12 @@
                                     situación financiera como educador.</p>
                                 <div class="text-center border p-3 rounded mb-3 bg-muted">
                                     <img src="assets/img/brubank.png" alt="Brubank" style="height: 40px;" class="mb-2">
-                                    <p class="mb-1 small">CBU: <span id="cbuText" class="user-select-all">1430001713011607450015</span></p>
-                                    <p class="mb-1">Alias: <strong id="aliasText" class="text-brubank fs-5 user-select-all">autoconvocadoctes</strong></p>
-                                    <p class="mb-0 small">Nro. Cuenta: <span id="cuentaText" class="user-select-all">1301160745001</span></p>
+                                    <p class="mb-1 small">CBU: <span id="cbuText"
+                                            class="user-select-all">1430001713011607450015</span></p>
+                                    <p class="mb-1">Alias: <strong id="aliasText"
+                                            class="text-brubank fs-5 user-select-all">autoconvocadoctes</strong></p>
+                                    <p class="mb-0 small">Nro. Cuenta: <span id="cuentaText"
+                                            class="user-select-all">1301160745001</span></p>
                                 </div>
                                 <p>👍 Podés donar con lo que puedas a nuestra cuenta.<br>¡😍
                                     Gracias por confiar en nosotros y por apoyarnos en nuestro camino a una educación de
@@ -397,7 +404,8 @@
                                 </figcaption>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-brubank w-100" id="btnCopiarAlias"><i class="fa-regular fa-copy me-2"></i>Copiar Alias</button>
+                                <button type="button" class="btn btn-brubank w-100" id="btnCopiarAlias"><i
+                                        class="fa-regular fa-copy me-2"></i>Copiar Alias</button>
                             </div>
                         </div>
                     </div>
@@ -531,7 +539,9 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing">Estatuto</a></li>
+                        <li><a class="text-decoration-none"
+                                href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing"
+                                target="_blank">Estatuto</a></li>
                         <li><a class="text-decoration-none"
                                 href="https://drive.google.com/file/d/1SzJ_k9b2E_4Kmo9Ja9Fs7ENDNJZIvKYp/view?usp=sharing"
                                 target="_blank">Licencias</a></li>
@@ -643,10 +653,10 @@
                 elements.forEach(el => {
                     const domEl = document.getElementById(el.id);
                     if (!domEl) return;
-                    
+
                     // Detener animación si el elemento tiene el foco para evitar problemas en móviles
                     if (document.activeElement === domEl) return;
-                    
+
                     if (!el.lastBaseText) {
                         let currentText = "";
                         if (el.type === "select") {
@@ -656,7 +666,7 @@
                         }
                         el.lastBaseText = currentText.replace(/\.+$/, '');
                     }
-                    
+
                     if (el.isClassInput && changeText) {
                         const keys = Object.keys(clases);
                         if (keys.length > 0) {

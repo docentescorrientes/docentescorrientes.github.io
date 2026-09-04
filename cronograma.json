@@ -1,42 +1,42 @@
 [
   {
     "anio": "2026",
-    "mes": "08",
+    "mes": "09",
     "cronogramas": [
         {
             "titulo": "Cód. 603 - Plus Unificado ($110 mil)",
             "tipo": "plus unificado",
-            "activo":false,
+            "activo":true,
             "dias": [
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "07",
+                    "fecha": "08",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "10",
-                    "fecha_cajeros": "08"
+                    "fecha": "09",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "11",
+                    "fecha": "10",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "12",
+                    "fecha": "11",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "13",
-                    "_fecha_cajeros": ""
+                    "fecha": "14",
+                    "fecha_cajeros": "12"
                 }
             ]
         },
@@ -80,7 +80,7 @@
         {
             "titulo": "Salario Real (sin pluses)",
             "tipo": "sueldo",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",

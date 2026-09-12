@@ -475,6 +475,14 @@
     </section>
     <!-- End Featured Product -->
 
+    <!-- Notificaciones -->
+    <section class="container pb-4 text-center">
+        <button id="btnNotificaciones" class="btn btn-success rounded-pill px-4">
+            <i class="fa-solid fa-bell me-2"></i> Activar notificaciones
+        </button>
+        <p id="estadoNotificaciones" class="small text-muted mt-2 mb-0"></p>
+    </section>
+
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
@@ -699,6 +707,56 @@
         }
 
         cargarCronograma();
+
+
+        // Notificaciones del navegador
+        const btnNotificaciones = document.getElementById('btnNotificaciones');
+        const estadoNotificaciones = document.getElementById('estadoNotificaciones');
+
+        function actualizarEstadoNotificaciones() {
+            if (!("Notification" in window)) {
+                btnNotificaciones.disabled = true;
+                estadoNotificaciones.textContent = "Este navegador no admite notificaciones.";
+                return;
+            }
+
+            if (Notification.permission === "granted") {
+                btnNotificaciones.innerHTML = '<i class="fa-solid fa-bell me-2"></i> Notificaciones activadas';
+                btnNotificaciones.classList.remove('btn-success');
+                btnNotificaciones.classList.add('btn-outline-success');
+                estadoNotificaciones.textContent = "Tu navegador tiene permiso para recibir notificaciones de este sitio.";
+            } else if (Notification.permission === "denied") {
+                btnNotificaciones.innerHTML = '<i class="fa-solid fa-bell-slash me-2"></i> Notificaciones bloqueadas';
+                btnNotificaciones.classList.remove('btn-success');
+                btnNotificaciones.classList.add('btn-outline-secondary');
+                estadoNotificaciones.textContent = "Las notificaciones están bloqueadas. Podés habilitarlas desde la configuración del navegador.";
+            } else {
+                estadoNotificaciones.textContent = "Activá las notificaciones para recibir avisos de DAC 2019.";
+            }
+        }
+
+        if (btnNotificaciones) {
+            actualizarEstadoNotificaciones();
+
+            btnNotificaciones.addEventListener('click', async () => {
+                if (!("Notification" in window)) return;
+
+                if (Notification.permission === "denied") {
+                    alert("Las notificaciones están bloqueadas en el navegador. Debés habilitarlas desde la configuración del sitio.");
+                    return;
+                }
+
+                const permiso = await Notification.requestPermission();
+                actualizarEstadoNotificaciones();
+
+                if (permiso === "granted") {
+                    new Notification("DAC 2019", {
+                        body: "¡Notificaciones activadas correctamente!",
+                        icon: "assets/img/favicon.png"
+                    });
+                }
+            });
+        }
 
         // Configuración del video de YouTube
         // ⚠️ IMPORTANTE: Busca el ID del canal @SISEArgentina (empieza con "UC") BtU6xmHN-ls 30/01/26. 

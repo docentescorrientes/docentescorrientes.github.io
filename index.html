@@ -652,16 +652,20 @@
                 cronogramaActivo.dias.forEach(item => {
                     const tr = document.createElement('tr');
                     const fecha = new Date(mesDataActivo.anio, mesDataActivo.mes - 1, item.fecha);
-                    let claseFecha = (fecha.getTime() === hoy.getTime()) ? "text-dark fw-bold" : "";
-                    if (claseFecha) tr.style.backgroundColor = '#e3f2fd';
+                    const fechaCajeros = String(item.fecha_cajeros ?? '').trim() !== ''
+                        ? new Date(mesDataActivo.anio, mesDataActivo.mes - 1, item.fecha_cajeros)
+                        : null;
+                    const esHoy = fecha.getTime() === hoy.getTime()
+                        || (fechaCajeros !== null && fechaCajeros.getTime() === hoy.getTime());
+                    const claseFecha = esHoy ? "text-dark fw-bold" : "";
+                    if (esHoy) tr.style.backgroundColor = '#e3f2fd';
 
                     let fechaTexto = fecha.toLocaleDateString('es-ES', opcionesFecha);
                     fechaTexto = fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1);
 
                     let cellContent = `<div class="${claseFecha}" style="line-height: 1.2; margin-bottom: 0;">${fechaTexto}</div>`;
 
-                    if (item.fecha_cajeros && item.fecha_cajeros.trim() !== "") {
-                        const fechaCajeros = new Date(mesDataActivo.anio, mesDataActivo.mes - 1, item.fecha_cajeros);
+                    if (fechaCajeros) {
                         let fechaCajerosTexto = fechaCajeros.toLocaleDateString('es-ES', opcionesFecha);
                         fechaCajerosTexto = fechaCajerosTexto.charAt(0).toUpperCase() + fechaCajerosTexto.slice(1);
                         cellContent += `<div style="font-size: 15px !important; font-weight: bold; color: #000; line-height: 1;">* Disponible en cajeros: ${fechaCajerosTexto}</div>`;

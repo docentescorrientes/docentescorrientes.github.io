@@ -476,10 +476,12 @@
     <!-- End Featured Product -->
 
     <!-- Notificaciones -->
-    <section class="container pb-4 text-center">
+    <section id="avisoNotificaciones" class="position-fixed bottom-0 start-50 translate-middle-x bg-white border rounded shadow p-3 text-center" style="z-index: 1080; width: min(92vw, 420px); margin-bottom: 1rem;" aria-labelledby="tituloNotificaciones" hidden>
+        <h2 id="tituloNotificaciones" class="h5">¿Querés permitir notificaciones de DAC 2019?</h2>
         <button id="btnNotificaciones" class="btn btn-success rounded-pill px-4">
-            <i class="fa-solid fa-bell me-2"></i> Activar notificaciones
+            <i class="fa-solid fa-bell me-2"></i> Permitir
         </button>
+        <button id="cerrarNotificaciones" class="btn btn-link text-secondary">Ahora no</button>
         <p id="estadoNotificaciones" class="small text-muted mt-2 mb-0" role="status" aria-live="polite"></p>
     </section>
 
@@ -718,8 +720,18 @@
         // Mantener las notificaciones independientes del cronograma.
         const btnNotificaciones = document.getElementById('btnNotificaciones');
         const estadoNotificaciones = document.getElementById('estadoNotificaciones');
+        const avisoNotificaciones = document.getElementById('avisoNotificaciones');
+        let avisoDescartado = false;
+        try {
+            avisoDescartado = sessionStorage.getItem('avisoNotificacionesDescartado') === '1';
+        } catch (error) {
+            // El aviso también funciona cuando el almacenamiento está bloqueado.
+        }
 
         function actualizarEstadoNotificaciones() {
+            avisoNotificaciones.hidden = avisoDescartado || !window.isSecureContext
+                || !['https:', 'http:'].includes(location.protocol)
+                || !("Notification" in window) || Notification.permission !== 'default';
             btnNotificaciones.disabled = false;
             btnNotificaciones.classList.remove('btn-success', 'btn-outline-success', 'btn-outline-secondary');
             if (!window.isSecureContext || !['https:', 'http:'].includes(location.protocol)) {
@@ -744,14 +756,23 @@
                 btnNotificaciones.classList.add('btn-outline-secondary');
                 estadoNotificaciones.textContent = "Las notificaciones están bloqueadas. Podés habilitarlas desde la configuración del navegador.";
             } else {
-                btnNotificaciones.innerHTML = '<i class="fa-solid fa-bell me-2"></i> Activar notificaciones';
+                btnNotificaciones.innerHTML = '<i class="fa-solid fa-bell me-2"></i> Permitir';
                 btnNotificaciones.classList.add('btn-success');
-                estadoNotificaciones.textContent = "Pulsá el botón para permitir notificaciones y recibir una de prueba.";
+                estadoNotificaciones.textContent = "El navegador te pedirá confirmar el permiso.";
             }
         }
 
         if (btnNotificaciones && estadoNotificaciones) {
             actualizarEstadoNotificaciones();
+            document.getElementById('cerrarNotificaciones').addEventListener('click', () => {
+                avisoDescartado = true;
+                avisoNotificaciones.hidden = true;
+                try {
+                    sessionStorage.setItem('avisoNotificacionesDescartado', '1');
+                } catch (error) {
+                    // Mantener el descarte en memoria si no se puede guardar.
+                }
+            });
 
             btnNotificaciones.addEventListener('click', async () => {
                 if (!("Notification" in window)) return;
@@ -796,6 +817,8 @@
                     estadoNotificaciones.textContent = "Notificación de prueba enviada. Si no aparece, revisá las notificaciones del navegador en tu dispositivo.";
                 } catch (error) {
                     console.error('Error al activar notificaciones:', error);
+                    avisoNotificaciones.hidden = false;
+                    btnNotificaciones.hidden = Notification.permission !== 'default';
                     estadoNotificaciones.textContent = "No se pudo mostrar la notificación. Revisá los permisos del sitio y del navegador e intentá nuevamente.";
                 } finally {
                     btnNotificaciones.disabled = false;

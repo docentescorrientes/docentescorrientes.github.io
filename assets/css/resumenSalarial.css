@@ -9,7 +9,7 @@
 .resumen-indicadores {
     margin-bottom: 0;
 }
-#resumen-metodo, #basico-metodo, #basico-escenario {
+#resumen-metodo, #basico-metodo, #basico-escenario, #todos-metodo, #todos-escenario {
     font-size: 0.75rem;
     line-height: 1.4;
 }

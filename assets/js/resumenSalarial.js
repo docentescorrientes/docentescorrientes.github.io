@@ -7,6 +7,11 @@ export function sueldoMaestra333(anio, mes, plusesAlBasico = false) {
     // Un cargo, indice 1, zona 20%, material didactico 10%, sin antiguedad.
     const codigos = ['193', '603', '625', '632'];
     const plusesBrutos = valor('g', '603') + valor('g', '625');
+    if (plusesAlBasico === 'todos') {
+        const basicoSimulado = valor('b', '1') + valor('n', '171')
+            + codigos.reduce((suma, codigo) => suma + valor('g', codigo), 0);
+        return basicoSimulado * 1.3 * 0.75 + valor('d', '210');
+    }
     const remunerativo = (valor('b', '1') + (plusesAlBasico ? plusesBrutos : 0)) * 1.3
         + codigos.reduce((suma, codigo) => suma + valor('g', codigo), 0)
         - (plusesAlBasico ? plusesBrutos : 0);
@@ -76,6 +81,9 @@ if (estado) {
             escribir('enero', `Enero de ${resumen.anio} (sin traspaso): ${pesos(resumen.enero)}`);
             escribir('escenario', `Pluses brutos incorporados al b\u00e1sico: ${pesos(resumen.pluses / 0.75)}. Bonificaci\u00f3n neta adicional: ${pesos(resumen.pluses * 0.2)} por zona + ${pesos(resumen.pluses * 0.1)} por material did\u00e1ctico. Mejora mensual: ${pesos(resumen.mejora)} frente al sueldo actual de ${pesos(resumen.netoActual)}. Se simula el traspaso en el mes mostrado; enero conserva el sueldo original.`);
         }
+        if (plusesAlBasico === 'todos') {
+            escribir('escenario', `Los importes de los c\u00f3digos 171, 193, 632, 603 y 625 se incorporan al b\u00e1sico, sin duplicarlos. Todo el nuevo b\u00e1sico bonifica 20% de zona y 10% de material did\u00e1ctico, con aportes del 25%. El 171 pasa a tener aportes. Diferencia neta mensual: ${pesos(resumen.mejora)} frente al sueldo actual de ${pesos(resumen.netoActual)}. Enero conserva el sueldo original.`);
+        }
         escribir('aumento', conSigno(resumen.aumento));
         escribir('inflacion', conSigno(resumen.inflacion));
         escribir('inflacion-nacional', conSigno(resumen.inflacionNacional));
@@ -117,6 +125,13 @@ if (original) {
     detalle.className = 'small text-muted';
     escenario.querySelector('#basico-enero').after(detalle);
     original.after(escenario);
+    const todos = escenario.cloneNode(true);
+    todos.id = 'todos-salarial';
+    todos.querySelectorAll('[id]').forEach(elemento => {
+        elemento.id = elemento.id.replace(/^basico-/, 'todos-');
+    });
+    todos.querySelector('h2').textContent = 'Maestra de grado com\u00fan \u00b7 Todos los adicionales al b\u00e1sico';
+    escenario.after(todos);
     const carousel = original.closest('.carousel');
     carousel.querySelector('.carousel-indicators').replaceChildren(
         ...Array.from(carousel.querySelectorAll('.carousel-item'), (item, indice) => {
@@ -129,4 +144,5 @@ if (original) {
     );
     renderizarResumen('resumen');
     renderizarResumen('basico', true);
+    renderizarResumen('todos', 'todos');
 }

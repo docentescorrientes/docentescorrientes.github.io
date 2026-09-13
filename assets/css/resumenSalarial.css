@@ -1,0 +1,54 @@
+.resumen-salarial {
+    padding: 3rem;
+}
+.resumen-salarial .resumen-monto {
+    font-size: 2rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+.resumen-indicadores {
+    margin-bottom: 0;
+}
+#resumen-metodo, #basico-metodo, #basico-escenario {
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+.resumen-indicadores > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: .75rem 0;
+    border-top: 1px solid #ced4da;
+}
+.resumen-indicadores dt {
+    font-weight: 400;
+}
+.resumen-indicadores dd {
+    flex-shrink: 0;
+    margin: 0;
+    font-weight: 700;
+}
+.resumen-bar-label {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .25rem 1rem;
+    margin: .75rem 0 .35rem;
+}
+.resumen-bar-track {
+    height: 18px;
+    background: #dee2e6;
+}
+.resumen-bar {
+    height: 100%;
+    width: 0;
+}
+@media (max-width: 575px) {
+    .resumen-salarial {
+        padding: 2rem 2.5rem 3rem;
+    }
+    .resumen-salarial .resumen-monto {
+        font-size: 1.75rem;
+    }
+}

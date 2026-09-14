@@ -42,10 +42,28 @@ export function compararSalario(datos, fecha = new Date(), plusesAlBasico = fals
     const factorReferencia = Math.max(factorAnual, factorAnualNacional);
     const regionReferencia = factorAnual >= factorAnualNacional ? 'NEA' : 'nacional';
     const cbtDiciembre = datos.canastaBTNac[anio - 1]?.[11];
+    const cbtAnterior = datos.canastaBTNac[anio - 1]?.[indice];
+    const sueldoAnterior = sueldoMaestra333(anio - 1, indice + 1);
+    const tieneBasicoAnterior = obtenerValores(anio - 1, indice + 1, 'b').some(item => item.valor > 0);
+    const inflacionInteranual = serie => {
+        // Desde el mes siguiente del anio anterior hasta el mes comparado inclusive.
+        const tasas = Array.from({ length: 12 }, (_, i) => {
+            const mes = indice + 1 + i;
+            return serie[anio - 1 + Math.floor(mes / 12)]?.[mes % 12];
+        });
+        return tasas.every(Number.isFinite)
+            ? (tasas.reduce((factor, tasa) => factor * (1 + tasa / 100), 1) - 1) * 100
+            : null;
+    };
     return {
         anio, mes: indice + 1, enero, neto, pluses, sueldoSinPluses: neto - pluses, cbt: canastas[indice],
         netoActual, mejora: neto - netoActual,
         aumento: (neto / enero - 1) * 100,
+        aumentoInteranual: tieneBasicoAnterior && sueldoAnterior > 0 ? (neto / sueldoAnterior - 1) * 100 : null,
+        inflacionInteranual: inflacionInteranual(datos.inflacionNea),
+        inflacionNacionalInteranual: inflacionInteranual(datos.inflacionNac),
+        cbtInteranual: Number.isFinite(cbtAnterior) && cbtAnterior > 0
+            ? (canastas[indice] / cbtAnterior - 1) * 100 : null,
         inflacion: (factorAnual - 1) * 100,
         inflacionNacional: (factorAnualNacional - 1) * 100,
         regionReferencia,
@@ -87,6 +105,11 @@ if (estado) {
         escribir('aumento', conSigno(resumen.aumento));
         escribir('inflacion', conSigno(resumen.inflacion));
         escribir('inflacion-nacional', conSigno(resumen.inflacionNacional));
+        const interanual = valor => valor === null ? 'No disponible' : conSigno(valor);
+        escribir('aumento-interanual', interanual(resumen.aumentoInteranual));
+        escribir('inflacion-interanual', interanual(resumen.inflacionInteranual));
+        escribir('inflacion-nacional-interanual', interanual(resumen.inflacionNacionalInteranual));
+        escribir('cbt-interanual', interanual(resumen.cbtInteranual));
         escribir('real-titulo', `Salario frente a la inflaci\u00f3n anual (${resumen.regionReferencia})`);
         escribir('real', conSigno(resumen.real));
         elemento('real').classList.add(resumen.real < 0 ? 'text-danger' : 'text-success');

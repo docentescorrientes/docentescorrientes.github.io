@@ -9,6 +9,14 @@
 .resumen-indicadores {
     margin-bottom: 0;
 }
+.resumen-salarial .resumen-interanual {
+    font-size: 0.625rem;
+    line-height: 1.4;
+}
+.resumen-salarial .resumen-interanual span {
+    color: #495057;
+    font-weight: 600;
+}
 #resumen-metodo, #basico-metodo, #basico-escenario, #todos-metodo, #todos-escenario {
     font-size: 0.75rem;
     line-height: 1.4;

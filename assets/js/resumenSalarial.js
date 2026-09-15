@@ -44,6 +44,12 @@ export function compararSalario(datos, fecha = new Date(), plusesAlBasico = fals
     const cbtDiciembre = datos.canastaBTNac[anio - 1]?.[11];
     const cbtAnterior = datos.canastaBTNac[anio - 1]?.[indice];
     const sueldoAnterior = sueldoMaestra333(anio - 1, indice + 1);
+    const seguroVida = (periodoAnio, periodoMes) => obtenerValores(periodoAnio, periodoMes, 'd')
+        .find(item => item.name.startsWith('210 '))?.valor ?? 0;
+    // El seguro se mantiene en el neto mostrado, pero sus variaciones no son salariales.
+    const eneroComparable = enero - seguroVida(anio, 1);
+    const netoComparable = neto - seguroVida(anio, indice + 1);
+    const sueldoAnteriorComparable = sueldoAnterior - seguroVida(anio - 1, indice + 1);
     const tieneBasicoAnterior = obtenerValores(anio - 1, indice + 1, 'b').some(item => item.valor > 0);
     const inflacionInteranual = serie => {
         // Desde el mes siguiente del anio anterior hasta el mes comparado inclusive.
@@ -58,8 +64,9 @@ export function compararSalario(datos, fecha = new Date(), plusesAlBasico = fals
     return {
         anio, mes: indice + 1, enero, neto, pluses, sueldoSinPluses: neto - pluses, cbt: canastas[indice],
         netoActual, mejora: neto - netoActual,
-        aumento: (neto / enero - 1) * 100,
-        aumentoInteranual: tieneBasicoAnterior && sueldoAnterior > 0 ? (neto / sueldoAnterior - 1) * 100 : null,
+        aumento: (netoComparable / eneroComparable - 1) * 100,
+        aumentoInteranual: tieneBasicoAnterior && sueldoAnteriorComparable > 0
+            ? (netoComparable / sueldoAnteriorComparable - 1) * 100 : null,
         inflacionInteranual: inflacionInteranual(datos.inflacionNea),
         inflacionNacionalInteranual: inflacionInteranual(datos.inflacionNac),
         cbtInteranual: Number.isFinite(cbtAnterior) && cbtAnterior > 0
@@ -68,7 +75,7 @@ export function compararSalario(datos, fecha = new Date(), plusesAlBasico = fals
         inflacionNacional: (factorAnualNacional - 1) * 100,
         regionReferencia,
         inflacionReferencia: (factorReferencia - 1) * 100,
-        real: (neto / enero / factorReferencia - 1) * 100,
+        real: (netoComparable / eneroComparable / factorReferencia - 1) * 100,
         cobertura: neto / canastas[indice] * 100,
         aumentoCbt: Number.isFinite(cbtDiciembre) && cbtDiciembre > 0
             ? (canastas[indice] / cbtDiciembre - 1) * 100

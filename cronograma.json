@@ -6,7 +6,7 @@
         {
             "titulo": "Cód. 603 - Plus Unificado ($110 mil)",
             "tipo": "plus unificado",
-            "activo":true,
+            "activo":false,
             "dias": [
                 {
                     "dia": "1°",

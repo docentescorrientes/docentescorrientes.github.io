@@ -26,6 +26,24 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     <script src="https://kit.fontawesome.com/d58c5b9122.js" crossorigin="anonymous"></script>
     <style>
+        .payment-banner .table-responsive {
+            padding: 12px;
+        }
+
+        .payment-banner .payment-date-current {
+            position: relative;
+            z-index: 1;
+            transform: scale(1.025);
+            box-shadow: 0 5px 10px rgba(25, 70, 100, 0.25);
+        }
+
+        .payment-banner .payment-date-current > td {
+            background-color: #e3f2fd;
+            border-color: #90caf9;
+            color: #212529;
+            font-weight: 700;
+        }
+
         #particles-js {
             position: fixed;
             inset: 0;
@@ -706,7 +724,7 @@
                     const esHoy = fecha.getTime() === hoy.getTime()
                         || (fechaCajeros !== null && fechaCajeros.getTime() === hoy.getTime());
                     const claseFecha = esHoy ? "text-dark fw-bold" : "";
-                    if (esHoy) tr.style.backgroundColor = '#e3f2fd';
+                    if (esHoy) tr.classList.add('payment-date-current');
 
                     let fechaTexto = fecha.toLocaleDateString('es-ES', opcionesFecha);
                     fechaTexto = fechaTexto.charAt(0).toUpperCase() + fechaTexto.slice(1);

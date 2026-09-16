@@ -163,12 +163,17 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
         let blanco = sumaGrupo(anio, n, tipoB);
         let gris = sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1];
         let negro = sumaGrupo(anio, n, tipoN) * factor[2];
-        let total = sumaGrupo(anio, n, tipoB) + sumaGrupo(anio, n, tipoG1C) * factor[0] + sumaGrupo(anio, n, tipoG2C) * factor[1] + sumaGrupo(anio, n, tipoN) * factor[2];
+        const total = blanco + gris + negro;
+        // El seguro ya tiene signo negativo y se descuenta solo en el primer cargo.
+        const seguroVida = numeroCargos == 1
+            ? (obtenerValores(anio, n, 'd').find(item => item.name.startsWith('210 '))?.valor ?? 0)
+            : 0;
+        const neto = total + seguroVida;
 
         arrayBlanco.push(100 * blanco / total);
         arrayGrisC.push(100 * gris / total);
         arrayNegro.push(100 * negro / total);
-        arrayTotalC.push(100 * total / divisor);
+        arrayTotalC.push(100 * neto / divisor);
     };
 
     // Calcular el máximo valor de las barras

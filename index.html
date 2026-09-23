@@ -665,17 +665,21 @@
         document.getElementById('añosPasados').textContent = 'ya hace unos ' + difference + ' años';
 
         function buscarCronograma(arrayData, tipo) {
-            let mesDataActivo = null;
-            let cronogramaActivo = null;
-            const hoyCalc = new Date();
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
 
-            // 1. Buscar si algún cronograma del tipo especificado tiene activo === true
             for (const mesData of arrayData) {
-                const cronoForzado = mesData.cronogramas.find(crono => crono.tipo === tipo && crono.activo === true);
-                if (cronoForzado) {
-                    mesDataActivo = mesData;
-                    cronogramaActivo = cronoForzado;
-                    return { mesDataActivo, cronogramaActivo };
+                const cronogramaActivo = mesData.cronogramas.find(crono => {
+                    if (crono.tipo !== tipo || crono.activo !== true) return false;
+
+                    // Conservar el cronograma hasta su última fecha de pago inclusive.
+                    const ultimaFechaPago = Math.max(...crono.dias.map(item =>
+                        new Date(mesData.anio, mesData.mes - 1, item.fecha).getTime()
+                    ));
+                    return ultimaFechaPago >= hoy.getTime();
+                });
+                if (cronogramaActivo) {
+                    return { mesDataActivo: mesData, cronogramaActivo };
                 }
             }
 

@@ -43,7 +43,7 @@
         {
             "titulo": "Cód. 625 - Plus de Refuerzo ($100 mil)",
             "tipo": "plus refuerzo",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",

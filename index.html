@@ -26,6 +26,61 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     <script src="https://kit.fontawesome.com/d58c5b9122.js" crossorigin="anonymous"></script>
     <style>
+        .carousel-pause-toggle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            display: grid;
+            place-items: center;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            border: 0;
+            outline: none;
+            box-shadow: none;
+            background: transparent;
+            color: #59ab6e;
+            opacity: 0.5;
+            transition: opacity 0.15s ease;
+        }
+
+        .carousel-pause-toggle svg {
+            width: 32px;
+            height: 40px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 6;
+            stroke-linecap: butt;
+            stroke-linejoin: round;
+        }
+
+        .carousel-pause-toggle .play-icon,
+        .carousel-pause-toggle[aria-pressed="true"] .pause-icon {
+            display: none;
+        }
+
+        .carousel-pause-toggle[aria-pressed="true"] .play-icon {
+            display: block;
+        }
+
+        .carousel-pause-toggle:hover,
+        .carousel-pause-toggle:focus-visible {
+            opacity: 0.9;
+        }
+
+        #template-mo-zay-hero-carousel .carousel-pause-toggle,
+        #template-mo-zay-hero-carousel .carousel-pause-toggle:focus,
+        #template-mo-zay-hero-carousel .carousel-pause-toggle:focus-visible,
+        #template-mo-zay-hero-carousel .carousel-pause-toggle:active {
+            border: 0;
+            outline: none;
+            box-shadow: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
         .payment-banner .table-responsive {
             padding: 12px;
         }
@@ -191,7 +246,7 @@
 
 
     <!-- Start Banner Hero -->
-    <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-pause="false">
         <ol class="carousel-indicators">
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
             <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
@@ -485,6 +540,13 @@
                 </div>
             </div>
         </div>
+        <button type="button" class="carousel-pause-toggle" aria-label="Pausar carrusel"
+            aria-pressed="false" title="Pausar carrusel">
+            <svg viewBox="0 0 32 40" aria-hidden="true" focusable="false">
+                <path class="pause-icon" d="M11 8v24M21 8v24"></path>
+                <path class="play-icon" d="M10 8l16 12-16 12z"></path>
+            </svg>
+        </button>
         <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel"
             role="button" data-bs-slide="prev">
             <i class="fas fa-chevron-left"></i>
@@ -647,6 +709,26 @@
     <script type="module" src="assets/js/resumenSalarial.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const heroCarouselElement = document.getElementById('template-mo-zay-hero-carousel');
+        const heroCarousel = new bootstrap.Carousel(heroCarouselElement, { ride: false, pause: false });
+        const carouselPauseButton = heroCarouselElement.querySelector('.carousel-pause-toggle');
+        let carouselPaused = false;
+
+        heroCarousel.cycle();
+        carouselPauseButton.addEventListener('click', () => {
+            carouselPaused = !carouselPaused;
+            if (carouselPaused) {
+                heroCarousel.pause();
+            } else {
+                heroCarousel.cycle();
+            }
+            const label = carouselPaused ? 'Reanudar carrusel' : 'Pausar carrusel';
+            carouselPauseButton.setAttribute('aria-pressed', String(carouselPaused));
+            carouselPauseButton.setAttribute('aria-label', label);
+            carouselPauseButton.title = label;
+        });
+    </script>
     <script>
         function actualizarReloj() {
             const fechaActual = new Date();

@@ -36,6 +36,7 @@ aumentos.agregarAumento("1 Básico", 2025, 3, 20000, "b");
 aumentos.agregarAumento("1 Básico", 2025, 8, 22000, "b");
 aumentos.agregarAumento("1 Básico", 2026, 3, 12000, "b");
 aumentos.agregarAumento("1 Básico", 2026, 6, 22000, "b");
+aumentos.agregarAumento("1 Básico", 2026, 11, 25700, "b");
 
 // Grises: (Neto * 4/3)
 aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 33500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo
@@ -44,10 +45,12 @@ aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)"
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 7, 47000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 8, 8000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2025, 7, 55000 * 4 / 3, "g"); // Tope: hasta un cargo
+aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2026, 11, 90000 * 4 / 3, "g"); // Tope: hasta un cargo
 
 aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2024, 7, 42000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2024, 8, 8000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2025, 7, 50000 * 4 / 3, "g"); // Tope: hasta un cargo
+aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2026, 11, 100000 * 4 / 3, "g"); // Tope: hasta un cargo
 
 aumentos.agregarAumento("629 Adicional Remunerativo 2° Cargo (solo en el 2° cargo)", 2023, 9, 10000 * 4 / 3, "g"); // ## Tope: hasta un cargo en el segundo
 
@@ -80,6 +83,7 @@ aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 1, 20000, "n"); // Tope
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2024, 2, 100000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2025, 3, 80000, "n"); // Tope: hasta un cargo y 2 hijos
 aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2026, 3, 30000, "n"); // Tope: hasta un cargo y 2 hijos
+aumentos.agregarAumento("3 Ayuda Escolar (marzo)", 2026, 11, 170000, "n"); // Tope: hasta un cargo y 2 hijos
 
 // Descuentos: cod210SegVida -2163
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 10, -1553.67, "d"); // Tope: solo un cargo
@@ -87,7 +91,7 @@ aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -155.36, "d");
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2024, 11, -222.17, "d");
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2025, 10, -231.80, "d");
 aumentos.agregarAumento("210 Seguro de Vida (Life)", 2026, 5, -130.00, "d");
-aumentos.agregarAumento("210 Seguro de Vida (Life)", 2026, 7, -230.00, "d"); 
+aumentos.agregarAumento("210 Seguro de Vida (Life)", 2026, 7, -230.00, "d");
 
 // Descuentos: segurosCNP -4113.54
 aumentos.agregarAumento("Seguros CNP (Banco Corrientes)", 2025, 5, -4113.54, "d"); // Tope: solo un cargo

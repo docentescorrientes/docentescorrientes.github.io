@@ -5,17 +5,21 @@ import { obtenerValores, formatNumero, obtenerNombreMes } from "./dataSalario.js
 const apJub = 0.2;
 const obSocial = 0.05;
 const DESCUENTO = apJub + obSocial;
-let valor603 = 0;
-let valor625 = 0;
 // Función para capturar datos del formulario y calcular el salario
 document.getElementById("dataForm").addEventListener("submit", function (event) {
     event.preventDefault();
     let datosFormulario = capturarDatos(event);
+    const selectedTextMonth = document.getElementById("month").selectedOptions[0].text;
+    const resultado = calcularSalario(datosFormulario, selectedTextMonth);
+    generarTabla(resultado.year, resultado.month, datosFormulario,
+        resultado.codigos, resultado.nombres, resultado.valores, resultado.colores, resultado);
+});
+
+// El mismo cálculo se usa para el recibo y para la comparación mensual.
+export function calcularSalario(datosFormulario, selectedTextMonth = "") {
     const year = datosFormulario.year;
     let month = datosFormulario.month;
     const seniority = datosFormulario.seniority;
-
-    const selectedTextMonth = document.getElementById("month").options[document.getElementById("month").selectedIndex].text;
 
     // Forzar exclusivamente el mes de Junio (6) y Diciembre (12) para los aguinaldos
     if (selectedTextMonth === "1° SAC Junio") {
@@ -63,7 +67,6 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
 
     const anio193 = parseInt(year);
     const mes193 = parseInt(month);
-    console.log("Año 193:", anio193, "Mes 193:", mes193);
     // Arreglos para ítems Grises
     let text193 = "Adicional Remunerativo Docente C/A (en solo un cargo)";
     if (anio193 > 2025 || (anio193 === 2025 && mes193 >= 3)) {
@@ -203,8 +206,8 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
     arrayValorN.push(sumaTotalN);
     arrayValorN.push(arrayValorN[0] + arrayValorN[1]);
 
-    valor603 = arrayValorG[1]; // Plus Unificado Remunerativo (Código 603)
-    valor625 = arrayValorG[2]; // Plus de Refuerzo Remunerativo (Código 625)
+    const valor603 = arrayValorG[1]; // Plus Unificado Remunerativo (Código 603)
+    const valor625 = arrayValorG[2]; // Plus de Refuerzo Remunerativo (Código 625)
 
     // --- Ajustes especiales para SAC Junio y SAC Diciembre ---
     if (selectedTextMonth === "1° SAC Junio" || selectedTextMonth === "2° SAC Diciembre") {
@@ -216,18 +219,63 @@ document.getElementById("dataForm").addEventListener("submit", function (event) 
         arrayValor = arrayValor.map(() => 0);
     };
 
-    // --- Generar la tabla con los arreglos de Blancos, Grises y Negros ---
-    generarTabla(year, month, datosFormulario,
-        [...arrayCodigoB, ...arrayCodigoG, ...arrayCodigoN],
-        [...arrayNameB, ...arrayNameG, ...arrayNameN],
-        [...arrayValorB, ...arrayValorG, ...arrayValorN],
-        [
+    const esSAC = selectedTextMonth === "1° SAC Junio" || selectedTextMonth === "2° SAC Diciembre";
+    // La comparación mensual incluye Life y excluye el seguro bancario CNP.
+    const descuentos = esSAC ? 0 : obtenerValores(year, month, "d")
+        .filter(item => item.name !== "Seguros CNP (Banco Corrientes)")
+        .reduce((total, item) => total + item.valor, 0);
+    // Mantener el ajuste de un centavo aplicado al total del recibo.
+    const neto = (arrayValorB[5] + arrayValorG[5]) * (1 - DESCUENTO) + arrayValorN[2] - 0.01 + descuentos;
+    return {
+        year, month, esSAC, neto, valor603, valor625,
+        codigos: [...arrayCodigoB, ...arrayCodigoG, ...arrayCodigoN],
+        nombres: [...arrayNameB, ...arrayNameG, ...arrayNameN],
+        valores: [...arrayValorB, ...arrayValorG, ...arrayValorN],
+        colores: [
             ...Array(arrayCodigoB.length).fill("primary"),
             ...Array(arrayCodigoG.length).fill("warning"),
             ...Array(arrayCodigoN.length).fill("danger")
         ]
-    );
-});
+    };
+}
+
+export function compararMesAnterior(datosFormulario, resultado) {
+    const mes = Number(resultado.month);
+    const year = mes === 1 ? Number(resultado.year) - 1 : Number(resultado.year);
+    const month = mes === 1 ? 12 : mes - 1;
+    const anterior = calcularSalario({ ...datosFormulario, year, month });
+    const netoActual = Math.round(resultado.neto * 100) / 100;
+    const netoAnterior = Math.round(anterior.neto * 100) / 100;
+    const diferencia = Math.round((netoActual - netoAnterior) * 100) / 100;
+    return { year, month, netoActual, netoAnterior, diferencia,
+        porcentaje: netoAnterior > 0 ? diferencia / netoAnterior * 100 : null };
+}
+
+function generarComparacion(datosFormulario, resultado) {
+    if (resultado.esSAC) {
+        return '<tr class="table-info"><td colspan="5">La comparación con el mes anterior está disponible para sueldos mensuales. El aguinaldo se calcula por separado.</td></tr>';
+    }
+    const comparacion = compararMesAnterior(datosFormulario, resultado);
+    const nombreMes = new Intl.DateTimeFormat("es-AR", { month: "long" });
+    const periodo = (year, month) => `${nombreMes.format(new Date(Number(year), Number(month) - 1, 1))} de ${year}`;
+    const variacion = comparacion.diferencia > 0 ? "Aumento neto" : comparacion.diferencia < 0 ? "Disminución neta" : "Sin variación neta";
+    return `
+        <tr id="comparacionMensual" style="--bs-table-bg: #fff;">
+            <th colspan="5" scope="rowgroup">🔎 Comparación con el mes anterior</th>
+        </tr>
+        <tr class="table-info">
+            <td colspan="4" class="text-start">Neto de ${periodo(comparacion.year, comparacion.month)}</td>
+            <td class="fw-bold">${formatNumero(comparacion.netoAnterior, "$")}</td>
+        </tr>
+        <tr class="table-info">
+            <td colspan="4" class="text-start">Neto de ${periodo(resultado.year, resultado.month)}</td>
+            <td class="fw-bold">${formatNumero(comparacion.netoActual, "$")}</td>
+        </tr>
+        <tr class="table-info fw-bold">
+            <td colspan="4" class="text-start">${variacion} (${comparacion.porcentaje === null ? "porcentaje no disponible" : `${formatNumero(comparacion.porcentaje)}%`})</td>
+            <td>${formatNumero(comparacion.diferencia, "$")}</td>
+        </tr>`;
+}
 
 // Función para calcular valores Blancos
 function calcularBlancos(year, month, seniority, indiceClase, ubicacionGeografica, jornada, ayMatDidac = 0.1) {
@@ -274,7 +322,8 @@ function calcularNegros(year, month, cociente7, cantHijo, cantHijoDisc, cantEsc,
 }
 
 // Función para generar la tabla con Bootstrap 5
-function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, arrayValor, arrayColor) {
+function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, arrayValor, arrayColor, resultado) {
+    const { valor603, valor625 } = resultado;
     let datos = arrayCodigo.map((codigo, index) => ({
         codigo,
         nombre: arrayNombre[index],
@@ -430,6 +479,7 @@ function generarTabla(year, month, datosFormulario, arrayCodigo, arrayNombre, ar
           <td class="fw-bold border-2 border-success">${formatNumero(segurosCNPas + cod120SegVida + arrayRecuperado[1], "$")}</td>
       `;
             tbody.appendChild(newRowSeguroCNP);
+            tbody.insertAdjacentHTML("beforeend", generarComparacion(datosFormulario, resultado));
         }
     }
 

@@ -103,6 +103,20 @@
             }
         }
 
+        #buscarCargo,
+        #miSelect {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem !important;
+            font-weight: 400 !important;
+            line-height: 1.5;
+            color: #212529;
+        }
+
+        #buscarCargo::placeholder {
+            color: inherit;
+            opacity: 1;
+        }
+
         #particles-js {
             position: fixed;
             inset: 0;
@@ -204,16 +218,23 @@
                 </p>
 
                 <div class="mb-3">
+                    <label for="buscarCargo" class="form-label">Buscar por categoría, clase o cargo</label>
+                    <input type="search" class="form-control border-success" id="buscarCargo"
+                        placeholder="Ej.: 5, 191 o maestro" aria-describedby="buscarCargoHelp resultadosBusqueda">
+                    <div id="buscarCargoHelp" class="form-text text-muted">Escribí una categoría, un código de clase o el nombre del cargo y seleccioná una coincidencia.</div>
+                    <div id="resultadosBusqueda" class="form-text" role="status" aria-live="polite"></div>
+                </div>
+                <div class="mb-3">
                     <label for="miSelect" class="form-label">Busca tu clase e índice de clase de cargo docentes
                         aquí</label>
                     <select class="form-select border-success fw-normal" id="miSelect" name="miSelect" required
-                        aria-describedby="yearHelp">
+                        aria-describedby="miSelectHelp">
                         <option value="" selected disabled>Buscar la clase e índice de clase del cargo docente . . .
                         </option>
                     </select>
-                    <div id="miSelectHelp" class="form-text text-muted">Seleccione el año correspondiente.</div>
+                    <div id="miSelectHelp" class="form-text text-muted">Seleccioná el cargo para consultar su información y montos.</div>
                 </div>
-                <div class="alert alert-secondary" id="claseBuscada">
+                <div class="alert alert-secondary" id="claseBuscada" aria-live="polite">
                     <strong>👆 Esperando</strong> que seleccione cargo . . .
                 </div>
             </div>
@@ -455,12 +476,93 @@
                 .map(numeroClase => ({ numeroClase, ...buscarDataClase(numeroClase) }))
                 .sort((a, b) => a.cargo.localeCompare(b.cargo, 'es', { sensitivity: 'base' }));
 
-            // Llenar el select con los cargos
-            clasesDisponibles.forEach(datos => {
-                const option = document.createElement('option');
-                option.value = datos.numeroClase;
-                option.textContent = datos.cargo;
-                select.appendChild(option);
+            const buscarCargo = document.getElementById('buscarCargo');
+            const resultadosBusqueda = document.getElementById('resultadosBusqueda');
+            const normalizar = texto => String(texto).normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+
+            function llenarCargos(cargos) {
+                while (select.options.length > 1) select.remove(1);
+                cargos.forEach(datos => {
+                    const option = document.createElement('option');
+                    option.value = datos.numeroClase;
+                    option.textContent = `${datos.cargo} — Clase ${datos.clase} · Categoría ${datos.categoria}`;
+                    select.appendChild(option);
+                });
+            }
+
+            llenarCargos(clasesDisponibles);
+
+            // Animar las sugerencias sin modificar el texto de búsqueda.
+            const ejemplosBusqueda = ['Buscar por categoría: 5...', 'Buscar por clase: 191...', 'Buscar por cargo: maestro...'];
+            const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let ejemploActual = 0;
+            let caracteresBusqueda = 0;
+            let borrandoBusqueda = false;
+            let temporizadorBusqueda = null;
+
+            function animarBusqueda() {
+                clearTimeout(temporizadorBusqueda);
+                if (reducirMovimiento || buscarCargo.value || document.activeElement === buscarCargo) return;
+
+                const ejemplo = ejemplosBusqueda[ejemploActual];
+                caracteresBusqueda += borrandoBusqueda ? -1 : 1;
+                buscarCargo.placeholder = ejemplo.slice(0, caracteresBusqueda);
+                let demora = borrandoBusqueda ? 40 : 80;
+
+                if (!borrandoBusqueda && caracteresBusqueda === ejemplo.length) {
+                    borrandoBusqueda = true;
+                    demora = 2000;
+                } else if (borrandoBusqueda && caracteresBusqueda === 0) {
+                    borrandoBusqueda = false;
+                    ejemploActual = (ejemploActual + 1) % ejemplosBusqueda.length;
+                    demora = 500;
+                }
+                temporizadorBusqueda = setTimeout(animarBusqueda, demora);
+            }
+
+            buscarCargo.addEventListener('focus', () => {
+                clearTimeout(temporizadorBusqueda);
+                buscarCargo.placeholder = 'Ej.: 5, 191 o maestro';
+            });
+            buscarCargo.addEventListener('blur', () => {
+                caracteresBusqueda = 0;
+                borrandoBusqueda = false;
+                animarBusqueda();
+            });
+            animarBusqueda();
+
+            buscarCargo.addEventListener('input', () => {
+                const consulta = normalizar(buscarCargo.value);
+                const seleccionAnterior = select.value;
+                const coincidencias = clasesDisponibles.filter(datos => !consulta ||
+                    String(datos.categoria) === consulta || String(datos.clase) === consulta ||
+                    normalizar(datos.cargo).includes(consulta));
+                llenarCargos(coincidencias);
+                select.disabled = coincidencias.length === 0;
+                resultadosBusqueda.textContent = consulta
+                    ? (coincidencias.length ? `${coincidencias.length} cargo(s) encontrado(s).` : 'No se encontraron cargos para esa búsqueda.')
+                    : '';
+
+                if (coincidencias.length === 1) {
+                    select.value = coincidencias[0].numeroClase;
+                } else if (coincidencias.some(datos => String(datos.numeroClase) === seleccionAnterior)) {
+                    select.value = seleccionAnterior;
+                } else {
+                    select.value = '';
+                }
+
+                if (select.value) {
+                    select.dispatchEvent(new Event('change'));
+                } else {
+                    const resultado = document.getElementById('claseBuscada');
+                    resultado.classList.remove('alert-success', 'alert-secondary');
+                    resultado.classList.add('alert-info');
+                    resultado.textContent = coincidencias.length
+                        ? 'Seleccioná un cargo para ver su información.'
+                        : 'Probá con otra categoría, clase o nombre de cargo.';
+                    bootstrap.Collapse.getOrCreateInstance(document.getElementById('collapseOne'), { toggle: false }).hide();
+                }
             });
 
             // Efecto de escritura dinámica en el placeholder (primera opción del select)
@@ -538,10 +640,11 @@
                 if (claseSeleccionada) {
                     // Mostrar información en el div
                     claseBuscadaDiv.innerHTML = `<strong>👉 Clase:</strong> ${claseSeleccionada.clase} <br>
-                                                 <strong>📌 Cargo:</strong> ${claseSeleccionada.cargo} <br> 
+                                                 <strong>📌 Cargo:</strong> ${claseSeleccionada.cargo} <br>
+                                                 <strong>Categoría:</strong> ${claseSeleccionada.categoria} <br>
                                                  <strong>💰 Valor Clase:</strong> ${claseSeleccionada.valorClase} <br> 
                                                  <strong>📈 Índice Clase:</strong> ${claseSeleccionada.indiceClase.toFixed(5)}`;
-                    claseBuscadaDiv.classList.remove('alert-secondary');
+                    claseBuscadaDiv.classList.remove('alert-secondary', 'alert-info');
                     claseBuscadaDiv.classList.add('alert-success');
 
                     let n = 1;

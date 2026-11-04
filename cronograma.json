@@ -1,7 +1,7 @@
 [
   {
     "anio": "2026",
-    "mes": "10",
+    "mes": "11",
     "cronogramas": [
         {
             "titulo": "Cód. 603 - Plus Unificado ($110 mil)",
@@ -11,31 +11,31 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "07",
+                    "fecha": "05",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "08",
+                    "fecha": "06",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "09",
-                    "_fecha_cajeros": ""
+                    "fecha": "11",
+                    "fecha_cajeros": "7"
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "13",
-                    "fecha_cajeros": "10"
+                    "fecha": "12",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "14",
+                    "fecha": "13",
                     "_fecha_cajeros": ""
                 }
             ]
@@ -43,7 +43,7 @@
         {
             "titulo": "Cód. 625 - Plus de Refuerzo ($100 mil)",
             "tipo": "plus refuerzo",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",
@@ -80,37 +80,37 @@
         {
             "titulo": "Salario Real (sin pluses)",
             "tipo": "sueldo",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "26",
-                    "fecha_cajeros": "24"
+                    "fecha": "24",
+                    "fecha_cajeros": "23"
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "27",
+                    "fecha": "25",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "28",
+                    "fecha": "26",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "29",
+                    "fecha": "27",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
                     "fecha": "30",
-                    "_fecha_cajeros": ""
+                    "fecha_cajeros": "28"
                 }                
             ]
         }

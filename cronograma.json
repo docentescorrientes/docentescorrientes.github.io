@@ -17,14 +17,14 @@
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "06",
-                    "_fecha_cajeros": ""
+                    "fecha": "11",
+                    "fecha_cajeros": "6"
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "11",
-                    "fecha_cajeros": "7"
+                    "fecha": "12",
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "4°",

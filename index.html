@@ -93,6 +93,47 @@
             color: #495057;
         }
 
+        .carousel-context-always {
+            display: block;
+            margin: 0 1rem 1rem;
+            padding: 0.6rem 1rem;
+        }
+
+        .carousel-context-always p {
+            margin: 0;
+        }
+
+        .carousel-context-always p + p {
+            margin-top: 0.5rem;
+        }
+
+        #template-mo-zay-hero-carousel .carousel-item:not(.payment-banner) p,
+        #template-mo-zay-hero-carousel .carousel-item:not(.payment-banner) table {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        #template-mo-zay-hero-carousel .carousel-item:not(.payment-banner) h1 {
+            font-size: 2rem;
+        }
+
+        #template-mo-zay-hero-carousel .carousel-item:not(.payment-banner) h2 {
+            font-size: 1.5rem;
+        }
+
+        #template-mo-zay-hero-carousel .carousel-item:not(.payment-banner) h3 {
+            font-size: 1.25rem;
+        }
+
+        #template-mo-zay-hero-carousel .carousel-item.carousel-item-measuring {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            display: block !important;
+            height: auto !important;
+            visibility: hidden !important;
+        }
+
         @media (min-width: 992px) {
             .carousel-context {
                 display: block;
@@ -112,7 +153,7 @@
             box-shadow: 0 5px 10px rgba(25, 70, 100, 0.25);
         }
 
-        .payment-banner .payment-date-current > td {
+        .payment-banner .payment-date-current>td {
             background-color: #e3f2fd;
             border-color: #90caf9;
             color: #212529;
@@ -323,6 +364,9 @@
                             </div>
                         </div>
                     </div>
+                    <aside class="carousel-context carousel-context-always">
+                        <p><strong>Cód. 603:</strong> <span id="monto-plus-unificado">Cargando montos...</span>. Remunerativo, con tope de un cargo. Al incorporarlo al básico, también se computaría para antigüedad, ubicación geográfica y jubilación (en todos los cargos).</p>
+                    </aside>
                 </div>
             </div>
             <div class="carousel-item payment-banner" style="display: none;">
@@ -356,6 +400,9 @@
                             </div>
                         </div>
                     </div>
+                    <aside class="carousel-context carousel-context-always">
+                        <p><strong>Cód. 625:</strong> <span id="monto-plus-refuerzo">Cargando montos...</span>. Remunerativo, con tope de un cargo. Al incorporarlo al básico, también se computaría para antigüedad, ubicación geográfica y jubilación (en todos los cargos).</p>
+                    </aside>
                 </div>
             </div>
             <div class="carousel-item payment-banner" style="display: none;">
@@ -389,6 +436,9 @@
                             </div>
                         </div>
                     </div>
+                    <aside class="carousel-context carousel-context-always">
+                        <p><strong>Cód. 193 (gris):</strong> <span id="monto-codigo-193">Cargando monto...</span>. <strong>Cód. 632 (gris):</strong> <span id="monto-codigo-632">Cargando monto...</span>. Son remunerativos, no bonificables y tienen tope de dos cargos. <strong>Cód. 171 (negro):</strong> <span id="monto-codigo-171">Cargando monto...</span>. No remunerativo, No bonificable y con tope de dos cargos.</p>
+                    </aside>
                 </div>
             </div>
             <div class="carousel-item active" id="resumen-salarial" data-bs-interval="15000">
@@ -404,20 +454,38 @@
                                 <p class="resumen-monto text-success" id="resumen-neto"></p>
                                 <p id="resumen-enero"></p>
                                 <dl class="resumen-indicadores">
-                                    <div><dt>Aumento respecto de enero</dt><dd id="resumen-aumento"></dd></div>
-                                    <div><dt>Inflación NEA acumulada del año</dt><dd id="resumen-inflacion"></dd></div>
-                                    <div><dt>Inflación nacional acumulada del año</dt><dd id="resumen-inflacion-nacional"></dd></div>
-                                    <div><dt id="resumen-real-titulo">Salario frente a la inflación anual</dt><dd id="resumen-real"></dd></div>
+                                    <div>
+                                        <dt>Aumento respecto de enero</dt>
+                                        <dd id="resumen-aumento"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>Inflación NEA acumulada del año</dt>
+                                        <dd id="resumen-inflacion"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>Inflación nacional acumulada del año</dt>
+                                        <dd id="resumen-inflacion-nacional"></dd>
+                                    </div>
+                                    <div>
+                                        <dt id="resumen-real-titulo">Salario frente a la inflación anual</dt>
+                                        <dd id="resumen-real"></dd>
+                                    </div>
                                 </dl>
                             </div>
                             <div class="col-lg-7">
                                 <h3 class="h5">Comparación con la CBT · Hogar tipo 2</h3>
                                 <p class="text-muted">Referencia INDEC - CBT tipo 2 (Linea de pobreza).</p>
                                 <figure class="mb-3" aria-label="Comparación del sueldo neto y la canasta básica total">
-                                    <div class="resumen-bar-label"><span>Sueldo neto con pluses</span><strong id="resumen-bar-neto"></strong></div>
-                                    <div class="resumen-bar-track"><div id="resumen-bar-sueldo" class="resumen-bar bg-success"></div></div>
-                                    <div class="resumen-bar-label"><span>CBT tipo 2</span><strong id="resumen-cbt"></strong></div>
-                                    <div class="resumen-bar-track"><div id="resumen-bar-canasta" class="resumen-bar bg-primary"></div></div>
+                                    <div class="resumen-bar-label"><span>Sueldo neto con pluses</span><strong
+                                            id="resumen-bar-neto"></strong></div>
+                                    <div class="resumen-bar-track">
+                                        <div id="resumen-bar-sueldo" class="resumen-bar bg-success"></div>
+                                    </div>
+                                    <div class="resumen-bar-label"><span>CBT tipo 2</span><strong
+                                            id="resumen-cbt"></strong></div>
+                                    <div class="resumen-bar-track">
+                                        <div id="resumen-bar-canasta" class="resumen-bar bg-primary"></div>
+                                    </div>
                                     <figcaption class="mt-3 fw-bold" id="resumen-cobertura"></figcaption>
                                 </figure>
                                 <p id="resumen-brecha"></p>
@@ -430,7 +498,13 @@
                             Inflación nacional <span id="resumen-inflacion-nacional-interanual"></span> ·
                             CBT tipo 2 <span id="resumen-cbt-interanual"></span>.
                         </p>
-                        <p class="small mb-0"><a href="simulador.html" class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">Simulador salarial</a> · <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31" class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">IPC INDEC</a> · <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149" class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">CBT INDEC</a></p>
+                        <p class="small mb-0"><a href="simulador.html" class="text-success text-decoration-none"
+                                target="_blank" rel="noopener noreferrer">Simulador salarial</a> · <a
+                                href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31"
+                                class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">IPC
+                                INDEC</a> · <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149"
+                                class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">CBT
+                                INDEC</a></p>
                     </div>
                 </div>
             </div>
@@ -456,8 +530,15 @@
                     </div>
                     <p class="small mb-2" id="licencia-inicio"></p>
                     <p class="small mb-2" id="licencia-carnaval"></p>
-                    <p class="small mb-2">Régimen docente: Decreto N.º 1482/79, arts. 3 inc. a), 4 y 5. El receso funcional escolar no equivale a la licencia anual ordinaria.</p>
-                    <p class="small mb-0"><strong>Administración pública:</strong> se rige por la Ley Provincial N.º 4067 (arts. 88 al 94) y el Decreto N.º 4340/86. Es un régimen distinto; la escala de días no se detalla aquí. <a class="text-success text-decoration-none" href="normas.html">Consultar normas</a>.</p>
+                    <p class="small mb-2">Régimen docente: Decreto N.º 1482/79, arts. 3 inc. a), 4 y 5. El receso
+                        funcional escolar no equivale a la licencia anual ordinaria.</p>
+                    <p class="small mb-0"><strong>Administración pública:</strong> se rige por la Ley Provincial N.º
+                        4067 (arts. 88 al 94) y el Decreto N.º 4340/86. Es un régimen distinto; la escala de días no se
+                        detalla aquí. <a class="text-success text-decoration-none" href="normas.html">Consultar
+                            normas</a>.</p>
+                    <aside class="carousel-context carousel-context-always mt-3">
+                        <p>La duración depende del cargo y la antigüedad computada al 31 de diciembre del año anterior. Confirmá las fechas con la normativa y las comunicaciones oficiales vigentes.</p>
+                    </aside>
                 </div>
             </div>
             <div class="carousel-item">
@@ -485,7 +566,8 @@
                         </div>
                     </div>
                     <aside class="carousel-context">
-                        <p>DA Corrientes es un espacio independiente y autoconvocado que trabaja por la educación y los derechos de docentes y estudiantes.</p>
+                        <p>DA Corrientes es un espacio independiente y autoconvocado que trabaja por la educación y los
+                            derechos de docentes y estudiantes.</p>
                     </aside>
                 </div>
             </div>
@@ -516,7 +598,8 @@
                         </div>
                     </div>
                     <aside class="carousel-context">
-                        <p>El simulador sirve para revisar la liquidación mensual y estimar los haberes que corresponden según los datos ingresados.</p>
+                        <p>El simulador sirve para revisar la liquidación mensual y estimar los haberes que corresponden
+                            según los datos ingresados.</p>
                     </aside>
                 </div>
             </div>
@@ -547,7 +630,8 @@
                         </div>
                     </div>
                     <aside class="carousel-context">
-                        <p>La sección reúne normas, documentación y modelos de notas para consultar referencias sobre derechos y obligaciones laborales.</p>
+                        <p>La sección reúne normas, documentación y modelos de notas para consultar referencias sobre
+                            derechos y obligaciones laborales.</p>
                     </aside>
                 </div>
             </div>
@@ -576,7 +660,8 @@
                         </div>
                     </div>
                     <aside class="carousel-context">
-                        <p>Los gráficos presentan datos salariales como referencia para analizar su evolución y acompañar los reclamos con información.</p>
+                        <p>Los gráficos presentan datos salariales como referencia para analizar su evolución y
+                            acompañar los reclamos con información.</p>
                     </aside>
                 </div>
             </div>
@@ -609,13 +694,14 @@
                         </div>
                     </div>
                     <aside class="carousel-context">
-                        <p>Las contribuciones voluntarias ayudan a sostener las iniciativas y proyectos que impulsa el espacio.</p>
+                        <p>Las contribuciones voluntarias ayudan a sostener las iniciativas y proyectos que impulsa el
+                            espacio.</p>
                     </aside>
                 </div>
             </div>
         </div>
-        <button type="button" class="carousel-pause-toggle" aria-label="Pausar carrusel"
-            aria-pressed="false" title="Pausar carrusel">
+        <button type="button" class="carousel-pause-toggle" aria-label="Pausar carrusel" aria-pressed="false"
+            title="Pausar carrusel">
             <svg viewBox="0 0 32 40" aria-hidden="true" focusable="false">
                 <path class="pause-icon" d="M11 8v24M21 8v24"></path>
                 <path class="play-icon" d="M10 8l16 12-16 12z"></path>
@@ -675,7 +761,9 @@
     <!-- End Featured Product -->
 
     <!-- Notificaciones -->
-    <section id="avisoNotificaciones" class="position-fixed top-50 start-50 translate-middle bg-white border rounded shadow p-3 text-center" style="z-index: 1080; width: min(92vw, 420px);" aria-labelledby="tituloNotificaciones" hidden>
+    <section id="avisoNotificaciones"
+        class="position-fixed top-50 start-50 translate-middle bg-white border rounded shadow p-3 text-center"
+        style="z-index: 1080; width: min(92vw, 420px);" aria-labelledby="tituloNotificaciones" hidden>
         <h2 id="tituloNotificaciones" class="h5">¿Querés permitir notificaciones de DAC 2019?</h2>
         <button id="btnNotificaciones" class="btn btn-success rounded-pill px-4">
             <i class="fa-solid fa-bell me-2"></i> Permitir
@@ -804,112 +892,111 @@
         });
     </script>
     <script>
-            const anioLicenciaManual = null;
-            const anioLicencia = anioLicenciaManual ?? new Date().getFullYear() + 1;
-            const licenciaTramos = [
-                { cargo: 'Personal docente superior (desde supervisor inclusive)', antiguedad: 'Todos los tramos', dias: 45 },
-                { cargo: 'Directivos y docentes', antiguedad: 'Hasta 5 años', dias: 20 },
-                { cargo: 'Directivos y docentes', antiguedad: 'Más de 5 y hasta 10 años', dias: 25 },
-                { cargo: 'Directivos y docentes', antiguedad: 'Más de 10 y hasta 15 años', dias: 30 },
-                { cargo: 'Directivos y docentes', antiguedad: 'Más de 15 años', dias: 35 }
-            ];
+        const anioLicenciaManual = null;
+        const anioLicencia = anioLicenciaManual ?? new Date().getFullYear() + 1;
+        const licenciaTramos = [
+            { cargo: 'Personal docente superior (desde supervisor inclusive)', antiguedad: 'Todos los tramos', dias: 45 },
+            { cargo: 'Directivos y docentes', antiguedad: 'Hasta 5 años', dias: 20 },
+            { cargo: 'Directivos y docentes', antiguedad: 'Más de 5 y hasta 10 años', dias: 25 },
+            { cargo: 'Directivos y docentes', antiguedad: 'Más de 10 y hasta 15 años', dias: 30 },
+            { cargo: 'Directivos y docentes', antiguedad: 'Más de 15 años', dias: 35 }
+        ];
 
-            function obtenerPrimerDiaHabil(anio) {
-                const fecha = new Date(Date.UTC(anio, 0, 1));
-                while (fecha.getUTCDay() === 0 || fecha.getUTCDay() === 6 || fecha.getUTCDate() === 1) {
-                    fecha.setUTCDate(fecha.getUTCDate() + 1);
-                }
-                return fecha;
+        function obtenerPrimerDiaHabil(anio) {
+            const fecha = new Date(Date.UTC(anio, 0, 1));
+            while (fecha.getUTCDay() === 0 || fecha.getUTCDay() === 6 || fecha.getUTCDate() === 1) {
+                fecha.setUTCDate(fecha.getUTCDate() + 1);
             }
+            return fecha;
+        }
 
-            function sumarDias(fecha, dias) {
-                const resultado = new Date(fecha);
-                resultado.setUTCDate(resultado.getUTCDate() + dias);
-                return resultado;
+        function sumarDias(fecha, dias) {
+            const resultado = new Date(fecha);
+            resultado.setUTCDate(resultado.getUTCDate() + dias);
+            return resultado;
+        }
+
+        function formatearFecha(fecha, incluirDiaSemana = false) {
+            const opciones = incluirDiaSemana
+                ? { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }
+                : { day: 'numeric', month: 'long', timeZone: 'UTC' };
+            const texto = new Intl.DateTimeFormat('es-AR', opciones).format(fecha);
+            return texto.charAt(0).toLocaleUpperCase('es-AR') + texto.slice(1);
+        }
+
+        function formatearPeriodo(inicio, fin) {
+            const mesInicio = new Intl.DateTimeFormat('es-AR', { month: 'long', timeZone: 'UTC' }).format(inicio);
+            const mesFin = new Intl.DateTimeFormat('es-AR', { month: 'long', timeZone: 'UTC' }).format(fin);
+            if (inicio.getUTCMonth() === fin.getUTCMonth()) {
+                return `${inicio.getUTCDate()} al ${fin.getUTCDate()} de ${mesFin}`;
             }
+            return `${inicio.getUTCDate()} de ${mesInicio} al ${fin.getUTCDate()} de ${mesFin}`;
+        }
 
-            function formatearFecha(fecha, incluirDiaSemana = false) {
-                const opciones = incluirDiaSemana
-                    ? { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }
-                    : { day: 'numeric', month: 'long', timeZone: 'UTC' };
-                const texto = new Intl.DateTimeFormat('es-AR', opciones).format(fecha);
-                return texto.charAt(0).toLocaleUpperCase('es-AR') + texto.slice(1);
-            }
+        function obtenerDomingoPascua(anio) {
+            const a = anio % 19;
+            const b = Math.floor(anio / 100);
+            const c = anio % 100;
+            const d = Math.floor(b / 4);
+            const e = b % 4;
+            const f = Math.floor((b + 8) / 25);
+            const g = Math.floor((b - f + 1) / 3);
+            const h = (19 * a + b - d - g + 15) % 30;
+            const i = Math.floor(c / 4);
+            const k = c % 4;
+            const l = (32 + 2 * e + 2 * i - h - k) % 7;
+            const m = Math.floor((a + 11 * h + 22 * l) / 451);
+            const mes = Math.floor((h + l - 7 * m + 114) / 31);
+            const dia = ((h + l - 7 * m + 114) % 31) + 1;
+            return new Date(Date.UTC(anio, mes - 1, dia));
+        }
 
-            function formatearPeriodo(inicio, fin) {
-                const mesInicio = new Intl.DateTimeFormat('es-AR', { month: 'long', timeZone: 'UTC' }).format(inicio);
-                const mesFin = new Intl.DateTimeFormat('es-AR', { month: 'long', timeZone: 'UTC' }).format(fin);
-                if (inicio.getUTCMonth() === fin.getUTCMonth()) {
-                    return `${inicio.getUTCDate()} al ${fin.getUTCDate()} de ${mesFin}`;
-                }
-                return `${inicio.getUTCDate()} de ${mesInicio} al ${fin.getUTCDate()} de ${mesFin}`;
-            }
+        function actualizarLicenciaAnual() {
+            const anio = anioLicencia;
+            const inicio = obtenerPrimerDiaHabil(anio);
+            const cuerpo = document.getElementById('licencia-tabla');
+            const supervisorFin = sumarDias(inicio, 44);
 
-            function obtenerDomingoPascua(anio) {
-                const a = anio % 19;
-                const b = Math.floor(anio / 100);
-                const c = anio % 100;
-                const d = Math.floor(b / 4);
-                const e = b % 4;
-                const f = Math.floor((b + 8) / 25);
-                const g = Math.floor((b - f + 1) / 3);
-                const h = (19 * a + b - d - g + 15) % 30;
-                const i = Math.floor(c / 4);
-                const k = c % 4;
-                const l = (32 + 2 * e + 2 * i - h - k) % 7;
-                const m = Math.floor((a + 11 * h + 22 * l) / 451);
-                const mes = Math.floor((h + l - 7 * m + 114) / 31);
-                const dia = ((h + l - 7 * m + 114) % 31) + 1;
-                return new Date(Date.UTC(anio, mes - 1, dia));
-            }
+            document.getElementById('licencia-titulo').textContent = `Licencia anual ordinaria docente · ${anio}`;
+            document.getElementById('licencia-antiguedad').textContent =
+                `Duración según cargo y antigüedad computada al 31 de diciembre de ${anio - 1}.`;
+            document.getElementById('licencia-caption').textContent =
+                `Duración y período de la licencia anual ordinaria docente en ${anio}`;
+            document.getElementById('licencia-inicio').textContent =
+                `Inicio: ${formatearFecha(inicio, true)}, primer día hábil de enero. Se cuentan días corridos, incluidos sábados, domingos, feriados y asuetos; no se agregan días por ellos. Fecha calculada según fines de semana y el feriado del 1 de enero; verificar feriados o asuetos adicionales dispuestos para cada año.`;
 
-            function actualizarLicenciaAnual() {
-                const anio = anioLicencia;
-                const inicio = obtenerPrimerDiaHabil(anio);
-                const cuerpo = document.getElementById('licencia-tabla');
-                const supervisorFin = sumarDias(inicio, 44);
+            cuerpo.replaceChildren();
+            licenciaTramos.forEach(({ cargo, antiguedad, dias }) => {
+                const fin = sumarDias(inicio, dias - 1);
+                const fila = document.createElement('tr');
+                const cargoCelda = document.createElement('th');
+                cargoCelda.scope = 'row';
+                cargoCelda.textContent = cargo;
+                fila.append(cargoCelda);
 
-                document.getElementById('licencia-titulo').textContent = `Licencia anual ordinaria docente · ${anio}`;
-                document.getElementById('licencia-antiguedad').textContent =
-                    `Duración según cargo y antigüedad computada al 31 de diciembre de ${anio - 1}.`;
-                document.getElementById('licencia-caption').textContent =
-                    `Duración y período de la licencia anual ordinaria docente en ${anio}`;
-                document.getElementById('licencia-inicio').textContent =
-                    `Inicio: ${formatearFecha(inicio, true)}, primer día hábil de enero. Se cuentan días corridos, incluidos sábados, domingos, feriados y asuetos; no se agregan días por ellos. Fecha calculada según fines de semana y el feriado del 1 de enero; verificar feriados o asuetos adicionales dispuestos para cada año.`;
-
-                cuerpo.replaceChildren();
-                licenciaTramos.forEach(({ cargo, antiguedad, dias }) => {
-                    const fin = sumarDias(inicio, dias - 1);
-                    const fila = document.createElement('tr');
-                    const cargoCelda = document.createElement('th');
-                    cargoCelda.scope = 'row';
-                    cargoCelda.textContent = cargo;
-                    fila.append(cargoCelda);
-
-                    [antiguedad, String(dias), formatearPeriodo(inicio, fin)].forEach(texto => {
-                        const celda = document.createElement('td');
-                        celda.textContent = texto;
-                        fila.append(celda);
-                    });
-                    cuerpo.append(fila);
+                [antiguedad, String(dias), formatearPeriodo(inicio, fin)].forEach(texto => {
+                    const celda = document.createElement('td');
+                    celda.textContent = texto;
+                    fila.append(celda);
                 });
+                cuerpo.append(fila);
+            });
 
-                const domingoPascua = obtenerDomingoPascua(anio);
-                const carnavalLunes = sumarDias(domingoPascua, -48);
-                const carnavalMartes = sumarDias(domingoPascua, -47);
-                const carnavalDentroLicencia = carnavalLunes <= supervisorFin && carnavalMartes >= inicio;
-                document.getElementById('licencia-carnaval').textContent =
-                    `Carnaval: lunes ${formatearFecha(carnavalLunes)} y martes ${formatearFecha(carnavalMartes)}; ${
-                        carnavalDentroLicencia
-                            ? 'queda comprendido en el período de 45 días de supervisores, sin extensión de la licencia.'
-                            : 'no coincide con el período de 45 días de supervisores.'
-                    }`;
-            }
+            const domingoPascua = obtenerDomingoPascua(anio);
+            const carnavalLunes = sumarDias(domingoPascua, -48);
+            const carnavalMartes = sumarDias(domingoPascua, -47);
+            const carnavalDentroLicencia = carnavalLunes <= supervisorFin && carnavalMartes >= inicio;
+            document.getElementById('licencia-carnaval').textContent =
+                `Carnaval: lunes ${formatearFecha(carnavalLunes)} y martes ${formatearFecha(carnavalMartes)}; ${carnavalDentroLicencia
+                    ? 'queda comprendido en el período de 45 días de supervisores, sin extensión de la licencia.'
+                    : 'no coincide con el período de 45 días de supervisores.'
+                }`;
+        }
 
-            actualizarLicenciaAnual();
+        actualizarLicenciaAnual();
     </script>
     <script>
-            function actualizarReloj() {
+        function actualizarReloj() {
             const fechaActual = new Date();
             const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
@@ -1010,6 +1097,35 @@
             }
         }
 
+        function ajustarAlturaCarrusel() {
+            const items = document.querySelectorAll('#template-mo-zay-hero-carousel .carousel-inner .carousel-item');
+            items.forEach(item => {
+                item.style.height = '';
+            });
+
+            let alturaMaxima = 0;
+            items.forEach(item => {
+                item.classList.add('carousel-item-measuring');
+                alturaMaxima = Math.max(alturaMaxima, item.scrollHeight);
+                item.classList.remove('carousel-item-measuring');
+            });
+
+            items.forEach(item => {
+                item.style.height = `${alturaMaxima}px`;
+            });
+        }
+
+        let ajusteAlturaPendiente = false;
+        window.addEventListener('resize', () => {
+            if (ajusteAlturaPendiente) return;
+            ajusteAlturaPendiente = true;
+            window.requestAnimationFrame(() => {
+                ajustarAlturaCarrusel();
+                ajusteAlturaPendiente = false;
+            });
+        });
+        window.addEventListener('load', ajustarAlturaCarrusel, { once: true });
+
         async function cargarCronograma() {
             try {
                 const response = await fetch('cronograma.json');
@@ -1036,6 +1152,7 @@
                     indicators.appendChild(indicator);
                 });
 
+                ajustarAlturaCarrusel();
             } catch (error) {
                 console.error('Error cargando cronograma:', error);
             }
@@ -1209,6 +1326,45 @@
             },
             retina_detect: true
         });
+    </script>
+    <script type="module">
+        import { formatNumero, obtenerValores } from './scriptSimulador/dataSalario.js';
+
+        const hoy = new Date();
+        const aumentosRemunerativos = obtenerValores(hoy.getFullYear(), hoy.getMonth() + 1, 'g');
+        const aumentosNoRemunerativos = obtenerValores(hoy.getFullYear(), hoy.getMonth() + 1, 'n');
+
+        function obtenerMontoCodigo(codigo, tipo, elementoId) {
+            const elemento = document.getElementById(elementoId);
+            if (!elemento) {
+                throw new Error(`No se encontró el elemento ${elementoId}`);
+            }
+
+            const aumentos = tipo === 'g' ? aumentosRemunerativos : aumentosNoRemunerativos;
+            const aumento = aumentos.find(item => item.name.startsWith(`${codigo} `));
+            if (!aumento) {
+                elemento.textContent = 'Monto no disponible';
+                console.error(`No se encontró el monto de tipo ${tipo} del código ${codigo} en dataSalario.js`);
+                return;
+            }
+
+            return aumento.valor;
+        }
+
+        function mostrarMontoBrutoNeto(codigo, tipo, elementoId) {
+            const monto = obtenerMontoCodigo(codigo, tipo, elementoId);
+            if (monto === undefined) return;
+
+            const elemento = document.getElementById(elementoId);
+            const neto = tipo === 'g' ? monto * 0.75 : monto;
+            elemento.textContent = `${formatNumero(monto, '$')} bruto / ${formatNumero(neto, '$')} neto`;
+        }
+
+        mostrarMontoBrutoNeto('603', 'g', 'monto-plus-unificado');
+        mostrarMontoBrutoNeto('625', 'g', 'monto-plus-refuerzo');
+        mostrarMontoBrutoNeto('193', 'g', 'monto-codigo-193');
+        mostrarMontoBrutoNeto('632', 'g', 'monto-codigo-632');
+        mostrarMontoBrutoNeto('171', 'n', 'monto-codigo-171');
     </script>
     <!-- End Script -->
 </body>

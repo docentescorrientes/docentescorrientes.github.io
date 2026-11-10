@@ -4,7 +4,7 @@
     "mes": "11",
     "cronogramas": [
         {
-            "titulo": "Cód. 603 - Plus Unificado ($110 mil)",
+            "titulo": "Cód. 603 - Plus Unificado",
             "tipo": "plus unificado",
             "activo":true,
             "dias": [
@@ -41,9 +41,9 @@
             ]
         },
         {
-            "titulo": "Cód. 625 - Plus de Refuerzo ($100 mil)",
+            "titulo": "Cód. 625 - Plus de Refuerzo",
             "tipo": "plus refuerzo",
-            "activo": false,
+            "activo": true,
             "dias": [
                 {
                     "dia": "1°",
@@ -80,7 +80,7 @@
         {
             "titulo": "Salario Real (sin pluses)",
             "tipo": "sueldo",
-            "activo": false,
+            "activo": true,
             "dias": [
                 {
                     "dia": "1°",
@@ -121,7 +121,7 @@
     "mes": "12",
     "cronogramas": [
         {
-            "titulo": "Cód. 603 - Plus Unificado ($110 mil)",
+            "titulo": "Cód. 603 - Plus Unificado",
             "tipo": "plus unificado",
             "activo": false,
             "dias": [

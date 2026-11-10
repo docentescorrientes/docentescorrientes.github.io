@@ -36,7 +36,7 @@ aumentos.agregarAumento("1 Básico", 2025, 3, 20000, "b");
 aumentos.agregarAumento("1 Básico", 2025, 8, 22000, "b");
 aumentos.agregarAumento("1 Básico", 2026, 3, 12000, "b");
 aumentos.agregarAumento("1 Básico", 2026, 6, 22000, "b");
-aumentos.agregarAumento("1 Básico", 2026, 11, 25700, "b");
+//aumentos.agregarAumento("1 Básico", 2026, 11, 25700, "b");
 
 // Grises: (Neto * 4/3)
 aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)", 2023, 4, 33500 * 4 / 3, "g"); // Tope: hasta dos cargos 11/03/25 se modificó, antes 1 cargo
@@ -45,12 +45,12 @@ aumentos.agregarAumento("193 Adicional Remunerativo Docente C/A (en dos cargos)"
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 7, 47000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2024, 8, 8000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2025, 7, 55000 * 4 / 3, "g"); // Tope: hasta un cargo
-aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2026, 11, 90000 * 4 / 3, "g"); // Tope: hasta un cargo
+//aumentos.agregarAumento("603 Plus Unificado Remunerativo (solo un cargo)", 2026, 11, 90000 * 4 / 3, "g"); // Tope: hasta un cargo
 
 aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2024, 7, 42000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2024, 8, 8000 * 4 / 3, "g"); // Tope: hasta un cargo
 aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2025, 7, 50000 * 4 / 3, "g"); // Tope: hasta un cargo
-aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2026, 11, 100000 * 4 / 3, "g"); // Tope: hasta un cargo
+//aumentos.agregarAumento("625 Plus de Refuerzo Remunerativo (solo un cargo)", 2026, 11, 100000 * 4 / 3, "g"); // Tope: hasta un cargo
 
 aumentos.agregarAumento("629 Adicional Remunerativo 2° Cargo (solo en el 2° cargo)", 2023, 9, 10000 * 4 / 3, "g"); // ## Tope: hasta un cargo en el segundo
 

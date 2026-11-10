@@ -85,6 +85,16 @@
             padding: 12px;
         }
 
+        #template-mo-zay-hero-carousel .carousel-item.carousel-item-measuring {
+            display: block !important;
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            visibility: hidden !important;
+            transform: none !important;
+        }
+
         .payment-banner .payment-date-current {
             position: relative;
             z-index: 1;
@@ -752,7 +762,40 @@
         const heroCarouselElement = document.getElementById('template-mo-zay-hero-carousel');
         const heroCarousel = new bootstrap.Carousel(heroCarouselElement, { ride: false, pause: false });
         const carouselPauseButton = heroCarouselElement.querySelector('.carousel-pause-toggle');
+        const carouselInner = heroCarouselElement.querySelector('.carousel-inner');
         let carouselPaused = false;
+
+        function ajustarAlturaCarrusel() {
+            const items = carouselInner.querySelectorAll('.carousel-item');
+            let alturaMaxima = 0;
+
+            items.forEach(item => {
+                item.classList.add('carousel-item-measuring');
+                alturaMaxima = Math.max(alturaMaxima, item.getBoundingClientRect().height);
+                item.classList.remove('carousel-item-measuring');
+            });
+
+            carouselInner.style.minHeight = `${alturaMaxima}px`;
+        }
+
+        let ajusteAlturaPendiente = false;
+        function programarAjusteAlturaCarrusel() {
+            if (ajusteAlturaPendiente) return;
+            ajusteAlturaPendiente = true;
+            requestAnimationFrame(() => {
+                ajusteAlturaPendiente = false;
+                ajustarAlturaCarrusel();
+            });
+        }
+
+        ajustarAlturaCarrusel();
+        window.addEventListener('resize', programarAjusteAlturaCarrusel);
+        carouselInner.addEventListener('slid.bs.carousel', programarAjusteAlturaCarrusel);
+        new MutationObserver(programarAjusteAlturaCarrusel).observe(carouselInner, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
 
         heroCarousel.cycle();
         carouselPauseButton.addEventListener('click', () => {
@@ -769,7 +812,8 @@
         });
     </script>
     <script>
-            const anioLicencia = new Date().getFullYear() + 1;
+            const anioLicenciaManual = null;
+            const anioLicencia = anioLicenciaManual ?? new Date().getFullYear() + 1;
             const licenciaTramos = [
                 { cargo: 'Personal docente superior (desde supervisor inclusive)', antiguedad: 'Todos los tramos', dias: 45 },
                 { cargo: 'Directivos y docentes', antiguedad: 'Hasta 5 años', dias: 20 },

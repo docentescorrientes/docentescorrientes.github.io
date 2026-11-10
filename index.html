@@ -99,6 +99,19 @@
             font-weight: 700;
         }
 
+        .licencia-anual .table-responsive {
+            padding: 0.25rem 0;
+        }
+
+        .licencia-anual table {
+            min-width: 700px;
+        }
+
+        .licencia-anual th,
+        .licencia-anual td {
+            padding: 0.45rem 0.6rem;
+        }
+
         #particles-js {
             position: fixed;
             inset: 0;
@@ -399,6 +412,32 @@
                         </p>
                         <p class="small mb-0"><a href="simulador.html" class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">Simulador salarial</a> · <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-3-5-31" class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">IPC INDEC</a> · <a href="https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-149" class="text-success text-decoration-none" target="_blank" rel="noopener noreferrer">CBT INDEC</a></p>
                     </div>
+                </div>
+            </div>
+            <div class="carousel-item licencia-anual" data-bs-interval="15000">
+                <div class="container py-4 px-4 px-lg-5">
+                    <h2 class="h2 text-success mb-1" id="licencia-titulo">Licencia anual ordinaria docente</h2>
+                    <div class="mb-3">
+                        <p class="mb-0 mt-2" id="licencia-antiguedad"></p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered table-striped text-center align-middle mb-2">
+                            <caption class="visually-hidden" id="licencia-caption"></caption>
+                            <thead class="table-success">
+                                <tr>
+                                    <th scope="col">Cargo</th>
+                                    <th scope="col">Antigüedad</th>
+                                    <th scope="col">Días corridos</th>
+                                    <th scope="col">Período</th>
+                                </tr>
+                            </thead>
+                            <tbody id="licencia-tabla"></tbody>
+                        </table>
+                    </div>
+                    <p class="small mb-2" id="licencia-inicio"></p>
+                    <p class="small mb-2" id="licencia-carnaval"></p>
+                    <p class="small mb-2">Régimen docente: Decreto N.º 1482/79, arts. 3 inc. a), 4 y 5. El receso funcional escolar no equivale a la licencia anual ordinaria.</p>
+                    <p class="small mb-0"><strong>Administración pública:</strong> se rige por la Ley Provincial N.º 4067 (arts. 88 al 94) y el Decreto N.º 4340/86. Es un régimen distinto; la escala de días no se detalla aquí. <a class="text-success text-decoration-none" href="normas.html">Consultar normas</a>.</p>
                 </div>
             </div>
             <div class="carousel-item">
@@ -730,7 +769,111 @@
         });
     </script>
     <script>
-        function actualizarReloj() {
+            const anioLicencia = new Date().getFullYear() + 1;
+            const licenciaTramos = [
+                { cargo: 'Personal docente superior (desde supervisor inclusive)', antiguedad: 'Todos los tramos', dias: 45 },
+                { cargo: 'Directivos y docentes', antiguedad: 'Hasta 5 años', dias: 20 },
+                { cargo: 'Directivos y docentes', antiguedad: 'Más de 5 y hasta 10 años', dias: 25 },
+                { cargo: 'Directivos y docentes', antiguedad: 'Más de 10 y hasta 15 años', dias: 30 },
+                { cargo: 'Directivos y docentes', antiguedad: 'Más de 15 años', dias: 35 }
+            ];
+
+            function obtenerPrimerDiaHabil(anio) {
+                const fecha = new Date(Date.UTC(anio, 0, 1));
+                while (fecha.getUTCDay() === 0 || fecha.getUTCDay() === 6 || fecha.getUTCDate() === 1) {
+                    fecha.setUTCDate(fecha.getUTCDate() + 1);
+                }
+                return fecha;
+            }
+
+            function sumarDias(fecha, dias) {
+                const resultado = new Date(fecha);
+                resultado.setUTCDate(resultado.getUTCDate() + dias);
+                return resultado;
+            }
+
+            function formatearFecha(fecha, incluirDiaSemana = false) {
+                const opciones = incluirDiaSemana
+                    ? { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }
+                    : { day: 'numeric', month: 'long', timeZone: 'UTC' };
+                const texto = new Intl.DateTimeFormat('es-AR', opciones).format(fecha);
+                return texto.charAt(0).toLocaleUpperCase('es-AR') + texto.slice(1);
+            }
+
+            function formatearPeriodo(inicio, fin) {
+                const mesInicio = new Intl.DateTimeFormat('es-AR', { month: 'long', timeZone: 'UTC' }).format(inicio);
+                const mesFin = new Intl.DateTimeFormat('es-AR', { month: 'long', timeZone: 'UTC' }).format(fin);
+                if (inicio.getUTCMonth() === fin.getUTCMonth()) {
+                    return `${inicio.getUTCDate()} al ${fin.getUTCDate()} de ${mesFin}`;
+                }
+                return `${inicio.getUTCDate()} de ${mesInicio} al ${fin.getUTCDate()} de ${mesFin}`;
+            }
+
+            function obtenerDomingoPascua(anio) {
+                const a = anio % 19;
+                const b = Math.floor(anio / 100);
+                const c = anio % 100;
+                const d = Math.floor(b / 4);
+                const e = b % 4;
+                const f = Math.floor((b + 8) / 25);
+                const g = Math.floor((b - f + 1) / 3);
+                const h = (19 * a + b - d - g + 15) % 30;
+                const i = Math.floor(c / 4);
+                const k = c % 4;
+                const l = (32 + 2 * e + 2 * i - h - k) % 7;
+                const m = Math.floor((a + 11 * h + 22 * l) / 451);
+                const mes = Math.floor((h + l - 7 * m + 114) / 31);
+                const dia = ((h + l - 7 * m + 114) % 31) + 1;
+                return new Date(Date.UTC(anio, mes - 1, dia));
+            }
+
+            function actualizarLicenciaAnual() {
+                const anio = anioLicencia;
+                const inicio = obtenerPrimerDiaHabil(anio);
+                const cuerpo = document.getElementById('licencia-tabla');
+                const supervisorFin = sumarDias(inicio, 44);
+
+                document.getElementById('licencia-titulo').textContent = `Licencia anual ordinaria docente · ${anio}`;
+                document.getElementById('licencia-antiguedad').textContent =
+                    `Duración según cargo y antigüedad computada al 31 de diciembre de ${anio - 1}.`;
+                document.getElementById('licencia-caption').textContent =
+                    `Duración y período de la licencia anual ordinaria docente en ${anio}`;
+                document.getElementById('licencia-inicio').textContent =
+                    `Inicio: ${formatearFecha(inicio, true)}, primer día hábil de enero. Se cuentan días corridos, incluidos sábados, domingos, feriados y asuetos; no se agregan días por ellos. Fecha calculada según fines de semana y el feriado del 1 de enero; verificar feriados o asuetos adicionales dispuestos para cada año.`;
+
+                cuerpo.replaceChildren();
+                licenciaTramos.forEach(({ cargo, antiguedad, dias }) => {
+                    const fin = sumarDias(inicio, dias - 1);
+                    const fila = document.createElement('tr');
+                    const cargoCelda = document.createElement('th');
+                    cargoCelda.scope = 'row';
+                    cargoCelda.textContent = cargo;
+                    fila.append(cargoCelda);
+
+                    [antiguedad, String(dias), formatearPeriodo(inicio, fin)].forEach(texto => {
+                        const celda = document.createElement('td');
+                        celda.textContent = texto;
+                        fila.append(celda);
+                    });
+                    cuerpo.append(fila);
+                });
+
+                const domingoPascua = obtenerDomingoPascua(anio);
+                const carnavalLunes = sumarDias(domingoPascua, -48);
+                const carnavalMartes = sumarDias(domingoPascua, -47);
+                const carnavalDentroLicencia = carnavalLunes <= supervisorFin && carnavalMartes >= inicio;
+                document.getElementById('licencia-carnaval').textContent =
+                    `Carnaval: lunes ${formatearFecha(carnavalLunes)} y martes ${formatearFecha(carnavalMartes)}; ${
+                        carnavalDentroLicencia
+                            ? 'queda comprendido en el período de 45 días de supervisores, sin extensión de la licencia.'
+                            : 'no coincide con el período de 45 días de supervisores.'
+                    }`;
+            }
+
+            actualizarLicenciaAnual();
+    </script>
+    <script>
+            function actualizarReloj() {
             const fechaActual = new Date();
             const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);

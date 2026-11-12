@@ -1,0 +1,46 @@
+name: Actualizar vista previa del cronograma
+
+on:
+  push:
+    paths:
+      - "cronograma.json"
+      - "scripts/generate_social_preview.py"
+      - "image/logo.png"
+      - ".github/workflows/actualizar-vista-cronograma.yml"
+  schedule:
+    - cron: "5 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Instalar Pillow
+        run: python -m pip install Pillow
+
+      - name: Generar imagen del cronograma
+        run: python scripts/generate_social_preview.py
+
+      - name: Guardar imagen actualizada
+        run: |
+          if git diff --quiet -- assets/img/cronograma-social.png; then
+            echo "La imagen ya está actualizada."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/img/cronograma-social.png
+          git commit -m "Actualizar vista previa del cronograma"
+          git push

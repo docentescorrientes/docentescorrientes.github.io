@@ -80,7 +80,7 @@
         {
             "titulo": "Salario Real (sin pluses)",
             "tipo": "sueldo",
-            "activo": true,
+            "activo": false,
             "dias": [
                 {
                     "dia": "1°",

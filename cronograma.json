@@ -43,7 +43,7 @@
         {
             "titulo": "Cód. 625 - Plus de Refuerzo",
             "tipo": "plus refuerzo",
-            "activo": false,
+            "activo": true,
             "dias": [
                 {
                     "dia": "1°",

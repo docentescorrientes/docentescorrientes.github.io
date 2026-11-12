@@ -1,3 +1,4 @@
+import hashlib
 import json
 from datetime import date
 from pathlib import Path
@@ -8,6 +9,8 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "cronograma.json"
 OUTPUT = ROOT / "assets" / "img" / "cronograma-social.png"
+INDEX = ROOT / "index.html"
+SOCIAL_IMAGE_URL = "https://dacorrientes.com.ar/assets/img/cronograma-social.png"
 LOGO = ROOT / "image" / "logo.png"
 MONTHS = (
     "enero", "febrero", "marzo", "abril", "mayo", "junio",
@@ -63,6 +66,21 @@ def format_full_date(year, month, day):
         f"{weekdays[payment_date.weekday()].capitalize()} "
         f"{payment_date.day} de {MONTHS[payment_date.month - 1]} de {payment_date.year}"
     )
+
+
+def update_social_image_url(version):
+    content = INDEX.read_text(encoding="utf-8")
+    marker = '<meta property="og:image" content="'
+    start = content.index(marker) + len(marker)
+    end = content.index('"', start)
+    image_url = content[start:end].split("?", 1)[0]
+    if image_url != SOCIAL_IMAGE_URL:
+        raise ValueError(f"Unexpected social image URL: {image_url}")
+
+    versioned_url = f"{SOCIAL_IMAGE_URL}?v={version}"
+    updated_content = content[:start] + versioned_url + content[end:]
+    if updated_content != content:
+        INDEX.write_text(updated_content, encoding="utf-8")
 
 
 def main():
@@ -176,6 +194,8 @@ def main():
         fill="#59675d",
     )
     image.save(OUTPUT, format="PNG", optimize=True)
+    version = hashlib.sha256(OUTPUT.read_bytes()).hexdigest()[:12]
+    update_social_image_url(version)
     print(f"Imagen generada: {OUTPUT}")
 
 

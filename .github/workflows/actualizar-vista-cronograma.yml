@@ -34,13 +34,13 @@ jobs:
 
       - name: Guardar imagen actualizada
         run: |
-          if git diff --quiet -- assets/img/cronograma-social.png; then
+          if git diff --quiet -- assets/img/cronograma-social.png index.html; then
             echo "La imagen ya está actualizada."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/img/cronograma-social.png
+          git add assets/img/cronograma-social.png index.html
           git commit -m "Actualizar vista previa del cronograma"
           git push

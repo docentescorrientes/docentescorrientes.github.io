@@ -1132,7 +1132,7 @@
 
         async function cargarCronograma() {
             try {
-                const response = await fetch('cronograma.json');
+                const response = await fetch('cronograma.json', { cache: 'no-store' });
                 if (!response.ok) throw new Error('No se pudo cargar el cronograma');
                 const arrayData = await response.json();
 

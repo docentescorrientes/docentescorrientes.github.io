@@ -24,6 +24,58 @@
             background-color: #ffffff;
             z-index: -1;
         }
+
+        .cue-detail-panel {
+            padding: 1.25rem;
+            border: 1px solid #e6edf5;
+            border-radius: 0 0 1rem 1rem;
+            background: linear-gradient(145deg, #f8fbff 0%, #f3f6fb 100%);
+        }
+
+        .cue-detail-heading {
+            color: #23395d;
+        }
+
+        .cue-detail-item {
+            height: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid #e8edf4;
+            border-radius: 0.75rem;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(35, 57, 93, 0.04);
+        }
+
+        .cue-detail-item-label {
+            margin-bottom: 0.25rem;
+            color: #718096;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.045em;
+            text-transform: uppercase;
+        }
+
+        .cue-detail-item-value {
+            color: #25344a;
+            font-size: 0.95rem;
+        }
+
+        .cue-detail-toggle {
+            white-space: nowrap;
+        }
+
+        .cue-detail-toggle .fa-chevron-down {
+            transition: transform 0.2s ease;
+        }
+
+        .cue-detail-toggle[aria-expanded="true"] .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 575.98px) {
+            .cue-detail-panel {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 
@@ -387,27 +439,19 @@
                             const sector = escapeHtml(row["Sector"] || "");
                             const ambito = escapeHtml(row["Ámbito"] || "");
                             const nivelTexto = escapeHtml(getNivel(row));
-                            const codigoPostal = escapeHtml(row["Código Postal"] || "");
-                            const telefono = escapeHtml(row["Teléfono"] || "");
-                            const mail = escapeHtml(row["Mail"] || "");
                             const modalidad = escapeHtml(row["Modalidad"] || "");
                             const detailId = `cue-detail-${Math.random().toString(36).slice(2, 10)}`;
-                            const ubicacion = [
-                                domicilio,
-                                localidad && `localidad ${localidad}`,
-                                departamento && `departamento ${departamento}`
-                            ].filter(Boolean).join(", ");
-                            const descripcion = [
-                                nombre && ubicacion && `El establecimiento ${nombre} está ubicado en ${ubicacion}.`,
-                                sector && `Es de gestión ${sector.toLowerCase()}.`,
-                                ambito && `Se encuentra en ámbito ${ambito.toLowerCase()}.`,
-                                jurisdiccion && `Pertenece a la jurisdicción ${jurisdiccion}.`,
-                                modalidad && modalidad !== "-----" && `Registra modalidad ${modalidad}.`,
-                                nivelTexto !== "-----" && `Ofrece nivel(es) ${nivelTexto}.`,
-                                codigoPostal && `Su código postal es ${codigoPostal}.`,
-                                telefono && `Teléfono: ${telefono}.`,
-                                mail && `Correo electrónico: ${mail}.`
-                            ].filter(Boolean).join(" ");
+                            const detalles = Object.entries(row).map(([campo, valor]) => {
+                                const texto = String(valor || "").trim();
+                                return `
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="cue-detail-item">
+                                            <div class="cue-detail-item-label">${escapeHtml(campo)}</div>
+                                            <div class="cue-detail-item-value fw-semibold text-break">${escapeHtml(texto && texto !== "-----" ? texto : "Sin datos")}</div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join("");
 
                             const tr = document.createElement("tr");
                             tr.innerHTML = `
@@ -428,8 +472,8 @@
                                 </td>
                                 <td class="text-center align-middle small">${domicilio || "-----"}</td>
                                 <td class="text-center align-middle">
-                                  <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#${detailId}" aria-expanded="false" aria-controls="${detailId}">
-                                    Ver más
+                                  <button class="btn btn-sm btn-outline-primary rounded-pill cue-detail-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#${detailId}" aria-expanded="false" aria-controls="${detailId}">
+                                    <i class="fa-solid fa-circle-info me-1"></i> Ver ficha <i class="fa-solid fa-chevron-down ms-1"></i>
                                   </button>
                                 </td>
                             `;
@@ -439,8 +483,12 @@
                             detailRow.innerHTML = `
                                 <td colspan="7" class="p-0 border-0">
                                     <div id="${detailId}" class="accordion-collapse collapse">
-                                        <div class="p-3 bg-light border-top">
-                                            <p class="mb-0 text-start">${descripcion || "No hay más datos disponibles para este establecimiento."}</p>
+                                        <div class="cue-detail-panel">
+                                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                                                <h3 class="cue-detail-heading h6 fw-bold mb-0"><i class="fa-solid fa-building me-2 text-primary"></i>Ficha del establecimiento</h3>
+                                                <span class="badge rounded-pill bg-primary-subtle text-primary">${Object.keys(row).length} datos</span>
+                                            </div>
+                                            <div class="row g-3">${detalles}</div>
                                         </div>
                                     </div>
                                 </td>

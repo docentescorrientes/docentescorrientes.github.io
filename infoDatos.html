@@ -255,6 +255,47 @@
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body px-0">
+                                <div class="px-3 mb-4">
+                                    <h3 class="h6 text-success">Bonificaciones del cargo seleccionado</h3>
+                                    <p class="text-muted small">Se calculan sobre el básico bruto del cargo. Ayuda de material didáctico: 10%; ubicación y antigüedad según los porcentajes elegidos.</p>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="ubicacionBonificacion">Ubicación geográfica</label>
+                                            <select class="form-select" id="ubicacionBonificacion">
+                                                <optgroup label="Inicial, Primaria y EFA">
+                                                    <option value="0.20" selected>Urbana (20%)</option>
+                                                    <option value="0.50">Alejadas del radio urbano (50%)</option>
+                                                    <option value="0.80">Desfavorable (80%)</option>
+                                                    <option value="1.50">Muy desfavorable (150%)</option>
+                                                    <option value="2.00">Inhóspitas (200%)</option>
+                                                </optgroup>
+                                                <optgroup label="Medio y Superior">
+                                                    <option value="0.20">Zona A (20%)</option>
+                                                    <option value="0.30">Zona B (30%)</option>
+                                                    <option value="0.60">Zona C (60%)</option>
+                                                    <option value="0.90">Zona D (90%)</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="antiguedadBonificacion">Antigüedad</label>
+                                            <select class="form-select" id="antiguedadBonificacion">
+                                                <option value="0" selected>Menos de 1 año (0%)</option>
+                                                <option value="0.10">1 año (10%)</option>
+                                                <option value="0.15">Entre 2 y 4 años (15%)</option>
+                                                <option value="0.30">Entre 5 y 6 años (30%)</option>
+                                                <option value="0.40">Entre 7 y 9 años (40%)</option>
+                                                <option value="0.50">Entre 10 y 11 años (50%)</option>
+                                                <option value="0.60">Entre 12 y 14 años (60%)</option>
+                                                <option value="0.70">Entre 15 y 16 años (70%)</option>
+                                                <option value="0.80">Entre 17 y 19 años (80%)</option>
+                                                <option value="1.00">Entre 20 y 21 años (100%)</option>
+                                                <option value="1.10">Entre 22 y 23 años (110%)</option>
+                                                <option value="1.20">24 años o más (120%)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="table-responsive mt-3" id="prueba"></div>
                             </div>
                         </div>
@@ -455,6 +496,44 @@
             const montoBasicoEsp = document.getElementById('montoReferencia');
             const aumentoBasicoEsp = document.getElementById('aumentoReferencia');
             const montoNetoEsp = document.getElementById('netoReferencia');
+            const ubicacionBonificacion = document.getElementById('ubicacionBonificacion');
+            const antiguedadBonificacion = document.getElementById('antiguedadBonificacion');
+            let claseSeleccionadaActual = null;
+
+            function actualizarBonificaciones() {
+                const porcentajeUbicacion = Number(ubicacionBonificacion.value);
+                const porcentajeAntiguedad = Number(antiguedadBonificacion.value);
+                document.getElementById('ubicacionPorcentaje').textContent = `${formatNumero(porcentajeUbicacion * 100)}%`;
+                document.getElementById('antiguedadPorcentaje').textContent = `${formatNumero(porcentajeAntiguedad * 100)}%`;
+
+                const basico = exportados["1 Básico"];
+                const indiceClase = claseSeleccionadaActual?.indiceClase ?? 1;
+                const cantidadUnidades = claseSeleccionadaActual?.clase == 192 ? 15
+                    : claseSeleccionadaActual?.clase == 191 ? 12 : 1;
+                const basicoBruto = cantidadUnidades * basico.totalAcumuladoHastaFecha * indiceClase;
+                const aumentoBasicoBruto = cantidadUnidades * basico.montoMostrar * indiceClase;
+                const porcentajes = {
+                    materialDidactico: 0.10,
+                    ubicacion: porcentajeUbicacion,
+                    antiguedad: porcentajeAntiguedad
+                };
+
+                Object.entries(porcentajes).forEach(([bonificacion, porcentaje]) => {
+                    const bruto = basicoBruto * porcentaje;
+                    const aumentoNeto = aumentoBasicoBruto * porcentaje * 0.75;
+                    const porcentajeActualizacion = porcentaje === 0 ? 0 : basico.porcentajeActualizacion;
+                    document.getElementById(`${bonificacion}Bruto`).textContent = formatNumero(bruto, "$");
+                    document.getElementById(`${bonificacion}Neto`).textContent = formatNumero(bruto * 0.75, "$");
+                    document.getElementById(`${bonificacion}Fecha`).textContent = `${basico.mes}/${basico.anio}`;
+                    document.getElementById(`${bonificacion}Aumento`).textContent = formatNumero(aumentoNeto, "$");
+                    document.getElementById(`${bonificacion}Porcentaje`).textContent =
+                        `${formatNumero(porcentajeActualizacion)}%`;
+                });
+            }
+
+            ubicacionBonificacion.addEventListener('change', actualizarBonificaciones);
+            antiguedadBonificacion.addEventListener('change', actualizarBonificaciones);
+            actualizarBonificaciones();
 
             // Ocultar el código 629 si la fecha es marzo 2025 o posterior
             const fechaActual = new Date();
@@ -638,6 +717,7 @@
                 const claseBuscadaDiv = document.getElementById('claseBuscada');
 
                 if (claseSeleccionada) {
+                    claseSeleccionadaActual = claseSeleccionada;
                     // Mostrar información en el div
                     claseBuscadaDiv.innerHTML = `<strong>👉 Clase:</strong> ${claseSeleccionada.clase} <br>
                                                  <strong>📌 Cargo:</strong> ${claseSeleccionada.cargo} <br>
@@ -656,8 +736,9 @@
 
                     // Calcular el nuevo valor para la celda (valorClase * indiceClase)
                     montoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].totalAcumuladoHastaFecha * claseSeleccionada.indiceClase, "$");
-                    aumentoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].montoMostrar * claseSeleccionada.indiceClase, "$");
+                    aumentoBasicoEsp.textContent = formatNumero(n * exportados["1 Básico"].montoMostrar * claseSeleccionada.indiceClase * 0.75, "$");
                     montoNetoEsp.textContent = formatNumero(n * exportados["1 Básico"].totalAcumuladoHastaFecha * claseSeleccionada.indiceClase * 0.75, "$");
+                    actualizarBonificaciones();
 
                     const collapseElement = document.getElementById("collapseOne");
                     new bootstrap.Collapse(collapseElement, { toggle: false }).show();

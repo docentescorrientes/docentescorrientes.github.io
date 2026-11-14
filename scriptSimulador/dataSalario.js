@@ -133,12 +133,20 @@ function buscarAumentos(anio, mes, dia) {
   });
 
   let tablaHTML = `
-    <table class="table table-striped table-bordered text-center align-middle">
+    <table class="table table-striped table-bordered text-center align-middle mb-0" style="min-width: 760px; table-layout: fixed;">
+      <colgroup>
+        <col style="width: 34%;">
+        <col style="width: 14%;">
+        <col style="width: 15%;">
+        <col style="width: 13%;">
+        <col style="width: 13%;">
+        <col style="width: 11%;">
+      </colgroup>
       <thead class="table-secondary">
         <tr>
           <th>Código</th>
-          <th>Última Actualización (Mes/Año)</th>
-          <th>Monto Último Aumento</th>
+          <th>Última Actualización<br>(Mes/Año)</th>
+          <th>Monto del Último Aumento<br>(Neto)</th>
           <th>Total Bruto</th>
           <th>Total Neto</th>
           <th>% Actualización</th>
@@ -160,13 +168,15 @@ function buscarAumentos(anio, mes, dia) {
 
     // Si el total acumulado es igual al último aumento, mostrar $0,00
     const montoMostrar = totalAcumuladoHastaFecha === monto ? 0 : monto;
-    exportados[codigo] = { montoMostrar, totalAcumuladoHastaFecha };
+    exportados[codigo] = { montoMostrar, totalAcumuladoHastaFecha, anio, mes, porcentajeActualizacion: 0 };
+    const montoMostrarNeto = tipo === "b" || tipo === "g" ? montoMostrar * 0.75 : montoMostrar;
 
     // Obtener el total acumulado ANTERIOR a la fecha del último aumento
     const totalAcumuladoAnterior = aumentos.obtenerTotalPorCodigoAnteriorA(codigo, anio, mes, tipo);
 
     // Calcular % de actualización (último aumento / total acumulado anterior)
     const porcentajeActualizacion = totalAcumuladoAnterior ? (monto / totalAcumuladoAnterior) * 100 : 0;
+    exportados[codigo].porcentajeActualizacion = porcentajeActualizacion;
 
     // Calcular Total Neto
     let totalNeto = totalAcumuladoHastaFecha;
@@ -186,13 +196,42 @@ function buscarAumentos(anio, mes, dia) {
     tablaHTML += `
       <tr class="${rowClass}">
         <td class="text-start">${codigoMostrar}</td>
-        <td>${mes}/${anio}</td>
-        <td id="aumentoReferencia">${formatNumero(montoMostrar, "$")}</td>
-        <td id="montoReferencia">${formatNumero(totalAcumuladoHastaFecha, "$")}</td>
-        <td id="netoReferencia">${formatNumero(totalNeto, "$")}</td>
-        <td>${formatNumero(porcentajeActualizacion.toFixed(2))}%</td>
+        <td class="text-nowrap">${mes}/${anio}</td>
+        <td id="aumentoReferencia" class="text-nowrap">${formatNumero(montoMostrarNeto, "$")}</td>
+        <td id="montoReferencia" class="text-nowrap">${formatNumero(totalAcumuladoHastaFecha, "$")}</td>
+        <td id="netoReferencia" class="text-nowrap">${formatNumero(totalNeto, "$")}</td>
+        <td class="text-nowrap">${formatNumero(porcentajeActualizacion.toFixed(2))}%</td>
       </tr>
     `;
+
+    if (codigo === "1 Básico") {
+      tablaHTML += `
+      <tr class="table-primary">
+        <td class="text-start">36 Ubicación Geográfica</td>
+        <td id="ubicacionFecha" class="text-nowrap">—</td>
+        <td id="ubicacionAumento" class="text-nowrap">—</td>
+        <td id="ubicacionBruto">—</td>
+        <td id="ubicacionNeto">—</td>
+        <td id="ubicacionPorcentaje">—</td>
+      </tr>
+      <tr class="table-primary">
+        <td class="text-start">37 Antigüedad</td>
+        <td id="antiguedadFecha" class="text-nowrap">—</td>
+        <td id="antiguedadAumento" class="text-nowrap">—</td>
+        <td id="antiguedadBruto">—</td>
+        <td id="antiguedadNeto">—</td>
+        <td id="antiguedadPorcentaje">—</td>
+      </tr>
+      <tr class="table-primary">
+        <td class="text-start">62 Ay. Material Didáctico</td>
+        <td id="materialDidacticoFecha" class="text-nowrap">—</td>
+        <td id="materialDidacticoAumento" class="text-nowrap">—</td>
+        <td id="materialDidacticoBruto">—</td>
+        <td id="materialDidacticoNeto">—</td>
+        <td id="materialDidacticoPorcentaje">—</td>
+      </tr>
+      `;
+    }
   });
   tablaHTML += `
   <tr><td colspan="6" style="height: 10px;"></td></tr> <!-- Fila en blanco -->

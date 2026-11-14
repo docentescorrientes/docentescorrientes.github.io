@@ -299,7 +299,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                             const yScale = context.chart.scales.y;
                             const currentY = yScale.getPixelForValue(currentVal);
                             const barY = yScale.getPixelForValue(barValue);
-                            if (barY < currentY && currentY - barY < 16) return 'bottom';
+                            if (Math.abs(currentY - barY) < 24) return 'bottom';
                         }
 
                         // Obtener todos los valores de las líneas en este mes

@@ -98,7 +98,7 @@ if (estado) {
         const conSigno = valor => `${valor > 0 ? '+' : ''}${porcentaje(valor)}`;
         const escribir = (id, texto) => { elemento(id).textContent = texto; };
         const mes = new Intl.DateTimeFormat('es-AR', { month: 'long' }).format(new Date(resumen.anio, resumen.mes - 1, 1));
-        escribir('periodo', `${mes} de ${resumen.anio} \u00b7 \u00daltimo mes con datos comparables cargados`);
+        escribir('periodo', `Datos hasta ${mes} de ${resumen.anio} \u00b7 \u00daltimo mes con datos comparables`);
         escribir('neto', `${pesos(resumen.sueldoSinPluses)} de sueldo neto + ${pesos(resumen.pluses)} de pluses netos`);
         escribir('enero', `Enero de ${resumen.anio}: ${pesos(resumen.enero)}`);
         if (plusesAlBasico) {

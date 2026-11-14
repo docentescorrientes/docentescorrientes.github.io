@@ -132,10 +132,11 @@
         <div class="container my-4">
             <div class="shadow-lg p-4 bg-white rounded">
                 <h2 class="text-center text-primary mb-3">Buscador de CUE de Establecimientos Educativos</h2>
-                <p class="text-center text-dark fw-bold">
+                <p class="text-center text-dark fw-bold mb-2">
                     <img src="./image/logo.png" alt="Logo Docentes Autoconvocados" width="35" height="35" class="me-2">
                     Docentes Autoconvocados Corrientes - Sector 2019
                 </p>
+                <p class="text-center text-muted small mb-3">Padrón oficial actualizado - Corrientes 2026</p>
 
                 <!-- Buscador centrado -->
                 <div class="d-flex justify-content-center mb-4 mt-4">
@@ -153,8 +154,8 @@
 
                 <!-- Mensaje informativo inicial -->
                 <div id="infoAlert" class="alert alert-light text-center" role="alert">
-                    <i class="fa-solid fa-circle-info me-2 text-primary"></i> Escriba el nombre de una institución o
-                    localidad en el buscador para ver los resultados.
+                    <i class="fa-solid fa-circle-info me-2 text-primary"></i> Escriba el nombre de una institución,
+                    localidad, departamento o domicilio en el buscador para ver los resultados.
                 </div>
 
                 <!-- Tabla -->
@@ -163,11 +164,13 @@
                         style="border-radius:12px;overflow:hidden;">
                         <thead class="table-primary text-center">
                             <tr>
-                                <th style="width: 20%;">Localidad / Departamento</th>
-                                <th style="width: 35%;">Institución</th>
-                                <th style="width: 15%;">CUE-Anexo</th>
-                                <th style="width: 15%;">Nivel</th>
-                                <th style="width: 15%;">Jurisdicción</th>
+                                <th style="width: 16%;">Localidad / Departamento</th>
+                                <th style="width: 24%;">Institución</th>
+                                <th style="width: 12%;">CUE-Anexo</th>
+                                <th style="width: 10%;">Nivel</th>
+                                <th style="width: 18%;">Jurisdicción / Sector</th>
+                                <th style="width: 12%;">Domicilio</th>
+                                <th style="width: 8%;">Más</th>
                             </tr>
                         </thead>
                         <tbody id="dataTable"></tbody>
@@ -320,53 +323,129 @@
             skipEmptyLines: true,
             transformHeader: header => header.trim(),
             complete: function (results) {
-                const data = results.data;
+                const data = (results.data || []).filter(row => row && Object.keys(row).length);
                 const tableBody = document.getElementById("dataTable");
                 const resultsTable = document.getElementById("resultsTable");
                 const copyAlert = document.getElementById("copyAlert");
                 const infoAlert = document.getElementById("infoAlert");
+                const inputSearch = document.getElementById("searchInput");
+
+                const escapeHtml = (value = "") => String(value)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/\"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+
+                const normalize = (value = "") => String(value).trim().toLowerCase();
+
+                function getNivel(row) {
+                    const niveles = [];
+                    if (String(row["Inicial"] || "").trim().toUpperCase() === "SI") niveles.push("Inicial");
+                    if (String(row["Primario"] || "").trim().toUpperCase() === "SI") niveles.push("Primario");
+                    if (String(row["Secundario"] || "").trim().toUpperCase() === "SI") niveles.push("Secundario");
+                    if (String(row["Superior"] || "").trim().toUpperCase() === "SI") niveles.push("Superior");
+                    if (niveles.length) return niveles.join(", ");
+
+                    const fallback = String(row["Nivel"] || row["Modalidad"] || "").trim();
+                    return fallback && fallback !== "-----" ? fallback : "-----";
+                }
 
                 function renderTable(filterText = "") {
                     tableBody.innerHTML = "";
                     let count = 0;
+                    const query = normalize(filterText);
 
-                    if (!filterText.trim()) {
+                    if (!query) {
                         resultsTable.style.display = "none";
                         infoAlert.style.display = "block";
                         infoAlert.className = "alert alert-info text-center";
-                        infoAlert.textContent = "ℹ️ Escriba el nombre de una institución o localidad en el buscador para ver los resultados.";
+                        infoAlert.textContent = "ℹ️ Escriba el nombre de una institución, localidad o domicilio para ver los resultados.";
                         return;
                     }
 
                     data.forEach(row => {
-                        const texto = ((row["Nombre de Institución"] || "") + " " + (row["Localidad"] || "")).toLowerCase();
-                        if (texto.includes(filterText.toLowerCase())) {
+                        const busqueda = [
+                            row["Nombre de Institución"],
+                            row["Localidad"],
+                            row["Departamento"],
+                            row["Domicilio"],
+                            row["Mail"],
+                            row["Teléfono"],
+                            row["Sector"],
+                            row["Ámbito"],
+                            row["Modalidad"]
+                        ].join(" ").toLowerCase();
+
+                        if (busqueda.includes(query)) {
                             const cue = row["CUE-Anexo"] || "";
-
-                            // Unificar niveles
-                            const niveles = [];
-                            if (row["Inicial"] && row["Inicial"].toUpperCase() === "SI") niveles.push("Inicial");
-                            if (row["Primario"] && row["Primario"].toUpperCase() === "SI") niveles.push("Primario");
-                            if (row["Secundario"] && row["Secundario"].toUpperCase() === "SI") niveles.push("Secundario");
-                            if (row["Superior"] && row["Superior"].toUpperCase() === "SI") niveles.push("Superior");
-
-                            const nivelTexto = niveles.length > 0 ? niveles.join(", ") : "-----";
+                            const nombre = escapeHtml(row["Nombre de Institución"] || "");
+                            const localidad = escapeHtml(row["Localidad"] || "");
+                            const departamento = escapeHtml(row["Departamento"] || "");
+                            const domicilio = escapeHtml(row["Domicilio"] || "");
+                            const jurisdiccion = escapeHtml(row["Nivel Jurisdiccional"] || "Corrientes");
+                            const sector = escapeHtml(row["Sector"] || "");
+                            const ambito = escapeHtml(row["Ámbito"] || "");
+                            const nivelTexto = escapeHtml(getNivel(row));
+                            const codigoPostal = escapeHtml(row["Código Postal"] || "");
+                            const telefono = escapeHtml(row["Teléfono"] || "");
+                            const mail = escapeHtml(row["Mail"] || "");
+                            const modalidad = escapeHtml(row["Modalidad"] || "");
+                            const detailId = `cue-detail-${Math.random().toString(36).slice(2, 10)}`;
+                            const ubicacion = [
+                                domicilio,
+                                localidad && `localidad ${localidad}`,
+                                departamento && `departamento ${departamento}`
+                            ].filter(Boolean).join(", ");
+                            const descripcion = [
+                                nombre && ubicacion && `El establecimiento ${nombre} está ubicado en ${ubicacion}.`,
+                                sector && `Es de gestión ${sector.toLowerCase()}.`,
+                                ambito && `Se encuentra en ámbito ${ambito.toLowerCase()}.`,
+                                jurisdiccion && `Pertenece a la jurisdicción ${jurisdiccion}.`,
+                                modalidad && modalidad !== "-----" && `Registra modalidad ${modalidad}.`,
+                                nivelTexto !== "-----" && `Ofrece nivel(es) ${nivelTexto}.`,
+                                codigoPostal && `Su código postal es ${codigoPostal}.`,
+                                telefono && `Teléfono: ${telefono}.`,
+                                mail && `Correo electrónico: ${mail}.`
+                            ].filter(Boolean).join(" ");
 
                             const tr = document.createElement("tr");
                             tr.innerHTML = `
-                        <td class="text-center">
-                          <div><strong>${row["Localidad"] || ""}</strong></div>
-                          <div class="text-muted" style="font-size:12px;">${row["Departamento"] || ""}</div>
-                        </td>
-                        <td class="text-center">${row["Nombre de Institución"] || ""}</td>
-                        <td>
-                          ${cue}
-                          ${cue ? `<button class="btn btn-sm btn-outline-primary ms-2 copy-btn" data-cue="${cue}">Copiar</button>` : ""}
-                        </td>
-                        <td class="text-center">${nivelTexto}</td>
-                        <td class="text-center">${row["Nivel Jurisdiccional"] || ""}</td>
-                    `;
+                                <td class="text-center align-middle">
+                                  <div><strong>${localidad}</strong></div>
+                                  <div class="text-muted small">${departamento}</div>
+                                </td>
+                                <td class="align-middle">${nombre}</td>
+                                <td class="text-center align-middle">
+                                  <div>${cue || "-----"}</div>
+                                  ${cue ? `<button class="btn btn-sm btn-outline-primary mt-2 copy-btn" data-cue="${cue}">Copiar</button>` : ""}
+                                </td>
+                                <td class="text-center align-middle">${nivelTexto}</td>
+                                <td class="text-center align-middle">
+                                  <div><strong>${jurisdiccion}</strong></div>
+                                  <div class="text-muted small">${sector}</div>
+                                  <div class="text-muted small">${ambito}</div>
+                                </td>
+                                <td class="text-center align-middle small">${domicilio || "-----"}</td>
+                                <td class="text-center align-middle">
+                                  <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#${detailId}" aria-expanded="false" aria-controls="${detailId}">
+                                    Ver más
+                                  </button>
+                                </td>
+                            `;
                             tableBody.appendChild(tr);
+
+                            const detailRow = document.createElement("tr");
+                            detailRow.innerHTML = `
+                                <td colspan="7" class="p-0 border-0">
+                                    <div id="${detailId}" class="accordion-collapse collapse">
+                                        <div class="p-3 bg-light border-top">
+                                            <p class="mb-0 text-start">${descripcion || "No hay más datos disponibles para este establecimiento."}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            `;
+                            tableBody.appendChild(detailRow);
                             count++;
                         }
                     });
@@ -378,36 +457,37 @@
                         resultsTable.style.display = "none";
                         infoAlert.style.display = "block";
                         infoAlert.className = "alert alert-warning text-center";
-                        infoAlert.textContent = "⚠️ No se encontraron resultados. Intente con otro nombre o localidad.";
+                        infoAlert.textContent = "⚠️ No se encontraron resultados. Intente con otro nombre, localidad o domicilio.";
                     }
 
-                    // Botones de copiar
                     document.querySelectorAll(".copy-btn").forEach(btn => {
                         btn.addEventListener("click", (e) => {
                             e.stopPropagation();
                             const cue = btn.getAttribute("data-cue");
-                            navigator.clipboard.writeText(cue).then(() => {
+                            if (!cue) return;
+
+                            if (navigator.clipboard) {
+                                navigator.clipboard.writeText(cue).then(() => {
+                                    copyAlert.classList.remove("d-none");
+                                    setTimeout(() => copyAlert.classList.add("d-none"), 2000);
+                                });
+                            } else {
                                 copyAlert.classList.remove("d-none");
                                 setTimeout(() => copyAlert.classList.add("d-none"), 2000);
-                            });
+                            }
                         });
                     });
                 }
 
-                // Buscador en vivo
                 document.getElementById("searchInput").addEventListener("input", (e) => {
                     renderTable(e.target.value);
                 });
 
-                // Efecto de escritura dinámica en el placeholder con datos del CSV
-                const inputSearch = document.getElementById("searchInput");
-
-                // Preparar listas completas para selección aleatoria
                 const allInstitutions = data
                     .map(row => row["Nombre de Institución"])
-                    .filter(n => n && n.length > 5 && n.length < 40); // Filtrar nombres muy cortos o largos
+                    .filter(value => value && value.length > 3 && value.length < 60);
 
-                const allLocalities = [...new Set(data.map(row => row["Localidad"]).filter(l => l))];
+                const allLocalities = [...new Set(data.map(row => row["Localidad"]).filter(Boolean))];
 
                 let currentText = "Buscar institución o localidad...";
                 let charIdx = 0;
@@ -415,7 +495,7 @@
 
                 function typeEffect() {
                     if (isDeleting) {
-                        inputSearch.placeholder = currentText.substring(0, charIdx - 1);
+                        inputSearch.placeholder = currentText.substring(0, Math.max(0, charIdx - 1));
                         charIdx--;
                     } else {
                         inputSearch.placeholder = currentText.substring(0, charIdx + 1);
@@ -426,11 +506,10 @@
 
                     if (!isDeleting && charIdx === currentText.length) {
                         isDeleting = true;
-                        typeSpeed = 2000; // Pausa al terminar de escribir la frase
+                        typeSpeed = 2000;
                     } else if (isDeleting && charIdx === 0) {
                         isDeleting = false;
 
-                        // Seleccionar nueva frase aleatoria
                         if (Math.random() > 0.5 && allInstitutions.length > 0) {
                             const randomInst = allInstitutions[Math.floor(Math.random() * allInstitutions.length)];
                             currentText = `Por ej. Institución: ${randomInst}`;
@@ -439,13 +518,12 @@
                             currentText = `Por ej. Localidad: ${randomLoc}`;
                         }
 
-                        typeSpeed = 500; // Pausa antes de escribir la siguiente
+                        typeSpeed = 500;
                     }
 
                     setTimeout(typeEffect, typeSpeed);
                 }
 
-                // Iniciar el efecto si hay frases disponibles
                 if (allInstitutions.length > 0 || allLocalities.length > 0) typeEffect();
             }
         });

@@ -26,9 +26,9 @@
         }
 
         .cue-detail-panel {
-            padding: 1.25rem;
+            margin: 0.75rem;
             border: 1px solid #e6edf5;
-            border-radius: 0 0 1rem 1rem;
+            border-radius: 0.85rem;
             background: linear-gradient(145deg, #f8fbff 0%, #f3f6fb 100%);
         }
 
@@ -73,7 +73,7 @@
 
         @media (max-width: 575.98px) {
             .cue-detail-panel {
-                padding: 1rem;
+                margin: 0.5rem;
             }
         }
     </style>
@@ -403,12 +403,112 @@
                     return fallback && fallback !== "-----" ? fallback : "-----";
                 }
 
+                // Cortes P20, P40, P60 y P80 calculados sobre el padrón nacional 2026.
+                const indicesVulnerabilidad = {
+                    "Total de hogares": [0.131, 0.180576, 0.230088, 0.306008],
+                    "Hogares con población de 3 a 17": [0.110479, 0.168555, 0.225974, 0.307783],
+                    "Población de 3 a 17": [0.121458, 0.184103, 0.245761, 0.334163]
+                };
+                const nivelesVulnerabilidad = ["Muy baja", "Baja", "Media", "Alta", "Muy alta"];
+
+                function obtenerVulnerabilidad(campo, valor) {
+                    const cortes = indicesVulnerabilidad[campo];
+                    const numero = Number(valor);
+                    if (!cortes || !String(valor || "").trim() || !Number.isFinite(numero)) return "Sin datos";
+                    const nivel = cortes.findIndex(corte => numero <= corte);
+                    return `Vulnerabilidad ${nivelesVulnerabilidad[nivel === -1 ? 4 : nivel]}`;
+                }
+
+                const searchableData = data.map(row => ({
+                    row,
+                    searchText: [
+                        row["Nombre de Institución"],
+                        row["Localidad"],
+                        row["Departamento"],
+                        row["Domicilio"],
+                        row["Mail"],
+                        row["Teléfono"],
+                        row["Sector"],
+                        row["Ámbito"],
+                        row["Modalidad"]
+                    ].join(" ").toLowerCase()
+                }));
+                const rowsByDetailId = new Map();
+
+                function renderDetails(row) {
+                    const indicesContexto = Object.entries(indicesVulnerabilidad).map(([campo]) => {
+                        const valor = String(row[campo] || "").trim();
+                        return `
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="cue-detail-item">
+                                    <div class="cue-detail-item-label">${escapeHtml(campo)}</div>
+                                    <div class="cue-detail-item-value fw-semibold text-break">${escapeHtml(valor || "Sin datos")}</div>
+                                    <span class="badge rounded-pill bg-primary-subtle text-primary mt-2">${escapeHtml(obtenerVulnerabilidad(campo, valor))}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join("");
+                    const camposContexto = Object.keys(indicesVulnerabilidad);
+                    const detalles = Object.entries(row)
+                        .filter(([campo]) => !camposContexto.includes(campo))
+                        .map(([campo, valor]) => {
+                            const texto = String(valor || "").trim();
+                            return `
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="cue-detail-item">
+                                        <div class="cue-detail-item-label">${escapeHtml(campo)}</div>
+                                        <div class="cue-detail-item-value fw-semibold text-break">${escapeHtml(texto && texto !== "-----" ? texto : "Sin datos")}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join("");
+
+                    return `
+                            <div class="p-3 p-md-4">
+                                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                                    <h3 class="cue-detail-heading h6 fw-bold mb-0"><i class="fa-solid fa-building me-2 text-primary"></i>Ficha del establecimiento</h3>
+                                    <span class="badge rounded-pill bg-primary-subtle text-primary">${Object.keys(row).length} datos</span>
+                                </div>
+                                <h4 class="h6 fw-bold text-primary mb-3">Vulnerabilidad del contexto</h4>
+                                <div class="row g-3 mb-3">${indicesContexto}</div>
+                                <div class="row g-3">${detalles}</div>
+                            </div>
+                        `;
+                }
+
+                tableBody.addEventListener("click", event => {
+                    if (!(event.target instanceof Element)) return;
+                    const copyButton = event.target.closest(".copy-btn");
+                    if (copyButton) {
+                        event.stopPropagation();
+                        const cue = copyButton.getAttribute("data-cue");
+                        if (!cue || !navigator.clipboard) return;
+                        navigator.clipboard.writeText(cue).then(() => {
+                            copyAlert.classList.remove("d-none");
+                            setTimeout(() => copyAlert.classList.add("d-none"), 2000);
+                        });
+                        return;
+                    }
+
+                    const detailToggle = event.target.closest(".cue-detail-toggle");
+                    if (!detailToggle) return;
+                    const detailId = detailToggle.getAttribute("aria-controls");
+                    const panel = detailId && document.getElementById(detailId);
+                    const row = detailId && rowsByDetailId.get(detailId);
+                    if (panel && row && panel.dataset.loaded !== "true") {
+                        panel.innerHTML = renderDetails(row);
+                        panel.dataset.loaded = "true";
+                    }
+                });
+
                 function renderTable(filterText = "") {
-                    tableBody.innerHTML = "";
+                    rowsByDetailId.clear();
+                    const resultRows = [];
                     let count = 0;
                     const query = normalize(filterText);
 
                     if (!query) {
+                        tableBody.innerHTML = "";
                         resultsTable.style.display = "none";
                         infoAlert.style.display = "block";
                         infoAlert.className = "alert alert-info text-center";
@@ -416,20 +516,8 @@
                         return;
                     }
 
-                    data.forEach(row => {
-                        const busqueda = [
-                            row["Nombre de Institución"],
-                            row["Localidad"],
-                            row["Departamento"],
-                            row["Domicilio"],
-                            row["Mail"],
-                            row["Teléfono"],
-                            row["Sector"],
-                            row["Ámbito"],
-                            row["Modalidad"]
-                        ].join(" ").toLowerCase();
-
-                        if (busqueda.includes(query)) {
+                    searchableData.forEach(({ row, searchText }) => {
+                        if (searchText.includes(query)) {
                             const cue = row["CUE-Anexo"] || "";
                             const nombre = escapeHtml(row["Nombre de Institución"] || "");
                             const localidad = escapeHtml(row["Localidad"] || "");
@@ -441,20 +529,8 @@
                             const nivelTexto = escapeHtml(getNivel(row));
                             const modalidad = escapeHtml(row["Modalidad"] || "");
                             const detailId = `cue-detail-${Math.random().toString(36).slice(2, 10)}`;
-                            const detalles = Object.entries(row).map(([campo, valor]) => {
-                                const texto = String(valor || "").trim();
-                                return `
-                                    <div class="col-sm-6 col-lg-4">
-                                        <div class="cue-detail-item">
-                                            <div class="cue-detail-item-label">${escapeHtml(campo)}</div>
-                                            <div class="cue-detail-item-value fw-semibold text-break">${escapeHtml(texto && texto !== "-----" ? texto : "Sin datos")}</div>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join("");
-
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `
+                            resultRows.push(`
+                                <tr>
                                 <td class="text-center align-middle">
                                   <div><strong>${localidad}</strong></div>
                                   <div class="text-muted small">${departamento}</div>
@@ -476,27 +552,20 @@
                                     <i class="fa-solid fa-circle-info me-1"></i> Ver ficha <i class="fa-solid fa-chevron-down ms-1"></i>
                                   </button>
                                 </td>
-                            `;
-                            tableBody.appendChild(tr);
-
-                            const detailRow = document.createElement("tr");
-                            detailRow.innerHTML = `
+                                </tr>
+                                <tr>
                                 <td colspan="7" class="p-0 border-0">
                                     <div id="${detailId}" class="accordion-collapse collapse">
-                                        <div class="cue-detail-panel">
-                                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-                                                <h3 class="cue-detail-heading h6 fw-bold mb-0"><i class="fa-solid fa-building me-2 text-primary"></i>Ficha del establecimiento</h3>
-                                                <span class="badge rounded-pill bg-primary-subtle text-primary">${Object.keys(row).length} datos</span>
-                                            </div>
-                                            <div class="row g-3">${detalles}</div>
-                                        </div>
+                                        <div class="cue-detail-panel" data-loaded="false"></div>
                                     </div>
                                 </td>
-                            `;
-                            tableBody.appendChild(detailRow);
+                                </tr>
+                            `);
+                            rowsByDetailId.set(detailId, row);
                             count++;
                         }
                     });
+                    tableBody.innerHTML = resultRows.join("");
 
                     if (count > 0) {
                         resultsTable.style.display = "block";
@@ -508,27 +577,12 @@
                         infoAlert.textContent = "⚠️ No se encontraron resultados. Intente con otro nombre, localidad o domicilio.";
                     }
 
-                    document.querySelectorAll(".copy-btn").forEach(btn => {
-                        btn.addEventListener("click", (e) => {
-                            e.stopPropagation();
-                            const cue = btn.getAttribute("data-cue");
-                            if (!cue) return;
-
-                            if (navigator.clipboard) {
-                                navigator.clipboard.writeText(cue).then(() => {
-                                    copyAlert.classList.remove("d-none");
-                                    setTimeout(() => copyAlert.classList.add("d-none"), 2000);
-                                });
-                            } else {
-                                copyAlert.classList.remove("d-none");
-                                setTimeout(() => copyAlert.classList.add("d-none"), 2000);
-                            }
-                        });
-                    });
                 }
 
-                document.getElementById("searchInput").addEventListener("input", (e) => {
-                    renderTable(e.target.value);
+                let searchTimeout;
+                inputSearch.addEventListener("input", () => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => renderTable(inputSearch.value), 120);
                 });
 
                 const allInstitutions = data

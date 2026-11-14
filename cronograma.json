@@ -80,13 +80,13 @@
         {
             "titulo": "Salario Real (sin pluses)",
             "tipo": "sueldo",
-            "activo": false,
+            "activo": true,
             "dias": [
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
                     "fecha": "24",
-                    "fecha_cajeros": "23"
+                    "fecha_cajeros": "21"
                 },
                 {
                     "dia": "2°",

@@ -274,9 +274,9 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                     color: 'gray' // Color opcional del subtítulo
                 },
                 datalabels: {  // Mostrar valores en barras y líneas
+                    display: true,
                     anchor: function(context) {
-                        // 'end' para las barras, 'center' para las líneas para mejor distribución
-                        return context.datasetIndex === 0 ? 'end' : 'center';
+                        return 'end';
                     },
                     align: function(context) {
                         if (context.datasetIndex === 0) return 'top';
@@ -287,6 +287,14 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
 
                         if (currentVal === null || currentVal === undefined) return 'top';
 
+                        const barValue = datasets[0].data[index];
+                        if (barValue !== null && barValue !== undefined) {
+                            const yScale = context.chart.scales.y;
+                            const currentY = yScale.getPixelForValue(currentVal);
+                            const barY = yScale.getPixelForValue(barValue);
+                            if (barY < currentY && currentY - barY < 16) return 'bottom';
+                        }
+
                         // Obtener todos los valores de las líneas en este mes
                         let lines = [];
                         for (let i = 1; i < datasets.length; i++) {
@@ -296,13 +304,11 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                             }
                         }
                         if (lines.length <= 1) return 'top';
-                        // Ordenar de menor a mayor y ubicar (abajo, medio-derecha, arriba)
                         lines.sort((a, b) => a.val - b.val);
                         const myRank = lines.findIndex(v => v.dsIndex === context.datasetIndex);
-                        if (myRank === lines.length - 1) return 'top';
-                        if (myRank === 0) return 'bottom';
-                        return 'right';
+                        return myRank === 0 ? 'bottom' : 'top';
                     },
+                    offset: 8,
                     color: 'rgba(8, 8, 8, 0.7)',
                     font: {
                         size: 10,

@@ -128,31 +128,31 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "07",
+                    "fecha": "10",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "10",
-                    "fecha_cajeros": "08"
-                },
-                {
-                    "dia": "3°",
-                    "dni": "4 y 5",
                     "fecha": "11",
                     "_fecha_cajeros": ""
                 },
                 {
+                    "dia": "3°",
+                    "dni": "4 y 5",
+                    "fecha": "14",
+                    "fecha_cajeros": "12"
+                },
+                {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "12",
+                    "fecha": "15",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
-                    "fecha": "13",
+                    "fecha": "15",
                     "_fecha_cajeros": ""
                 }
             ]
@@ -166,7 +166,7 @@
                     "dia": "1°",
                     "dni": "0 y 1",
                     "fecha": "16",
-                    "fecha_cajeros": "13"
+                    "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
@@ -183,14 +183,14 @@
                 {
                     "dia": "4°",
                     "dni": "6 y 7",
-                    "fecha": "19",
-                    "_fecha_cajeros": ""
+                    "fecha": "21",
+                    "fecha_cajeros": "19"
                 },
                 {
                     "dia": "5°",
                     "dni": "8 y 9",
                     "fecha": "22",
-                    "fecha_cajeros": "20"
+                    "_fecha_cajeros": ""
                 }
             ]
         },
@@ -202,19 +202,19 @@
                 {
                     "dia": "1°",
                     "dni": "0 y 1",
-                    "fecha": "24",
+                    "fecha": "23",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "2°",
                     "dni": "2 y 3",
-                    "fecha": "25",
+                    "fecha": "24",
                     "_fecha_cajeros": ""
                 },
                 {
                     "dia": "3°",
                     "dni": "4 y 5",
-                    "fecha": "26",
+                    "fecha": "28",
                     "_fecha_cajeros": ""
                 },
                 {

@@ -1,5 +1,5 @@
 import { dateGral } from './date.js';
-import { obtenerValores, formatNumero } from '../../scriptSimulador/dataSalario.js';
+import { obtenerValores, formatNumero, formatNumeroCompacto } from '../../scriptSimulador/dataSalario.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     inicioGrafico();
@@ -334,7 +334,7 @@ function crearGrafico(chart, radioCheck = 0, antiguedad = 0, comparacion, cargo)
                     beginAtZero: true,
                     max: maxConMargen, // 👈 valor calculado dinámicamente
                     ticks: {
-                        callback: (value) => '$ ' + formatNumero(value)
+                        callback: value => formatNumeroCompacto(value, "$")
                     },
                     title: { // 👈 Agregamos el título del eje Y
                         display: true,

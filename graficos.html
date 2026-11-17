@@ -209,6 +209,67 @@
                         remunerativos).
                     </p>
                 </div>
+                <div class="container mt-5 text-center">
+                    <h3 class="text-primary">Evolución del salario y poder adquisitivo</h3>
+                    <div class="container mb-4 text-center">
+                        <h6 class="text-primary">Mostrar valores en:</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="modoPoderAdquisitivo"
+                                id="modoPoderPorcentaje" value="porcentaje">
+                            <label class="form-check-label" for="modoPoderPorcentaje">Porcentaje</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="modoPoderAdquisitivo"
+                                id="modoPoderNominal" value="nominal" checked>
+                            <label class="form-check-label" for="modoPoderNominal">Nominal ($)</label>
+                        </div>
+                    </div>
+                    <div class="container mb-4 text-center">
+                        <h6 class="text-primary">Selecciona el año:</h6>
+                        <select class="form-select w-auto d-inline-block" id="anioSelectPoderAdquisitivo">
+                            <option value="2025">2025</option>
+                            <option value="2026" selected>2026</option>
+                        </select>
+                    </div>
+                    <div class="container mb-4 text-center">
+                        <h6 class="text-primary">Seleccione su antigüedad:</h6>
+                        <input type="range" class="form-range" id="antiguedadRangePoderAdquisitivo" min="0" max="11"
+                            step="1">
+                        <p id="antiguedadValorPoderAdquisitivo" class="mt-2">Seleccione su antigüedad</p>
+                    </div>
+                    <div class="container mb-4 text-center">
+                        <h6 class="text-primary">Selecciona el cargo:</h6>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="grupoOpcionesCargoPoderAdquisitivo"
+                                id="cargo1PoderAdquisitivo" value="1" checked>
+                            <label class="form-check-label" for="cargo1PoderAdquisitivo">1° Cargo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="grupoOpcionesCargoPoderAdquisitivo"
+                                id="cargo2PoderAdquisitivo" value="2">
+                            <label class="form-check-label" for="cargo2PoderAdquisitivo">2° Cargo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="grupoOpcionesCargoPoderAdquisitivo"
+                                id="cargo3PoderAdquisitivo" value="3">
+                            <label class="form-check-label" for="cargo3PoderAdquisitivo">3° Cargo</label>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                        <div style="width: 100%; max-width: 1200px; height: 500px;">
+                            <canvas id="chartPoderAdquisitivo"></canvas>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-4" style="text-align: justify;">
+                        Cada barra muestra el salario neto de ese mes actualizado por la inflación mensual del NEA
+                        hasta el último mes con datos disponibles; por eso, todos los montos están expresados en pesos
+                        equivalentes a ese mes. La línea indica el salario nominal de referencia. Así se compara el
+                        poder adquisitivo de los salarios anteriores con el último salario disponible del año
+                        seleccionado. Las líneas azul, amarilla y roja muestran los porcentajes de montos blancos,
+                        grises y negros, respectivamente, con escala porcentual en el eje derecho. Estos filtros son
+                        independientes de los del gráfico de cobertura.
+                    </p>
+                </div>
                 <!-- End Gráfico CB-->
 
 
@@ -316,7 +377,7 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Información</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none"
+                         <li><a class="text-decoration-none"
                                 href="https://drive.google.com/file/d/1UqbuLqiOLKJVy0Q4HRW1TzIYwdhsV96v/view?usp=sharing"
                                 target="_blank">Estatuto</a></li>
                         <li><a class="text-decoration-none"

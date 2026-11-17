@@ -274,6 +274,21 @@ export function formatNumero(number, simbol = "") {
   return (isNegative ? `-${simbol}` : `${simbol}`) + formattedNumber;
 };
 
+export function formatNumeroCompacto(number, simbol = "") {
+  const isNegative = number < 0;
+  const absoluteNumber = Math.abs(number);
+  const prefijo = isNegative ? `-${simbol}` : simbol;
+
+  if (absoluteNumber >= 1000000) {
+    return `${prefijo}${(absoluteNumber / 1000000).toLocaleString('es-AR', { maximumFractionDigits: 1 })} M`;
+  }
+  if (absoluteNumber >= 1000) {
+    return `${prefijo}${(absoluteNumber / 1000).toLocaleString('es-AR', { maximumFractionDigits: 0 })} mil`;
+  }
+
+  return `${prefijo}${Math.round(absoluteNumber).toLocaleString('es-AR')}`;
+};
+
 export function obtenerNombreMes(numero) {
   let numeroMes = parseInt(numero); // Convertir a número si es un string
   const meses = [

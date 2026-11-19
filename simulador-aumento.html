@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Campaña todo al básico - DACorrientes</title>
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-success logo h1" href="index.html">
+                <i class="fa-solid fa-chalkboard-user mx-2"></i>DAC 2019
+            </a>
+            <div class="d-flex gap-3">
+                <a class="nav-link" href="simulador.html">Simulador de haberes</a>
+                <a class="nav-link" href="index.html">Inicio</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="container py-5" aria-labelledby="tituloSimuladorAumento">
+            <div class="card shadow-lg p-4">
+                <h1 class="text-center text-success mb-2" id="tituloSimuladorAumento">Campaña todo al básico</h1>
+                <p class="text-center mb-4">
+                    Compará cómo impactaría un aumento bruto mensual por cargo si se incorporara al Código 1 o a los
+                    códigos remunerativos y no remunerativos indicados.
+                </p>
+                <form id="simuladorAumentoForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="montoAumento">Aumento bruto mensual por cargo/ítem</label>
+                            <input class="form-control" id="montoAumento" name="montoAumento" type="text"
+                                inputmode="decimal" pattern="[0-9.]+(,[0-9]{0,2})?" required
+                                placeholder="Ej.: 100.000"
+                                title="Usá punto para los miles y coma para los decimales.">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="cantidadCargosAumento">Cantidad de cargos</label>
+                            <select class="form-select" id="cantidadCargosAumento" name="cantidadCargosAumento" required>
+                                <option value="1">1 cargo</option>
+                                <option value="2">2 cargos</option>
+                                <option value="3">3 cargos</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="nivelAumento">Nivel educativo</label>
+                            <select class="form-select" id="nivelAumento" name="nivelAumento" required>
+                                <option value="primaria">Inicial / Primaria / EFA</option>
+                                <option value="medio">Secundaria</option>
+                                <option value="superior">Superior</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="ubicacionAumento">Ubicación geográfica</label>
+                            <select class="form-select" id="ubicacionAumento" name="ubicacionAumento" required></select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="antiguedadAumento">Antigüedad</label>
+                            <select class="form-select" id="antiguedadAumento" name="antiguedadAumento" required>
+                                <option value="0">Menos de 1 año (0%)</option>
+                                <option value="0.10">1 año (10%)</option>
+                                <option value="0.15">Entre 2 y 4 años (15%)</option>
+                                <option value="0.30">Entre 5 y 6 años (30%)</option>
+                                <option value="0.40">Entre 7 y 9 años (40%)</option>
+                                <option value="0.50">Entre 10 y 11 años (50%)</option>
+                                <option value="0.60">Entre 12 y 14 años (60%)</option>
+                                <option value="0.70">Entre 15 y 16 años (70%)</option>
+                                <option value="0.80">Entre 17 y 19 años (80%)</option>
+                                <option value="1">Entre 20 y 21 años (100%)</option>
+                                <option value="1.10">Entre 22 y 23 años (110%)</option>
+                                <option value="1.20">24 años o más (120%)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="cargosJornadaExtendida">Cargos con jornada extendida (Cód. 624)</label>
+                            <select class="form-select" id="cargosJornadaExtendida" name="cargosJornadaExtendida" required>
+                                <option value="0">Ninguno</option>
+                                <option value="1">1 cargo</option>
+                                <option value="2">2 cargos</option>
+                                <option value="3">3 cargos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="form-text mt-3 mb-0" id="horasAumento"></p>
+                    <p class="form-text">
+                        En el Código 1 se suma ubicación, antigüedad y 10% de ayuda de material didáctico sobre el básico.
+                        La jornada extendida (Cód. 624) agrega 25% sobre esos conceptos para cada cargo seleccionado.
+                        IOSCOR (5%) e IPS (20%) se calculan sobre los ítems remunerativos. El Código 171 se considera no
+                        remunerativo. Se aplican topes de 1 cargo para 603/625 y de 2 cargos para 193/632/171.
+                    </p>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-success" type="submit">Comparar alternativas</button>
+                    </div>
+                </form>
+                <div class="mt-4" id="resultadoAumento" aria-live="polite"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-light text-center py-4">
+        <p class="mb-2">Docentes Autoconvocados Corrientes - Sector 2019</p>
+        <a class="text-success" href="simulador.html">Volver al simulador de haberes</a>
+    </footer>
+
+    <script type="module" src="scriptSimulador/simuladorAumento.js"></script>
+</body>
+
+</html>

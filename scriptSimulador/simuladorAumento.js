@@ -160,6 +160,7 @@ if (typeof document !== "undefined") {
     const jornadaExtendidaCheckbox = document.getElementById("cargosJornadaExtendida");
     const horasInfo = document.getElementById("horasAumento");
     const resultado = document.getElementById("resultadoAumento");
+    const compararButton = document.getElementById("compararAumento");
     const nivelesAntiguedad = [
         { valor: 0, texto: "0% - Menos de 1 año" },
         { valor: 0.10, texto: "10% - 1 año" },
@@ -293,7 +294,7 @@ if (typeof document !== "undefined") {
         montoInput.setCustomValidity("");
     });
 
-    form.addEventListener("submit", event => {
+    function calcularFormulario(event) {
         event.preventDefault();
         const monto = parsearMontoIngresado(montoInput.value);
         montoInput.setCustomValidity(Number.isFinite(monto) && monto > 0
@@ -313,5 +314,8 @@ if (typeof document !== "undefined") {
             cargosJornadaExtendida
         });
         renderizarResultados(alternativas, antiguedad);
-    });
+    }
+
+    compararButton.addEventListener("click", calcularFormulario);
+    form.addEventListener("submit", calcularFormulario);
 }

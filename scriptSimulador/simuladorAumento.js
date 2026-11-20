@@ -155,9 +155,25 @@ if (typeof document !== "undefined") {
     const nivelSelect = document.getElementById("nivelAumento");
     const ubicacionSelect = document.getElementById("ubicacionAumento");
     const cargosSelect = document.getElementById("cantidadCargosAumento");
-    const cargosJornadaSelect = document.getElementById("cargosJornadaExtendida");
+    const antiguedadRange = document.getElementById("antiguedadAumento");
+    const antiguedadValor = document.getElementById("antiguedadAumentoValor");
+    const jornadaExtendidaCheckbox = document.getElementById("cargosJornadaExtendida");
     const horasInfo = document.getElementById("horasAumento");
     const resultado = document.getElementById("resultadoAumento");
+    const nivelesAntiguedad = [
+        { valor: 0, texto: "0% - Menos de 1 año" },
+        { valor: 0.10, texto: "10% - 1 año" },
+        { valor: 0.15, texto: "15% - Entre 2 y 4 años" },
+        { valor: 0.30, texto: "30% - Entre 5 y 6 años" },
+        { valor: 0.40, texto: "40% - Entre 7 y 9 años" },
+        { valor: 0.50, texto: "50% - Entre 10 y 11 años" },
+        { valor: 0.60, texto: "60% - Entre 12 y 14 años" },
+        { valor: 0.70, texto: "70% - Entre 15 y 16 años" },
+        { valor: 0.80, texto: "80% - Entre 17 y 19 años" },
+        { valor: 1, texto: "100% - Entre 20 y 21 años" },
+        { valor: 1.10, texto: "110% - Entre 22 y 23 años" },
+        { valor: 1.20, texto: "120% - 24 años o más" }
+    ];
     const formatoMoneda = new Intl.NumberFormat("es-AR", {
         style: "currency",
         currency: "ARS",
@@ -190,14 +206,8 @@ if (typeof document !== "undefined") {
         }
     }
 
-    function actualizarCargosJornadaExtendida() {
-        const cargos = Number(cargosSelect.value);
-        Array.from(cargosJornadaSelect.options).forEach(option => {
-            option.disabled = Number(option.value) > cargos;
-        });
-        if (Number(cargosJornadaSelect.value) > cargos) {
-            cargosJornadaSelect.value = String(cargos);
-        }
+    function actualizarAntiguedad() {
+        antiguedadValor.textContent = nivelesAntiguedad[Number(antiguedadRange.value)].texto;
     }
 
     function renderizarResultados(alternativas, antiguedad) {
@@ -261,10 +271,15 @@ if (typeof document !== "undefined") {
     nivelSelect.addEventListener("change", actualizarUbicaciones);
     nivelSelect.addEventListener("change", actualizarReferenciaHoras);
     cargosSelect.addEventListener("change", actualizarReferenciaHoras);
-    cargosSelect.addEventListener("change", actualizarCargosJornadaExtendida);
+    antiguedadRange.addEventListener("input", () => {
+        actualizarAntiguedad();
+        if (montoInput.value.trim()) {
+            form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+        }
+    });
     actualizarUbicaciones();
     actualizarReferenciaHoras();
-    actualizarCargosJornadaExtendida();
+    actualizarAntiguedad();
 
     montoInput.addEventListener("input", () => {
         const formato = formatearMontoIngresado(montoInput.value, montoInput.selectionStart);
@@ -283,8 +298,8 @@ if (typeof document !== "undefined") {
 
         const cargos = Number(cargosSelect.value);
         const ubicacion = Number(ubicacionSelect.value);
-        const antiguedad = Number(document.getElementById("antiguedadAumento").value);
-        const cargosJornadaExtendida = Number(cargosJornadaSelect.value);
+        const antiguedad = nivelesAntiguedad[Number(antiguedadRange.value)].valor;
+        const cargosJornadaExtendida = jornadaExtendidaCheckbox.checked ? cargos : 0;
         const alternativas = calcularAlternativasAumento({
             monto,
             cargos,

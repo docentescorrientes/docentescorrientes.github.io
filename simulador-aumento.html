@@ -19,8 +19,8 @@
                 <i class="fa-solid fa-chalkboard-user mx-2"></i>DAC 2019
             </a>
             <div class="d-flex gap-3">
-                <a class="nav-link" href="simulador.html">Simulador de haberes</a>
-                <a class="nav-link" href="index.html">Inicio</a>
+                <a class="nav-link text-success" href="simulador.html">Simulador de haberes</a>
+                <a class="nav-link text-success" href="index.html">Inicio</a>
             </div>
         </div>
     </nav>
@@ -63,30 +63,13 @@
                             <select class="form-select" id="ubicacionAumento" name="ubicacionAumento" required></select>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="antiguedadAumento">Antigüedad</label>
-                            <select class="form-select" id="antiguedadAumento" name="antiguedadAumento" required>
-                                <option value="0">Menos de 1 año (0%)</option>
-                                <option value="0.10">1 año (10%)</option>
-                                <option value="0.15">Entre 2 y 4 años (15%)</option>
-                                <option value="0.30">Entre 5 y 6 años (30%)</option>
-                                <option value="0.40">Entre 7 y 9 años (40%)</option>
-                                <option value="0.50">Entre 10 y 11 años (50%)</option>
-                                <option value="0.60">Entre 12 y 14 años (60%)</option>
-                                <option value="0.70">Entre 15 y 16 años (70%)</option>
-                                <option value="0.80">Entre 17 y 19 años (80%)</option>
-                                <option value="1">Entre 20 y 21 años (100%)</option>
-                                <option value="1.10">Entre 22 y 23 años (110%)</option>
-                                <option value="1.20">24 años o más (120%)</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="cargosJornadaExtendida">Cargos con jornada extendida (Cód. 624)</label>
-                            <select class="form-select" id="cargosJornadaExtendida" name="cargosJornadaExtendida" required>
-                                <option value="0">Ninguno</option>
-                                <option value="1">1 cargo</option>
-                                <option value="2">2 cargos</option>
-                                <option value="3">3 cargos</option>
-                            </select>
+                            <div class="form-check mt-4">
+                                <input class="form-check-input" id="cargosJornadaExtendida"
+                                    name="cargosJornadaExtendida" type="checkbox" value="1">
+                                <label class="form-check-label" for="cargosJornadaExtendida">
+                                    Jornada extendida (Cód. 624)
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <p class="form-text mt-3 mb-0" id="horasAumento"></p>
@@ -100,6 +83,14 @@
                         <button class="btn btn-success" type="submit">Comparar alternativas</button>
                     </div>
                 </form>
+                <div class="mt-4">
+                    <label class="form-label d-flex justify-content-between" for="antiguedadAumento">
+                        <span>Antigüedad</span>
+                        <strong id="antiguedadAumentoValor">0% - Menos de 1 año</strong>
+                    </label>
+                    <input class="form-range" id="antiguedadAumento" name="antiguedadAumento"
+                        type="range" min="0" max="11" step="1" value="0">
+                </div>
                 <div class="mt-4" id="resultadoAumento" aria-live="polite"></div>
             </div>
         </section>

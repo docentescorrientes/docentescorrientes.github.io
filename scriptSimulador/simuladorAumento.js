@@ -266,6 +266,11 @@ if (typeof document !== "undefined") {
             <p class="form-text mb-0">
                 Cálculo del incremento mensual según los datos ingresados; no incluye descuentos adicionales ni otros ítems del recibo.
             </p>`;
+        if (window.matchMedia("(max-width: 767.98px)").matches) {
+            requestAnimationFrame(() => {
+                resultado.firstElementChild.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+        }
     }
 
     nivelSelect.addEventListener("change", actualizarUbicaciones);
